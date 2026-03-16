@@ -3,440 +3,193 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Estilo Artesanal · Cerámica · Jabones · Artesanías</title>
+<title>estiloartesanal.emma · Jabones naturales & Cerámica</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
 :root{
-  --cream:#faf7f2;--warm:#f4ede3;--sand:#e2d5c4;--clay:#c9a882;
-  --terra:#a0694a;--dark:#1a1613;--muted:#7a6e65;--white:#fff;
-  --green:#6e8862;--r:18px;
+  --white:#ffffff;--off:#f8f6f2;--sage:#8fa882;--sage-lt:#edf2e9;
+  --sage-dk:#5a7050;--terra:#b07355;--clay:#d4a882;--sand:#ede5d8;
+  --dark:#1c1a17;--muted:#7a756e;--border:#e8e2d8;--r:12px;
+  --font-d:'Cormorant Garamond',serif;--font-b:'Jost',sans-serif;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--dark);overflow-x:hidden;}
+body{font-family:var(--font-b);background:var(--white);color:var(--dark);overflow-x:hidden;line-height:1.6;}
+img{display:block;max-width:100%;}
+a{text-decoration:none;}
 
-/* pages */
-.page{display:none;}
-.page.active{display:block;animation:fi .35s ease;}
-@keyframes fi{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+/* ── HEADER ── */
+header{position:sticky;top:0;z-index:200;background:rgba(255,255,255,.97);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);}
+.hdr{max-width:1160px;margin:0 auto;padding:.85rem 28px;display:flex;align-items:center;justify-content:space-between;gap:1rem;}
+.logo{display:flex;align-items:center;gap:.5rem;cursor:pointer;}
+.logo-text .ln{font-family:var(--font-d);font-size:1.1rem;font-weight:400;color:var(--dark);}
+.logo-text .ls{font-size:.58rem;font-weight:300;color:var(--muted);letter-spacing:2.5px;text-transform:uppercase;display:block;}
+nav a{font-size:.76rem;font-weight:400;letter-spacing:.6px;text-transform:uppercase;color:var(--muted);transition:color .2s;margin-left:2rem;}
+nav a:hover{color:var(--sage-dk);}
 
-/* HEADER */
-header{
-  position:sticky;top:0;z-index:200;
-  background:rgba(250,247,242,.93);backdrop-filter:blur(14px);
-  border-bottom:1px solid var(--sand);
-}
-.hdr{
-  max-width:1200px;margin:0 auto;padding:.85rem 28px;
-  display:flex;align-items:center;justify-content:space-between;gap:1rem;
-}
-.logo{
-  font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:400;
-  color:var(--terra);cursor:pointer;letter-spacing:.3px;text-decoration:none;
-  display:flex;align-items:center;gap:.4rem;
-}
-.logo svg{width:28px;height:28px;flex-shrink:0;}
-nav{display:flex;gap:2rem;}
-nav a{
-  text-decoration:none;color:var(--dark);font-size:.875rem;font-weight:400;
-  letter-spacing:.2px;transition:color .2s;cursor:pointer;
-}
-nav a:hover{color:var(--terra);}
-.hdr-ig{
-  display:flex;align-items:center;gap:.45rem;
-  font-size:.8rem;color:var(--muted);
-  background:var(--warm);border:1px solid var(--sand);
-  padding:.35rem .95rem;border-radius:30px;cursor:pointer;
-  transition:border-color .2s;
-}
-.hdr-ig:hover{border-color:var(--clay);}
-.hdr-ig svg{width:14px;height:14px;color:var(--terra);}
+/* ── BTN ── */
+.btn{display:inline-flex;align-items:center;gap:.45rem;font-family:var(--font-b);font-size:.76rem;font-weight:400;letter-spacing:.8px;text-transform:uppercase;border:none;border-radius:50px;cursor:pointer;transition:all .2s;text-decoration:none;}
+.btn-dark{background:var(--dark);color:var(--white);padding:.82rem 2rem;}
+.btn-dark:hover{background:var(--sage-dk);transform:translateY(-2px);}
+.btn-outline{background:transparent;color:var(--dark);padding:.8rem 1.8rem;border:1.5px solid var(--border);}
+.btn-outline:hover{border-color:var(--sage);color:var(--sage-dk);transform:translateY(-2px);}
+.btn svg{width:14px;height:14px;}
 
-/* HERO */
-.hero{
-  max-width:1200px;margin:0 auto;padding:80px 28px 64px;
-  display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;
-}
-.hero-text h1{
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(3rem,5.5vw,5.2rem);font-weight:400;line-height:1.05;
-  color:var(--dark);margin-bottom:1.3rem;
-}
-.hero-text h1 em{font-style:italic;color:var(--terra);}
-.hero-text p{
-  font-size:1.02rem;color:var(--muted);max-width:400px;
-  line-height:1.75;margin-bottom:2rem;
-}
-.pill-row{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2.2rem;}
-.pill{
-  font-size:.76rem;font-weight:500;letter-spacing:.5px;text-transform:uppercase;
-  padding:.32rem .85rem;border-radius:30px;
-  background:var(--warm);border:1px solid var(--sand);color:var(--muted);
-  display:flex;align-items:center;gap:.35rem;
-}
-.pill svg{width:12px;height:12px;}
-.pill.green{background:#ecf2e8;border-color:#c2d6b8;color:var(--green);}
-.btn{
-  display:inline-flex;align-items:center;gap:.5rem;
-  background:var(--dark);color:#fff;
-  font-size:.88rem;font-weight:500;letter-spacing:.2px;
-  padding:.82rem 1.9rem;border-radius:50px;border:none;cursor:pointer;
-  text-decoration:none;transition:background .2s,transform .15s;
-}
-.btn:hover{background:var(--terra);transform:translateY(-2px);}
-.btn svg{width:16px;height:16px;}
-.btn.secondary{background:var(--white);color:var(--dark);border:1.5px solid var(--sand);}
-.btn.secondary:hover{background:var(--warm);transform:translateY(-2px);}
-.btn.mp{background:#009ee3;}
-.btn.mp:hover{background:#007fc5;}
-
-/* HERO VISUAL */
-.hero-vis{position:relative;height:520px;}
-.hero-vis img{
-  position:absolute;border-radius:36px;
-  object-fit:cover;box-shadow:0 24px 56px rgba(0,0,0,.13);
-}
-.hv-main{width:76%;height:450px;right:0;top:0;border-radius:36px 36px 36px 12px;}
-.hv-small{
-  width:46%;height:220px;left:0;bottom:0;
-  border-radius:12px 12px 36px 36px;
-  border:4px solid var(--cream);
-}
-.hv-badge{
-  position:absolute;left:37%;top:32%;z-index:3;
-  background:var(--white);border-radius:16px;
-  padding:.85rem 1.2rem;box-shadow:0 12px 30px rgba(0,0,0,.12);
-  font-size:.8rem;text-align:center;min-width:90px;
-}
-.hv-badge strong{
-  display:block;font-family:'Cormorant Garamond',serif;
-  font-size:2rem;font-weight:500;color:var(--terra);line-height:1;
-}
-
-/* SECTION */
-.section-wrap{max-width:1200px;margin:0 auto;padding:0 28px;}
-.eyebrow{
-  font-size:.72rem;font-weight:500;text-transform:uppercase;
-  letter-spacing:.9px;color:var(--terra);margin-bottom:.4rem;
-  display:flex;align-items:center;gap:.4rem;
-}
-.eyebrow svg{width:10px;height:10px;}
-.stitle{
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(2rem,4vw,2.9rem);font-weight:400;
-  color:var(--dark);margin-bottom:.4rem;
-}
+/* ── EYEBROW ── */
+.eyebrow{font-size:.66rem;font-weight:400;letter-spacing:3px;text-transform:uppercase;color:var(--sage);margin-bottom:.5rem;display:flex;align-items:center;gap:.55rem;}
+.eyebrow::before{content:'';width:22px;height:1px;background:var(--sage);}
+.stitle{font-family:var(--font-d);font-size:clamp(2rem,3.5vw,3.1rem);font-weight:300;line-height:1.1;margin-bottom:.5rem;}
 .stitle em{font-style:italic;color:var(--terra);}
-.ssub{color:var(--muted);font-size:.94rem;margin-bottom:2.8rem;}
+.ssub{color:var(--muted);font-size:.9rem;line-height:1.75;max-width:480px;}
 
-/* PROFILE */
-.profile-wrap{
-  background:var(--white);
-  border-top:1px solid var(--sand);border-bottom:1px solid var(--sand);
-  padding:72px 0;
-}
-.profile-inner{
-  max-width:1200px;margin:0 auto;padding:0 28px;
-  display:grid;grid-template-columns:180px 1fr;gap:52px;align-items:start;
-}
-.avatar{
-  width:158px;height:158px;border-radius:50%;
-  background:linear-gradient(145deg,#d4a87a,#a0694a);
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:0 14px 38px rgba(160,105,74,.28);
-}
-.avatar svg{width:70px;height:70px;color:#fff;}
-.pname{
-  font-family:'Cormorant Garamond',serif;
-  font-size:1.95rem;font-weight:400;margin-bottom:.2rem;
-}
-.phandle{
-  font-size:.85rem;color:var(--muted);margin-bottom:1.4rem;
-  display:flex;align-items:center;gap:.35rem;
-}
-.phandle svg{width:13px;height:13px;color:var(--terra);}
-.pstats{display:flex;gap:2.2rem;margin-bottom:1.5rem;}
-.pstat strong{
-  display:block;font-family:'Cormorant Garamond',serif;
-  font-size:1.6rem;font-weight:500;
-}
-.pstat span{font-size:.78rem;color:var(--muted);}
-.pbio{
-  font-size:.94rem;color:#4a433c;line-height:1.8;max-width:560px;
-  border-left:2px solid var(--clay);padding-left:1rem;margin-bottom:1.4rem;
-}
-.pitems{display:flex;flex-wrap:wrap;gap:.45rem;}
-.pitem{
-  font-size:.8rem;background:var(--warm);border:1px solid var(--sand);
-  padding:.28rem .8rem;border-radius:20px;color:var(--muted);
-  display:flex;align-items:center;gap:.35rem;
-}
-.pitem svg{width:11px;height:11px;color:var(--clay);}
+/* ── HERO ── */
+.hero{position:relative;overflow:hidden;background:var(--off);min-height:90vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;}
+.hero-left{padding:80px 40px 80px 80px;position:relative;z-index:2;}
+.hero-eyebrow{font-size:.68rem;letter-spacing:3.5px;text-transform:uppercase;color:var(--sage);margin-bottom:1.5rem;display:flex;align-items:center;gap:.6rem;}
+.hero-eyebrow::before{content:'';width:30px;height:1px;background:var(--sage);}
+.hero-left h1{font-family:var(--font-d);font-size:clamp(3.2rem,5.5vw,5.5rem);font-weight:300;line-height:1.03;color:var(--dark);margin-bottom:1.4rem;}
+.hero-left h1 em{font-style:italic;color:var(--terra);}
+.hero-left p{font-size:1rem;color:var(--muted);line-height:1.8;max-width:380px;margin-bottom:2.5rem;}
+.hero-actions{display:flex;gap:.9rem;flex-wrap:wrap;}
+.hero-right{position:relative;height:100%;min-height:90vh;}
+.hero-circle{position:absolute;top:50%;left:10%;transform:translateY(-50%);width:380px;height:380px;border-radius:50%;background:var(--sage-lt);z-index:0;}
+.hero-img-main{position:absolute;right:0;top:0;width:80%;height:100%;object-fit:cover;z-index:1;border-radius:0 0 0 100px;}
+.hero-img-float{position:absolute;left:-20px;bottom:60px;z-index:3;width:42%;height:240px;object-fit:cover;border-radius:60px 60px 60px 14px;border:5px solid var(--white);box-shadow:0 20px 44px rgba(0,0,0,.1);}
+.hero-badge{position:absolute;bottom:110px;right:24px;z-index:4;background:var(--white);border-radius:16px;padding:1rem 1.3rem;box-shadow:0 12px 32px rgba(0,0,0,.1);text-align:center;}
+.hero-badge strong{display:block;font-family:var(--font-d);font-size:2.2rem;font-weight:400;color:var(--terra);line-height:1;}
+.hero-badge span{font-size:.68rem;color:var(--muted);letter-spacing:.5px;text-transform:uppercase;}
+/* leaf SVGs */
+.hero-leaf{position:absolute;pointer-events:none;z-index:5;}
 
-/* PRODUCTS */
-.products-section{padding:80px 0;}
-.pgrid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(272px,1fr));
-  gap:22px;
-}
-.pcard{
-  background:var(--white);border-radius:var(--r);
-  overflow:hidden;border:1px solid var(--sand);
-  cursor:pointer;transition:transform .28s,box-shadow .28s;
-}
-.pcard:hover{transform:translateY(-7px);box-shadow:0 22px 44px rgba(0,0,0,.09);}
-.pcard.soon{opacity:.72;cursor:default;}
-.pcard.soon:hover{transform:none;box-shadow:none;}
-.cimg{width:100%;height:258px;object-fit:cover;display:block;background:var(--warm);}
-.cimg-ph{
-  width:100%;height:258px;background:var(--warm);
-  display:flex;align-items:center;justify-content:center;
-}
-.cimg-ph svg{width:56px;height:56px;color:var(--clay);}
-.cbody{padding:1.35rem 1.55rem 1.6rem;}
-.clabel{
-  font-size:.7rem;font-weight:500;text-transform:uppercase;letter-spacing:.7px;
-  color:var(--terra);margin-bottom:.4rem;display:flex;align-items:center;gap:.3rem;
-}
-.clabel svg{width:11px;height:11px;}
-.cname{
-  font-family:'Cormorant Garamond',serif;
-  font-size:1.48rem;font-weight:400;margin-bottom:.45rem;
-}
-.cdesc{font-size:.84rem;color:var(--muted);line-height:1.6;margin-bottom:1.15rem;}
-.cfoot{display:flex;align-items:center;justify-content:space-between;}
-.cprice{
-  font-family:'Cormorant Garamond',serif;
-  font-size:1.38rem;font-weight:500;color:var(--dark);
-}
-.cprice small{font-family:'DM Sans',sans-serif;font-size:.72rem;color:var(--muted);}
-.cbtn{
-  font-size:.78rem;font-weight:500;
-  background:var(--dark);color:#fff;
-  border:none;border-radius:30px;padding:.48rem 1.05rem;cursor:pointer;
-  display:flex;align-items:center;gap:.3rem;
-  transition:background .2s;
-}
-.cbtn svg{width:13px;height:13px;}
-.cbtn:hover{background:var(--terra);}
-.badge-soon{
-  font-size:.68rem;background:var(--warm);color:var(--muted);
-  border:1px solid var(--sand);padding:.12rem .55rem;
-  border-radius:20px;vertical-align:middle;margin-left:.4rem;
-}
+/* ── STRIP ── */
+.strip{background:var(--sage);padding:1.4rem 0;}
+.strip-inner{max-width:1160px;margin:0 auto;padding:0 28px;display:flex;gap:1.5rem;flex-wrap:wrap;justify-content:space-between;align-items:center;}
+.strip-item{display:flex;align-items:center;gap:.65rem;color:var(--white);}
+.strip-item svg{width:18px;height:18px;opacity:.85;flex-shrink:0;}
+.strip-item p{font-size:.74rem;letter-spacing:.5px;font-weight:300;text-transform:uppercase;}
 
-/* DETAIL */
-.detail-wrap{max-width:1200px;margin:0 auto;padding:40px 28px 80px;}
-.back-btn{
-  display:inline-flex;align-items:center;gap:.4rem;
-  font-size:.84rem;color:var(--muted);cursor:pointer;
-  margin-bottom:2.5rem;background:none;border:none;
-  transition:color .2s;
-}
-.back-btn:hover{color:var(--terra);}
-.back-btn svg{width:15px;height:15px;}
-.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:58px;align-items:start;}
-.det-img{
-  width:100%;height:500px;object-fit:cover;
-  border-radius:28px;box-shadow:0 22px 52px rgba(0,0,0,.11);
-}
-.det-img-ph{
-  width:100%;height:500px;background:var(--warm);border-radius:28px;
-  display:flex;align-items:center;justify-content:center;
-}
-.det-img-ph svg{width:80px;height:80px;color:var(--clay);}
-.det-cat{
-  font-size:.72rem;text-transform:uppercase;letter-spacing:.8px;color:var(--terra);
-  margin-bottom:.5rem;display:flex;align-items:center;gap:.35rem;
-}
-.det-cat svg{width:11px;height:11px;}
-.det-title{
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(2rem,4vw,3.1rem);font-weight:400;
-  line-height:1.1;margin-bottom:.9rem;
-}
-.det-price{
-  font-family:'Cormorant Garamond',serif;
-  font-size:2.1rem;font-weight:400;color:var(--terra);
-  margin-bottom:1.5rem;
-}
-.det-desc{font-size:.95rem;color:var(--muted);line-height:1.8;margin-bottom:1.8rem;}
-.det-features{margin-bottom:2rem;display:flex;flex-direction:column;gap:.2rem;}
-.det-feat{
-  font-size:.86rem;color:#4a433c;padding:.42rem 0;
-  border-bottom:1px solid var(--warm);
-  display:flex;align-items:center;gap:.55rem;
-}
-.det-feat svg{width:14px;height:14px;color:var(--terra);flex-shrink:0;}
-.det-actions{display:flex;flex-direction:column;gap:.75rem;}
-.det-note{
-  font-size:.76rem;color:var(--muted);
-  display:flex;align-items:center;gap:.4rem;margin-top:.6rem;
-}
-.det-note svg{width:12px;height:12px;color:var(--clay);}
+/* ── SECTION ── */
+.section{padding:90px 0;}
+.sec-inner{max-width:1160px;margin:0 auto;padding:0 28px;}
+.sec-off{background:var(--off);}
 
-/* CHECKOUT */
-.ck-wrap{max-width:860px;margin:0 auto;padding:40px 28px 80px;}
-.ck-grid{display:grid;grid-template-columns:1fr 1fr;gap:42px;align-items:start;}
-.ck-summary{
-  background:var(--white);border:1px solid var(--sand);
-  border-radius:var(--r);padding:2rem;position:sticky;top:88px;
-}
-.ck-sum-title{
-  font-family:'Cormorant Garamond',serif;
-  font-size:1.5rem;font-weight:400;margin-bottom:1.5rem;
-}
-.ck-prod-row{display:flex;gap:.9rem;align-items:center;margin-bottom:1.5rem;}
-.ck-thumb{
-  width:68px;height:68px;border-radius:12px;
-  object-fit:cover;flex-shrink:0;background:var(--warm);
-}
-.ck-pname{font-size:.88rem;font-weight:500;margin-bottom:.2rem;}
-.ck-pcat{font-size:.8rem;color:var(--muted);}
-.ck-hr{border:none;border-top:1px solid var(--sand);margin:1rem 0;}
-.ck-total{display:flex;justify-content:space-between;font-size:1.05rem;font-weight:500;}
-.ck-form h3{
-  font-family:'Cormorant Garamond',serif;
-  font-size:1.8rem;font-weight:300;margin-bottom:1.5rem;
-}
-.fg{margin-bottom:1.15rem;}
-.fg label{font-size:.8rem;color:var(--muted);display:block;margin-bottom:.38rem;}
-.fg input,.fg textarea,.fg select{
-  width:100%;padding:.7rem .95rem;
-  border:1.5px solid var(--sand);border-radius:11px;
-  font-size:.9rem;font-family:'DM Sans',sans-serif;
-  background:var(--cream);color:var(--dark);
-  outline:none;transition:border-color .2s;
-}
-.fg input:focus,.fg textarea:focus{border-color:var(--clay);}
-.fg-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
-.ck-pay-section{margin-top:1.5rem;}
-.ck-pay-section h4{
-  font-size:.84rem;font-weight:500;margin-bottom:.9rem;color:var(--muted);
-  display:flex;align-items:center;gap:.4rem;
-}
-.ck-pay-section h4 svg{width:13px;height:13px;}
-.or-div{
-  text-align:center;color:var(--muted);font-size:.78rem;margin:.9rem 0;
-  position:relative;
-}
-.or-div::before,.or-div::after{
-  content:'';position:absolute;top:50%;width:44%;height:1px;background:var(--sand);
-}
-.or-div::before{left:0;}.or-div::after{right:0;}
-.secure{
-  display:flex;align-items:center;gap:.4rem;justify-content:center;
-  font-size:.76rem;color:var(--muted);margin-top:.75rem;
-}
-.secure svg{width:12px;height:12px;}
+/* ── GLICERINA ── */
+.gli-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;}
+.gli-img-wrap{position:relative;}
+.gli-img{width:100%;height:510px;object-fit:cover;border-radius:80px 20px 80px 20px;box-shadow:0 28px 60px rgba(0,0,0,.1);}
+.gli-float-badge{position:absolute;top:28px;right:-22px;background:var(--white);border-radius:14px;padding:1rem 1.2rem;box-shadow:0 10px 28px rgba(0,0,0,.1);text-align:center;min-width:88px;}
+.gli-float-badge p{font-family:var(--font-d);font-size:1.1rem;font-weight:500;color:var(--sage-dk);line-height:1.2;}
+.gli-float-badge small{font-family:var(--font-b);font-size:.62rem;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;}
+.gli-leaf{position:absolute;bottom:-18px;left:-18px;opacity:.45;pointer-events:none;}
+.gli-props{margin-top:1.2rem;display:flex;flex-direction:column;gap:.9rem;}
+.gli-prop{display:flex;align-items:flex-start;gap:.9rem;padding:1.1rem 1.3rem;background:var(--white);border-radius:var(--r);border:1px solid var(--border);transition:all .2s;cursor:default;}
+.gli-prop:hover{border-color:var(--sage);transform:translateX(5px);box-shadow:0 6px 20px rgba(143,168,130,.12);}
+.gli-ico{width:40px;height:40px;border-radius:10px;background:var(--sage-lt);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.2rem;}
+.gli-txt strong{display:block;font-size:.88rem;font-weight:500;color:var(--dark);margin-bottom:.15rem;}
+.gli-txt p{font-size:.8rem;color:var(--muted);line-height:1.55;}
 
-/* SUCCESS */
-.suc-wrap{max-width:500px;margin:80px auto;padding:0 28px;text-align:center;}
-.suc-ico{font-size:4.5rem;margin-bottom:1rem;}
-.suc-wrap h2{
-  font-family:'Cormorant Garamond',serif;
-  font-size:2.6rem;font-weight:300;margin-bottom:.8rem;
-}
-.suc-wrap p{color:var(--muted);line-height:1.75;margin-bottom:2rem;}
-.suc-addr{
-  background:var(--warm);border:1px solid var(--sand);
-  border-radius:var(--r);padding:1.5rem;margin-bottom:2rem;text-align:left;
-}
-.suc-addr strong{
-  display:flex;align-items:center;gap:.4rem;
-  font-size:.72rem;text-transform:uppercase;letter-spacing:.7px;
-  color:var(--terra);margin-bottom:.4rem;
-}
-.suc-addr strong svg{width:11px;height:11px;}
+/* ── PRODUCTOS ── */
+.prod-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:2.5rem;flex-wrap:wrap;gap:1rem;}
+.filter-row{display:flex;gap:.5rem;flex-wrap:wrap;}
+.filt{font-size:.72rem;font-weight:400;letter-spacing:.5px;text-transform:uppercase;padding:.38rem 1rem;border-radius:30px;border:1.5px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;transition:all .2s;}
+.filt.on,.filt:hover{background:var(--sage);border-color:var(--sage);color:var(--white);}
+.prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:22px;}
 
-/* RETIRO */
-.retiro-wrap{
-  background:var(--white);
-  border-top:1px solid var(--sand);border-bottom:1px solid var(--sand);
-  padding:80px 0;
-}
-.retiro-inner{
-  max-width:1200px;margin:0 auto;padding:0 28px;
-  display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;
-}
-.addr-pill{
-  display:inline-flex;align-items:center;gap:.5rem;
-  background:var(--white);border:2px solid var(--clay);
-  border-radius:50px;padding:.65rem 1.5rem;margin:1rem 0;
-  font-size:1.05rem;font-weight:500;color:var(--terra);
-}
-.addr-pill svg{width:15px;height:15px;}
-.notice{
-  display:inline-flex;align-items:center;gap:.5rem;
-  background:#fff8f0;border:1px solid #edd4b0;
-  border-radius:30px;padding:.5rem 1.1rem;
-  font-size:.8rem;color:#9a7050;margin-top:.8rem;
-}
-.notice svg{width:13px;height:13px;}
-.retiro-vis{
-  background:linear-gradient(135deg,var(--warm) 0%,#e8d9c8 100%);
-  border-radius:28px;height:290px;border:1px solid var(--sand);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;
-}
-.retiro-vis svg{width:52px;height:52px;color:var(--terra);}
+/* ── PRODUCT CARD ── */
+.pcard{background:var(--white);border-radius:16px;border:1px solid var(--border);overflow:hidden;cursor:pointer;transition:transform .3s,box-shadow .3s;}
+.pcard:hover{transform:translateY(-9px);box-shadow:0 26px 52px rgba(0,0,0,.08);}
+.pcard.soon{opacity:.65;cursor:default;pointer-events:none;}
+.cimg-wrap{position:relative;overflow:hidden;}
+.cimg{width:100%;height:255px;object-fit:cover;transition:transform .5s;}
+.pcard:hover .cimg{transform:scale(1.05);}
+.cimg-ph{width:100%;height:255px;background:var(--sand);display:flex;align-items:center;justify-content:center;}
+.cimg-ph svg{width:48px;height:48px;color:var(--clay);}
+.ctag{position:absolute;top:12px;left:12px;font-size:.62rem;font-weight:400;letter-spacing:.7px;text-transform:uppercase;background:var(--white);color:var(--sage-dk);padding:.25rem .7rem;border-radius:30px;border:1px solid var(--sage-lt);}
+.ctag.pronto{background:var(--sand);color:var(--muted);border-color:var(--sand);}
+.cbody{padding:1.2rem 1.4rem 1.5rem;}
+.ccat{font-size:.64rem;letter-spacing:.8px;text-transform:uppercase;color:var(--sage);margin-bottom:.3rem;}
+.cname{font-family:var(--font-d);font-size:1.45rem;font-weight:400;margin-bottom:.45rem;line-height:1.2;}
+.chips{display:flex;flex-wrap:wrap;gap:.28rem;margin-bottom:.9rem;}
+.ingr{font-size:.64rem;background:var(--sage-lt);color:var(--sage-dk);padding:.18rem .6rem;border-radius:20px;}
+.cfoot{display:flex;align-items:center;justify-content:space-between;margin-top:.5rem;}
+.cprice{font-family:var(--font-d);font-size:1.38rem;font-weight:400;color:var(--dark);}
+.cprice small{font-family:var(--font-b);font-size:.66rem;color:var(--muted);}
+.cbtn{font-size:.7rem;letter-spacing:.5px;text-transform:uppercase;background:var(--dark);color:var(--white);border:none;border-radius:30px;padding:.46rem 1rem;cursor:pointer;display:flex;align-items:center;gap:.3rem;transition:background .2s;}
+.cbtn svg{width:11px;height:11px;}
+.cbtn:hover{background:var(--sage-dk);}
 
-/* PAGOS */
-.pagos-section{padding:80px 0;}
-.pagos-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
-  gap:1.1rem;margin-top:1.8rem;
-}
-.pago-card{
-  background:var(--white);border:1px solid var(--sand);
-  border-radius:var(--r);padding:1.7rem 1.4rem;text-align:center;
-  transition:transform .2s,border-color .2s;
-}
-.pago-card:hover{transform:translateY(-4px);border-color:var(--clay);}
-.pago-card svg{width:32px;height:32px;color:var(--terra);margin:0 auto .75rem;display:block;}
-.pago-card p{font-size:.83rem;color:var(--muted);}
+/* ── ABOUT ── */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;}
+.about-imgs{position:relative;height:480px;}
+.ai1{position:absolute;right:0;top:0;width:68%;height:400px;object-fit:cover;border-radius:20px 80px 20px 80px;box-shadow:0 24px 52px rgba(0,0,0,.1);}
+.ai2{position:absolute;left:0;bottom:0;width:54%;height:270px;object-fit:cover;border-radius:70px 20px 70px 20px;border:5px solid var(--white);box-shadow:0 14px 34px rgba(0,0,0,.08);}
+.about-stats{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-top:1.8rem;}
+.astat{padding:1.1rem;background:var(--white);border-radius:var(--r);border:1px solid var(--border);text-align:center;}
+.astat strong{display:block;font-family:var(--font-d);font-size:1.9rem;font-weight:400;color:var(--terra);}
+.astat span{font-size:.74rem;color:var(--muted);}
 
-/* FOOTER */
-footer{
-  background:var(--dark);color:#c5bdb5;
-  border-radius:40px 40px 0 0;margin-top:5rem;
-  padding:3.5rem 28px 2.5rem;text-align:center;
-}
-.foot-logo{
-  font-family:'Cormorant Garamond',serif;
-  font-size:2rem;font-weight:400;color:var(--clay);
-  margin-bottom:.8rem;display:block;
-}
-.foot-socials{display:flex;justify-content:center;gap:1.4rem;margin:1.1rem 0;}
-.foot-socials a{
-  color:#c5bdb5;width:40px;height:40px;border-radius:50%;
-  border:1px solid #3a3530;display:flex;align-items:center;
-  justify-content:center;transition:color .2s,border-color .2s;
-}
-.foot-socials a:hover{color:var(--clay);border-color:var(--clay);}
-.foot-socials a svg{width:16px;height:16px;}
-footer p{font-size:.8rem;color:#6b6057;}
+/* ── RETIRO ── */
+.retiro-wrap{background:var(--dark);padding:80px 0;}
+.retiro-inner{max-width:1160px;margin:0 auto;padding:0 28px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+.ret-text .eyebrow{color:var(--clay);}
+.ret-text .eyebrow::before{background:var(--clay);}
+.ret-text .stitle{color:var(--white);}
+.ret-text .stitle em{color:var(--clay);}
+.ret-text p{color:#a09890;font-size:.93rem;line-height:1.8;margin-bottom:.8rem;}
+.addr-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:var(--r);padding:1.4rem 1.6rem;margin-top:1.4rem;display:flex;align-items:center;gap:1rem;}
+.addr-ico{width:44px;height:44px;border-radius:11px;background:var(--terra);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.addr-ico svg{width:18px;height:18px;color:var(--white);}
+.addr-card strong{display:block;font-size:1rem;font-weight:500;color:var(--white);}
+.addr-card span{font-size:.78rem;color:#a09890;}
+.notice{display:inline-flex;align-items:center;gap:.4rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:30px;padding:.42rem .95rem;font-size:.74rem;color:#a09890;margin-top:.9rem;}
+.notice svg{width:11px;height:11px;}
+.ret-vis{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:24px;height:300px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.7rem;}
+.ret-vis svg{width:50px;height:50px;color:var(--clay);}
+.ret-vis strong{font-size:1.1rem;color:var(--white);}
+.ret-vis p{font-size:.82rem;color:#a09890;}
+
+/* ── PAGOS ── */
+.pago-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1rem;margin-top:2rem;}
+.pago-card{background:var(--off);border:1px solid var(--border);border-radius:var(--r);padding:1.7rem;text-align:center;transition:all .2s;}
+.pago-card:hover{transform:translateY(-4px);border-color:var(--sage);}
+.pago-card svg{width:28px;height:28px;color:var(--sage);margin:0 auto .75rem;display:block;}
+.pago-card h4{font-size:.85rem;font-weight:500;margin-bottom:.2rem;}
+.pago-card p{font-size:.76rem;color:var(--muted);}
+
+/* ── FOOTER ── */
+footer{background:var(--dark);color:#c2bab2;padding:3.5rem 28px 2rem;margin-top:0;}
+.foot-inner{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:40px;}
+.foot-brand p{font-size:.83rem;color:#a09890;line-height:1.7;margin-top:.7rem;max-width:250px;}
+.foot-logo-row{display:flex;align-items:center;gap:.5rem;}
+.foot-logo-row span{font-family:var(--font-d);font-size:1.1rem;color:var(--clay);}
+.foot-col h5{font-size:.62rem;letter-spacing:2.5px;text-transform:uppercase;color:#7a716a;margin-bottom:1rem;}
+.foot-col a{display:block;font-size:.82rem;color:#a09890;text-decoration:none;margin-bottom:.4rem;transition:color .2s;cursor:pointer;}
+.foot-col a:hover{color:var(--clay);}
+.foot-socials{display:flex;gap:.55rem;margin-top:1rem;}
+.foot-socials a{width:33px;height:33px;border-radius:50%;border:1px solid #3a3530;display:flex;align-items:center;justify-content:center;color:#a09890;transition:all .2s;}
+.foot-socials a:hover{background:var(--sage);border-color:var(--sage);color:var(--white);}
+.foot-socials a svg{width:13px;height:13px;}
+.foot-bottom{max-width:1160px;margin:.5rem auto 0;padding-top:1rem;border-top:1px solid #2e2a25;display:flex;justify-content:space-between;font-size:.7rem;color:#6a6058;}
 
 /* RESPONSIVE */
-@media(max-width:900px){
-  .hero{grid-template-columns:1fr;padding:50px 20px 40px;}
-  .hero-vis{height:320px;}
-  .hv-main{width:85%;height:300px;}
-  .hv-small{width:46%;height:165px;}
-  .profile-inner{grid-template-columns:1fr;}
-  .detail-grid{grid-template-columns:1fr;}
-  .det-img,.det-img-ph{height:320px;}
-  .retiro-inner{grid-template-columns:1fr;}
-  .ck-grid{grid-template-columns:1fr;}
+@media(max-width:960px){
+  .hero{grid-template-columns:1fr;min-height:auto;}
+  .hero-left{padding:60px 28px 36px;}
+  .hero-right{min-height:320px;}
+  .hero-img-main{width:88%;height:320px;border-radius:0 0 0 70px;}
+  .hero-img-float{width:46%;height:180px;left:-5px;}
+  .gli-grid,.about-grid,.retiro-inner{grid-template-columns:1fr;}
+  .gli-img{height:300px;}
+  .about-imgs{height:280px;}
+  .ai1{width:72%;height:240px;}
+  .ai2{width:55%;height:180px;}
 }
-@media(max-width:620px){
+@media(max-width:640px){
   nav{display:none;}
-  .hdr-ig{display:none;}
-  .hero-text h1{font-size:2.8rem;}
-  .fg-row{grid-template-columns:1fr;}
+  .foot-inner{grid-template-columns:1fr;}
+  .hero-left h1{font-size:2.9rem;}
 }
 </style>
 </head>
@@ -445,208 +198,240 @@ footer p{font-size:.8rem;color:#6b6057;}
 <!-- HEADER -->
 <header>
 <div class="hdr">
-  <a class="logo" onclick="showPage('home')">
-    <svg viewBox="0 0 36 36" width="34" height="34" style="flex-shrink:0;">
-      <circle cx="18" cy="18" r="17" fill="none" stroke="var(--clay)" stroke-width="1.2"/>
-      <circle cx="18" cy="18" r="14" fill="none" stroke="var(--sand)" stroke-width="0.6" stroke-dasharray="2 3"/>
-      <text x="18" y="23" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="18" font-weight="400" fill="var(--terra)" font-style="italic">E</text>
+  <a class="logo" href="index.html">
+    <svg width="36" height="36" viewBox="0 0 36 36">
+      <circle cx="18" cy="18" r="17" fill="none" stroke="#d4a882" stroke-width="1.2"/>
+      <circle cx="18" cy="18" r="13.5" fill="none" stroke="#e8e2d8" stroke-width=".6" stroke-dasharray="2.5 3.5"/>
+      <text x="18" y="23.5" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="18" font-weight="400" fill="#b07355" font-style="italic">E</text>
     </svg>
-    <span style="display:flex;flex-direction:column;line-height:1.1;">
-      <span style="font-size:1.1rem;font-weight:400;letter-spacing:.5px;">estilo artesanal</span>
-      <span style="font-size:.7rem;font-weight:300;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;">hecho a mano</span>
-    </span>
+    <div class="logo-text">
+      <span class="ln">estiloartesanal.emma</span>
+      <span class="ls">hecho a mano · la plata</span>
+    </div>
   </a>
   <nav>
-    <a onclick="navTo('perfil')">Nosotras</a>
-    <a onclick="navTo('productos')">Productos</a>
-    <a onclick="navTo('retiro')">Retiro</a>
-    <a onclick="navTo('pagos')">Pagos</a>
+    <a href="#glicerina">Glicerina</a>
+    <a href="#productos">Productos</a>
+    <a href="#sobre">Sobre mí</a>
+    <a href="#retiro">Retiro</a>
   </nav>
-  <div class="hdr-ig">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-      <rect x="2" y="2" width="20" height="20" rx="5"/>
-      <circle cx="12" cy="12" r="5"/>
-      <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/>
-    </svg>
-    @estiloartesanal.emma
-  </div>
+  <a class="btn btn-sage" href="#productos">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+    Ver productos
+  </a>
 </div>
 </header>
 
-<!-- ═══ HOME ═══ -->
-<div id="page-home" class="page active">
-
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-text">
-    <div class="pill-row">
-      <span class="pill">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22V12M12 12C10 8 6 8 4 10c-1 1-1 3 0 4l8 8M12 12c2-4 6-4 8-2 1 1 1 3 0 4l-8 8"/></svg>
-        Hecho a mano
-      </span>
-      <span class="pill green">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 8C8 10 5.9 16.17 3.82 19.34c-.9 1.4 1.34 2.34 2.46.97L12 13l7 7c1.12 1.37 3.36.43 2.46-.97C19.1 16.17 17 10 8 8"/></svg>
-        Natural
-      </span>
-      <span class="pill">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-        La Plata
-      </span>
+  <div class="hero-left">
+    <p class="hero-eyebrow">Artesanal · Natural · Único</p>
+    <h1>Jabones que<br/><em>cuidan</em><br/>tu piel</h1>
+    <p>Glicerina vegetal, aceites esenciales y arcillas naturales. Sin químicos, sin artificios — solo lo mejor para vos.</p>
+    <div class="hero-actions">
+      <a class="btn btn-dark" href="#productos">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        Ver productos
+      </a>
+      <a class="btn btn-outline" href="#glicerina">¿Qué es la glicerina?</a>
     </div>
-    <h1>Arte que <em>vive</em><br/>en tu hogar</h1>
-    <p>Cerámica esmaltada, jabones vegetales y artesanías únicas — <strong style="font-weight:500;color:var(--dark)">@estiloartesanal.emma</strong>. Cada pieza lleva la huella de quien la creó.</p>
-    <button class="btn" onclick="document.getElementById('productos').scrollIntoView({behavior:'smooth'})">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-      Ver productos
-    </button>
   </div>
-  <div class="hero-vis">
-    <img class="hv-main"
-      src="https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=85&w=1200&auto=format&fit=crop"
+  <div class="hero-right">
+    <div class="hero-circle"></div>
+    <svg class="hero-leaf" style="top:8%;right:6%;width:65px;opacity:.65;" viewBox="0 0 60 80"><path d="M30 5C50 20 55 50 30 75C5 50 10 20 30 5Z" fill="#8fa882"/><path d="M30 10L30 70" stroke="#5a7050" stroke-width=".8" fill="none"/></svg>
+    <svg class="hero-leaf" style="bottom:18%;left:12%;width:44px;opacity:.5;" viewBox="0 0 45 60"><path d="M22 4C40 16 42 42 22 56C2 42 4 16 22 4Z" fill="#d4a882"/></svg>
+    <img class="hero-img-main"
+      src="assets/images/jabones-hero.jpg"
+      onerror="this.src='https://images.unsplash.com/photo-1607006332611-ff950d0bf067?q=85&w=900&auto=format&fit=crop'"
+      alt="Jabones naturales artesanales"/>
+    <img class="hero-img-float"
+      src="assets/images/ceramica.jpg"
+      onerror="this.src='https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=85&w=600&auto=format&fit=crop'"
       alt="Cerámica artesanal"/>
-    <img class="hv-small"
-      src="assets /images/jabones.jpg"
-      alt="Jabones naturales"/>
-    <div class="hv-badge">
+    <div class="hero-badge">
       <strong>100%</strong>
-      artesanal
+      <span>Natural</span>
     </div>
   </div>
 </section>
 
-<!-- PERFIL -->
-<section id="perfil" class="profile-wrap">
-<div class="profile-inner">
-  <div class="avatar">
-    <svg viewBox="0 0 80 80" width="110" height="110">
-      <circle cx="40" cy="40" r="38" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="1.5"/>
-      <circle cx="40" cy="40" r="30" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="0.8" stroke-dasharray="3 5"/>
-      <text x="40" y="54" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="46" font-weight="400" fill="white" font-style="italic">E</text>
-    </svg>
-  </div>
-  <div>
-    <h2 class="pname">estiloartesanal.emma</h2>
-    <p class="phandle">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
-      @estiloartesanal.emma
-    </p>
-    <div class="pstats">
-      <div class="pstat"><strong>21</strong><span>seguidores</span></div>
-      <div class="pstat"><strong>129</strong><span>seguidos</span></div>
-      <div class="pstat"><strong>♥</strong><span>seguido por amigas</span></div>
+<!-- STRIP -->
+<div class="strip">
+  <div class="strip-inner">
+    <div class="strip-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M17 8C8 10 5.9 16.17 3.82 19.34c-.9 1.4 1.34 2.34 2.46.97L12 13l7 7"/></svg>
+      <p>100% ingredientes naturales</p>
     </div>
-    <p class="pbio">Creo piezas únicas con arcilla, aceites vegetales y mucho amor desde mi taller. Cada objeto es una pequeña historia que va a vivir en tu casa.</p>
-    <div class="pitems">
-      <span class="pitem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="12" rx="8" ry="5"/><path d="M12 7v10M4 12h16"/></svg>Cerámica esmaltada</span>
-      <span class="pitem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 8C8 10 5.9 16.17 3.82 19.34c-.9 1.4 1.34 2.34 2.46.97L12 13l7 7"/></svg>Jabones vegetales</span>
-      <span class="pitem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 4h6M8 16h8a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2z"/><path d="M12 2v6"/></svg>Velas soja (pronto)</span>
-      <span class="pitem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Objetos decorativos</span>
-      <span class="pitem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12V22H4V12"/><path d="M22 7H2v5h20V7z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>Regalos artesanales</span>
+    <div class="strip-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+      <p>Hecho con amor</p>
+    </div>
+    <div class="strip-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <p>Sin sulfatos ni parabenos</p>
+    </div>
+    <div class="strip-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      <p>Curado mínimo 4 semanas</p>
+    </div>
+    <div class="strip-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+      <p>Retiro · Calle 43 N°4364</p>
+    </div>
+  </div>
+</div>
+
+<!-- GLICERINA -->
+<section id="glicerina" class="section sec-off">
+<div class="sec-inner">
+  <div class="gli-grid">
+    <div class="gli-img-wrap">
+      <img class="gli-img"
+        src="assets/images/glicerina.jpg"
+        onerror="this.src='https://images.unsplash.com/photo-1607006332611-ff950d0bf067?q=85&w=800&auto=format&fit=crop'"
+        alt="Glicerina vegetal"/>
+      <div class="gli-float-badge">
+        <p>Glicerina<br/>Vegetal</p>
+        <small>pura · natural</small>
+      </div>
+      <svg class="gli-leaf" width="65" height="90" viewBox="0 0 65 90"><path d="M32 5C54 22 58 56 32 84C6 56 10 22 32 5Z" fill="#8fa882"/><path d="M32 12L32 78" stroke="#5a7050" stroke-width=".9" fill="none"/></svg>
+    </div>
+    <div>
+      <p class="eyebrow">Ingrediente estrella</p>
+      <h2 class="stitle">Propiedades de la <em>Glicerina</em></h2>
+      <p class="ssub" style="margin-bottom:1.5rem;">El corazón de nuestros jabones. Conocé por qué hace tanto bien a tu piel.</p>
+      <div class="gli-props">
+        <div class="gli-prop"><div class="gli-ico">💧</div><div class="gli-txt"><strong>Hidratante natural</strong><p>Atrae y retiene la humedad, manteniendo la piel suave e hidratada todo el día.</p></div></div>
+        <div class="gli-prop"><div class="gli-ico">🌿</div><div class="gli-txt"><strong>Suaviza la piel</strong><p>La piel se siente más lisa y flexible con cada uso.</p></div></div>
+        <div class="gli-prop"><div class="gli-ico">🧼</div><div class="gli-txt"><strong>Limpieza suave</strong><p>Limpia sin resecar — ideal para uso diario en todo tipo de piel.</p></div></div>
+        <div class="gli-prop"><div class="gli-ico">✨</div><div class="gli-txt"><strong>Apta para piel sensible</strong><p>Ingrediente suave, bien tolerado incluso por pieles delicadas.</p></div></div>
+        <div class="gli-prop"><div class="gli-ico">🌸</div><div class="gli-txt"><strong>Espuma cremosa</strong><p>Aporta transparencia, suavidad y espuma cremosa a los jabones artesanales.</p></div></div>
+      </div>
     </div>
   </div>
 </div>
 </section>
 
 <!-- PRODUCTOS -->
-<section id="productos" class="products-section">
-<div class="section-wrap">
-  <p class="eyebrow">
-    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-    Colección
-  </p>
-  <h2 class="stitle">Mis <em>creaciones</em></h2>
-  <p class="ssub">Cada pieza es única. Hecha a mano con materiales naturales y dedicación.</p>
+<section id="productos" class="section">
+<div class="sec-inner">
+  <div class="prod-header">
+    <div>
+      <p class="eyebrow">Colección</p>
+      <h2 class="stitle">Mis <em>creaciones</em></h2>
+    </div>
+    <div class="filter-row">
+      <button class="filt on" onclick="filtrar(this,'todos')">Todos</button>
+      <button class="filt" onclick="filtrar(this,'jabones')">Jabones</button>
+      <button class="filt" onclick="filtrar(this,'ceramica')">Cerámica</button>
+      <button class="filt" onclick="filtrar(this,'deco')">Decoración</button>
+    </div>
+  </div>
 
-  <div class="pgrid">
+  <div class="prod-grid" id="pgrid">
 
-    <!-- CERÁMICA -->
-    <div class="pcard" onclick="showDetail('ceramica')">
-      <img class="cimg"
-        src="https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=85&w=800&auto=format&fit=crop"
-        alt="Cerámica artesanal"/>
+    <div class="pcard" data-cat="jabones" onclick="irProducto('jabon-lavanda')">
+      <div class="cimg-wrap">
+        <img class="cimg" src="assets/images/jabon-lavanda.jpg" onerror="this.src='https://images.unsplash.com/photo-1607006332611-ff950d0bf067?q=85&w=700&auto=format&fit=crop'" alt="Jabón Lavanda"/>
+        <span class="ctag">Natural</span>
+      </div>
       <div class="cbody">
-        <p class="clabel">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="12" rx="8" ry="5"/><path d="M12 7v10M4 12h16"/></svg>
-          Cerámica
-        </p>
+        <p class="ccat">Jabones</p>
+        <h3 class="cname">Jabón de Lavanda</h3>
+        <div class="chips"><span class="ingr">Glicerina vegetal</span><span class="ingr">Lavanda</span><span class="ingr">Aceite de oliva</span></div>
+        <div class="cfoot"><div class="cprice">$4.800 <small>c/u</small></div><button class="cbtn">Ver <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button></div>
+      </div>
+    </div>
+
+    <div class="pcard" data-cat="jabones" onclick="irProducto('jabon-citrico')">
+      <div class="cimg-wrap">
+        <img class="cimg" src="assets/images/jabon-citrico.jpg" onerror="this.src='https://images.unsplash.com/photo-1556228578-dd539282b964?q=85&w=700&auto=format&fit=crop'" alt="Jabón Cítrico"/>
+        <span class="ctag">Energizante</span>
+      </div>
+      <div class="cbody">
+        <p class="ccat">Jabones</p>
+        <h3 class="cname">Jabón Cítrico</h3>
+        <div class="chips"><span class="ingr">Glicerina vegetal</span><span class="ingr">Limón</span><span class="ingr">Naranja</span><span class="ingr">Karité</span></div>
+        <div class="cfoot"><div class="cprice">$4.800 <small>c/u</small></div><button class="cbtn">Ver <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button></div>
+      </div>
+    </div>
+
+    <div class="pcard" data-cat="jabones" onclick="irProducto('jabon-romero')">
+      <div class="cimg-wrap">
+        <img class="cimg" src="assets/images/velas.jpg" onerror="this.src='https://images.unsplash.com/photo-1612817288484-6f916006741a?q=85&w=700&auto=format&fit=crop'" alt="Jabón Romero"/>
+        <span class="ctag">Purificante</span>
+      </div>
+      <div class="cbody">
+        <p class="ccat">Jabones</p>
+        <h3 class="cname">Jabón de Romero</h3>
+        <div class="chips"><span class="ingr">Glicerina vegetal</span><span class="ingr">Romero</span><span class="ingr">Arcilla verde</span></div>
+        <div class="cfoot"><div class="cprice">$4.800 <small>c/u</small></div><button class="cbtn">Ver <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button></div>
+      </div>
+    </div>
+
+    <div class="pcard" data-cat="ceramica" onclick="irProducto('ceramica')">
+      <div class="cimg-wrap">
+        <img class="cimg" src="assets/images/ceramica.jpg" onerror="this.src='https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=85&w=700&auto=format&fit=crop'" alt="Cerámica"/>
+        <span class="ctag">Pieza única</span>
+      </div>
+      <div class="cbody">
+        <p class="ccat">Cerámica</p>
         <h3 class="cname">Piezas esmaltadas</h3>
-        <p class="cdesc">Tazas, cuencos y macetas únicas. Cada una con su textura y color propios.</p>
-        <div class="cfoot">
-          <div class="cprice">$12.500 <small>aprox.</small></div>
-          <button class="cbtn">
-            Ver más
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </button>
-        </div>
+        <div class="chips"><span class="ingr">Arcilla alta temp.</span><span class="ingr">Esmaltes naturales</span></div>
+        <div class="cfoot"><div class="cprice">$12.500 <small>aprox.</small></div><button class="cbtn">Ver <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button></div>
       </div>
     </div>
 
-    <!-- JABONES -->
-    <div class="pcard" onclick="showDetail('jabones')">
-      <img class="cimg"
-        src="assets /images/velas.jpg"
-        alt="Jabones naturales"/>
-      <div class="cbody">
-        <p class="clabel">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 8C8 10 5.9 16.17 3.82 19.34c-.9 1.4 1.34 2.34 2.46.97L12 13l7 7"/></svg>
-          Jabones
-        </p>
-        <h3 class="cname">Jabones naturales</h3>
-        <p class="cdesc">Con aceites vegetales, arcillas y aceites esenciales. Lavanda, cítricos, romero.</p>
-        <div class="cfoot">
-          <div class="cprice">$4.800 <small>c/u</small></div>
-          <button class="cbtn">
-            Ver más
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </button>
-        </div>
+    <div class="pcard" data-cat="deco" onclick="irProducto('deco')">
+      <div class="cimg-wrap">
+        <img class="cimg" src="assets/images/deco.jpg" onerror="this.src='https://images.unsplash.com/photo-1588515724527-074a7a56616c?q=85&w=700&auto=format&fit=crop'" alt="Decoración"/>
+        <span class="ctag">Artesanal</span>
       </div>
-    </div>
-
-    <!-- DECO -->
-    <div class="pcard" onclick="showDetail('deco')">
-      <img class="cimg"
-        src="assets /images/lamparasal.jpg"
-        alt="Objetos decorativos"/>
       <div class="cbody">
-        <p class="clabel">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-          Decoración
-        </p>
+        <p class="ccat">Decoración</p>
         <h3 class="cname">Objetos de hogar</h3>
-        <p class="cdesc">Esculturas, sahumerios y piezas únicas para el hogar. Arte cotidiano.</p>
-        <div class="cfoot">
-          <div class="cprice">$3.200 <small>desde</small></div>
-          <button class="cbtn">
-            Ver más
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </button>
-        </div>
+        <div class="chips"><span class="ingr">Arcilla natural</span><span class="ingr">Terracota</span></div>
+        <div class="cfoot"><div class="cprice">$3.200 <small>desde</small></div><button class="cbtn">Ver <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button></div>
       </div>
     </div>
 
-    <!-- VELAS próximamente -->
-    <div class="pcard soon">
-      <div class="cimg-ph">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round">
-          <path d="M9 4h6M8 16h8a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2z"/>
-          <path d="M12 2v6"/>
-          <path d="M10 10c0-1.1.9-2 2-2"/>
-        </svg>
+    <div class="pcard soon" data-cat="velas">
+      <div class="cimg-wrap">
+        <div class="cimg-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"><rect x="8" y="8" width="8" height="12" rx="2"/><path d="M12 4v4"/></svg></div>
+        <span class="ctag pronto">Próximamente</span>
       </div>
       <div class="cbody">
-        <p class="clabel">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-          Próximamente
-        </p>
-        <h3 class="cname">Velas de cera <span class="badge-soon">pronto</span></h3>
-        <p class="cdesc">Velas de cera vegetal y soja con pabilo de algodón. En desarrollo.</p>
-        <div class="cfoot">
-          <div class="cprice">— <small>en breve</small></div>
-        </div>
+        <p class="ccat" style="color:var(--muted)">Velas</p>
+        <h3 class="cname" style="color:var(--muted)">Velas de soja</h3>
+        <div class="chips"><span class="ingr" style="opacity:.55">Cera de soja</span><span class="ingr" style="opacity:.55">Pabilo algodón</span></div>
+        <div class="cfoot"><div class="cprice" style="color:var(--muted)">— <small>en breve</small></div></div>
       </div>
     </div>
 
+  </div>
+</div>
+</section>
+
+<!-- SOBRE MÍ -->
+<section id="sobre" class="section sec-off">
+<div class="sec-inner">
+  <div class="about-grid">
+    <div class="about-imgs">
+      <img class="ai1" src="assets/images/taller.jpg" onerror="this.src='https://images.unsplash.com/photo-1556228578-dd539282b964?q=85&w=800&auto=format&fit=crop'" alt="Taller"/>
+      <img class="ai2" src="assets/images/manos.jpg" onerror="this.src='https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?q=85&w=600&auto=format&fit=crop'" alt="Manos artesanas"/>
+    </div>
+    <div>
+      <p class="eyebrow">Sobre mí</p>
+      <h2 class="stitle">Hecho con <em>amor</em><br/>en mi taller</h2>
+      <p class="ssub" style="margin-bottom:1.1rem;">Soy Emma, artesana de La Plata. Creo jabones naturales con glicerina vegetal y aceites esenciales desde mi taller en casa.</p>
+      <p style="color:var(--muted);font-size:.9rem;line-height:1.8;">Cada jabón está curado mínimo 4 semanas. Uso solo ingredientes que conozco — sin sulfatos, sin parabenos, sin artificios. También trabajo la cerámica esmaltada: tazas, cuencos y objetos únicos.</p>
+      <div class="about-stats">
+        <div class="astat"><strong>100%</strong><span>Natural</span></div>
+        <div class="astat"><strong>4 sem.</strong><span>Curado mínimo</span></div>
+        <div class="astat"><strong>0</strong><span>Químicos artificiales</span></div>
+        <div class="astat"><strong>♥</strong><span>Hecho a mano</span></div>
+      </div>
+    </div>
   </div>
 </div>
 </section>
@@ -654,295 +439,89 @@ footer p{font-size:.8rem;color:#6b6057;}
 <!-- RETIRO -->
 <section id="retiro" class="retiro-wrap">
 <div class="retiro-inner">
-  <div>
-    <p class="eyebrow">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-      Dónde encontrarnos
-    </p>
+  <div class="ret-text">
+    <p class="eyebrow">Dónde encontrarnos</p>
     <h2 class="stitle">Retiro <em>personal</em></h2>
-    <p style="color:var(--muted);line-height:1.75;margin-bottom:.5rem;">Podés venir a ver las piezas, tocarlas y llevarte la que más te guste al instante.</p>
-    <div class="addr-pill">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-      Calle 43 N° 4364
+    <p style="margin-top:.6rem;">Vení al taller, ver las piezas en persona y llevarte la que más te guste al instante.</p>
+    <p><svg style="width:12px;height:12px;vertical-align:middle;color:#a09890;margin-right:.3rem;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Con cita previa — escribime por Instagram</p>
+    <div class="addr-card">
+      <div class="addr-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg></div>
+      <div><strong>Calle 43 N° 4364</strong><span>La Plata · Buenos Aires · Argentina</span></div>
     </div>
-    <p style="font-size:.86rem;color:var(--muted);display:flex;align-items:center;gap:.4rem;">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-      Con cita previa — escribime por Instagram
-    </p>
-    <div class="notice">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="13" height="13"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
-      Por ahora sin envíos · Solo retiro personal
-    </div>
+    <div class="notice"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>Sin envíos por ahora · Solo retiro personal</div>
   </div>
-  <div class="retiro-vis">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round">
-      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-      <polyline points="9 22 9 12 15 12 15 22"/>
-      <path d="M12 2v5"/>
-    </svg>
-    <div style="text-align:center;">
-      <strong style="font-size:1rem;color:var(--dark)">Calle 43 N° 4364</strong>
-      <p style="font-size:.82rem;color:var(--muted)">La Plata · Buenos Aires</p>
-    </div>
+  <div class="ret-vis">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    <strong>Calle 43 N° 4364</strong>
+    <p>La Plata · Bs. As.</p>
+    <p style="font-size:.76rem;opacity:.65;">@estiloartesanal.emma</p>
   </div>
 </div>
 </section>
 
 <!-- PAGOS -->
-<section id="pagos" class="pagos-section">
-<div class="section-wrap">
-  <p class="eyebrow">
-    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.11 0-2 .89-2 2v12c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
-    Métodos
-  </p>
+<section id="pagos" class="section">
+<div class="sec-inner">
+  <p class="eyebrow">Métodos</p>
   <h2 class="stitle">Formas de <em>pago</em></h2>
-  <p class="ssub">Pagá como más te convenga. Consultá por cuotas sin interés.</p>
-  <div class="pagos-grid">
-    <div class="pago-card">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-        <rect x="1" y="4" width="22" height="16" rx="3"/>
-        <path d="M1 10h22"/>
-      </svg>
-      <p>Tarjeta de crédito</p>
-    </div>
-    <div class="pago-card">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-        <rect x="5" y="2" width="14" height="20" rx="2"/>
-        <path d="M12 18h.01"/>
-      </svg>
-      <p>Mercado Pago</p>
-    </div>
-    <div class="pago-card">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-        <polyline points="9 22 9 12 15 12 15 22"/>
-      </svg>
-      <p>Transferencia bancaria</p>
-    </div>
-    <div class="pago-card">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-        <path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-      </svg>
-      <p>Efectivo (en retiro)</p>
-    </div>
+  <p class="ssub">Varias opciones disponibles. Consultá por cuotas sin interés.</p>
+  <div class="pago-grid">
+    <div class="pago-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="1" y="4" width="22" height="16" rx="3"/><path d="M1 10h22"/></svg><h4>Tarjeta</h4><p>Crédito y débito</p></div>
+    <div class="pago-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg><h4>Mercado Pago</h4><p>Pago online seguro</p></div>
+    <div class="pago-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg><h4>Transferencia</h4><p>Bancaria / alias</p></div>
+    <div class="pago-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg><h4>Efectivo</h4><p>Solo en el retiro</p></div>
   </div>
 </div>
 </section>
 
-</div><!-- /page-home -->
-
-<!-- ═══ DETAIL ═══ -->
-<div id="page-detail" class="page">
-<div class="detail-wrap">
-  <button class="back-btn" onclick="showPage('home')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-    Volver a productos
-  </button>
-  <div class="detail-grid">
-    <div id="det-img-slot"></div>
-    <div id="det-info-slot"></div>
-  </div>
-</div>
-</div>
-
-<!-- ═══ CHECKOUT ═══ -->
-<div id="page-checkout" class="page">
-<div class="ck-wrap">
-  <button class="back-btn" onclick="showPage('detail')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-    Volver al producto
-  </button>
-  <h2 style="font-family:'Cormorant Garamond',serif;font-size:2.1rem;font-weight:300;margin-bottom:1.8rem;">
-    Finalizar <em style="font-style:italic;color:var(--terra)">compra</em>
-  </h2>
-  <div class="ck-grid">
-    <div id="ck-summary-slot" class="ck-summary"></div>
-    <div class="ck-form">
-      <h3>Tus datos</h3>
-      <div class="fg-row">
-        <div class="fg"><label>Nombre</label><input id="ch-nom" type="text" placeholder="María"/></div>
-        <div class="fg"><label>Apellido</label><input id="ch-ape" type="text" placeholder="González"/></div>
-      </div>
-      <div class="fg"><label>Email</label><input id="ch-email" type="email" placeholder="maria@email.com"/></div>
-      <div class="fg"><label>Teléfono / WhatsApp</label><input id="ch-tel" type="tel" placeholder="+54 9 221 000-0000"/></div>
-      <div class="fg"><label>Nota (opcional)</label><textarea id="ch-nota" rows="2" placeholder="Algo especial..."></textarea></div>
-      <div class="ck-pay-section">
-        <h4>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-          Elegí cómo pagar
-        </h4>
-        <button class="btn mp" style="width:100%;justify-content:center;" onclick="submitMP()">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:16px;height:16px;"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
-          Pagar con Mercado Pago
-        </button>
-        <div class="or-div">o</div>
-        <button class="btn secondary" style="width:100%;justify-content:center;" onclick="submitConfirm()">
-          Confirmar y coordinar por Instagram
-        </button>
-        <p class="secure">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-          Compra segura · Datos protegidos
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-
-<!-- ═══ SUCCESS ═══ -->
-<div id="page-success" class="page">
-<div class="suc-wrap">
-  <div class="suc-ico">🎉</div>
-  <h2>¡Pedido <em style="font-style:italic;color:var(--terra)">recibido!</em></h2>
-  <p>Gracias por tu compra. En breve te contactamos por Instagram o WhatsApp para coordinar el retiro.</p>
-  <div class="suc-addr">
-    <strong>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-      Punto de retiro
-    </strong>
-    Calle 43 N° 4364 · La Plata · Buenos Aires<br/>
-    <span style="font-size:.8rem;color:var(--muted)">Con cita previa — te escribimos para coordinar</span>
-  </div>
-  <button class="btn" onclick="showPage('home')" style="margin:0 auto;">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:16px;height:16px;"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-    Volver al inicio
-  </button>
-</div>
-</div>
-
 <!-- FOOTER -->
 <footer>
-  <span class="foot-logo" style="display:flex;align-items:center;justify-content:center;gap:.6rem;">
-    <svg viewBox="0 0 36 36" width="30" height="30">
-      <circle cx="18" cy="18" r="17" fill="none" stroke="var(--clay)" stroke-width="1.2"/>
-      <circle cx="18" cy="18" r="14" fill="none" stroke="#6b5a4a" stroke-width="0.6" stroke-dasharray="2 3"/>
-      <text x="18" y="23" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="18" font-weight="400" fill="var(--clay)" font-style="italic">E</text>
-    </svg>
-    estilo artesanal
-  </span>
-  <p style="font-size:.88rem;margin-bottom:.4rem;">Cerámica · Jabones naturales · Velas (pronto)</p>
-  <div class="foot-socials">
-    <a href="#">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
-    </a>
-    <a href="#">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-    </a>
-    <a href="#">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.5 12 19.79 19.79 0 0 1 1.15 3.39a2 2 0 0 1 1.99-2.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7 9.91a16 16 0 0 0 6 6l1.06-1.06a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-    </a>
+<div class="foot-inner">
+  <div class="foot-brand">
+    <div class="foot-logo-row">
+      <svg width="30" height="30" viewBox="0 0 36 36"><circle cx="18" cy="18" r="17" fill="none" stroke="#d4a882" stroke-width="1.2"/><circle cx="18" cy="18" r="13.5" fill="none" stroke="#3a3530" stroke-width=".6" stroke-dasharray="2.5 3.5"/><text x="18" y="23.5" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="18" font-weight="400" fill="#d4a882" font-style="italic">E</text></svg>
+      <span>estiloartesanal.emma</span>
+    </div>
+    <p>Jabones naturales de glicerina, cerámica artesanal y objetos únicos hechos a mano en La Plata.</p>
+    <div class="foot-socials">
+      <a href="https://instagram.com/estiloartesanal.emma" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+      <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+      <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.5 12 19.79 19.79 0 011.15 3.39a2 2 0 011.99-2.18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7 9.91a16 16 0 006 6l1.06-1.06a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></a>
+    </div>
   </div>
-  <p>© 2026 · @estiloartesanal.emma · Calle 43 N° 4364</p>
+  <div class="foot-col">
+    <h5>Productos</h5>
+    <a href="producto.html?id=jabon-lavanda">Jabón de Lavanda</a>
+    <a href="producto.html?id=jabon-citrico">Jabón Cítrico</a>
+    <a href="producto.html?id=jabon-romero">Jabón de Romero</a>
+    <a href="producto.html?id=ceramica">Cerámica esmaltada</a>
+    <a href="producto.html?id=deco">Objetos decorativos</a>
+  </div>
+  <div class="foot-col">
+    <h5>Información</h5>
+    <a href="#glicerina">Propiedades glicerina</a>
+    <a href="#sobre">Sobre mí</a>
+    <a href="#retiro">Punto de retiro</a>
+    <a href="#pagos">Formas de pago</a>
+    <a href="https://instagram.com/estiloartesanal.emma" target="_blank">Instagram</a>
+  </div>
+</div>
+<div class="foot-bottom">
+  <span>© 2026 · estiloartesanal.emma · Calle 43 N° 4364 · La Plata</span>
+  <span>Hecho con 🌿 y amor artesanal</span>
+</div>
 </footer>
 
 <script>
-const PRODUCTS = {
-  ceramica:{
-    id:'ceramica',label:'Cerámica',icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="12" rx="8" ry="5"/><path d="M12 7v10M4 12h16"/></svg>',
-    name:'Piezas de cerámica esmaltadas',price:'$12.500',
-    desc:'Cada pieza de cerámica es única: tazas, cuencos, macetas y más. Esmaltadas a mano con engobes y óxidos naturales. Aptas para uso diario, microondas y lavavajillas.',
-    features:['Esmaltadas a mano · pieza única','Arcilla de alta temperatura','Apta uso diario y microondas','Empacada para regalo sin costo extra'],
-    img:'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=85&w=1100&auto=format&fit=crop',
-  },
-  jabones:{
-    id:'jabones',label:'Jabones',icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 8C8 10 5.9 16.17 3.82 19.34c-.9 1.4 1.34 2.34 2.46.97L12 13l7 7"/></svg>',
-    name:'Jabones naturales artesanales',price:'$4.800',
-    desc:'Elaborados con aceites vegetales de primera calidad: oliva, coco y manteca de karité. Sin sulfatos ni parabenos. Fragancias naturales: lavanda, cítricos, romero y más.',
-    features:['Base 100% vegetal','Sin sulfatos ni parabenos','Aceites esenciales naturales','Curado mínimo 4 semanas'],
-    img:'https://images.unsplash.com/photo-1607006332611-ff950d0bf067?q=85&w=1100&auto=format&fit=crop',
-  },
-  deco:{
-    id:'deco',label:'Decoración',icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>',
-    name:'Objetos decorativos de hogar',price:'$3.200',
-    desc:'Pequeñas esculturas, sahumerios y piezas únicas para el hogar. Hechas en arcilla y terracota con acabados naturales. Perfectas como regalo o para un rincón especial.',
-    features:['Arcilla y terracota natural','Acabados a mano','Ideal como regalo','Pieza única, sin molde'],
-    img:'https://images.unsplash.com/photo-1588515724527-074a7a56616c?q=85&w=1100&auto=format&fit=crop',
-  },
-};
-
-let current = null;
-
-function showPage(name){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById('page-'+name).classList.add('active');
-  window.scrollTo({top:0,behavior:'smooth'});
+function filtrar(btn, cat){
+  document.querySelectorAll('.filt').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  document.querySelectorAll('.pcard').forEach(c=>{
+    c.style.display=(cat==='todos'||c.dataset.cat===cat)?'':'none';
+  });
 }
-
-function navTo(id){
-  showPage('home');
-  setTimeout(()=>{
-    const el=document.getElementById(id);
-    if(el) el.scrollIntoView({behavior:'smooth'});
-  },100);
-}
-
-function arrowSVG(){
-  return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:15px;height:15px;flex-shrink:0;color:var(--terra)"><path d="M20 6L9 17l-5-5"/></svg>`;
-}
-
-function showDetail(id){
-  const p=PRODUCTS[id];if(!p)return;current=p;
-  document.getElementById('det-img-slot').innerHTML=
-    `<img class="det-img" src="${p.img}" alt="${p.name}"/>`;
-  document.getElementById('det-info-slot').innerHTML=`
-    <p class="det-cat">${p.icon} ${p.label}</p>
-    <h2 class="det-title">${p.name}</h2>
-    <div class="det-price">${p.price}</div>
-    <p class="det-desc">${p.desc}</p>
-    <div class="det-features">${p.features.map(f=>`<div class="det-feat">${arrowSVG()} ${f}</div>`).join('')}</div>
-    <div class="det-actions">
-      <button class="btn" style="justify-content:center;" onclick="goCheckout()">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:16px;height:16px;"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-        Comprar ahora
-      </button>
-      <button class="btn mp" style="justify-content:center;" onclick="goCheckout()">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:16px;height:16px;"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
-        Pagar con Mercado Pago
-      </button>
-    </div>
-    <p class="det-note">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:12px;height:12px;color:var(--clay)"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-      Retiro personal · Calle 43 N° 4364 · La Plata
-    </p>
-  `;
-  showPage('detail');
-}
-
-function goCheckout(){
-  if(!current)return;
-  const p=current;
-  document.getElementById('ck-summary-slot').innerHTML=`
-    <p class="ck-sum-title">Tu pedido</p>
-    <div class="ck-prod-row">
-      <img class="ck-thumb" src="${p.img}" alt="${p.name}"/>
-      <div>
-        <p class="ck-pname">${p.name}</p>
-        <p class="ck-pcat">${p.label}</p>
-      </div>
-    </div>
-    <hr class="ck-hr"/>
-    <div class="ck-total"><span>Total</span><strong>${p.price}</strong></div>
-    <hr class="ck-hr"/>
-    <p style="font-size:.76rem;color:var(--muted);line-height:1.7;">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:12px;height:12px;vertical-align:middle;" stroke-linecap="round"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-      Retiro: Calle 43 N° 4364<br/>Sin envíos por ahora
-    </p>
-  `;
-  showPage('checkout');
-}
-
-function submitMP(){
-  const nom=document.getElementById('ch-nom').value.trim();
-  const email=document.getElementById('ch-email').value.trim();
-  if(!nom||!email){alert('Por favor completá tu nombre y email antes de continuar.');return;}
-  alert(`¡Gracias ${nom}! Serás redirigida al checkout de Mercado Pago.\n\n⚙️ Para activar el pago real, configurá tu Public Key de Mercado Pago.`);
-  showPage('success');
-}
-
-function submitConfirm(){
-  const nom=document.getElementById('ch-nom').value.trim();
-  if(!nom){alert('Por favor ingresá tu nombre.');return;}
-  showPage('success');
+function irProducto(id){
+  window.location.href='producto.html?id='+id;
 }
 </script>
 </body>
