@@ -58,9 +58,9 @@ app.post("/crear-preferencia", async (req, res) => {
       // ── URLs de retorno ──────────────────────────────────────
       // Reemplazá con tus URLs reales cuando tengas el dominio
       back_urls: {
-        success: `${process.env.FRONTEND_URL || "http://localhost:5500"}/estiloartesanal.html?pago=exitoso`,
-        failure: `${process.env.FRONTEND_URL || "http://localhost:5500"}/estiloartesanal.html?pago=fallido`,
-        pending: `${process.env.FRONTEND_URL || "http://localhost:5500"}/estiloartesanal.html?pago=pendiente`,
+        success: `${process.env.FRONTEND_URL || "http://localhost:5500"}/confirmacion.html?status=approved`,
+        failure: `${process.env.FRONTEND_URL || "http://localhost:5500"}/confirmacion.html?status=rejected`,
+        pending: `${process.env.FRONTEND_URL || "http://localhost:5500"}/confirmacion.html?status=pending`,
       },
       auto_return: "approved",   // redirige automático si el pago se aprueba
 
