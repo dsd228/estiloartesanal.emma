@@ -8,22 +8,29 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
+/* ── NEUMORFISMO TOKENS ── */
 :root {
-  --white:   #ffffff;
-  --off:     #f8f6f3;
-  --sage:    #E8C1C7;
-  --sage-dk: #8a4f58;
-  --sage-lt: #f5dde0;
-  --ink:     #222220;
-  --muted:   #888880;
-  --line:    #e5e0d8;
+  --bg:      #e8e0d8;
+  --bg-lt:   #f5efe8;
+  --shadow-d:#c4bcb4;
+  --shadow-l:#ffffff;
+  --pink:    #E8C1C7;
+  --pink-dk: #8a4f58;
+  --pink-md: #c89aa8;
+  --pink-lt: #f5dde0;
+  --ink:     #3a2a2e;
+  --muted:   #9a8880;
   --clay:    #c8956a;
   --serif:   'Cormorant Garamond', Georgia, serif;
   --sans:    'Jost', system-ui, sans-serif;
+  /* neumorphism helpers */
+  --nm-out:  8px 8px 20px var(--shadow-d), -8px -8px 20px var(--shadow-l);
+  --nm-in:   inset 5px 5px 14px var(--shadow-d), inset -5px -5px 14px var(--shadow-l);
+  --nm-sm:   4px 4px 10px var(--shadow-d), -4px -4px 10px var(--shadow-l);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{font-family:var(--sans);background:var(--white);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
 img{display:block;max-width:100%;}
 a{text-decoration:none;color:inherit;}
 button{font-family:var(--sans);cursor:pointer;}
@@ -31,325 +38,333 @@ button{font-family:var(--sans);cursor:pointer;}
 /* ── REVEAL ── */
 .rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease;}
 .rv.vs{opacity:1;transform:none;}
-.d1{transition-delay:.1s;}.d2{transition-delay:.2s;}.d3{transition-delay:.3s;}.d4{transition-delay:.4s;}
+.d1{transition-delay:.1s;}.d2{transition-delay:.2s;}.d3{transition-delay:.3s;}
 
 /* ── HEADER ── */
 header{
   position:fixed;top:0;left:0;right:0;z-index:500;
-  background:rgba(255,255,255,.97);
-  border-bottom:1px solid var(--line);
-  transition:box-shadow .3s;
+  background:rgba(232,224,216,.97);
+  backdrop-filter:blur(12px);
+  box-shadow:0 4px 16px var(--shadow-d),0 -1px 0 var(--shadow-l);
 }
-header.up{box-shadow:0 2px 18px rgba(0,0,0,.06);}
-.hdr{
-  max-width:1160px;margin:0 auto;
-  padding:0 40px;height:64px;
-  display:flex;align-items:center;justify-content:space-between;
-  gap:1rem;
-}
-.logo{
-  font-family:var(--serif);font-size:1.25rem;font-weight:400;
-  letter-spacing:.5px;color:var(--ink);
-  display:flex;flex-direction:column;align-items:center;line-height:1.1;
-}
-.logo small{font-family:var(--sans);font-size:.5rem;font-weight:300;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-top:2px;}
+.hdr{max-width:1200px;margin:0 auto;padding:0 40px;height:72px;display:flex;align-items:center;justify-content:space-between;gap:1rem;}
 
-nav{display:flex;gap:0;}
+/* Logo neumorfismo circular en header */
+.logo-wrap{
+  width:52px;height:52px;border-radius:50%;
+  background:var(--bg);
+  box-shadow:var(--nm-sm);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+  cursor:pointer;
+  transition:box-shadow .2s;
+}
+.logo-wrap:hover{box-shadow:var(--nm-in);}
+.logo-wrap svg{width:36px;height:36px;}
+
+.logo-text{display:flex;flex-direction:column;line-height:1.1;}
+.logo-text span{font-family:var(--serif);font-size:1rem;font-weight:400;color:var(--ink);font-style:italic;}
+.logo-text small{font-size:.5rem;font-weight:300;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);}
+
+nav{display:flex;gap:.2rem;}
 nav a{
-  font-size:.68rem;font-weight:400;letter-spacing:1.8px;text-transform:uppercase;
-  color:var(--muted);padding:.4rem 1.1rem;transition:color .2s;
-  border-bottom:1px solid transparent;
+  font-size:.65rem;font-weight:400;letter-spacing:1.8px;text-transform:uppercase;
+  color:var(--muted);padding:.5rem 1rem;border-radius:50px;
+  transition:all .22s;
 }
-nav a:hover{color:var(--ink);border-bottom-color:var(--ink);}
+nav a:hover{
+  color:var(--ink);
+  background:var(--bg);
+  box-shadow:var(--nm-sm);
+}
 
-.hdr-right{display:flex;align-items:center;gap:.6rem;}
 .hdr-btn{
-  font-size:.65rem;font-weight:400;letter-spacing:1.5px;text-transform:uppercase;
-  padding:.55rem 1.4rem;border:1px solid var(--ink);border-radius:0;
-  background:transparent;color:var(--ink);transition:all .22s;
+  font-size:.64rem;font-weight:400;letter-spacing:1.5px;text-transform:uppercase;
+  padding:.6rem 1.5rem;border-radius:50px;border:none;
+  background:var(--bg);color:var(--ink);
+  box-shadow:var(--nm-sm);
+  transition:all .22s;
 }
-.hdr-btn:hover{background:var(--ink);color:var(--white);}
-.hdr-btn.filled{background:var(--ink);color:var(--white);}
-.hdr-btn.filled:hover{background:var(--sage-dk);border-color:var(--sage-dk);}
+.hdr-btn:hover{box-shadow:var(--nm-in);color:var(--pink-dk);}
 
 /* ── HERO ── */
-.hero{
-  position:relative;width:100%;
-  height:100svh;min-height:580px;max-height:900px;
-  overflow:hidden;margin-top:64px;
-}
+.hero{position:relative;width:100%;height:100svh;min-height:580px;max-height:900px;overflow:hidden;margin-top:72px;}
 .h-slides{position:absolute;inset:0;}
 .h-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.4s ease;}
 .h-slide.on{opacity:1;}
 .h-slide img{width:100%;height:100%;object-fit:cover;transform:scale(1.05);transition:transform 8s ease;}
 .h-slide.on img{transform:scale(1);}
-.h-slide::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,.22);}
+.h-slide::after{content:'';position:absolute;inset:0;background:rgba(40,20,24,.35);}
 
-.h-body{
-  position:absolute;inset:0;z-index:2;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  text-align:center;padding:0 24px;
-}
-.h-body h1{
-  font-family:var(--sans);font-size:clamp(1.5rem,4vw,3rem);
-  font-weight:300;letter-spacing:5px;text-transform:uppercase;
-  color:#ffffff;line-height:1.25;margin-bottom:2rem;
-  text-shadow:0 2px 20px rgba(0,0,0,.3);
-}
+.h-body{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 24px;}
+.h-body h1{font-family:var(--sans);font-size:clamp(1.5rem,4vw,3rem);font-weight:300;letter-spacing:5px;text-transform:uppercase;color:#fff;line-height:1.25;margin-bottom:2rem;text-shadow:0 2px 20px rgba(0,0,0,.3);}
+
+/* CTA neumorfismo sobre hero — fondo semitransparente */
 .h-cta{
   font-size:.68rem;font-weight:400;letter-spacing:2.5px;text-transform:uppercase;
-  background:transparent;color:#ffffff;
-  border:1px solid rgba(255,255,255,.85);
-  padding:.75rem 2.4rem;transition:all .25s;
+  background:rgba(232,224,216,.2);color:#fff;
+  border:1px solid rgba(255,255,255,.5);
+  border-radius:50px;padding:.8rem 2.4rem;
+  backdrop-filter:blur(8px);
+  transition:all .25s;
 }
-.h-cta:hover{background:#ffffff;color:var(--ink);}
+.h-cta:hover{background:rgba(232,224,216,.35);}
 
-.h-dots{
-  position:absolute;bottom:28px;left:50%;transform:translateX(-50%);
-  z-index:3;display:flex;gap:.5rem;
+.h-dots{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);z-index:3;display:flex;gap:.5rem;}
+.h-dot{
+  width:10px;height:10px;border-radius:50%;border:none;padding:0;cursor:pointer;
+  background:var(--bg);
+  box-shadow:2px 2px 5px var(--shadow-d),-2px -2px 5px var(--shadow-l);
+  transition:all .3s;
 }
-.h-dot{width:8px;height:8px;border-radius:50%;border:1px solid rgba(255,255,255,.7);background:transparent;padding:0;cursor:pointer;transition:all .3s;}
-.h-dot.on{background:#ffffff;}
-
-.h-prog{position:absolute;bottom:0;left:0;height:2px;background:var(--sage);z-index:3;width:0%;transition:width linear;}
+.h-dot.on{box-shadow:inset 2px 2px 5px var(--shadow-d),inset -2px -2px 5px var(--shadow-l);background:var(--pink-md);}
+.h-prog{position:absolute;bottom:0;left:0;height:3px;background:var(--pink-md);z-index:3;width:0%;transition:width linear;}
 
 /* ── STRIP ── */
-.strip{background:var(--sage);}
-.strip-inner{
-  max-width:1160px;margin:0 auto;padding:0 40px;
-  display:grid;grid-template-columns:repeat(4,1fr);
-}
-.s-item{
-  padding:1.5rem 1rem;text-align:center;
-  border-right:1px solid rgba(255,255,255,.3);
-}
+.strip{background:var(--pink);box-shadow:0 4px 12px var(--shadow-d);}
+.strip-inner{max-width:1200px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:repeat(4,1fr);}
+.s-item{padding:1.5rem 1rem;text-align:center;border-right:1px solid rgba(255,255,255,.3);}
 .s-item:last-child{border-right:none;}
-.s-item svg{width:30px;height:30px;color:rgba(255,255,255,.9);margin:0 auto .6rem;}
-.s-item h4{font-size:.62rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--ink);margin-bottom:.3rem;}
-.s-item p{font-size:.7rem;font-weight:300;color:rgba(0,0,0,.5);line-height:1.55;}
+.s-item svg{width:28px;height:28px;color:var(--ink);opacity:.7;margin:0 auto .6rem;}
+.s-item h4{font-size:.62rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--ink);margin-bottom:.25rem;}
+.s-item p{font-size:.7rem;font-weight:300;color:rgba(58,42,46,.6);line-height:1.5;}
 
-/* ── SECTION ── */
-.sec{padding:90px 0;}
-.inn{max-width:1160px;margin:0 auto;padding:0 40px;}
-.sec-off{background:var(--off);}
+/* ── SECTIONS ── */
+.sec{padding:96px 0;}
+.inn{max-width:1200px;margin:0 auto;padding:0 40px;}
+.sec-off{background:var(--bg-lt);}
 
 .sec-title{text-align:center;margin-bottom:56px;}
-.sec-title h2{
-  font-family:var(--sans);font-size:.72rem;font-weight:400;
-  letter-spacing:4px;text-transform:uppercase;color:var(--ink);margin-bottom:.5rem;
-}
-.sec-title .line{width:36px;height:1px;background:var(--sage);margin:0 auto;}
+.sec-title h2{font-family:var(--sans);font-size:.72rem;font-weight:400;letter-spacing:4px;text-transform:uppercase;color:var(--ink);margin-bottom:.6rem;}
+.sec-line{width:40px;height:3px;border-radius:2px;background:var(--bg);box-shadow:var(--nm-sm);margin:0 auto;}
 
-/* ── PRODUCTS GRID ── */
-.prod-grid{
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
-  gap:0;border:1px solid var(--line);
+/* ── PRODUCTS ── */
+.filter-row{display:flex;justify-content:center;gap:.6rem;margin-bottom:48px;flex-wrap:wrap;}
+.fil{
+  font-size:.62rem;font-weight:400;letter-spacing:1.5px;text-transform:uppercase;
+  padding:.45rem 1.2rem;border-radius:50px;border:none;
+  background:var(--bg);color:var(--muted);
+  box-shadow:var(--nm-sm);
+  cursor:pointer;transition:all .22s;
 }
+.fil.on,.fil:hover{
+  box-shadow:var(--nm-in);
+  color:var(--pink-dk);
+}
+
+.prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:24px;}
+
 .pc{
-  border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding-bottom:2rem;
-  cursor:pointer;transition:background .25s;position:relative;overflow:hidden;
+  background:var(--bg);border-radius:20px;
+  box-shadow:var(--nm-out);
+  cursor:pointer;overflow:hidden;
+  transition:box-shadow .3s,transform .3s;
 }
-.pc:hover{background:var(--off);}
+.pc:hover{box-shadow:var(--nm-in);transform:translateY(-4px);}
 .pc.soon{opacity:.55;pointer-events:none;}
 
-.pc-img-wrap{overflow:hidden;position:relative;}
-.pc-img{width:100%;height:240px;object-fit:cover;transition:transform .6s ease;display:block;}
+.pc-img-wrap{overflow:hidden;position:relative;border-radius:20px 20px 0 0;}
+.pc-img{width:100%;height:220px;object-fit:cover;transition:transform .6s ease;}
 .pc:hover .pc-img{transform:scale(1.04);}
-.pc-ph{width:100%;height:240px;background:#f0ece5;display:flex;align-items:center;justify-content:center;}
-.pc-ph svg{width:36px;height:36px;color:#c8b89a;opacity:.6;}
-
-.pc-body{padding:1.4rem 1.4rem 0;text-align:center;}
-.pc-name{font-family:var(--sans);font-size:.72rem;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:.3rem;}
-.pc-cat{font-size:.64rem;font-weight:300;color:var(--muted);letter-spacing:1px;margin-bottom:.65rem;}
-.pc-price{font-size:.78rem;font-weight:400;color:var(--ink);margin-bottom:1rem;}
-
-.pc-btn{
-  font-size:.6rem;font-weight:400;letter-spacing:1.8px;text-transform:uppercase;
-  background:transparent;color:var(--ink);border:1px solid var(--ink);
-  padding:.5rem 1.2rem;width:calc(100% - 2.8rem);transition:all .22s;
-  display:block;margin:0 auto;
-}
-.pc-btn:hover{background:var(--ink);color:var(--white);}
+.pc-ph{width:100%;height:220px;background:var(--bg-lt);display:flex;align-items:center;justify-content:center;}
+.pc-ph svg{width:36px;height:36px;color:var(--pink-md);opacity:.5;}
 
 .pc-tag{
   position:absolute;top:12px;left:12px;
   font-size:.56rem;font-weight:400;letter-spacing:1px;text-transform:uppercase;
-  background:rgba(255,255,255,.9);color:var(--sage-dk);
-  padding:.2rem .65rem;border:1px solid var(--sage-lt);
+  background:var(--bg);color:var(--pink-dk);
+  padding:.22rem .75rem;border-radius:50px;
+  box-shadow:2px 2px 6px var(--shadow-d),-1px -1px 4px var(--shadow-l);
 }
-.pc-tag.pronto{background:var(--off);color:var(--muted);border-color:var(--line);}
+.pc-tag.pronto{color:var(--muted);}
 
-/* Filter row */
-.filter-row{display:flex;justify-content:center;gap:.4rem;margin-bottom:48px;}
-.fil{
-  font-size:.62rem;font-weight:400;letter-spacing:1.5px;text-transform:uppercase;
-  padding:.38rem 1.2rem;border:1px solid var(--line);
-  background:transparent;color:var(--muted);cursor:pointer;transition:all .2s;
+.pc-body{padding:1.3rem 1.4rem 1.6rem;text-align:center;}
+.pc-name{font-family:var(--sans);font-size:.7rem;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:.25rem;}
+.pc-cat{font-size:.62rem;font-weight:300;color:var(--muted);letter-spacing:1px;margin-bottom:.55rem;}
+.pc-price{font-size:.82rem;font-weight:400;color:var(--ink);margin-bottom:1rem;}
+
+.pc-btn{
+  font-size:.6rem;font-weight:400;letter-spacing:1.5px;text-transform:uppercase;
+  background:var(--bg);color:var(--ink);border:none;border-radius:50px;
+  padding:.5rem 1.2rem;width:calc(100% - 2rem);
+  box-shadow:var(--nm-sm);
+  transition:all .22s;display:block;margin:0 auto;
 }
-.fil.on,.fil:hover{background:var(--ink);border-color:var(--ink);color:var(--white);}
+.pc-btn:hover{box-shadow:var(--nm-in);color:var(--pink-dk);}
 
 /* ── GLICERINA ── */
 .gli-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
-.gli-img{width:100%;height:500px;object-fit:cover;}
-.gli-text .eyebrow{
-  font-size:.62rem;font-weight:400;letter-spacing:3px;text-transform:uppercase;
-  color:var(--sage-dk);margin-bottom:.8rem;display:flex;align-items:center;gap:.6rem;
-}
-.gli-text .eyebrow::before{content:'';width:20px;height:1px;background:var(--sage);}
-.gli-text h2{
-  font-family:var(--sans);font-size:.72rem;font-weight:400;
-  letter-spacing:4px;text-transform:uppercase;margin-bottom:1.5rem;
-}
+.gli-img-wrap{border-radius:24px;overflow:hidden;box-shadow:var(--nm-out);}
+.gli-img{width:100%;height:480px;object-fit:cover;display:block;}
+
+.gli-text .eyebrow{font-size:.62rem;font-weight:400;letter-spacing:3px;text-transform:uppercase;color:var(--pink-dk);margin-bottom:.8rem;display:flex;align-items:center;gap:.6rem;}
+.gli-text .eyebrow::before{content:'';width:20px;height:2px;border-radius:1px;background:var(--pink-md);box-shadow:1px 1px 3px var(--shadow-d);}
+.gli-text h2{font-family:var(--sans);font-size:.72rem;font-weight:400;letter-spacing:4px;text-transform:uppercase;margin-bottom:1.2rem;}
 .gli-text p{font-size:.86rem;font-weight:300;color:var(--muted);line-height:1.9;margin-bottom:1rem;}
 
-.gli-props{display:flex;flex-direction:column;gap:0;margin-top:1.5rem;border-top:1px solid var(--line);}
-.gli-prop{display:flex;align-items:center;gap:1rem;padding:.9rem 0;border-bottom:1px solid var(--line);}
-.gli-em{width:32px;height:32px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--sage-dk);}
-.gli-em svg{width:20px;height:20px;}
-.gli-prop strong{font-size:.76rem;font-weight:500;letter-spacing:.5px;}
-.gli-prop span{font-size:.74rem;font-weight:300;color:var(--muted);margin-left:auto;}
+.gli-props{display:flex;flex-direction:column;gap:.7rem;margin-top:1.4rem;}
+.gli-prop{
+  display:flex;align-items:center;gap:1rem;
+  padding:1rem 1.2rem;
+  background:var(--bg);border-radius:14px;
+  box-shadow:var(--nm-sm);
+  transition:box-shadow .25s;
+}
+.gli-prop:hover{box-shadow:var(--nm-in);}
+.gli-em{width:36px;height:36px;border-radius:10px;background:var(--bg);box-shadow:var(--nm-sm);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--pink-dk);}
+.gli-em svg{width:18px;height:18px;}
+.gli-prop strong{font-size:.78rem;font-weight:500;letter-spacing:.3px;}
+.gli-prop span{font-size:.72rem;font-weight:300;color:var(--muted);margin-left:auto;}
 
-/* ── BANNER CTA ── */
-.banner{position:relative;overflow:hidden;height:480px;}
+/* ── BANNER ── */
+.banner{position:relative;overflow:hidden;height:480px;margin:0;box-shadow:0 8px 24px var(--shadow-d);}
 .banner img{width:100%;height:100%;object-fit:cover;display:block;}
-.banner::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,.3);}
-.banner-body{
-  position:absolute;inset:0;z-index:1;
-  display:flex;flex-direction:column;align-items:flex-end;justify-content:center;
-  padding:0 10% 0 50%;text-align:left;
-}
-.banner-body h2{
-  font-family:var(--sans);font-size:clamp(.9rem,2vw,1rem);
-  font-weight:400;letter-spacing:4px;text-transform:uppercase;
-  color:#ffffff;margin-bottom:.7rem;line-height:1.4;
-}
+.banner::after{content:'';position:absolute;inset:0;background:rgba(40,20,24,.35);}
+.banner-body{position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;align-items:flex-end;justify-content:center;padding:0 10% 0 50%;text-align:left;}
+.banner-body h2{font-family:var(--sans);font-size:clamp(.9rem,2vw,1rem);font-weight:400;letter-spacing:4px;text-transform:uppercase;color:#fff;margin-bottom:.7rem;line-height:1.4;}
 .banner-body p{font-size:.83rem;font-weight:300;color:rgba(255,255,255,.75);line-height:1.8;margin-bottom:1.6rem;max-width:320px;}
 .banner-btn{
   font-size:.62rem;font-weight:400;letter-spacing:2px;text-transform:uppercase;
-  color:#ffffff;border:1px solid rgba(255,255,255,.75);
-  background:transparent;padding:.65rem 1.8rem;transition:all .25s;display:inline-block;
+  color:#fff;border:1px solid rgba(255,255,255,.6);border-radius:50px;
+  background:rgba(232,224,216,.15);backdrop-filter:blur(8px);
+  padding:.65rem 1.8rem;transition:all .25s;display:inline-block;
 }
-.banner-btn:hover{background:#ffffff;color:var(--ink);}
+.banner-btn:hover{background:rgba(232,224,216,.35);}
 
 /* ── ABOUT ── */
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);}
-.about-img{overflow:hidden;}
-.about-img img{width:100%;height:500px;object-fit:cover;display:block;transition:transform .6s ease;}
-.about-img:hover img{transform:scale(1.03);}
-.about-text{
-  padding:60px 56px;display:flex;flex-direction:column;justify-content:center;
-  background:var(--white);
-}
-.about-text .eyebrow{font-size:.6rem;font-weight:400;letter-spacing:3px;text-transform:uppercase;color:var(--sage-dk);margin-bottom:.6rem;}
-.about-text h2{font-family:var(--sans);font-size:.72rem;font-weight:400;letter-spacing:4px;text-transform:uppercase;margin-bottom:1.2rem;}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;}
+.about-img-wrap{border-radius:24px;overflow:hidden;box-shadow:var(--nm-out);}
+.about-img-wrap img{width:100%;height:480px;object-fit:cover;display:block;}
+
+.about-text .eyebrow{font-size:.6rem;font-weight:400;letter-spacing:3px;text-transform:uppercase;color:var(--pink-dk);margin-bottom:.6rem;}
+.about-text h2{font-family:var(--sans);font-size:.72rem;font-weight:400;letter-spacing:4px;text-transform:uppercase;margin-bottom:1.1rem;}
 .about-text p{font-size:.85rem;font-weight:300;color:var(--muted);line-height:1.9;margin-bottom:.7rem;}
 
-.stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);margin-top:2rem;border:1px solid var(--line);}
-.stat{background:var(--off);padding:1.2rem;text-align:center;}
-.stat strong{display:block;font-family:var(--serif);font-size:1.9rem;font-weight:300;color:var(--clay);line-height:1;margin-bottom:.2rem;}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:2rem;}
+.stat{
+  padding:1.3rem;text-align:center;border-radius:16px;
+  background:var(--bg);box-shadow:var(--nm-sm);
+  transition:box-shadow .25s;
+}
+.stat:hover{box-shadow:var(--nm-in);}
+.stat strong{display:block;font-family:var(--serif);font-size:1.9rem;font-weight:300;color:var(--clay);line-height:1;margin-bottom:.25rem;}
 .stat span{font-size:.62rem;font-weight:300;letter-spacing:1px;text-transform:uppercase;color:var(--muted);}
 
 /* ── RETIRO ── */
-.retiro-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);}
-.retiro-map{background:#f0e8e9;min-height:360px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.8rem;border-right:1px solid var(--line);}
-.retiro-map svg{width:38px;height:38px;color:var(--sage-dk);}
-.retiro-map strong{font-family:var(--sans);font-size:.7rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;}
-.retiro-map p{font-size:.75rem;color:var(--muted);}
-.retiro-text{padding:48px 52px;display:flex;flex-direction:column;justify-content:center;}
-.retiro-text .eyebrow{font-size:.6rem;font-weight:400;letter-spacing:3px;text-transform:uppercase;color:var(--sage-dk);margin-bottom:.6rem;}
+.retiro-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;}
+.retiro-map{
+  background:var(--bg);border-radius:24px;min-height:300px;
+  box-shadow:var(--nm-out);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.9rem;padding:2rem;
+}
+.retiro-map svg{width:40px;height:40px;color:var(--pink-dk);}
+.retiro-map strong{font-size:.72rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;}
+.retiro-map p{font-size:.76rem;color:var(--muted);}
+
+.retiro-text .eyebrow{font-size:.6rem;font-weight:400;letter-spacing:3px;text-transform:uppercase;color:var(--pink-dk);margin-bottom:.6rem;}
 .retiro-text h2{font-family:var(--sans);font-size:.72rem;font-weight:400;letter-spacing:4px;text-transform:uppercase;margin-bottom:1rem;}
 .retiro-text p{font-size:.84rem;font-weight:300;color:var(--muted);line-height:1.85;margin-bottom:.6rem;}
+
 .retiro-addr{
-  display:flex;align-items:center;gap:.8rem;
-  background:var(--off);border:1px solid var(--line);
-  padding:1rem 1.2rem;margin-top:1.2rem;
+  display:flex;align-items:center;gap:.9rem;
+  background:var(--bg);border-radius:14px;
+  box-shadow:var(--nm-sm);
+  padding:1rem 1.3rem;margin-top:1.3rem;
 }
-.retiro-addr svg{width:18px;height:18px;color:var(--sage-dk);flex-shrink:0;}
-.retiro-addr strong{display:block;font-size:.8rem;font-weight:500;margin-bottom:.1rem;}
+.retiro-addr svg{width:18px;height:18px;color:var(--pink-dk);flex-shrink:0;}
+.retiro-addr strong{display:block;font-size:.8rem;font-weight:500;margin-bottom:.15rem;}
 .retiro-addr span{font-size:.72rem;color:var(--muted);}
-.retiro-notice{
-  margin-top:.8rem;font-size:.68rem;font-weight:300;color:var(--muted);
-  display:flex;align-items:center;gap:.4rem;letter-spacing:.3px;
-}
+.retiro-notice{margin-top:.8rem;font-size:.68rem;font-weight:300;color:var(--muted);display:flex;align-items:center;gap:.4rem;}
 .retiro-notice svg{width:10px;height:10px;}
 
 /* ── PAGOS ── */
-.pago-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line);}
-.pago{border-right:1px solid var(--line);padding:2.2rem 1.4rem;text-align:center;transition:background .22s;}
-.pago:last-child{border-right:none;}
-.pago:hover{background:var(--off);}
-.pago svg{width:28px;height:28px;color:var(--sage-dk);margin:0 auto .9rem;display:block;}
+.pago-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:2.5rem;}
+.pago{
+  background:var(--bg);border-radius:20px;
+  box-shadow:var(--nm-out);
+  padding:2rem 1.4rem;text-align:center;
+  transition:box-shadow .25s,transform .25s;
+}
+.pago:hover{box-shadow:var(--nm-in);transform:translateY(-3px);}
+.pago-ico{
+  width:52px;height:52px;border-radius:14px;
+  background:var(--bg);box-shadow:var(--nm-sm);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 1rem;
+}
+.pago-ico svg{width:22px;height:22px;color:var(--pink-dk);}
 .pago h4{font-size:.66rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;margin-bottom:.3rem;}
 .pago p{font-size:.72rem;font-weight:300;color:var(--muted);}
 
 /* ── IG ── */
-.ig-sec{background:var(--sage);padding:72px 0;text-align:center;}
+.ig-sec{background:var(--pink);padding:72px 0;text-align:center;box-shadow:inset 0 4px 12px var(--shadow-d),inset 0 -4px 12px rgba(255,255,255,.3);}
 .ig-inner{max-width:480px;margin:0 auto;padding:0 24px;}
-.ig-icon{width:52px;height:52px;border-radius:14px;margin:0 auto 1.3rem;background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);display:flex;align-items:center;justify-content:center;}
-.ig-icon svg{width:24px;height:24px;color:#fff;}
+.ig-icon{
+  width:56px;height:56px;border-radius:16px;margin:0 auto 1.4rem;
+  background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);
+  box-shadow:4px 4px 10px rgba(138,79,88,.3),-2px -2px 8px rgba(255,255,255,.4);
+  display:flex;align-items:center;justify-content:center;
+}
+.ig-icon svg{width:26px;height:26px;color:#fff;}
 .ig-sec h2{font-size:.72rem;font-weight:400;letter-spacing:4px;text-transform:uppercase;color:var(--ink);margin-bottom:.7rem;}
-.ig-sec p{font-size:.82rem;font-weight:300;color:rgba(0,0,0,.5);line-height:1.8;margin-bottom:1.8rem;}
+.ig-sec p{font-size:.82rem;font-weight:300;color:rgba(58,42,46,.6);line-height:1.8;margin-bottom:1.8rem;}
 .ig-btn{
   display:inline-flex;align-items:center;gap:.55rem;
   font-size:.64rem;font-weight:400;letter-spacing:2px;text-transform:uppercase;
-  background:var(--ink);color:#ffffff;border:none;
-  padding:.7rem 2rem;transition:all .25s;cursor:pointer;
+  background:var(--bg);color:var(--ink);border:none;border-radius:50px;
+  padding:.75rem 2rem;
+  box-shadow:var(--nm-sm);
+  transition:all .25s;cursor:pointer;
 }
-.ig-btn:hover{background:var(--sage-dk);color:#ffffff;}
+.ig-btn:hover{box-shadow:var(--nm-in);color:var(--pink-dk);}
 .ig-btn svg{width:13px;height:13px;}
 
 /* ── FOOTER ── */
-footer{background:var(--ink);color:rgba(255,255,255,.45);}
-.foot-top{
-  max-width:1160px;margin:0 auto;padding:60px 40px 48px;
-  display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:48px;
-  border-bottom:1px solid rgba(255,255,255,.08);
+footer{
+  background:var(--ink);
+  box-shadow:inset 0 4px 16px rgba(0,0,0,.3);
 }
-.foot-logo{font-family:var(--serif);font-size:1.15rem;font-weight:400;color:rgba(255,255,255,.8);margin-bottom:.7rem;}
-.foot-brand p{font-size:.76rem;font-weight:300;line-height:1.75;max-width:230px;}
-.foot-socials{display:flex;gap:.45rem;margin-top:1.3rem;}
-.fsoc{width:30px;height:30px;border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.3);transition:all .22s;}
-.fsoc:hover{background:var(--sage);border-color:var(--sage);color:var(--ink);}
-.fsoc svg{width:11px;height:11px;}
-.foot-col h5{font-size:.56rem;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.2);margin-bottom:1rem;}
-.foot-col a{display:block;font-size:.76rem;font-weight:300;color:rgba(255,255,255,.35);margin-bottom:.5rem;transition:color .2s;}
-.foot-col a:hover{color:rgba(255,255,255,.8);}
-.foot-bottom{max-width:1160px;margin:0 auto;padding:1.2rem 40px;display:flex;justify-content:space-between;font-size:.64rem;font-weight:300;}
+.foot-top{max-width:1200px;margin:0 auto;padding:60px 40px 48px;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:48px;border-bottom:1px solid rgba(255,255,255,.07);}
+.foot-logo{font-family:var(--serif);font-size:1.1rem;font-style:italic;font-weight:300;color:var(--pink-md);margin-bottom:.7rem;}
+.foot-brand p{font-size:.76rem;font-weight:300;color:rgba(255,255,255,.3);line-height:1.75;max-width:230px;}
+.foot-socials{display:flex;gap:.5rem;margin-top:1.3rem;}
+.fsoc{
+  width:32px;height:32px;border-radius:50%;
+  background:rgba(255,255,255,.05);
+  box-shadow:2px 2px 6px rgba(0,0,0,.3),-1px -1px 4px rgba(255,255,255,.05);
+  display:flex;align-items:center;justify-content:center;
+  color:rgba(255,255,255,.3);transition:all .22s;
+}
+.fsoc:hover{background:var(--pink-md);color:#fff;}
+.fsoc svg{width:12px;height:12px;}
+.foot-col h5{font-size:.56rem;font-weight:400;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.18);margin-bottom:1rem;}
+.foot-col a{display:block;font-size:.76rem;font-weight:300;color:rgba(255,255,255,.3);margin-bottom:.5rem;transition:color .2s;}
+.foot-col a:hover{color:var(--pink-md);}
+.foot-bottom{max-width:1200px;margin:0 auto;padding:1.2rem 40px;display:flex;justify-content:space-between;font-size:.64rem;font-weight:300;color:rgba(255,255,255,.18);}
 
 /* ── RESPONSIVE ── */
 @media(max-width:960px){
   .strip-inner{grid-template-columns:1fr 1fr;}
   .s-item:nth-child(2){border-right:none;}
-  .s-item{border-bottom:1px solid rgba(255,255,255,.2);}
-  .prod-grid{grid-template-columns:1fr 1fr;}
-  .pc:nth-child(2n){border-right:none;}
-  .pc:nth-child(n+3){border-top:1px solid var(--line);}
   .gli-grid,.about-grid,.retiro-grid{grid-template-columns:1fr;}
   .gli-img{height:320px;}
-  .about-grid{border:none;gap:0;}
-  .about-img img{height:280px;}
-  .about-text{padding:36px 28px;}
-  .retiro-grid{border:none;gap:24px;}
-  .retiro-map{min-height:200px;border-right:none;border:1px solid var(--line);}
-  .retiro-text{padding:28px 0;}
-  .banner-body{padding:0 8%;align-items:flex-start;}
+  .about-img-wrap img{height:280px;}
   .pago-grid{grid-template-columns:1fr 1fr;}
-  .pago:nth-child(2n){border-right:none;}
-  .pago:nth-child(n+3){border-top:1px solid var(--line);}
   .foot-top{grid-template-columns:1fr;gap:32px;}
+  .banner-body{padding:0 8%;align-items:flex-start;}
 }
 @media(max-width:600px){
   nav{display:none;}
   .prod-grid{grid-template-columns:1fr;}
-  .pc{border-right:none;border-bottom:1px solid var(--line);}
   .pago-grid{grid-template-columns:1fr 1fr;}
   .hdr{padding:0 20px;}
   .inn{padding:0 20px;}
-  footer{padding:0 20px;}
+  footer{padding:0;}
   .foot-top{padding:40px 20px 32px;}
   .foot-bottom{padding:1rem 20px;flex-direction:column;gap:.4rem;text-align:center;}
   .strip-inner{grid-template-columns:1fr;}
   .s-item{border-right:none;}
+  .stats{grid-template-columns:1fr 1fr;}
 }
 </style>
 </head>
@@ -358,9 +373,26 @@ footer{background:var(--ink);color:rgba(255,255,255,.45);}
 <!-- HEADER -->
 <header id="hdr">
   <div class="hdr">
-    <a class="logo" href="#">
-      Estilo Artesanal.emma
-      <small>hecho a mano · Colonia Caroya</small>
+    <a href="#" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+      <!-- Logo neumorfismo mini -->
+      <div class="logo-wrap">
+        <svg width="36" height="36" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+          <style>
+            .em-h{font-family:'Cormorant Garamond',Georgia,serif;font-size:140px;font-style:italic;font-weight:300;fill:#8a4f58;}
+            .rt{font-family:'Jost',sans-serif;font-size:22px;font-weight:300;fill:#7a6a6e;letter-spacing:3px;}
+            .rb{font-family:'Jost',sans-serif;font-size:19px;font-weight:300;fill:#9a8880;letter-spacing:2px;}
+          </style>
+          <path id="aT" d="M 30,150 A 120,120 0 0,1 270,150" fill="none"/>
+          <text class="rt"><textPath href="#aT" startOffset="50%" text-anchor="middle">ESTILO ARTESANAL</textPath></text>
+          <path id="aB" d="M 48,165 A 105,105 0 0,0 252,165" fill="none"/>
+          <text class="rb"><textPath href="#aB" startOffset="50%" text-anchor="middle">TODO HECHO A MANO</textPath></text>
+          <text x="150" y="188" text-anchor="middle" class="em-h">E</text>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <span>Estilo Artesanal.emma</span>
+        <small>hecho a mano · Colonia Caroya</small>
+      </div>
     </a>
     <nav>
       <a href="#glicerina">Glicerina</a>
@@ -368,9 +400,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.45);}
       <a href="#sobre">Nosotros</a>
       <a href="#retiro">Retiro</a>
     </nav>
-    <div class="hdr-right">
-      <button class="hdr-btn filled" onclick="location.href='#productos'">Ver productos</button>
-    </div>
+    <button class="hdr-btn" onclick="location.href='#productos'">Ver productos</button>
   </div>
 </header>
 
@@ -400,23 +430,19 @@ footer{background:var(--ink);color:rgba(255,255,255,.45);}
   <div class="strip-inner">
     <div class="s-item">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M17 8C8 10 5.9 16.17 3.82 19.34c-.9 1.4 1.34 2.34 2.46.97L12 13l7 7"/></svg>
-      <h4>100% Natural</h4>
-      <p>Solo ingredientes que conocemos y confiamos</p>
+      <h4>100% Natural</h4><p>Solo ingredientes que conocemos y confiamos</p>
     </div>
     <div class="s-item">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-      <h4>Empaque cuidado</h4>
-      <p>Cada pieza envuelta con detalle artesanal</p>
+      <h4>Empaque cuidado</h4><p>Cada pieza envuelta con detalle artesanal</p>
     </div>
     <div class="s-item">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l8.84 8.84 8.84-8.84a5.5 5.5 0 000-7.78z"/></svg>
-      <h4>Hecho a mano</h4>
-      <p>Elaborado con amor en mi taller de Caroya</p>
+      <h4>Hecho a mano</h4><p>Elaborado con amor en mi taller de Caroya</p>
     </div>
     <div class="s-item">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-      <h4>Sin químicos</h4>
-      <p>Sin sulfatos, sin parabenos, sin artificios</p>
+      <h4>Sin químicos</h4><p>Sin sulfatos, sin parabenos, sin artificios</p>
     </div>
   </div>
 </div>
@@ -424,10 +450,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.45);}
 <!-- PRODUCTOS -->
 <section id="productos" class="sec">
 <div class="inn">
-  <div class="sec-title rv">
-    <h2>Productos destacados</h2>
-    <div class="line"></div>
-  </div>
+  <div class="sec-title rv"><h2>Productos destacados</h2><div class="sec-line"></div></div>
   <div class="filter-row rv d1">
     <button class="fil on" onclick="filtrar(this,'todos')">Todos</button>
     <button class="fil" onclick="filtrar(this,'jabones')">Jabones</button>
@@ -437,398 +460,128 @@ footer{background:var(--ink);color:rgba(255,255,255,.45);}
   </div>
   <div class="prod-grid rv d2" id="pgrid">
 
-    <!-- ── JABONES ── -->
     <div class="pc" data-cat="jabones" onclick="irProducto('jabon-lavanda')">
-      <div class="pc-img-wrap">
-        <img class="pc-img" src="assets /images/jardinlavanda.png" alt="Jabón Jardín de Lavanda"/>
-        <span class="pc-tag">Natural</span>
-      </div>
-      <div class="pc-body">
-        <div class="pc-name">Jardín de Lavanda</div>
-        <div class="pc-cat">Jabón artesanal</div>
-        <div class="pc-price">$4.800</div>
-        <button class="pc-btn">Agregar al pedido</button>
-      </div>
+      <div class="pc-img-wrap"><img class="pc-img" src="assets /images/jardinlavanda.png" alt="Jardín de Lavanda"/><span class="pc-tag">Natural</span></div>
+      <div class="pc-body"><div class="pc-name">Jardín de Lavanda</div><div class="pc-cat">Jabón artesanal</div><div class="pc-price">$4.800</div><button class="pc-btn">Agregar al pedido</button></div>
     </div>
-
-    <div class="pc" data-cat="jabones" onclick="irProducto('jabon-citrico')">
-      <div class="pc-img-wrap">
-        <img class="pc-img" src="assets /images/refrescante.png" alt="Jabón Refrescante"/>
-        <span class="pc-tag">Energizante</span>
-      </div>
-      <div class="pc-body">
-        <div class="pc-name">Refrescante</div>
-        <div class="pc-cat">Jabón artesanal</div>
-        <div class="pc-price">$4.800</div>
-        <button class="pc-btn">Agregar al pedido</button>
-      </div>
+    <div class="pc" data-cat="jabones" onclick="irProducto('jabon-refrescante')">
+      <div class="pc-img-wrap"><img class="pc-img" src="assets /images/refrescante.png" alt="Refrescante"/><span class="pc-tag">Energizante</span></div>
+      <div class="pc-body"><div class="pc-name">Refrescante</div><div class="pc-cat">Jabón artesanal</div><div class="pc-price">$4.800</div><button class="pc-btn">Agregar al pedido</button></div>
     </div>
-
     <div class="pc" data-cat="jabones" onclick="irProducto('jabon-manzanilla')">
-      <div class="pc-img-wrap">
-        <img class="pc-img" src="assets /images/manzanilla.png" alt="Jabón Manzanilla"/>
-        <span class="pc-tag">Suavizante</span>
-      </div>
-      <div class="pc-body">
-        <div class="pc-name">Manzanilla</div>
-        <div class="pc-cat">Jabón artesanal</div>
-        <div class="pc-price">$4.800</div>
-        <button class="pc-btn">Agregar al pedido</button>
-      </div>
+      <div class="pc-img-wrap"><img class="pc-img" src="assets /images/manzanilla.png" alt="Manzanilla"/><span class="pc-tag">Suavizante</span></div>
+      <div class="pc-body"><div class="pc-name">Manzanilla</div><div class="pc-cat">Jabón artesanal</div><div class="pc-price">$4.800</div><button class="pc-btn">Agregar al pedido</button></div>
     </div>
-
     <div class="pc" data-cat="jabones" onclick="irProducto('jabon-avena')">
-      <div class="pc-img-wrap">
-        <img class="pc-img" src="assets /images/avena.png" alt="Jabón Avena"/>
-        <span class="pc-tag">Nutritivo</span>
-      </div>
-      <div class="pc-body">
-        <div class="pc-name">Avena</div>
-        <div class="pc-cat">Jabón artesanal</div>
-        <div class="pc-price">$4.800</div>
-        <button class="pc-btn">Agregar al pedido</button>
-      </div>
+      <div class="pc-img-wrap"><img class="pc-img" src="assets /images/avena.png" alt="Avena"/><span class="pc-tag">Nutritivo</span></div>
+      <div class="pc-body"><div class="pc-name">Avena</div><div class="pc-cat">Jabón artesanal</div><div class="pc-price">$4.800</div><button class="pc-btn">Agregar al pedido</button></div>
     </div>
-
     <div class="pc" data-cat="jabones" onclick="irProducto('jabon-avenaseda')">
-      <div class="pc-img-wrap">
-        <img class="pc-img" src="assets /images/avenaseda.png" alt="Jabón Avena y Seda"/>
-        <span class="pc-tag">Hidratante</span>
-      </div>
-      <div class="pc-body">
-        <div class="pc-name">Avena & Seda</div>
-        <div class="pc-cat">Jabón artesanal</div>
-        <div class="pc-price">$4.800</div>
-        <button class="pc-btn">Agregar al pedido</button>
-      </div>
+      <div class="pc-img-wrap"><img class="pc-img" src="assets /images/avenaseda.png" alt="Avena y Seda"/><span class="pc-tag">Hidratante</span></div>
+      <div class="pc-body"><div class="pc-name">Avena &amp; Seda</div><div class="pc-cat">Jabón artesanal</div><div class="pc-price">$4.800</div><button class="pc-btn">Agregar al pedido</button></div>
     </div>
-
     <div class="pc" data-cat="jabones" onclick="irProducto('jabon-avenaseda2')">
-      <div class="pc-img-wrap">
-        <img class="pc-img" src="assets /images/avenaseda2.png" alt="Jabón Avena Seda 2"/>
-        <span class="pc-tag">Hidratante</span>
-      </div>
-      <div class="pc-body">
-        <div class="pc-name">Avena & Seda II</div>
-        <div class="pc-cat">Jabón artesanal</div>
-        <div class="pc-price">$4.800</div>
-        <button class="pc-btn">Agregar al pedido</button>
-      </div>
+      <div class="pc-img-wrap"><img class="pc-img" src="assets /images/avenaseda2.png" alt="Avena Seda II"/><span class="pc-tag">Hidratante</span></div>
+      <div class="pc-body"><div class="pc-name">Avena &amp; Seda II</div><div class="pc-cat">Jabón artesanal</div><div class="pc-price">$4.800</div><button class="pc-btn">Agregar al pedido</button></div>
     </div>
-
-    <div class="pc" data-cat="jabones" onclick="irProducto('jabon-mantecakarite')">
-      <div class="pc-img-wrap">
-        <img class="pc-img" src="assets /images/mantecadekarite.png" alt="Jabón Manteca de Karité"/>
-        <span class="pc-tag">Nutritivo</span>
-      </div>
-      <div class="pc-body">
-        <div class="pc-name">Manteca de Karité</div>
-        <div class="pc-cat">Jabón artesanal</div>
-        <div class="pc-price">$4.800</div>
-        <button class="pc-btn">Agregar al pedido</button>
-      </div>
+    <div class="pc" data-cat="jabones" onclick="irProducto('jabon-karite')">
+      <div class="pc-img-wrap"><img class="pc-img" src="assets /images/mantecadekarite.png" alt="Manteca de Karité"/><span class="pc-tag">Nutritivo</span></div>
+      <div class="pc-body"><div class="pc-name">Manteca de Karité</div><div class="pc-cat">Jabón artesanal</div><div class="pc-price">$4.800</div><button class="pc-btn">Agregar al pedido</button></div>
     </div>
-
     <div class="pc" data-cat="jabones" onclick="irProducto('jabon-detox')">
-      <div class="pc-img-wrap">
-        <img class="pc-img" src="assets /images/detox.png" alt="Jabón Detox"/>
-        <span class="pc-tag">Purificante</span>
-      </div>
-      <div class="pc-body">
-        <div class="pc-name">Detox</div>
-        <div class="pc-cat">Jabón artesanal</div>
-        <div class="pc-price">$4.800</div>
-        <button class="pc-btn">Agregar al pedido</button>
-      </div>
+      <div class="pc-img-wrap"><img class="pc-img" src="assets /images/detox.png" alt="Detox"/><span class="pc-tag">Purificante</span></div>
+      <div class="pc-body"><div class="pc-name">Detox</div><div class="pc-cat">Jabón artesanal</div><div class="pc-price">$4.800</div><button class="pc-btn">Agregar al pedido</button></div>
     </div>
-
     <div class="pc" data-cat="jabones" onclick="irProducto('jabon-petalos')">
-      <div class="pc-img-wrap">
-        <img class="pc-img" src="assets /images/petalos.png" alt="Jabón Pétalos"/>
-        <span class="pc-tag">Floral</span>
-      </div>
-      <div class="pc-body">
-        <div class="pc-name">Pétalos</div>
-        <div class="pc-cat">Jabón artesanal</div>
-        <div class="pc-price">$4.800</div>
-        <button class="pc-btn">Agregar al pedido</button>
-      </div>
+      <div class="pc-img-wrap"><img class="pc-img" src="assets /images/petalos.png" alt="Pétalos"/><span class="pc-tag">Floral</span></div>
+      <div class="pc-body"><div class="pc-name">Pétalos</div><div class="pc-cat">Jabón artesanal</div><div class="pc-price">$4.800</div><button class="pc-btn">Agregar al pedido</button></div>
+    </div>
+    <div class="pc" data-cat="jabones" onclick="irProducto('jabon-cacao')">
+      <div class="pc-img-wrap"><img class="pc-img" src="assets /images/dulceenergiacacao.png" alt="Dulce Energía Cacao"/><span class="pc-tag">Energizante</span></div>
+      <div class="pc-body"><div class="pc-name">Dulce Energía Cacao</div><div class="pc-cat">Jabón artesanal</div><div class="pc-price">$4.800</div><button class="pc-btn">Agregar al pedido</button></div>
+    </div>
+    <div class="pc" data-cat="jabones" onclick="irProducto('jabones-coleccion')">
+      <div class="pc-img-wrap"><img class="pc-img" src="assets /images/jaboneshero.jpg" alt="Colección jabones"/><span class="pc-tag">Colección</span></div>
+      <div class="pc-body"><div class="pc-name">Colección jabones</div><div class="pc-cat">Jabones artesanales</div><div class="pc-price">$4.800 c/u</div><button class="pc-btn">Ver más</button></div>
     </div>
 
-    <div class="pc" data-cat="jabones" onclick="irProducto('jabon-dulceenergia')">
-      <div class="pc-img-wrap">
-        <img class="pc-img" src="assets /images/dulceenergiacacao.png" alt="Jabón Dulce Energía Cacao"/>
-        <span class="pc-tag">Energizante</span>
-      </div>
-      <div class="pc-body">
-        <div class="pc-name">Dulce Energía Cacao</div>
-        <div class="pc-cat">Jabón artesanal</div>
-        <div class="pc-price">$4.800</div>
-        <button class="pc-btn">Agregar al pedido</button>
-      </div>
+    <div class="pc" data-cat="sahumadores" onclick="irProducto('sahumador-gratitud')">
+      <div class="pc-img-wrap"><img class="pc-img" src="assets /images/sahumadorchicogratitud.png" alt="Sahumador Gratitud"/><span class="pc-tag">Cerámica</span></div>
+      <div class="pc-body"><div class="pc-name">Sahumador Gratitud</div><div class="pc-cat">Sahumador chico</div><div class="pc-price">$7.000</div><button class="pc-btn">Agregar al pedido</button></div>
     </div>
-
-    <div class="pc" data-cat="jabones" onclick="irProducto('jabones-hero')">
-      <div class="pc-img-wrap">
-        <img class="pc-img" src="assets /images/jaboneshero.jpg" alt="Jabones variados"/>
-        <span class="pc-tag">Colección</span>
-      </div>
-      <div class="pc-body">
-        <div class="pc-name">Colección jabones</div>
-        <div class="pc-cat">Jabones artesanales</div>
-        <div class="pc-price">$4.800 c/u</div>
-        <button class="pc-btn">Ver más</button>
-      </div>
+    <div class="pc" data-cat="sahumadores" onclick="irProducto('sahumador-magia')">
+      <div class="pc-img-wrap"><img class="pc-img" src="assets /images/sahumadorgrandemagia.png" alt="Sahumador Magia"/><span class="pc-tag">Cerámica</span></div>
+      <div class="pc-body"><div class="pc-name">Sahumador Magia</div><div class="pc-cat">Sahumador grande</div><div class="pc-price">$7.000</div><button class="pc-btn">Agregar al pedido</button></div>
     </div>
-
-    <!-- ── SAHUMADORES ── -->
-    <div class="pc" data-cat="sahumadores" onclick="irProducto('sahumador-chico-gratitud')">
-      <div class="pc-img-wrap">
-        <img class="pc-img" src="assets /images/sahumadorchicogratitud.png" alt="Sahumador Chico Gratitud"/>
-        <span class="pc-tag">Cerámica</span>
-      </div>
-      <div class="pc-body">
-        <div class="pc-name">Sahumador Gratitud</div>
-        <div class="pc-cat">Sahumador chico</div>
-        <div class="pc-price">$7.000</div>
-        <button class="pc-btn">Agregar al pedido</button>
-      </div>
+    <div class="pc" data-cat="sahumadores" onclick="irProducto('sahumador-luz')">
+      <div class="pc-img-wrap"><img class="pc-img" src="assets /images/sahumadorazulluz.png" alt="Sahumador Luz"/><span class="pc-tag">Cerámica</span></div>
+      <div class="pc-body"><div class="pc-name">Sahumador Luz</div><div class="pc-cat">Pack x4 disponible</div><div class="pc-price">$9.000 c/u</div><button class="pc-btn">Agregar al pedido</button></div>
     </div>
-
-    <div class="pc" data-cat="sahumadores" onclick="irProducto('sahumador-grande-magia')">
-      <div class="pc-img-wrap">
-        <img class="pc-img" src="assets /images/sahumadorgrandemagia.png" alt="Sahumador Grande Magia"/>
-        <span class="pc-tag">Cerámica</span>
-      </div>
-      <div class="pc-body">
-        <div class="pc-name">Sahumador Magia</div>
-        <div class="pc-cat">Sahumador grande</div>
-        <div class="pc-price">$7.000</div>
-        <button class="pc-btn">Agregar al pedido</button>
-      </div>
-    </div>
-
-    <div class="pc" data-cat="sahumadores" onclick="irProducto('sahumador-luz-azul')">
-      <div class="pc-img-wrap">
-        <img class="pc-img" src="assets /images/sahumadorazulluz.png" alt="Sahumador Luz Azul"/>
-        <span class="pc-tag">Cerámica</span>
-      </div>
-      <div class="pc-body">
-        <div class="pc-name">Sahumador Luz</div>
-        <div class="pc-cat">Pack x4 disponible</div>
-        <div class="pc-price">$9.000 c/u</div>
-        <button class="pc-btn">Agregar al pedido</button>
-      </div>
-    </div>
-
     <div class="pc" data-cat="sahumadores" onclick="irProducto('sahumador-salmon')">
-      <div class="pc-img-wrap">
-        <img class="pc-img" src="assets /images/sahumadorsalmon.png" alt="Sahumador Salmón"/>
-        <span class="pc-tag">Cerámica</span>
-      </div>
-      <div class="pc-body">
-        <div class="pc-name">Sahumador Salmón</div>
-        <div class="pc-cat">Sahumador</div>
-        <div class="pc-price">$9.000</div>
-        <button class="pc-btn">Agregar al pedido</button>
-      </div>
+      <div class="pc-img-wrap"><img class="pc-img" src="assets /images/sahumadorsalmon.png" alt="Sahumador Salmón"/><span class="pc-tag">Cerámica</span></div>
+      <div class="pc-body"><div class="pc-name">Sahumador Salmón</div><div class="pc-cat">Sahumador</div><div class="pc-price">$9.000</div><button class="pc-btn">Agregar al pedido</button></div>
     </div>
-
     <div class="pc" data-cat="sahumadores" onclick="irProducto('sahumador-cielo')">
-      <div class="pc-img-wrap">
-        <img class="pc-img" src="assets /images/sahumadorluzciel.png" alt="Sahumador Luz Cielo"/>
-        <span class="pc-tag">Cerámica</span>
-      </div>
-      <div class="pc-body">
-        <div class="pc-name">Sahumador Cielo</div>
-        <div class="pc-cat">Sahumador</div>
-        <div class="pc-price">$9.000</div>
-        <button class="pc-btn">Agregar al pedido</button>
-      </div>
+      <div class="pc-img-wrap"><img class="pc-img" src="assets /images/sahumadorluzciel.png" alt="Sahumador Cielo"/><span class="pc-tag">Cerámica</span></div>
+      <div class="pc-body"><div class="pc-name">Sahumador Cielo</div><div class="pc-cat">Sahumador</div><div class="pc-price">$9.000</div><button class="pc-btn">Agregar al pedido</button></div>
     </div>
 
-    <!-- ── CERÁMICA ── -->
     <div class="pc" data-cat="ceramica" onclick="irProducto('cenicero-esmeralda')">
-      <div class="pc-img-wrap">
-        <img class="pc-img" src="assets /images/platocupcake.png" alt="Cenicero Esmeralda"/>
-        <span class="pc-tag">Pieza única</span>
-      </div>
-      <div class="pc-body">
-        <div class="pc-name">Cenicero Esmeralda</div>
-        <div class="pc-cat">Cerámica esmaltada</div>
-        <div class="pc-price">$5.000</div>
-        <button class="pc-btn">Agregar al pedido</button>
-      </div>
+      <div class="pc-img-wrap"><img class="pc-img" src="assets /images/platocupcake.png" alt="Cenicero Esmeralda"/><span class="pc-tag">Pieza única</span></div>
+      <div class="pc-body"><div class="pc-name">Cenicero Esmeralda</div><div class="pc-cat">Cerámica esmaltada</div><div class="pc-price">$5.000</div><button class="pc-btn">Agregar al pedido</button></div>
     </div>
-
     <div class="pc" data-cat="ceramica" onclick="irProducto('cuenco-frutilla')">
-      <div class="pc-img-wrap">
-        <img class="pc-img" src="assets /images/racimofrutillas.png" alt="Cuenco Frutilla"/>
-        <span class="pc-tag">Pieza única</span>
-      </div>
-      <div class="pc-body">
-        <div class="pc-name">Cuenco Frutilla</div>
-        <div class="pc-cat">Cerámica · mediano</div>
-        <div class="pc-price">$5.000</div>
-        <button class="pc-btn">Agregar al pedido</button>
-      </div>
+      <div class="pc-img-wrap"><img class="pc-img" src="assets /images/racimofrutillas.png" alt="Cuenco Frutilla"/><span class="pc-tag">Pieza única</span></div>
+      <div class="pc-body"><div class="pc-name">Cuenco Frutilla</div><div class="pc-cat">Cerámica · mediano</div><div class="pc-price">$5.000</div><button class="pc-btn">Agregar al pedido</button></div>
     </div>
-
     <div class="pc" data-cat="ceramica" onclick="irProducto('cazuela-locro')">
-      <div class="pc-img-wrap">
-        <img class="pc-img" src="assets /images/cuencolocro.png" alt="Cazuela Locro"/>
-        <span class="pc-tag">Pieza única</span>
-      </div>
-      <div class="pc-body">
-        <div class="pc-name">Cazuela Locro</div>
-        <div class="pc-cat">Cerámica · x3 disponibles</div>
-        <div class="pc-price">$9.000 · 3×$25.000</div>
-        <button class="pc-btn">Agregar al pedido</button>
-      </div>
+      <div class="pc-img-wrap"><img class="pc-img" src="assets /images/cuencolocro.png" alt="Cazuela Locro"/><span class="pc-tag">Pieza única</span></div>
+      <div class="pc-body"><div class="pc-name">Cazuela Locro</div><div class="pc-cat">x3 disponibles</div><div class="pc-price">$9.000 · 3×$25.000</div><button class="pc-btn">Agregar al pedido</button></div>
     </div>
-
     <div class="pc" data-cat="ceramica" onclick="irProducto('taza-juana')">
-      <div class="pc-img-wrap">
-        <img class="pc-img" src="assets /images/tazajuana.png" alt="Taza Juana"/>
-        <span class="pc-tag">Pieza única</span>
-      </div>
-      <div class="pc-body">
-        <div class="pc-name">Taza Juana</div>
-        <div class="pc-cat">Cerámica esmaltada</div>
-        <div class="pc-price">$7.500</div>
-        <button class="pc-btn">Agregar al pedido</button>
-      </div>
+      <div class="pc-img-wrap"><img class="pc-img" src="assets /images/tazajuana.png" alt="Taza Juana"/><span class="pc-tag">Pieza única</span></div>
+      <div class="pc-body"><div class="pc-name">Taza Juana</div><div class="pc-cat">Cerámica esmaltada</div><div class="pc-price">$7.500</div><button class="pc-btn">Agregar al pedido</button></div>
     </div>
-
     <div class="pc" data-cat="ceramica" onclick="irProducto('taza-campo')">
-      <div class="pc-img-wrap">
-        <img class="pc-img" src="assets /images/tazacampo.png" alt="Taza Campo"/>
-        <span class="pc-tag">Pieza única</span>
-      </div>
-      <div class="pc-body">
-        <div class="pc-name">Taza Campo</div>
-        <div class="pc-cat">Cerámica esmaltada</div>
-        <div class="pc-price">$7.500</div>
-        <button class="pc-btn">Agregar al pedido</button>
-      </div>
+      <div class="pc-img-wrap"><img class="pc-img" src="assets /images/tazacampo.png" alt="Taza Campo"/><span class="pc-tag">Pieza única</span></div>
+      <div class="pc-body"><div class="pc-name">Taza Campo</div><div class="pc-cat">Cerámica esmaltada</div><div class="pc-price">$7.500</div><button class="pc-btn">Agregar al pedido</button></div>
     </div>
-
     <div class="pc" data-cat="ceramica" onclick="irProducto('taza-mariposa')">
-      <div class="pc-img-wrap">
-        <img class="pc-img" src="assets /images/tazamariposa.png" alt="Taza Mariposa"/>
-        <span class="pc-tag">Pieza única</span>
-      </div>
-      <div class="pc-body">
-        <div class="pc-name">Taza Mariposa</div>
-        <div class="pc-cat">Cerámica esmaltada</div>
-        <div class="pc-price">$7.500</div>
-        <button class="pc-btn">Agregar al pedido</button>
-      </div>
+      <div class="pc-img-wrap"><img class="pc-img" src="assets /images/tazamariposa.png" alt="Taza Mariposa"/><span class="pc-tag">Pieza única</span></div>
+      <div class="pc-body"><div class="pc-name">Taza Mariposa</div><div class="pc-cat">Cerámica esmaltada</div><div class="pc-price">$7.500</div><button class="pc-btn">Agregar al pedido</button></div>
     </div>
-
     <div class="pc" data-cat="ceramica" onclick="irProducto('cuenco-sushi')">
-      <div class="pc-img-wrap">
-        <img class="pc-img" src="assets /images/cuencosushi.png" alt="Cuenco Sushi"/>
-        <span class="pc-tag">Pieza única</span>
-      </div>
-      <div class="pc-body">
-        <div class="pc-name">Cuenco Sushi</div>
-        <div class="pc-cat">Cerámica esmaltada</div>
-        <div class="pc-price">Consultar</div>
-        <button class="pc-btn">Consultar</button>
-      </div>
+      <div class="pc-img-wrap"><img class="pc-img" src="assets /images/cuencosushi.png" alt="Cuenco Sushi"/><span class="pc-tag">Pieza única</span></div>
+      <div class="pc-body"><div class="pc-name">Cuenco Sushi</div><div class="pc-cat">Cerámica esmaltada</div><div class="pc-price">Consultar</div><button class="pc-btn">Consultar</button></div>
     </div>
-
     <div class="pc" data-cat="ceramica" onclick="irProducto('cuenco-grande')">
-      <div class="pc-img-wrap">
-        <img class="pc-img" src="assets /images/cuencograndemulticolor.png" alt="Cuenco Grande Multicolor"/>
-        <span class="pc-tag">Pieza única</span>
-      </div>
-      <div class="pc-body">
-        <div class="pc-name">Cuenco Grande</div>
-        <div class="pc-cat">Cerámica multicolor</div>
-        <div class="pc-price">Consultar</div>
-        <button class="pc-btn">Consultar</button>
-      </div>
+      <div class="pc-img-wrap"><img class="pc-img" src="assets /images/cuencograndemulticolor.png" alt="Cuenco Grande"/><span class="pc-tag">Pieza única</span></div>
+      <div class="pc-body"><div class="pc-name">Cuenco Grande</div><div class="pc-cat">Cerámica multicolor</div><div class="pc-price">Consultar</div><button class="pc-btn">Consultar</button></div>
     </div>
 
-    <!-- ── DECORACIÓN ── -->
     <div class="pc" data-cat="deco" onclick="irProducto('casita-grande')">
-      <div class="pc-img-wrap">
-        <img class="pc-img" src="assets /images/piedrasantiestres.png" alt="Casita Grande Alegría"/>
-        <span class="pc-tag">Artesanal</span>
-      </div>
-      <div class="pc-body">
-        <div class="pc-name">Casita grande Alegría</div>
-        <div class="pc-cat">Decoración</div>
-        <div class="pc-price">$20.000</div>
-        <button class="pc-btn">Agregar al pedido</button>
-      </div>
+      <div class="pc-img-wrap"><img class="pc-img" src="assets /images/piedrasantiestres.png" alt="Casita Grande Alegría"/><span class="pc-tag">Artesanal</span></div>
+      <div class="pc-body"><div class="pc-name">Casita grande Alegría</div><div class="pc-cat">Decoración</div><div class="pc-price">$20.000</div><button class="pc-btn">Agregar al pedido</button></div>
     </div>
-
     <div class="pc" data-cat="deco" onclick="irProducto('casita-chica')">
-      <div class="pc-img-wrap">
-        <img class="pc-img" src="assets /images/ambar.png" alt="Casita Chica Hogar"/>
-        <span class="pc-tag">Artesanal</span>
-      </div>
-      <div class="pc-body">
-        <div class="pc-name">Casita chica Hogar</div>
-        <div class="pc-cat">Decoración</div>
-        <div class="pc-price">$15.000</div>
-        <button class="pc-btn">Agregar al pedido</button>
-      </div>
+      <div class="pc-img-wrap"><img class="pc-img" src="assets /images/ambar.png" alt="Casita Chica Hogar"/><span class="pc-tag">Artesanal</span></div>
+      <div class="pc-body"><div class="pc-name">Casita chica Hogar</div><div class="pc-cat">Decoración</div><div class="pc-price">$15.000</div><button class="pc-btn">Agregar al pedido</button></div>
     </div>
-
     <div class="pc" data-cat="deco" onclick="irProducto('florero-nube')">
-      <div class="pc-img-wrap">
-        <img class="pc-img" src="assets /images/fLorenube.png" alt="Florero Chico Nube"/>
-        <span class="pc-tag">Artesanal</span>
-      </div>
-      <div class="pc-body">
-        <div class="pc-name">Florero Nube</div>
-        <div class="pc-cat">Florero chico</div>
-        <div class="pc-price">$5.000</div>
-        <button class="pc-btn">Agregar al pedido</button>
-      </div>
+      <div class="pc-img-wrap"><img class="pc-img" src="assets /images/fLorenube.png" alt="Florero Nube"/><span class="pc-tag">Artesanal</span></div>
+      <div class="pc-body"><div class="pc-name">Florero Nube</div><div class="pc-cat">Florero chico</div><div class="pc-price">$5.000</div><button class="pc-btn">Agregar al pedido</button></div>
     </div>
-
     <div class="pc" data-cat="deco" onclick="irProducto('porta-cepillos')">
-      <div class="pc-img-wrap">
-        <img class="pc-img" src="assets /images/portecepilosambar.png" alt="Porta Cepillos Ámbar"/>
-        <span class="pc-tag">Artesanal</span>
-      </div>
-      <div class="pc-body">
-        <div class="pc-name">Porta Cepillos Ámbar</div>
-        <div class="pc-cat">Decoración baño</div>
-        <div class="pc-price">$5.000</div>
-        <button class="pc-btn">Agregar al pedido</button>
-      </div>
+      <div class="pc-img-wrap"><img class="pc-img" src="assets /images/portecepilosambar.png" alt="Porta Cepillos"/><span class="pc-tag">Artesanal</span></div>
+      <div class="pc-body"><div class="pc-name">Porta Cepillos Ámbar</div><div class="pc-cat">Decoración baño</div><div class="pc-price">$5.000</div><button class="pc-btn">Agregar al pedido</button></div>
     </div>
-
     <div class="pc" data-cat="deco" onclick="irProducto('porta-espiral')">
-      <div class="pc-img-wrap">
-        <img class="pc-img" src="assets /images/portaespiral.png" alt="Porta Espiral Margarita"/>
-        <span class="pc-tag">Artesanal</span>
-      </div>
-      <div class="pc-body">
-        <div class="pc-name">Porta Espiral Margarita</div>
-        <div class="pc-cat">Decoración</div>
-        <div class="pc-price">$8.000</div>
-        <button class="pc-btn">Agregar al pedido</button>
-      </div>
+      <div class="pc-img-wrap"><img class="pc-img" src="assets /images/portaespiral.png" alt="Porta Espiral"/><span class="pc-tag">Artesanal</span></div>
+      <div class="pc-body"><div class="pc-name">Porta Espiral Margarita</div><div class="pc-cat">Decoración</div><div class="pc-price">$8.000</div><button class="pc-btn">Agregar al pedido</button></div>
     </div>
-
     <div class="pc" data-cat="deco" onclick="irProducto('floreros')">
-      <div class="pc-img-wrap">
-        <img class="pc-img" src="assets /images/floreros.png" alt="Floreros"/>
-        <span class="pc-tag">Artesanal</span>
-      </div>
-      <div class="pc-body">
-        <div class="pc-name">Floreros</div>
-        <div class="pc-cat">Decoración</div>
-        <div class="pc-price">Consultar</div>
-        <button class="pc-btn">Consultar</button>
-      </div>
+      <div class="pc-img-wrap"><img class="pc-img" src="assets /images/floreros.png" alt="Floreros"/><span class="pc-tag">Artesanal</span></div>
+      <div class="pc-body"><div class="pc-name">Floreros</div><div class="pc-cat">Decoración</div><div class="pc-price">Consultar</div><button class="pc-btn">Consultar</button></div>
     </div>
 
   </div>
@@ -840,40 +593,25 @@ footer{background:var(--ink);color:rgba(255,255,255,.45);}
 <div class="inn">
   <div class="gli-grid">
     <div class="rv">
-      <img class="gli-img" src="assets /images/glicerinavegetal.jpg" alt="Glicerina vegetal"/>
+      <div class="gli-img-wrap"><img class="gli-img" src="assets /images/glicerinavegetal.jpg" alt="Glicerina vegetal"/></div>
     </div>
     <div class="gli-text rv d2">
       <p class="eyebrow">Ingrediente estrella</p>
       <h2>Propiedades de la glicerina</h2>
       <p>El corazón de nuestros jabones. La glicerina vegetal pura es lo que hace que cada jabón cuide de verdad tu piel — sin resecar, sin agredir.</p>
       <div class="gli-props">
-        <div class="gli-prop">
-          <div class="gli-em"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 2C6 9 4 13 4 16a8 8 0 0016 0c0-3-2-7-8-14z"/></svg></div>
-          <strong>Hidratante natural</strong><span>Retiene humedad</span>
-        </div>
-        <div class="gli-prop">
-          <div class="gli-em"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 22c-4 0-7-3-7-7 0-3 2-6 7-11 5 5 7 8 7 11 0 4-3 7-7 7z"/><path d="M12 13v5M9.5 15.5l2.5-2.5 2.5 2.5"/></svg></div>
-          <strong>Suaviza la piel</strong><span>Con cada uso</span>
-        </div>
-        <div class="gli-prop">
-          <div class="gli-em"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8V6a5 5 0 0110 0v2"/><path d="M12 13v3"/></svg></div>
-          <strong>Limpieza suave</strong><span>Sin resecar</span>
-        </div>
-        <div class="gli-prop">
-          <div class="gli-em"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
-          <strong>Piel sensible</strong><span>Bien tolerada</span>
-        </div>
-        <div class="gli-prop">
-          <div class="gli-em"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M8 12c0-2.2 1.8-4 4-4s4 1.8 4 4-1.8 4-4 4"/><path d="M12 16v1M12 7v1"/></svg></div>
-          <strong>Espuma cremosa</strong><span>Textura suave</span>
-        </div>
+        <div class="gli-prop"><div class="gli-em"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 2C6 9 4 13 4 16a8 8 0 0016 0c0-3-2-7-8-14z"/></svg></div><strong>Hidratante natural</strong><span>Retiene humedad</span></div>
+        <div class="gli-prop"><div class="gli-em"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 22c-4 0-7-3-7-7 0-3 2-6 7-11 5 5 7 8 7 11 0 4-3 7-7 7z"/><path d="M12 13v5M9.5 15.5l2.5-2.5 2.5 2.5"/></svg></div><strong>Suaviza la piel</strong><span>Con cada uso</span></div>
+        <div class="gli-prop"><div class="gli-em"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8V6a5 5 0 0110 0v2"/><path d="M12 13v3"/></svg></div><strong>Limpieza suave</strong><span>Sin resecar</span></div>
+        <div class="gli-prop"><div class="gli-em"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div><strong>Piel sensible</strong><span>Bien tolerada</span></div>
+        <div class="gli-prop"><div class="gli-em"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M8 12c0-2.2 1.8-4 4-4s4 1.8 4 4-1.8 4-4 4"/><path d="M12 16v1M12 7v1"/></svg></div><strong>Espuma cremosa</strong><span>Textura suave</span></div>
       </div>
     </div>
   </div>
 </div>
 </section>
 
-<!-- BANNER CTA -->
+<!-- BANNER -->
 <div class="banner">
   <img src="https://images.unsplash.com/photo-1584305574647-0cc949a2bb9f?q=90&w=1600&auto=format&fit=crop" alt="Taller artesanal"/>
   <div class="banner-body">
@@ -886,12 +624,9 @@ footer{background:var(--ink);color:rgba(255,255,255,.45);}
 <!-- SOBRE MÍ -->
 <section id="sobre" class="sec">
 <div class="inn">
-  <div class="sec-title rv">
-    <h2>Lo mejor de mi taller</h2>
-    <div class="line"></div>
-  </div>
+  <div class="sec-title rv"><h2>Lo mejor de mi taller</h2><div class="sec-line"></div></div>
   <div class="about-grid rv d1">
-    <div class="about-img">
+    <div class="about-img-wrap">
       <img src="assets /images/hero4.jpg" alt="Elaboración artesanal de jabones"/>
     </div>
     <div class="about-text">
@@ -913,10 +648,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.45);}
 <!-- RETIRO -->
 <section id="retiro" class="sec sec-off">
 <div class="inn">
-  <div class="sec-title rv">
-    <h2>Punto de retiro</h2>
-    <div class="line"></div>
-  </div>
+  <div class="sec-title rv"><h2>Punto de retiro</h2><div class="sec-line"></div></div>
   <div class="retiro-grid rv d1">
     <div class="retiro-map">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
@@ -944,15 +676,12 @@ footer{background:var(--ink);color:rgba(255,255,255,.45);}
 <!-- PAGOS -->
 <section id="pagos" class="sec">
 <div class="inn">
-  <div class="sec-title rv">
-    <h2>Formas de pago</h2>
-    <div class="line"></div>
-  </div>
+  <div class="sec-title rv"><h2>Formas de pago</h2><div class="sec-line"></div></div>
   <div class="pago-grid rv d1">
-    <div class="pago"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="1" y="4" width="22" height="16" rx="3"/><path d="M1 10h22"/></svg><h4>Tarjeta</h4><p>Crédito y débito</p></div>
-    <div class="pago"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg><h4>Mercado Pago</h4><p>Pago online seguro</p></div>
-    <div class="pago"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg><h4>Transferencia</h4><p>Bancaria / alias</p></div>
-    <div class="pago"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg><h4>Efectivo</h4><p>Solo en el retiro</p></div>
+    <div class="pago"><div class="pago-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="1" y="4" width="22" height="16" rx="3"/><path d="M1 10h22"/></svg></div><h4>Tarjeta</h4><p>Crédito y débito</p></div>
+    <div class="pago"><div class="pago-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></div><h4>Mercado Pago</h4><p>Pago online seguro</p></div>
+    <div class="pago"><div class="pago-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div><h4>Transferencia</h4><p>Bancaria / alias</p></div>
+    <div class="pago"><div class="pago-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><h4>Efectivo</h4><p>Solo en el retiro</p></div>
   </div>
 </div>
 </section>
@@ -1006,12 +735,8 @@ footer{background:var(--ink);color:rgba(255,255,255,.45);}
 </footer>
 
 <script>
-/* HEADER */
-window.addEventListener('scroll',()=>{
-  document.getElementById('hdr').classList.toggle('up',window.scrollY>10);
-},{passive:true});
+window.addEventListener('scroll',()=>{document.getElementById('hdr').classList.toggle('up',window.scrollY>10);},{passive:true});
 
-/* HERO */
 let idx=0;
 const slides=document.querySelectorAll('.h-slide');
 const dots=document.querySelectorAll('.h-dot');
@@ -1026,9 +751,7 @@ function show(n){
 function heroGo(n){show(n);reset();}
 function animProg(){
   prog.style.transition='none';prog.style.width='0%';
-  requestAnimationFrame(()=>requestAnimationFrame(()=>{
-    prog.style.transition=`width ${DUR}ms linear`;prog.style.width='100%';
-  }));
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{prog.style.transition=`width ${DUR}ms linear`;prog.style.width='100%';}));
 }
 function reset(){clearInterval(timer);timer=setInterval(()=>show(idx+1),DUR);}
 timer=setInterval(()=>show(idx+1),DUR);animProg();
@@ -1039,13 +762,11 @@ let tx=0;
 heroEl.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;},{passive:true});
 heroEl.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>40)show(dx<0?idx+1:idx-1);},{passive:true});
 
-/* REVEAL */
 const obs=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vs');obs.unobserve(e.target);}});
 },{threshold:.1,rootMargin:'0px 0px -30px 0px'});
 document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
 
-/* FILTER */
 function filtrar(btn,cat){
   document.querySelectorAll('.fil').forEach(b=>b.classList.remove('on'));btn.classList.add('on');
   document.querySelectorAll('.pc').forEach(c=>{c.style.display=(cat==='todos'||c.dataset.cat===cat)?'':'none';});
