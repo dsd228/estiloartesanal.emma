@@ -364,6 +364,7 @@ header{
   <div class="modal">
     <h2 id="modal-title">Nuevo <em>producto</em></h2>
     <input type="hidden" id="modal-id-original"/>
+
     <div class="fg"><label>ID único (ej: jabon-rosa)</label><input id="m-id" type="text" placeholder="jabon-rosa"/></div>
     <div class="fg"><label>Nombre del producto</label><input id="m-nombre" type="text" placeholder="Jabón de Rosa"/></div>
     <div class="fg-row">
@@ -379,13 +380,75 @@ header{
       <div class="fg"><label>Precio ($)</label><input id="m-precio" type="number" placeholder="4800"/></div>
     </div>
     <div class="fg"><label>Stock (unidades disponibles)</label><input id="m-stock" type="number" placeholder="1" min="0"/></div>
-    <div class="fg"><label>Ruta de imagen</label><input id="m-img" type="text" placeholder="assets /images/nombre.png"/></div>
+
+    <!-- FOTOS -->
+    <div class="fg">
+      <label>Fotos del producto</label>
+
+      <!-- Zona drag & drop -->
+      <div id="drop-zone"
+        ondragover="event.preventDefault();this.classList.add('drag-over')"
+        ondragleave="this.classList.remove('drag-over')"
+        ondrop="handleDrop(event)"
+        onclick="document.getElementById('file-input').click()"
+        style="
+          border:2px dashed var(--sd);border-radius:14px;
+          padding:1.6rem;text-align:center;cursor:pointer;
+          background:var(--bg);box-shadow:var(--nm-in);
+          transition:all .2s;margin-bottom:.7rem;
+        ">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" style="width:28px;height:28px;color:var(--pink-md);margin:0 auto .5rem;display:block;"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        <p style="font-size:.72rem;font-weight:300;color:var(--muted);">Arrastrá imágenes acá o <span style="color:var(--pink-dk);font-weight:500;">hacé clic para elegir</span></p>
+        <p style="font-size:.62rem;color:var(--muted);margin-top:.2rem;">JPG, PNG, WEBP · máx 8MB · hasta 10 fotos</p>
+      </div>
+      <input type="file" id="file-input" multiple accept="image/*" style="display:none" onchange="handleFiles(this.files)"/>
+
+      <!-- Preview de fotos -->
+      <div id="fotos-preview" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:.5rem;"></div>
+
+      <!-- URL manual -->
+      <div style="display:flex;align-items:center;gap:8px;margin-top:.4rem;">
+        <div style="flex:1;height:1px;background:var(--sd);"></div>
+        <span style="font-size:.6rem;color:var(--muted);letter-spacing:1px;text-transform:uppercase;">o ingresá URL</span>
+        <div style="flex:1;height:1px;background:var(--sd);"></div>
+      </div>
+      <input id="m-img" type="text" placeholder="assets /images/nombre.png o https://..." style="width:100%;margin-top:.5rem;padding:.72rem 1rem;border:none;border-radius:12px;font-size:.84rem;background:var(--bg);color:var(--ink);outline:none;box-shadow:var(--nm-in);font-family:var(--sans);"/>
+    </div>
+
     <div class="modal-actions">
       <button class="modal-cancel" onclick="cerrarModal()">Cancelar</button>
-      <button class="modal-save" onclick="guardarModal()">Guardar producto</button>
+      <button class="modal-save" id="modal-save-btn" onclick="guardarModal()">Guardar producto</button>
     </div>
   </div>
 </div>
+
+<style>
+#drop-zone.drag-over{border-color:var(--pink-dk);background:var(--pink-lt,#f5dde0);}
+.foto-thumb{
+  position:relative;width:72px;height:72px;border-radius:10px;overflow:hidden;
+  box-shadow:var(--nm-sm);flex-shrink:0;
+}
+.foto-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+.foto-thumb .del-foto{
+  position:absolute;top:3px;right:3px;width:18px;height:18px;border-radius:50%;
+  background:rgba(58,42,46,.7);border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;color:#fff;font-size:.7rem;
+  transition:background .2s;
+}
+.foto-thumb .del-foto:hover{background:var(--red,#b03030);}
+.foto-thumb .main-badge{
+  position:absolute;bottom:2px;left:2px;
+  font-size:.45rem;font-weight:500;letter-spacing:.5px;text-transform:uppercase;
+  background:var(--pink-dk);color:#fff;border-radius:4px;padding:1px 4px;
+}
+.upload-progress{
+  background:var(--bg);border-radius:10px;padding:.6rem .9rem;
+  box-shadow:var(--nm-in);font-size:.72rem;color:var(--muted);
+  display:flex;align-items:center;gap:.5rem;margin-bottom:.4rem;
+}
+.upload-progress svg{width:14px;height:14px;animation:spin 1s linear infinite;}
+@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+</style>
 
 <!-- TOAST -->
 <div class="toast" id="toast">
@@ -646,7 +709,122 @@ document.getElementById("modal-bg").addEventListener("click", e => {
   if (e.target === e.currentTarget) cerrarModal();
 });
 
-// ── TOAST ─────────────────────────────────────────────────────
+// ── UPLOAD DE IMÁGENES ────────────────────────────────────────
+let fotosSubidas = []; // [{url, filename, esLocal}]
+
+function handleDrop(e) {
+  e.preventDefault();
+  document.getElementById('drop-zone').classList.remove('drag-over');
+  handleFiles(e.dataTransfer.files);
+}
+
+async function handleFiles(files) {
+  const arr = Array.from(files).filter(f => f.type.startsWith('image/'));
+  if (!arr.length) return;
+  if (fotosSubidas.length + arr.length > 10) {
+    toast('Máximo 10 fotos por producto', 'err'); return;
+  }
+
+  for (const file of arr) {
+    await subirArchivo(file);
+  }
+}
+
+async function subirArchivo(file) {
+  // Mostrar spinner
+  const preview = document.getElementById('fotos-preview');
+  const spinId = 'spin-' + Date.now();
+  const spinEl = document.createElement('div');
+  spinEl.id = spinId;
+  spinEl.className = 'foto-thumb';
+  spinEl.style.cssText = 'display:flex;align-items:center;justify-content:center;background:var(--bg-lt,#f5efe8);';
+  spinEl.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:20px;height:20px;color:var(--pink-md);animation:spin 1s linear infinite;"><path d="M21 12a9 9 0 11-6.219-8.56"/></svg>`;
+  preview.appendChild(spinEl);
+
+  try {
+    const fd = new FormData();
+    fd.append('imagenes', file);
+
+    const r = await fetch(`${BACKEND}/admin/upload`, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${TOKEN}` },
+      body: fd,
+    });
+
+    if (!r.ok) throw new Error('Error subiendo imagen');
+    const data = await r.json();
+    const arch = data.archivos[0];
+
+    // Reemplazar spinner con thumb real
+    spinEl.remove();
+    const url = `${BACKEND}${arch.url}`;
+    fotosSubidas.push({ url, filename: arch.filename, esLocal: true });
+    renderFotos();
+
+    // Poner primera foto como imagen principal
+    if (fotosSubidas.length === 1) {
+      document.getElementById('m-img').value = url;
+    }
+
+  } catch(e) {
+    spinEl.remove();
+    toast('Error subiendo ' + file.name, 'err');
+  }
+}
+
+function renderFotos() {
+  const preview = document.getElementById('fotos-preview');
+  preview.innerHTML = fotosSubidas.map((f, i) => `
+    <div class="foto-thumb">
+      <img src="${f.url}" onerror="this.src=''" alt="foto ${i+1}"/>
+      ${i === 0 ? '<span class="main-badge">Principal</span>' : ''}
+      <button class="del-foto" onclick="eliminarFoto(${i})" title="Eliminar">×</button>
+    </div>
+  `).join('');
+
+  // Click en foto para hacerla principal
+  preview.querySelectorAll('.foto-thumb img').forEach((img, i) => {
+    img.style.cursor = 'pointer';
+    img.title = 'Usar como imagen principal';
+    img.onclick = () => {
+      // Mover al inicio
+      const f = fotosSubidas.splice(i, 1)[0];
+      fotosSubidas.unshift(f);
+      document.getElementById('m-img').value = f.url;
+      renderFotos();
+    };
+  });
+}
+
+async function eliminarFoto(i) {
+  const foto = fotosSubidas[i];
+
+  if (foto.esLocal) {
+    try {
+      await fetch(`${BACKEND}/admin/upload/${foto.filename}`, {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${TOKEN}` },
+      });
+    } catch(e) { /* silencioso */ }
+  }
+
+  fotosSubidas.splice(i, 1);
+  if (fotosSubidas.length > 0) {
+    document.getElementById('m-img').value = fotosSubidas[0].url;
+  } else {
+    document.getElementById('m-img').value = '';
+  }
+  renderFotos();
+}
+
+// Limpiar fotos al cerrar modal
+const _cerrarModalOrig = cerrarModal;
+cerrarModal = function() {
+  fotosSubidas = [];
+  document.getElementById('fotos-preview').innerHTML = '';
+  _cerrarModalOrig();
+};
+
 let toastTimer;
 function toast(msg, type="ok") {
   const el   = document.getElementById("toast");
