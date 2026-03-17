@@ -142,14 +142,13 @@ nav a:hover{color:var(--ink);border-bottom-color:var(--ink);}
 
 /* ── PRODUCTS GRID ── */
 .prod-grid{
-  display:grid;grid-template-columns:repeat(4,1fr);
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
   gap:0;border:1px solid var(--line);
 }
 .pc{
-  border-right:1px solid var(--line);padding-bottom:2rem;
+  border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding-bottom:2rem;
   cursor:pointer;transition:background .25s;position:relative;overflow:hidden;
 }
-.pc:last-child{border-right:none;}
 .pc:hover{background:var(--off);}
 .pc.soon{opacity:.55;pointer-events:none;}
 
@@ -433,17 +432,19 @@ footer{background:var(--ink);color:rgba(255,255,255,.45);}
     <button class="fil on" onclick="filtrar(this,'todos')">Todos</button>
     <button class="fil" onclick="filtrar(this,'jabones')">Jabones</button>
     <button class="fil" onclick="filtrar(this,'ceramica')">Cerámica</button>
+    <button class="fil" onclick="filtrar(this,'sahumadores')">Sahumadores</button>
     <button class="fil" onclick="filtrar(this,'deco')">Decoración</button>
   </div>
   <div class="prod-grid rv d2" id="pgrid">
 
+    <!-- ── JABONES ── -->
     <div class="pc" data-cat="jabones" onclick="irProducto('jabon-lavanda')">
       <div class="pc-img-wrap">
-        <img class="pc-img" src="https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?q=85&w=600&auto=format&fit=crop" alt="Jabón Lavanda"/>
+        <img class="pc-img" src="assets /images/jardinlavanda.png" alt="Jabón Jardín de Lavanda"/>
         <span class="pc-tag">Natural</span>
       </div>
       <div class="pc-body">
-        <div class="pc-name">Lavanda</div>
+        <div class="pc-name">Jardín de Lavanda</div>
         <div class="pc-cat">Jabón artesanal</div>
         <div class="pc-price">$4.800</div>
         <button class="pc-btn">Agregar al pedido</button>
@@ -452,63 +453,381 @@ footer{background:var(--ink);color:rgba(255,255,255,.45);}
 
     <div class="pc" data-cat="jabones" onclick="irProducto('jabon-citrico')">
       <div class="pc-img-wrap">
-        <img class="pc-img" src="https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?q=85&w=600&auto=format&fit=crop" alt="Jabón Cítrico"/>
+        <img class="pc-img" src="assets /images/refrescante.png" alt="Jabón Refrescante"/>
         <span class="pc-tag">Energizante</span>
       </div>
       <div class="pc-body">
-        <div class="pc-name">Cítrico</div>
+        <div class="pc-name">Refrescante</div>
         <div class="pc-cat">Jabón artesanal</div>
         <div class="pc-price">$4.800</div>
         <button class="pc-btn">Agregar al pedido</button>
       </div>
     </div>
 
-    <div class="pc" data-cat="jabones" onclick="irProducto('jabon-romero')">
+    <div class="pc" data-cat="jabones" onclick="irProducto('jabon-manzanilla')">
       <div class="pc-img-wrap">
-        <img class="pc-img" src="https://images.unsplash.com/photo-1601049676869-702ea24cfd58?q=85&w=600&auto=format&fit=crop" alt="Jabón Romero"/>
+        <img class="pc-img" src="assets /images/manzanilla.png" alt="Jabón Manzanilla"/>
+        <span class="pc-tag">Suavizante</span>
+      </div>
+      <div class="pc-body">
+        <div class="pc-name">Manzanilla</div>
+        <div class="pc-cat">Jabón artesanal</div>
+        <div class="pc-price">$4.800</div>
+        <button class="pc-btn">Agregar al pedido</button>
+      </div>
+    </div>
+
+    <div class="pc" data-cat="jabones" onclick="irProducto('jabon-avena')">
+      <div class="pc-img-wrap">
+        <img class="pc-img" src="assets /images/avena.png" alt="Jabón Avena"/>
+        <span class="pc-tag">Nutritivo</span>
+      </div>
+      <div class="pc-body">
+        <div class="pc-name">Avena</div>
+        <div class="pc-cat">Jabón artesanal</div>
+        <div class="pc-price">$4.800</div>
+        <button class="pc-btn">Agregar al pedido</button>
+      </div>
+    </div>
+
+    <div class="pc" data-cat="jabones" onclick="irProducto('jabon-avenaseda')">
+      <div class="pc-img-wrap">
+        <img class="pc-img" src="assets /images/avenaseda.png" alt="Jabón Avena y Seda"/>
+        <span class="pc-tag">Hidratante</span>
+      </div>
+      <div class="pc-body">
+        <div class="pc-name">Avena & Seda</div>
+        <div class="pc-cat">Jabón artesanal</div>
+        <div class="pc-price">$4.800</div>
+        <button class="pc-btn">Agregar al pedido</button>
+      </div>
+    </div>
+
+    <div class="pc" data-cat="jabones" onclick="irProducto('jabon-avenaseda2')">
+      <div class="pc-img-wrap">
+        <img class="pc-img" src="assets /images/avenaseda2.png" alt="Jabón Avena Seda 2"/>
+        <span class="pc-tag">Hidratante</span>
+      </div>
+      <div class="pc-body">
+        <div class="pc-name">Avena & Seda II</div>
+        <div class="pc-cat">Jabón artesanal</div>
+        <div class="pc-price">$4.800</div>
+        <button class="pc-btn">Agregar al pedido</button>
+      </div>
+    </div>
+
+    <div class="pc" data-cat="jabones" onclick="irProducto('jabon-mantecakarite')">
+      <div class="pc-img-wrap">
+        <img class="pc-img" src="assets /images/mantecadekarite.png" alt="Jabón Manteca de Karité"/>
+        <span class="pc-tag">Nutritivo</span>
+      </div>
+      <div class="pc-body">
+        <div class="pc-name">Manteca de Karité</div>
+        <div class="pc-cat">Jabón artesanal</div>
+        <div class="pc-price">$4.800</div>
+        <button class="pc-btn">Agregar al pedido</button>
+      </div>
+    </div>
+
+    <div class="pc" data-cat="jabones" onclick="irProducto('jabon-detox')">
+      <div class="pc-img-wrap">
+        <img class="pc-img" src="assets /images/detox.png" alt="Jabón Detox"/>
         <span class="pc-tag">Purificante</span>
       </div>
       <div class="pc-body">
-        <div class="pc-name">Romero</div>
+        <div class="pc-name">Detox</div>
         <div class="pc-cat">Jabón artesanal</div>
         <div class="pc-price">$4.800</div>
         <button class="pc-btn">Agregar al pedido</button>
       </div>
     </div>
 
-    <div class="pc" data-cat="ceramica" onclick="irProducto('ceramica')">
+    <div class="pc" data-cat="jabones" onclick="irProducto('jabon-petalos')">
       <div class="pc-img-wrap">
-        <img class="pc-img" src="https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=85&w=600&auto=format&fit=crop" alt="Cerámica"/>
+        <img class="pc-img" src="assets /images/petalos.png" alt="Jabón Pétalos"/>
+        <span class="pc-tag">Floral</span>
+      </div>
+      <div class="pc-body">
+        <div class="pc-name">Pétalos</div>
+        <div class="pc-cat">Jabón artesanal</div>
+        <div class="pc-price">$4.800</div>
+        <button class="pc-btn">Agregar al pedido</button>
+      </div>
+    </div>
+
+    <div class="pc" data-cat="jabones" onclick="irProducto('jabon-dulceenergia')">
+      <div class="pc-img-wrap">
+        <img class="pc-img" src="assets /images/dulceenergiacacao.png" alt="Jabón Dulce Energía Cacao"/>
+        <span class="pc-tag">Energizante</span>
+      </div>
+      <div class="pc-body">
+        <div class="pc-name">Dulce Energía Cacao</div>
+        <div class="pc-cat">Jabón artesanal</div>
+        <div class="pc-price">$4.800</div>
+        <button class="pc-btn">Agregar al pedido</button>
+      </div>
+    </div>
+
+    <div class="pc" data-cat="jabones" onclick="irProducto('jabones-hero')">
+      <div class="pc-img-wrap">
+        <img class="pc-img" src="assets /images/jaboneshero.jpg" alt="Jabones variados"/>
+        <span class="pc-tag">Colección</span>
+      </div>
+      <div class="pc-body">
+        <div class="pc-name">Colección jabones</div>
+        <div class="pc-cat">Jabones artesanales</div>
+        <div class="pc-price">$4.800 c/u</div>
+        <button class="pc-btn">Ver más</button>
+      </div>
+    </div>
+
+    <!-- ── SAHUMADORES ── -->
+    <div class="pc" data-cat="sahumadores" onclick="irProducto('sahumador-chico-gratitud')">
+      <div class="pc-img-wrap">
+        <img class="pc-img" src="assets /images/sahumadorchicogratitud.png" alt="Sahumador Chico Gratitud"/>
+        <span class="pc-tag">Cerámica</span>
+      </div>
+      <div class="pc-body">
+        <div class="pc-name">Sahumador Gratitud</div>
+        <div class="pc-cat">Sahumador chico</div>
+        <div class="pc-price">$7.000</div>
+        <button class="pc-btn">Agregar al pedido</button>
+      </div>
+    </div>
+
+    <div class="pc" data-cat="sahumadores" onclick="irProducto('sahumador-grande-magia')">
+      <div class="pc-img-wrap">
+        <img class="pc-img" src="assets /images/sahumadorgrandemagia.png" alt="Sahumador Grande Magia"/>
+        <span class="pc-tag">Cerámica</span>
+      </div>
+      <div class="pc-body">
+        <div class="pc-name">Sahumador Magia</div>
+        <div class="pc-cat">Sahumador grande</div>
+        <div class="pc-price">$7.000</div>
+        <button class="pc-btn">Agregar al pedido</button>
+      </div>
+    </div>
+
+    <div class="pc" data-cat="sahumadores" onclick="irProducto('sahumador-luz-azul')">
+      <div class="pc-img-wrap">
+        <img class="pc-img" src="assets /images/sahumadorazulluz.png" alt="Sahumador Luz Azul"/>
+        <span class="pc-tag">Cerámica</span>
+      </div>
+      <div class="pc-body">
+        <div class="pc-name">Sahumador Luz</div>
+        <div class="pc-cat">Pack x4 disponible</div>
+        <div class="pc-price">$9.000 c/u</div>
+        <button class="pc-btn">Agregar al pedido</button>
+      </div>
+    </div>
+
+    <div class="pc" data-cat="sahumadores" onclick="irProducto('sahumador-salmon')">
+      <div class="pc-img-wrap">
+        <img class="pc-img" src="assets /images/sahumadorsalmon.png" alt="Sahumador Salmón"/>
+        <span class="pc-tag">Cerámica</span>
+      </div>
+      <div class="pc-body">
+        <div class="pc-name">Sahumador Salmón</div>
+        <div class="pc-cat">Sahumador</div>
+        <div class="pc-price">$9.000</div>
+        <button class="pc-btn">Agregar al pedido</button>
+      </div>
+    </div>
+
+    <div class="pc" data-cat="sahumadores" onclick="irProducto('sahumador-cielo')">
+      <div class="pc-img-wrap">
+        <img class="pc-img" src="assets /images/sahumadorluzciel.png" alt="Sahumador Luz Cielo"/>
+        <span class="pc-tag">Cerámica</span>
+      </div>
+      <div class="pc-body">
+        <div class="pc-name">Sahumador Cielo</div>
+        <div class="pc-cat">Sahumador</div>
+        <div class="pc-price">$9.000</div>
+        <button class="pc-btn">Agregar al pedido</button>
+      </div>
+    </div>
+
+    <!-- ── CERÁMICA ── -->
+    <div class="pc" data-cat="ceramica" onclick="irProducto('cenicero-esmeralda')">
+      <div class="pc-img-wrap">
+        <img class="pc-img" src="assets /images/platocupcake.png" alt="Cenicero Esmeralda"/>
         <span class="pc-tag">Pieza única</span>
       </div>
       <div class="pc-body">
-        <div class="pc-name">Cerámica</div>
-        <div class="pc-cat">Piezas esmaltadas</div>
-        <div class="pc-price">desde $12.500</div>
-        <button class="pc-btn">Ver pieza</button>
+        <div class="pc-name">Cenicero Esmeralda</div>
+        <div class="pc-cat">Cerámica esmaltada</div>
+        <div class="pc-price">$5.000</div>
+        <button class="pc-btn">Agregar al pedido</button>
       </div>
     </div>
 
-    <div class="pc" data-cat="deco" onclick="irProducto('deco')">
+    <div class="pc" data-cat="ceramica" onclick="irProducto('cuenco-frutilla')">
       <div class="pc-img-wrap">
-        <img class="pc-img" src="https://images.unsplash.com/photo-1591348278863-a8fb3887e2aa?q=85&w=600&auto=format&fit=crop" alt="Decoración"/>
+        <img class="pc-img" src="assets /images/racimofrutillas.png" alt="Cuenco Frutilla"/>
+        <span class="pc-tag">Pieza única</span>
+      </div>
+      <div class="pc-body">
+        <div class="pc-name">Cuenco Frutilla</div>
+        <div class="pc-cat">Cerámica · mediano</div>
+        <div class="pc-price">$5.000</div>
+        <button class="pc-btn">Agregar al pedido</button>
+      </div>
+    </div>
+
+    <div class="pc" data-cat="ceramica" onclick="irProducto('cazuela-locro')">
+      <div class="pc-img-wrap">
+        <img class="pc-img" src="assets /images/cuencolocro.png" alt="Cazuela Locro"/>
+        <span class="pc-tag">Pieza única</span>
+      </div>
+      <div class="pc-body">
+        <div class="pc-name">Cazuela Locro</div>
+        <div class="pc-cat">Cerámica · x3 disponibles</div>
+        <div class="pc-price">$9.000 · 3×$25.000</div>
+        <button class="pc-btn">Agregar al pedido</button>
+      </div>
+    </div>
+
+    <div class="pc" data-cat="ceramica" onclick="irProducto('taza-juana')">
+      <div class="pc-img-wrap">
+        <img class="pc-img" src="assets /images/tazajuana.png" alt="Taza Juana"/>
+        <span class="pc-tag">Pieza única</span>
+      </div>
+      <div class="pc-body">
+        <div class="pc-name">Taza Juana</div>
+        <div class="pc-cat">Cerámica esmaltada</div>
+        <div class="pc-price">$7.500</div>
+        <button class="pc-btn">Agregar al pedido</button>
+      </div>
+    </div>
+
+    <div class="pc" data-cat="ceramica" onclick="irProducto('taza-campo')">
+      <div class="pc-img-wrap">
+        <img class="pc-img" src="assets /images/tazacampo.png" alt="Taza Campo"/>
+        <span class="pc-tag">Pieza única</span>
+      </div>
+      <div class="pc-body">
+        <div class="pc-name">Taza Campo</div>
+        <div class="pc-cat">Cerámica esmaltada</div>
+        <div class="pc-price">$7.500</div>
+        <button class="pc-btn">Agregar al pedido</button>
+      </div>
+    </div>
+
+    <div class="pc" data-cat="ceramica" onclick="irProducto('taza-mariposa')">
+      <div class="pc-img-wrap">
+        <img class="pc-img" src="assets /images/tazamariposa.png" alt="Taza Mariposa"/>
+        <span class="pc-tag">Pieza única</span>
+      </div>
+      <div class="pc-body">
+        <div class="pc-name">Taza Mariposa</div>
+        <div class="pc-cat">Cerámica esmaltada</div>
+        <div class="pc-price">$7.500</div>
+        <button class="pc-btn">Agregar al pedido</button>
+      </div>
+    </div>
+
+    <div class="pc" data-cat="ceramica" onclick="irProducto('cuenco-sushi')">
+      <div class="pc-img-wrap">
+        <img class="pc-img" src="assets /images/cuencosushi.png" alt="Cuenco Sushi"/>
+        <span class="pc-tag">Pieza única</span>
+      </div>
+      <div class="pc-body">
+        <div class="pc-name">Cuenco Sushi</div>
+        <div class="pc-cat">Cerámica esmaltada</div>
+        <div class="pc-price">Consultar</div>
+        <button class="pc-btn">Consultar</button>
+      </div>
+    </div>
+
+    <div class="pc" data-cat="ceramica" onclick="irProducto('cuenco-grande')">
+      <div class="pc-img-wrap">
+        <img class="pc-img" src="assets /images/cuencograndemulticolor.png" alt="Cuenco Grande Multicolor"/>
+        <span class="pc-tag">Pieza única</span>
+      </div>
+      <div class="pc-body">
+        <div class="pc-name">Cuenco Grande</div>
+        <div class="pc-cat">Cerámica multicolor</div>
+        <div class="pc-price">Consultar</div>
+        <button class="pc-btn">Consultar</button>
+      </div>
+    </div>
+
+    <!-- ── DECORACIÓN ── -->
+    <div class="pc" data-cat="deco" onclick="irProducto('casita-grande')">
+      <div class="pc-img-wrap">
+        <img class="pc-img" src="assets /images/piedrasantiestres.png" alt="Casita Grande Alegría"/>
         <span class="pc-tag">Artesanal</span>
       </div>
       <div class="pc-body">
-        <div class="pc-name">Hogar</div>
-        <div class="pc-cat">Objetos decorativos</div>
-        <div class="pc-price">desde $3.200</div>
-        <button class="pc-btn">Ver objetos</button>
+        <div class="pc-name">Casita grande Alegría</div>
+        <div class="pc-cat">Decoración</div>
+        <div class="pc-price">$20.000</div>
+        <button class="pc-btn">Agregar al pedido</button>
       </div>
     </div>
 
-    <div class="pc soon" data-cat="velas">
-      <div class="pc-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"><rect x="8" y="8" width="8" height="12" rx="2"/><path d="M12 4v4"/></svg></div>
-      <span class="pc-tag pronto">Próximamente</span>
+    <div class="pc" data-cat="deco" onclick="irProducto('casita-chica')">
+      <div class="pc-img-wrap">
+        <img class="pc-img" src="assets /images/ambar.png" alt="Casita Chica Hogar"/>
+        <span class="pc-tag">Artesanal</span>
+      </div>
       <div class="pc-body">
-        <div class="pc-name" style="color:var(--muted)">Velas</div>
-        <div class="pc-cat">Cera de soja</div>
-        <div class="pc-price" style="color:var(--muted)">— en breve</div>
+        <div class="pc-name">Casita chica Hogar</div>
+        <div class="pc-cat">Decoración</div>
+        <div class="pc-price">$15.000</div>
+        <button class="pc-btn">Agregar al pedido</button>
+      </div>
+    </div>
+
+    <div class="pc" data-cat="deco" onclick="irProducto('florero-nube')">
+      <div class="pc-img-wrap">
+        <img class="pc-img" src="assets /images/fLorenube.png" alt="Florero Chico Nube"/>
+        <span class="pc-tag">Artesanal</span>
+      </div>
+      <div class="pc-body">
+        <div class="pc-name">Florero Nube</div>
+        <div class="pc-cat">Florero chico</div>
+        <div class="pc-price">$5.000</div>
+        <button class="pc-btn">Agregar al pedido</button>
+      </div>
+    </div>
+
+    <div class="pc" data-cat="deco" onclick="irProducto('porta-cepillos')">
+      <div class="pc-img-wrap">
+        <img class="pc-img" src="assets /images/portecepilosambar.png" alt="Porta Cepillos Ámbar"/>
+        <span class="pc-tag">Artesanal</span>
+      </div>
+      <div class="pc-body">
+        <div class="pc-name">Porta Cepillos Ámbar</div>
+        <div class="pc-cat">Decoración baño</div>
+        <div class="pc-price">$5.000</div>
+        <button class="pc-btn">Agregar al pedido</button>
+      </div>
+    </div>
+
+    <div class="pc" data-cat="deco" onclick="irProducto('porta-espiral')">
+      <div class="pc-img-wrap">
+        <img class="pc-img" src="assets /images/portaespiral.png" alt="Porta Espiral Margarita"/>
+        <span class="pc-tag">Artesanal</span>
+      </div>
+      <div class="pc-body">
+        <div class="pc-name">Porta Espiral Margarita</div>
+        <div class="pc-cat">Decoración</div>
+        <div class="pc-price">$8.000</div>
+        <button class="pc-btn">Agregar al pedido</button>
+      </div>
+    </div>
+
+    <div class="pc" data-cat="deco" onclick="irProducto('floreros')">
+      <div class="pc-img-wrap">
+        <img class="pc-img" src="assets /images/floreros.png" alt="Floreros"/>
+        <span class="pc-tag">Artesanal</span>
+      </div>
+      <div class="pc-body">
+        <div class="pc-name">Floreros</div>
+        <div class="pc-cat">Decoración</div>
+        <div class="pc-price">Consultar</div>
+        <button class="pc-btn">Consultar</button>
       </div>
     </div>
 
