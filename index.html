@@ -46,7 +46,9 @@ header{
   background:rgba(232,224,216,.97);
   backdrop-filter:blur(12px);
   box-shadow:0 4px 16px var(--shadow-d),0 -1px 0 var(--shadow-l);
+  transition:box-shadow .3s;
 }
+header.scrolled{box-shadow:0 6px 24px var(--shadow-d),0 -1px 0 var(--shadow-l);}
 .hdr{max-width:1200px;margin:0 auto;padding:0 40px;height:72px;display:flex;align-items:center;justify-content:space-between;gap:1rem;}
 
 /* Logo neumorfismo circular en header */
@@ -736,7 +738,9 @@ footer{
 </footer>
 
 <script>
-window.addEventListener('scroll',()=>{document.getElementById('hdr').classList.toggle('up',window.scrollY>10);},{passive:true});
+window.addEventListener('scroll',()=>{
+  document.getElementById('hdr').classList.toggle('scrolled',window.scrollY>10);
+},{passive:true});
 
 let idx=0;
 const slides=document.querySelectorAll('.h-slide');
@@ -772,7 +776,42 @@ function filtrar(btn,cat){
   document.querySelectorAll('.fil').forEach(b=>b.classList.remove('on'));btn.classList.add('on');
   document.querySelectorAll('.pc').forEach(c=>{c.style.display=(cat==='todos'||c.dataset.cat===cat)?'':'none';});
 }
-function irProducto(id){window.location.href='producto.html?id='+id;}
+function irProducto(id){
+  // Mapear IDs del índice a IDs del catálogo de producto/checkout
+  const mapa = {
+    'jabon-refrescante':'jabon-citrico',
+    'jabon-manzanilla':'jabon-romero',
+    'jabon-avena':'jabon-lavanda',
+    'jabon-avenaseda':'jabon-lavanda',
+    'jabon-avenaseda2':'jabon-lavanda',
+    'jabon-karite':'jabon-citrico',
+    'jabon-detox':'jabon-romero',
+    'jabon-petalos':'jabon-lavanda',
+    'jabon-cacao':'jabon-citrico',
+    'jabones-coleccion':'jabon-lavanda',
+    'sahumador-gratitud':'deco',
+    'sahumador-magia':'deco',
+    'sahumador-luz':'deco',
+    'sahumador-salmon':'deco',
+    'sahumador-cielo':'deco',
+    'cenicero-esmeralda':'ceramica',
+    'cuenco-frutilla':'ceramica',
+    'cazuela-locro':'ceramica',
+    'taza-juana':'ceramica',
+    'taza-campo':'ceramica',
+    'taza-mariposa':'ceramica',
+    'cuenco-sushi':'ceramica',
+    'cuenco-grande':'ceramica',
+    'casita-grande':'deco',
+    'casita-chica':'deco',
+    'florero-nube':'deco',
+    'porta-cepillos':'deco',
+    'porta-espiral':'deco',
+    'floreros':'deco',
+  };
+  const destino = mapa[id] || id;
+  window.location.href='producto.html?id='+destino;
+}
 </script>
 </body>
 </html>
