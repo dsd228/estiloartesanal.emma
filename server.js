@@ -3,6 +3,7 @@ const cors    = require("cors");
 const fs      = require("fs");
 const path    = require("path");
 const crypto  = require("crypto");
+const multer  = require("multer");
 const { MercadoPagoConfig, Preference, Payment } = require("mercadopago");
 
 const app  = express();
@@ -11,6 +12,32 @@ const PORT = process.env.PORT || 3000;
 // ── Mercado Pago ──────────────────────────────────────────────
 const client = new MercadoPagoConfig({
   accessToken: process.env.MP_ACCESS_TOKEN,
+});
+
+// ── Multer — subida de imágenes ───────────────────────────────
+const UPLOADS_DIR = path.join(__dirname, "uploads");
+if (!fs.existsSync(UPLOADS_DIR)) fs.mkdirSync(UPLOADS_DIR, { recursive: true });
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => cb(null, UPLOADS_DIR),
+  filename: (req, file, cb) => {
+    const ext  = path.extname(file.originalname).toLowerCase();
+    const name = path.basename(file.originalname, ext)
+      .toLowerCase().replace(/[^a-z0-9]/g, "-").replace(/-+/g,"-");
+    cb(null, `${name}-${Date.now()}${ext}`);
+  },
+});
+
+const fileFilter = (req, file, cb) => {
+  const allowed = [".jpg",".jpeg",".png",".webp",".gif"];
+  const ext = path.extname(file.originalname).toLowerCase();
+  allowed.includes(ext) ? cb(null, true) : cb(new Error("Solo se permiten imágenes"));
+};
+
+const upload = multer({
+  storage,
+  fileFilter,
+  limits: { fileSize: 8 * 1024 * 1024, files: 10 }, // 8MB por archivo, máx 10
 });
 
 // ── Middlewares ───────────────────────────────────────────────
@@ -288,6 +315,65 @@ app.delete("/admin/stock/:id", (req, res) => {
   delete stock[req.params.id];
   guardarStock(stock);
   res.json({ ok: true });
+});
+
+// ── RUTAS DE IMÁGENES ─────────────────────────────────────────
+
+// Servir imágenes subidas públicamente
+app.use("/uploads", express.static(UPLOADS_DIR));
+
+// POST /admin/upload — subir una o varias imágenes
+app.post("/admin/upload", (req, res) => {
+  if (!verificarAuth(req)) return res.status(401).json({ error: "No autorizado" });
+
+  upload.array("imagenes", 10)(req, res, (err) => {
+    if (err) {
+      return res.status(400).json({ error: err.message });
+    }
+    if (!req.files || req.files.length === 0) {
+      return res.status(400).json({ error: "No se recibieron archivos" });
+    }
+
+    const urls = req.files.map(f => ({
+      filename: f.filename,
+      url: `/uploads/${f.filename}`,
+      size: f.size,
+    }));
+
+    res.json({ ok: true, archivos: urls });
+  });
+});
+
+// DELETE /admin/upload/:filename — eliminar imagen
+app.delete("/admin/upload/:filename", (req, res) => {
+  if (!verificarAuth(req)) return res.status(401).json({ error: "No autorizado" });
+
+  const filename = path.basename(req.params.filename); // seguridad
+  const filepath = path.join(UPLOADS_DIR, filename);
+
+  if (!fs.existsSync(filepath)) {
+    return res.status(404).json({ error: "Archivo no encontrado" });
+  }
+
+  fs.unlinkSync(filepath);
+  res.json({ ok: true });
+});
+
+// GET /admin/uploads — listar todas las imágenes subidas
+app.get("/admin/uploads", (req, res) => {
+  if (!verificarAuth(req)) return res.status(401).json({ error: "No autorizado" });
+
+  const files = fs.readdirSync(UPLOADS_DIR)
+    .filter(f => [".jpg",".jpeg",".png",".webp",".gif"].includes(path.extname(f).toLowerCase()))
+    .map(f => ({
+      filename: f,
+      url: `/uploads/${f}`,
+      size: fs.statSync(path.join(UPLOADS_DIR, f)).size,
+      fecha: fs.statSync(path.join(UPLOADS_DIR, f)).mtime,
+    }))
+    .sort((a,b) => new Date(b.fecha) - new Date(a.fecha));
+
+  res.json(files);
 });
 
 // ── ARRANCAR ──────────────────────────────────────────────────
