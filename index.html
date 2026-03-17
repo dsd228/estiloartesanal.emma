@@ -49,8 +49,10 @@ nav a:hover{color:var(--sage-dk);}
 .hero-slides{position:absolute;inset:0;z-index:0;}
 .hero-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease;}
 .hero-slide.active{opacity:1;}
-.hero-slide img{width:100%;height:100%;object-fit:cover;display:block;}
-.hero-slide::after{content:'';position:absolute;inset:0;background:linear-gradient(105deg,rgba(20,18,14,.65) 0%,rgba(20,18,14,.28) 55%,rgba(20,18,14,.08) 100%);}
+.hero-slide img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.06);transition:transform 7s ease;}
+.hero-slide.active img{transform:scale(1);}
+.hero-slide::after{content:'';position:absolute;inset:0;background:linear-gradient(105deg,rgba(20,18,14,.60) 0%,rgba(20,18,14,.25) 55%,rgba(20,18,14,.05) 100%);transition:background .5s;}
+.hero-slide:nth-child(4)::after{background:linear-gradient(105deg,rgba(20,18,14,.72) 0%,rgba(20,18,14,.40) 55%,rgba(20,18,14,.15) 100%);}
 .hero-content{position:absolute;inset:0;z-index:2;display:flex;align-items:center;padding:0 80px;}
 .hero-text{max-width:620px;}
 .hero-eyebrow{font-size:.68rem;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,.75);margin-bottom:1.4rem;display:flex;align-items:center;gap:.7rem;}
@@ -238,23 +240,23 @@ footer{background:var(--dark);color:#c2bab2;padding:3.5rem 28px 2rem;margin-top:
   <div class="hero-slides">
     <div class="hero-slide active">
       <img src="assets/images/hero.jpg"
-        onerror="this.src='https://images.unsplash.com/photo-1607006332611-ff950d0bf067?q=85&w=1600&auto=format&fit=crop'"
-        alt="Jabones naturales artesanales"/>
+        style="object-position:center 30%;"
+        alt="Mano sosteniendo jabones artesanales naturales"/>
     </div>
     <div class="hero-slide">
       <img src="assets/images/hero2.jpg"
-        onerror="this.src='https://images.unsplash.com/photo-1556228578-dd539282b964?q=85&w=1600&auto=format&fit=crop'"
-        alt="Jabones con aceites esenciales"/>
+        style="object-position:center center;"
+        alt="Jabones artesanales con rosa y flores secas"/>
     </div>
     <div class="hero-slide">
       <img src="assets/images/hero3.jpg"
-        onerror="this.src='https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=85&w=1600&auto=format&fit=crop'"
-        alt="Cerámica artesanal esmaltada"/>
+        style="object-position:center 40%;"
+        alt="Jabones naturales verdes con flores silvestres"/>
     </div>
     <div class="hero-slide">
       <img src="assets/images/hero4.jpg"
-        onerror="this.src='https://images.unsplash.com/photo-1588515724527-074a7a56616c?q=85&w=1600&auto=format&fit=crop'"
-        alt="Artesanías de hogar"/>
+        style="object-position:center 20%;"
+        alt="Variedad de jabones artesanales en canastas"/>
     </div>
   </div>
 
@@ -269,7 +271,7 @@ footer{background:var(--dark);color:#c2bab2;padding:3.5rem 28px 2rem;margin-top:
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           Ver productos
         </a>
-        <a class="btn btn-outline" href="#glicerina" style="color:var(--white);border-color:rgba(255,255,255,.4);">¿Qué es la glicerina?</a>
+        <a class="btn btn-outline" href="#glicerina" style="color:var(--white);border-color:rgba(255,255,255,.45);backdrop-filter:blur(4px);">¿Qué es la glicerina?</a>
       </div>
     </div>
   </div>
