@@ -3,7 +3,7 @@ const cors    = require("cors");
 const fs      = require("fs");
 const path    = require("path");
 const crypto  = require("crypto");
-const { MercadoPagoConfig, Preference } = require("mercadopago");
+const { MercadoPagoConfig, Preference, Payment } = require("mercadopago");
 
 const app  = express();
 const PORT = process.env.PORT || 3000;
@@ -176,7 +176,6 @@ app.post("/webhook", (req, res) => {
     // Asíncrono — no bloquea la respuesta
     (async () => {
       try {
-        const { Payment } = require("mercadopago");
         const paymentClient = new Payment(client);
         const payment = await paymentClient.get({ id: data.id });
 
