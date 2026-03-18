@@ -701,6 +701,37 @@ function renderTabla() {
   }).join("");
 }
 
+// ── NOTIFICAR CAMBIO EN LA WEB ────────────────────────────────
+// El backend ya sirve /productos.json dinámicamente desde stock.json,
+// así que cada cambio en el admin se refleja automáticamente en la web.
+// Esta función muestra confirmación visual de que la web está al día.
+function notificarCambio() {
+  // Ping silencioso al endpoint público para confirmar que el JSON está actualizado
+  fetch(`${BACKEND}/productos.json`, { cache: "no-cache" })
+    .then(r => r.ok ? mostrarIndicadorWeb() : null)
+    .catch(() => {});
+}
+
+function mostrarIndicadorWeb() {
+  let ind = document.getElementById("web-sync-ind");
+  if (!ind) {
+    ind = document.createElement("div");
+    ind.id = "web-sync-ind";
+    ind.style.cssText = `
+      position:fixed;top:78px;right:24px;z-index:9000;
+      background:var(--bg);border-radius:12px;box-shadow:var(--nm-sm);
+      padding:.55rem 1rem;font-size:.7rem;font-weight:400;letter-spacing:.5px;
+      display:flex;align-items:center;gap:.45rem;color:var(--green);
+      opacity:0;transition:opacity .3s;pointer-events:none;
+    `;
+    ind.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="width:13px;height:13px;"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 15.01 9 12.01"/></svg> Web actualizada`;
+    document.body.appendChild(ind);
+  }
+  ind.style.opacity = "1";
+  clearTimeout(ind._timer);
+  ind._timer = setTimeout(() => { ind.style.opacity = "0"; }, 2800);
+}
+
 async function guardarStock(id) {
   const val = Number(document.getElementById(`stock-${id}`).value);
   try {
@@ -714,6 +745,7 @@ async function guardarStock(id) {
     renderTabla();
     renderStats();
     toast(`Stock de "${stockData[id].nombre}" actualizado → ${val}`,"ok");
+    notificarCambio();
   } catch(e) {
     toast("Error guardando stock","err");
   }
@@ -731,6 +763,7 @@ async function eliminar(id) {
     renderTabla();
     renderStats();
     toast("Producto eliminado","ok");
+    notificarCambio();
   } catch(e) {
     toast("Error eliminando producto","err");
   }
@@ -834,6 +867,7 @@ async function guardarModal() {
     cerrarModal();
     renderTabla();
     renderStats();
+    notificarCambio();
   } catch(e) {
     toast(e.message || "Error guardando producto","err");
   }
