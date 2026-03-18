@@ -4,6 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Admin · estiloartesanal.emma</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
@@ -664,7 +665,12 @@ function cerrarModal() {
 }
 
 async function guardarModal() {
-  const id      = document.getElementById("m-id").value.trim().replace(/\s+/g,"-").toLowerCase();
+  // Cuando editamos, el campo m-id está disabled — usar el hidden field
+  const idOriginal = document.getElementById("modal-id-original").value;
+  const id = editandoId
+    ? idOriginal
+    : document.getElementById("m-id").value.trim().replace(/\s+/g,"-").toLowerCase();
+
   const nombre  = document.getElementById("m-nombre").value.trim();
   const cat     = document.getElementById("m-cat").value;
   const precio  = Number(document.getElementById("m-precio").value) || 0;
