@@ -771,7 +771,12 @@ function cardHtml(id,p){
   const precio=p.precio>0?`$${p.precio.toLocaleString('es-AR')}`:'Consultar';
   const tag=CAT_TAGS[p.categoria]||'Artesanal';
   const cat=CAT_LABELS[p.categoria]||p.categoria;
-  const img=p.imagen?`<img class="pc-img" src="${p.imagen.startsWith('http')?p.imagen:BACKEND+'/'+p.imagen}" alt="${p.nombre}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>${PH_SVG}`:PH_SVG;
+  const imgSrc=p.imagen
+    ? (p.imagen.startsWith('http') ? p.imagen
+      : p.imagen.startsWith('/uploads/') ? BACKEND+p.imagen
+      : p.imagen)   // rutas relativas como "assets /images/..." → tal cual
+    : '';
+  const img=imgSrc?`<img class="pc-img" src="${imgSrc}" alt="${p.nombre}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>${PH_SVG}`:PH_SVG;
   const btnTxt=agotado?'Agotado':(p.precio?'Agregar al pedido':'Consultar');
   return`<div class="pc${agotado?' soon':''}" data-cat="${p.categoria}" onclick="${agotado?'':'irProducto(\''+id+'\')'}">
     <div class="pc-img-wrap">${img}<span class="pc-tag${agotado?' pronto':''}">${agotado?'Agotado':tag}</span></div>
@@ -779,25 +784,66 @@ function cardHtml(id,p){
   </div>`;
 }
 
-async function cargarProductos(){
+// Catálogo de respaldo — se usa cuando el backend no está disponible (local, offline, Render dormido)
+// Mantenerlo sincronizado con stock.json si se agregan productos nuevos permanentes
+const CATALOGO_FALLBACK={
+  "jabon-lavanda":    {nombre:"Jardín de Lavanda",   categoria:"jabones",    precio:4800, stock:99, imagen:"assets /images/jardinlavanda.png"},
+  "jabon-citrico":    {nombre:"Refrescante",          categoria:"jabones",    precio:4800, stock:99, imagen:"assets /images/refrescante.png"},
+  "jabon-romero":     {nombre:"Manzanilla",           categoria:"jabones",    precio:4800, stock:99, imagen:"assets /images/manzanilla.png"},
+  "jabon-avena":      {nombre:"Avena",                categoria:"jabones",    precio:4800, stock:99, imagen:"assets /images/avena.png"},
+  "jabon-avenaseda":  {nombre:"Avena & Seda",         categoria:"jabones",    precio:4800, stock:99, imagen:"assets /images/avenaseda.png"},
+  "jabon-avenaseda2": {nombre:"Avena & Seda II",      categoria:"jabones",    precio:4800, stock:99, imagen:"assets /images/avenaseda2.png"},
+  "jabon-karite":     {nombre:"Manteca de Karité",    categoria:"jabones",    precio:4800, stock:99, imagen:"assets /images/mantecadekarite.png"},
+  "jabon-detox":      {nombre:"Detox",                categoria:"jabones",    precio:4800, stock:99, imagen:"assets /images/detox.png"},
+  "jabon-petalos":    {nombre:"Pétalos",              categoria:"jabones",    precio:4800, stock:99, imagen:"assets /images/petalos.png"},
+  "jabon-cacao":      {nombre:"Dulce Energía Cacao",  categoria:"jabones",    precio:4800, stock:99, imagen:"assets /images/dulceenergiacacao.png"},
+  "sahumador-gratitud":{nombre:"Sahumador Gratitud",  categoria:"sahumadores",precio:7000, stock:1,  imagen:"assets /images/sahumadorchicogratitud.png"},
+  "sahumador-magia":  {nombre:"Sahumador Magia",      categoria:"sahumadores",precio:7000, stock:1,  imagen:"assets /images/sahumadorgrandemagia.png"},
+  "sahumador-luz":    {nombre:"Sahumador Luz",         categoria:"sahumadores",precio:9000, stock:4,  imagen:"assets /images/sahumadorazulluz.png"},
+  "sahumador-salmon": {nombre:"Sahumador Salmón",     categoria:"sahumadores",precio:9000, stock:1,  imagen:"assets /images/sahumadorsalmon.png"},
+  "sahumador-cielo":  {nombre:"Sahumador Cielo",      categoria:"sahumadores",precio:9000, stock:1,  imagen:"assets /images/sahumadorluzcielo.png"},
+  "cenicero-esmeralda":{nombre:"Cenicero Esmeralda",  categoria:"ceramica",   precio:5000, stock:1,  imagen:"assets /images/platocupcacke.png"},
+  "cuenco-frutilla":  {nombre:"Cuenco Frutilla",      categoria:"ceramica",   precio:5000, stock:1,  imagen:"assets /images/racimofrutillas.png"},
+  "cazuela-locro":    {nombre:"Cazuela Locro",         categoria:"ceramica",   precio:9000, stock:3,  imagen:"assets /images/cuencolocro.png"},
+  "taza-juana":       {nombre:"Taza Juana",            categoria:"ceramica",   precio:7500, stock:1,  imagen:"assets /images/tazajuana.png"},
+  "taza-campo":       {nombre:"Taza Campo",            categoria:"ceramica",   precio:7500, stock:1,  imagen:"assets /images/tazacampo.png"},
+  "taza-mariposa":    {nombre:"Taza Mariposa",         categoria:"ceramica",   precio:7500, stock:1,  imagen:"assets /images/tazamariposa.png"},
+  "cuenco-sushi":     {nombre:"Cuenco Sushi",          categoria:"ceramica",   precio:0,    stock:1,  imagen:"assets /images/cuencosushi.png"},
+  "cuenco-grande":    {nombre:"Cuenco Grande Multicolor",categoria:"ceramica", precio:0,    stock:1,  imagen:"assets /images/cuencograndemulticolor.png"},
+  "casita-grande":    {nombre:"Casita grande Alegría", categoria:"deco",       precio:20000,stock:1,  imagen:"casitagrandealegria.png"},
+  "casita-chica":     {nombre:"Casita chica Hogar",    categoria:"deco",       precio:15000,stock:1,  imagen:"casitachicahogar.png"},
+  "florero-nube":     {nombre:"Florero Nube",          categoria:"deco",       precio:5000, stock:1,  imagen:"assets /images/floreronube.png"},
+  "porta-cepillos":   {nombre:"Porta Cepillos Ámbar",  categoria:"deco",       precio:5000, stock:1,  imagen:"assets /images/portacepillosambar.png"},
+  "porta-espiral":    {nombre:"Porta Espiral Margarita",categoria:"deco",      precio:8000, stock:1,  imagen:"assets /images/portaespiral.png"},
+  "floreros":         {nombre:"Floreros",              categoria:"deco",       precio:0,    stock:1,  imagen:"assets /images/floreros.png"},
+};
+
+function renderProductos(data){
   const grid=document.getElementById('pgrid');
+  const prods=Object.entries(data).filter(([,p])=>p.activo!==false);
+  if(!prods.length){grid.innerHTML='<p style="grid-column:1/-1;text-align:center;color:var(--muted);font-size:.82rem;padding:2rem 0;">Sin productos disponibles por el momento.</p>';return;}
+  grid.innerHTML=prods.map(([id,p])=>cardHtml(id,p)).join('');
+  if(catActual!=='todos'){
+    document.querySelectorAll('.pc').forEach(c=>{
+      c.style.display=c.dataset.cat===catActual?'':'none';
+    });
+  }
+  document.querySelectorAll('#pgrid .pc').forEach(el=>obs.observe(el));
+}
+
+async function cargarProductos(){
+  // Intentar del backend (producción); si falla usar catálogo embebido (local/offline)
   try{
-    const r=await fetch(`${BACKEND}/productos.json`,{cache:'no-cache'});
+    const ctrl=new AbortController();
+    const toid=setTimeout(()=>ctrl.abort(),4000); // timeout 4s
+    const r=await fetch(`${BACKEND}/productos.json`,{cache:'no-cache',signal:ctrl.signal});
+    clearTimeout(toid);
     if(!r.ok)throw new Error();
     const data=await r.json();
-    const prods=Object.entries(data).filter(([,p])=>p.activo!==false);
-    grid.innerHTML=prods.map(([id,p])=>cardHtml(id,p)).join('');
-    // re-aplicar filtro activo
-    if(catActual!=='todos'){
-      document.querySelectorAll('.pc').forEach(c=>{
-        c.style.display=c.dataset.cat===catActual?'':'none';
-      });
-    }
-    // re-observar nuevas cards
-    document.querySelectorAll('#pgrid .rv').forEach(el=>obs.observe(el));
+    renderProductos(data);
   }catch{
-    // fallback: mantener vacío con mensaje
-    grid.innerHTML='<p style="grid-column:1/-1;text-align:center;color:var(--muted);font-size:.82rem;padding:2rem 0;">No se pudieron cargar los productos. <a href="https://instagram.com/estiloartesanal_emma" style="color:var(--pink-dk);">Consultá por Instagram</a>.</p>';
+    // Fallback silencioso — muestra el catálogo embebido sin mensaje de error
+    renderProductos(CATALOGO_FALLBACK);
   }
 }
 
