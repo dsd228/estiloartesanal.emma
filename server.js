@@ -54,7 +54,7 @@ const STOCK_FILE = path.join(__dirname, "stock.json");
 const STOCK_DEFAULT = {
   // jabones
   "jabon-lavanda":     { nombre: "Jardín de Lavanda",       categoria: "jabones",      precio: 4800,  stock: 99, imagen: "assets/images/jardinlavanda.png" },
-  "jabon-citrico":     { nombre: "Refrescante",              categoria: "jabones",      precio: 4800,  stock: 99, imagen: "assets/images/refrescante.png" },
+  "jabon-citrico":     { nombre: "Refrescante",              categoria: "jabones",      precio: 4800,  stock: 99, imagen: "assets/images/refrezcante.png" },
   "jabon-romero":      { nombre: "Manzanilla",               categoria: "jabones",      precio: 4800,  stock: 99, imagen: "assets/images/manzanilla.png" },
   "jabon-avena":       { nombre: "Avena",                    categoria: "jabones",      precio: 4800,  stock: 99, imagen: "assets/images/avena.png" },
   "jabon-avenaseda":   { nombre: "Avena & Seda",             categoria: "jabones",      precio: 4800,  stock: 99, imagen: "assets/images/avenaseda.png" },
