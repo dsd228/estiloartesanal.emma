@@ -271,12 +271,16 @@ app.put("/admin/stock/:id", (req, res) => {
 
   if (!stock[id]) return res.status(404).json({ error: "Producto no encontrado" });
 
-  if (nombre    !== undefined) stock[id].nombre   = nombre;
-  if (precio    !== undefined) stock[id].precio   = Number(precio);
-  if (newStock  !== undefined) stock[id].stock    = Number(newStock);
-  if (categoria !== undefined) stock[id].categoria= categoria;
-  if (imagen    !== undefined) stock[id].imagen   = imagen;
-  if (activo    !== undefined) stock[id].activo   = activo;
+  if (nombre        !== undefined) stock[id].nombre         = nombre;
+  if (precio        !== undefined) stock[id].precio         = Number(precio);
+  if (newStock      !== undefined) stock[id].stock          = Number(newStock);
+  if (categoria     !== undefined) stock[id].categoria      = categoria;
+  if (imagen        !== undefined) stock[id].imagen         = imagen;
+  if (activo        !== undefined) stock[id].activo         = activo;
+  if (req.body.peso          !== undefined) stock[id].peso          = req.body.peso;
+  if (req.body.descripcion   !== undefined) stock[id].descripcion   = req.body.descripcion;
+  if (req.body.ingredientes  !== undefined) stock[id].ingredientes  = req.body.ingredientes;
+  if (req.body.caracteristicas !== undefined) stock[id].caracteristicas = req.body.caracteristicas;
 
   guardarStock(stock);
   res.json({ ok: true, producto: stock[id] });
