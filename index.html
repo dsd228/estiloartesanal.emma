@@ -390,8 +390,9 @@ footer{
   .sec-title{margin-bottom:32px;}
 
   /* Products */
-  .filter-row{gap:.3rem;margin-bottom:28px;}
-  .fil{font-size:.58rem;padding:.35rem .9rem;letter-spacing:.8px;}
+  .filter-row{gap:.3rem;margin-bottom:28px;flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px;justify-content:flex-start;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+  .filter-row::-webkit-scrollbar{display:none;}
+  .fil{font-size:.58rem;padding:.35rem .85rem;letter-spacing:.8px;white-space:nowrap;flex-shrink:0;}
   .prod-grid{grid-template-columns:1fr 1fr;gap:14px;}
   .pc{border-radius:14px;}
   .pc-img{height:160px;}
@@ -505,10 +506,10 @@ footer{
 <!-- HERO -->
 <section class="hero" id="hero">
   <div class="h-slides">
-    <div class="h-slide on"><img src="assets /images/ionela-mat-NlHZRIzKl3k-unsplash.jpg" style="object-position:center 40%" alt="Jabones artesanales"/></div>
-    <div class="h-slide"><img src="assets /images/dyah-miller-IwiLSSJXBTc-unsplash.jpg" style="object-position:center 50%" alt="Jabones naturales con flores"/></div>
-    <div class="h-slide"><img src="assets /images/hero.jpg" style="object-position:center 40%" alt="Jabones con ingredientes naturales"/></div>
-    <div class="h-slide"><img src="assets /images/hero2.jpg" style="object-position:center 50%" alt="Jabones artesanales variados"/></div>
+    <div class="h-slide on"><img src="assets /images/ionela-mat-NlHZRIzKl3k-unsplash.jpg" fetchpriority="high" style="object-position:center 40%" alt="Jabones artesanales"/></div>
+    <div class="h-slide"><img src="assets /images/dyah-miller-IwiLSSJXBTc-unsplash.jpg" loading="lazy" style="object-position:center 50%" alt="Jabones naturales con flores"/></div>
+    <div class="h-slide"><img src="assets /images/hero.jpg" loading="lazy" style="object-position:center 40%" alt="Jabones con ingredientes naturales"/></div>
+    <div class="h-slide"><img src="assets /images/hero2.jpg" loading="lazy" style="object-position:center 50%" alt="Jabones artesanales variados"/></div>
   </div>
   <div class="h-body">
     <h1>Jabones artesanales y cuidado<br/>natural para tu piel</h1>
@@ -779,12 +780,14 @@ function cardHtml(id,p){
   const precio=p.precio>0?`$${p.precio.toLocaleString('es-AR')}`:'Consultar';
   const tag=CAT_TAGS[p.categoria]||'Artesanal';
   const cat=CAT_LABELS[p.categoria]||p.categoria;
-  const imgSrc=p.imagen
-    ? (p.imagen.startsWith('http') ? p.imagen
-      : p.imagen.startsWith('/uploads/') ? BACKEND+p.imagen
-      : p.imagen)   // rutas relativas como "assets /images/..." → tal cual
-    : '';
-  const img=imgSrc?`<img class="pc-img" src="${imgSrc}" alt="${p.nombre}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>${PH_SVG}`:PH_SVG;
+  // Preferir imagen local del catálogo si el backend devuelve URL externa (Unsplash, etc.)
+  // Solo usar URL externa si fue subida desde el admin (/uploads/)
+  const imgLocal = CATALOGO_FALLBACK[id]?.imagen || '';
+  const imgRaw = p.imagen||'';
+  const imgSrc = imgRaw.startsWith('/uploads/') ? BACKEND+imgRaw
+               : (imgRaw && !imgRaw.startsWith('http')) ? imgRaw
+               : imgLocal;
+  const img=imgSrc?`<img class="pc-img" src="${imgSrc}" alt="${p.nombre}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>${PH_SVG}`:PH_SVG;
   const btnTxt=agotado?'Agotado':(p.precio?'Agregar al pedido':'Consultar');
   return`<div class="pc${agotado?' soon':''}" data-cat="${p.categoria}" onclick="${agotado?'':'irProducto(\''+id+'\')'}">
     <div class="pc-img-wrap">${img}<span class="pc-tag${agotado?' pronto':''}">${agotado?'Agotado':tag}</span></div>
