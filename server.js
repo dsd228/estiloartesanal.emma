@@ -68,9 +68,9 @@ const STOCK_DEFAULT = {
   "sahumador-magia":   { nombre: "Sahumador Magia",          categoria: "sahumadores",  precio: 7000,  stock: 1,  imagen: "assets /images/sahumadorgrandemagia.png" },
   "sahumador-luz":     { nombre: "Sahumador Luz",            categoria: "sahumadores",  precio: 9000,  stock: 4,  imagen: "assets /images/sahumadorazulluz.png" },
   "sahumador-salmon":  { nombre: "Sahumador Salmón",         categoria: "sahumadores",  precio: 9000,  stock: 1,  imagen: "assets /images/sahumadorsalmon.png" },
-  "sahumador-cielo":   { nombre: "Sahumador Cielo",          categoria: "sahumadores",  precio: 9000,  stock: 1,  imagen: "assets /images/sahumadorluzciel.png" },
+  "sahumador-cielo":   { nombre: "Sahumador Cielo",          categoria: "sahumadores",  precio: 9000,  stock: 1,  imagen: "assets /images/sahumadorluzcielo.png" },
   // ceramica
-  "cenicero-esmeralda":{ nombre: "Cenicero Esmeralda",       categoria: "ceramica",     precio: 5000,  stock: 1,  imagen: "assets /images/platocupcake.png" },
+  "cenicero-esmeralda":{ nombre: "Cenicero Esmeralda",       categoria: "ceramica",     precio: 5000,  stock: 1,  imagen: "assets /images/platocupcacke.png" },
   "cuenco-frutilla":   { nombre: "Cuenco Frutilla",          categoria: "ceramica",     precio: 5000,  stock: 1,  imagen: "assets /images/racimofrutillas.png" },
   "cazuela-locro":     { nombre: "Cazuela Locro",            categoria: "ceramica",     precio: 9000,  stock: 3,  imagen: "assets /images/cuencolocro.png" },
   "taza-juana":        { nombre: "Taza Juana",               categoria: "ceramica",     precio: 7500,  stock: 1,  imagen: "assets /images/tazajuana.png" },
@@ -79,10 +79,10 @@ const STOCK_DEFAULT = {
   "cuenco-sushi":      { nombre: "Cuenco Sushi",             categoria: "ceramica",     precio: 0,     stock: 1,  imagen: "assets /images/cuencosushi.png" },
   "cuenco-grande":     { nombre: "Cuenco Grande Multicolor", categoria: "ceramica",     precio: 0,     stock: 1,  imagen: "assets /images/cuencograndemulticolor.png" },
   // deco
-  "casita-grande":     { nombre: "Casita grande Alegría",    categoria: "deco",         precio: 20000, stock: 1,  imagen: "assets /images/piedrasantiestres.png" },
-  "casita-chica":      { nombre: "Casita chica Hogar",       categoria: "deco",         precio: 15000, stock: 1,  imagen: "assets /images/ambar.png" },
-  "florero-nube":      { nombre: "Florero Nube",             categoria: "deco",         precio: 5000,  stock: 1,  imagen: "assets /images/fLorenube.png" },
-  "porta-cepillos":    { nombre: "Porta Cepillos Ámbar",     categoria: "deco",         precio: 5000,  stock: 1,  imagen: "assets /images/portecepilosambar.png" },
+  "casita-grande":     { nombre: "Casita grande Alegría",    categoria: "deco",         precio: 20000, stock: 1,  imagen: "casitagrandealegria.png" },
+  "casita-chica":      { nombre: "Casita chica Hogar",       categoria: "deco",         precio: 15000, stock: 1,  imagen: "casitachicahogar.png" },
+  "florero-nube":      { nombre: "Florero Nube",             categoria: "deco",         precio: 5000,  stock: 1,  imagen: "assets /images/floreronube.png" },
+  "porta-cepillos":    { nombre: "Porta Cepillos Ámbar",     categoria: "deco",         precio: 5000,  stock: 1,  imagen: "assets /images/portacepillosambar.png" },
   "porta-espiral":     { nombre: "Porta Espiral Margarita",  categoria: "deco",         precio: 8000,  stock: 1,  imagen: "assets /images/portaespiral.png" },
   "floreros":          { nombre: "Floreros",                 categoria: "deco",         precio: 0,     stock: 1,  imagen: "assets /images/floreros.png" },
 };
@@ -104,8 +104,23 @@ function guardarStock(data) {
 // Inicializar stock si no existe
 if (!fs.existsSync(STOCK_FILE)) guardarStock(STOCK_DEFAULT);
 
-// ── SESIONES ADMIN (en memoria, simple) ──────────────────────
-const sessions = new Map();
+// ── SESIONES ADMIN (persistidas en archivo) ──────────────────
+const SESSIONS_FILE = path.join(__dirname, "sessions.json");
+
+function leerSessions() {
+  try {
+    if (fs.existsSync(SESSIONS_FILE))
+      return new Map(Object.entries(JSON.parse(fs.readFileSync(SESSIONS_FILE, "utf8"))));
+  } catch(e) {}
+  return new Map();
+}
+
+function guardarSessions(map) {
+  try { fs.writeFileSync(SESSIONS_FILE, JSON.stringify(Object.fromEntries(map))); }
+  catch(e) {}
+}
+
+const sessions = leerSessions();
 
 function crearToken() {
   return crypto.randomBytes(32).toString("hex");
@@ -240,11 +255,12 @@ app.post("/admin/login", (req, res) => {
   const token = crearToken();
   sessions.set(token, { createdAt: Date.now() });
 
-  // Limpiar tokens viejos (> 8hs)
+  // Limpiar tokens viejos (> 30 días)
   for (const [t, s] of sessions) {
-    if (Date.now() - s.createdAt > 8 * 60 * 60 * 1000) sessions.delete(t);
+    if (Date.now() - s.createdAt > 30 * 24 * 60 * 60 * 1000) sessions.delete(t);
   }
 
+  guardarSessions(sessions);
   res.json({ token });
 });
 
@@ -252,6 +268,7 @@ app.post("/admin/login", (req, res) => {
 app.post("/admin/logout", (req, res) => {
   const token = (req.headers.authorization || "").replace("Bearer ", "");
   sessions.delete(token);
+  guardarSessions(sessions);
   res.json({ ok: true });
 });
 
