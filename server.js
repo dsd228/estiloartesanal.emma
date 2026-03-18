@@ -152,6 +152,13 @@ app.get("/stock/:id", (req, res) => {
   res.json(prod);
 });
 
+// GET /productos.json — catálogo público en formato JSON (para que index.html lo consuma)
+app.get("/productos.json", (req, res) => {
+  res.setHeader("Content-Type", "application/json");
+  res.setHeader("Cache-Control", "no-cache");
+  res.json(leerStock());
+});
+
 // POST /crear-preferencia — crea preferencia MP y descuenta stock
 app.post("/crear-preferencia", async (req, res) => {
   const { producto, precio, nombre, email, telefono, nota, productoId } = req.body;
