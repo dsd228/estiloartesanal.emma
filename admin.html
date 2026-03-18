@@ -213,12 +213,12 @@ header{
 .modal h2 em{font-style:italic;color:var(--clay);}
 .fg{margin-bottom:1rem;}
 .fg label{font-size:.62rem;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:.4rem;}
-.fg input,.fg select{
+.fg input,.fg select,.fg textarea{
   width:100%;padding:.75rem 1rem;border:none;border-radius:12px;
   font-size:.86rem;background:var(--bg);color:var(--ink);outline:none;
-  box-shadow:var(--nm-in);
+  box-shadow:var(--nm-in);resize:vertical;
 }
-.fg input:focus,.fg select:focus{box-shadow:inset 6px 6px 16px var(--sd),inset -6px -6px 16px var(--sl);}
+.fg input:focus,.fg select:focus,.fg textarea:focus{box-shadow:inset 6px 6px 16px var(--sd),inset -6px -6px 16px var(--sl);}
 .fg-row{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;}
 .modal-actions{display:flex;gap:.8rem;margin-top:1.5rem;}
 .modal-save{
@@ -381,6 +381,10 @@ header{
       <div class="fg"><label>Precio ($)</label><input id="m-precio" type="number" placeholder="4800"/></div>
     </div>
     <div class="fg"><label>Stock (unidades disponibles)</label><input id="m-stock" type="number" placeholder="1" min="0"/></div>
+    <div class="fg"><label>Peso / medida (opcional, ej: 140gr)</label><input id="m-peso" type="text" placeholder="140gr"/></div>
+    <div class="fg"><label>Descripción del producto</label><textarea id="m-desc" rows="3" placeholder="Describí el producto tal como lo contarías a una clienta..."></textarea></div>
+    <div class="fg"><label>Ingredientes (separados por coma)</label><input id="m-ingredientes" type="text" placeholder="Glicerina vegetal, Flor de manzanilla, Aceite de oliva"/></div>
+    <div class="fg"><label>Características (separadas por coma)</label><input id="m-props" type="text" placeholder="Hidratante, Apto piel sensible, Sin sulfatos"/></div>
 
     <!-- FOTOS -->
     <div class="fg">
@@ -637,23 +641,31 @@ function abrirModal(id) {
     const p = stockData[id];
     title.innerHTML = `Editar <em>producto</em>`;
     document.getElementById("modal-id-original").value = id;
-    document.getElementById("m-id").value      = id;
-    document.getElementById("m-nombre").value  = p.nombre;
-    document.getElementById("m-cat").value     = p.categoria;
-    document.getElementById("m-precio").value  = p.precio;
-    document.getElementById("m-stock").value   = p.stock;
-    document.getElementById("m-img").value     = p.imagen||"";
-    document.getElementById("m-id").disabled   = true;
+    document.getElementById("m-id").value        = id;
+    document.getElementById("m-nombre").value    = p.nombre;
+    document.getElementById("m-cat").value       = p.categoria;
+    document.getElementById("m-precio").value    = p.precio;
+    document.getElementById("m-stock").value     = p.stock;
+    document.getElementById("m-peso").value      = p.peso||"";
+    document.getElementById("m-desc").value      = p.descripcion||"";
+    document.getElementById("m-ingredientes").value = (p.ingredientes||[]).join(", ");
+    document.getElementById("m-props").value     = (p.caracteristicas||[]).join(", ");
+    document.getElementById("m-img").value       = p.imagen||"";
+    document.getElementById("m-id").disabled     = true;
   } else {
     title.innerHTML = `Nuevo <em>producto</em>`;
     document.getElementById("modal-id-original").value = "";
-    document.getElementById("m-id").value      = "";
-    document.getElementById("m-nombre").value  = "";
-    document.getElementById("m-cat").value     = "jabones";
-    document.getElementById("m-precio").value  = "";
-    document.getElementById("m-stock").value   = "1";
-    document.getElementById("m-img").value     = "";
-    document.getElementById("m-id").disabled   = false;
+    document.getElementById("m-id").value           = "";
+    document.getElementById("m-nombre").value        = "";
+    document.getElementById("m-cat").value           = "jabones";
+    document.getElementById("m-precio").value        = "";
+    document.getElementById("m-stock").value         = "1";
+    document.getElementById("m-peso").value          = "";
+    document.getElementById("m-desc").value          = "";
+    document.getElementById("m-ingredientes").value  = "";
+    document.getElementById("m-props").value         = "";
+    document.getElementById("m-img").value           = "";
+    document.getElementById("m-id").disabled         = false;
   }
 
   modal.classList.add("open");
@@ -671,11 +683,15 @@ async function guardarModal() {
     ? idOriginal
     : document.getElementById("m-id").value.trim().replace(/\s+/g,"-").toLowerCase();
 
-  const nombre  = document.getElementById("m-nombre").value.trim();
-  const cat     = document.getElementById("m-cat").value;
-  const precio  = Number(document.getElementById("m-precio").value) || 0;
-  const stock   = Number(document.getElementById("m-stock").value) || 0;
-  const imagen  = document.getElementById("m-img").value.trim();
+  const nombre      = document.getElementById("m-nombre").value.trim();
+  const cat         = document.getElementById("m-cat").value;
+  const precio      = Number(document.getElementById("m-precio").value) || 0;
+  const stock       = Number(document.getElementById("m-stock").value) || 0;
+  const peso        = document.getElementById("m-peso").value.trim();
+  const descripcion = document.getElementById("m-desc").value.trim();
+  const ingredientes= document.getElementById("m-ingredientes").value.split(",").map(s=>s.trim()).filter(Boolean);
+  const caracteristicas = document.getElementById("m-props").value.split(",").map(s=>s.trim()).filter(Boolean);
+  const imagen      = document.getElementById("m-img").value.trim();
 
   if (!id || !nombre) { toast("ID y nombre son obligatorios","err"); return; }
 
@@ -685,20 +701,20 @@ async function guardarModal() {
       const r = await fetch(`${BACKEND}/admin/stock/${editandoId}`, {
         method:"PUT",
         headers:{"Content-Type":"application/json",Authorization:`Bearer ${TOKEN}`},
-        body: JSON.stringify({ nombre, categoria:cat, precio, stock, imagen }),
+        body: JSON.stringify({ nombre, categoria:cat, precio, stock, peso, descripcion, ingredientes, caracteristicas, imagen }),
       });
       if (!r.ok) throw new Error();
-      stockData[editandoId] = { ...stockData[editandoId], nombre, categoria:cat, precio, stock, imagen };
+      stockData[editandoId] = { ...stockData[editandoId], nombre, categoria:cat, precio, stock, peso, descripcion, ingredientes, caracteristicas, imagen };
       toast("Producto actualizado","ok");
     } else {
       // Nuevo
       const r = await fetch(`${BACKEND}/admin/stock`, {
         method:"POST",
         headers:{"Content-Type":"application/json",Authorization:`Bearer ${TOKEN}`},
-        body: JSON.stringify({ id, nombre, categoria:cat, precio, stockNum:stock, imagen }),
+        body: JSON.stringify({ id, nombre, categoria:cat, precio, stockNum:stock, peso, descripcion, ingredientes, caracteristicas, imagen }),
       });
       if (!r.ok) { const e=await r.json(); throw new Error(e.error); }
-      stockData[id] = { nombre, categoria:cat, precio, stock, imagen, activo:true };
+      stockData[id] = { nombre, categoria:cat, precio, stock, peso, descripcion, ingredientes, caracteristicas, imagen, activo:true };
       toast("Producto agregado","ok");
     }
 
