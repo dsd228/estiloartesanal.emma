@@ -657,11 +657,11 @@ footer{
     </div>
 
     <div class="pc" data-cat="deco" onclick="irProducto('casita-grande')">
-      <div class="pc-img-wrap"><img class="pc-img" src="assets /images/casitagrandealegria.png" alt="Casita Grande Alegría"/><span class="pc-tag">Artesanal</span></div>
+      <div class="pc-img-wrap"><img class="pc-img" src="casitagrandealegria.png" alt="Casita Grande Alegría"/><span class="pc-tag">Artesanal</span></div>
       <div class="pc-body"><div class="pc-name">Casita grande Alegría</div><div class="pc-cat">Decoración</div><div class="pc-price">$20.000</div><button class="pc-btn">Agregar al pedido</button></div>
     </div>
     <div class="pc" data-cat="deco" onclick="irProducto('casita-chica')">
-      <div class="pc-img-wrap"><img class="pc-img" src="assets /images/casitachicahogar.png" alt="Casita Chica Hogar"/><span class="pc-tag">Artesanal</span></div>
+      <div class="pc-img-wrap"><img class="pc-img" src="casitachicahogar.png" alt="Casita Chica Hogar"/><span class="pc-tag">Artesanal</span></div>
       <div class="pc-body"><div class="pc-name">Casita chica Hogar</div><div class="pc-cat">Decoración</div><div class="pc-price">$15.000</div><button class="pc-btn">Agregar al pedido</button></div>
     </div>
     <div class="pc" data-cat="deco" onclick="irProducto('florero-nube')">
@@ -905,40 +905,7 @@ function filtrar(btn,cat){
   document.querySelectorAll('.pc').forEach(c=>{c.style.display=(cat==='todos'||c.dataset.cat===cat)?'':'none';});
 }
 function irProducto(id){
-  // Mapear IDs del índice a IDs del catálogo de producto/checkout
-  const mapa = {
-    'jabon-refrescante':'jabon-citrico',
-    'jabon-manzanilla':'jabon-romero',
-    'jabon-avena':'jabon-lavanda',
-    'jabon-avenaseda':'jabon-lavanda',
-    'jabon-avenaseda2':'jabon-lavanda',
-    'jabon-karite':'jabon-citrico',
-    'jabon-detox':'jabon-romero',
-    'jabon-petalos':'jabon-lavanda',
-    'jabon-cacao':'jabon-citrico',
-    'jabones-coleccion':'jabon-lavanda',
-    'sahumador-gratitud':'deco',
-    'sahumador-magia':'deco',
-    'sahumador-luz':'deco',
-    'sahumador-salmon':'deco',
-    'sahumador-cielo':'deco',
-    'cenicero-esmeralda':'ceramica',
-    'cuenco-frutilla':'ceramica',
-    'cazuela-locro':'ceramica',
-    'taza-juana':'ceramica',
-    'taza-campo':'ceramica',
-    'taza-mariposa':'ceramica',
-    'cuenco-sushi':'ceramica',
-    'cuenco-grande':'ceramica',
-    'casita-grande':'deco',
-    'casita-chica':'deco',
-    'florero-nube':'deco',
-    'porta-cepillos':'deco',
-    'porta-espiral':'deco',
-    'floreros':'deco',
-  };
-  const destino = mapa[id] || id;
-  window.location.href='producto.html?id='+destino;
+  window.location.href='producto.html?id='+id;
 }
 </script>
 </body>
