@@ -20,7 +20,7 @@
   --nm-sm:4px 4px 10px var(--sd),-4px -4px 10px var(--sl);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.6;min-height:100vh;-webkit-font-smoothing:antialiased;}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.6;min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
 img{display:block;max-width:100%;}
 a{text-decoration:none;color:inherit;}
 
@@ -109,7 +109,23 @@ header{background:rgba(232,224,216,.97);backdrop-filter:blur(14px);box-shadow:0 
 .spinning{animation:spin 1s linear infinite;}
 
 @media(max-width:780px){.ck-grid{grid-template-columns:1fr;}.summary{position:static;}.fg-row{grid-template-columns:1fr;}}
-@media(max-width:500px){.step-bar{display:none;}.hdr{justify-content:center;}}
+@media(max-width:500px){
+  .step-bar{display:none;}
+  .hdr{justify-content:center;padding:0 16px;height:60px;}
+  .logo-text small{display:none;}
+  .back-row,.ck-wrap{padding-left:14px;padding-right:14px;}
+  .card,.pay-card{padding:1.2rem 1.1rem 1.4rem;}
+}
+@media(max-width:400px){
+  .hdr{height:56px;}
+  .logo-wrap{width:36px;height:36px;}
+  .logo-text span{font-size:.8rem;}
+  .back-row,.ck-wrap{padding-left:10px;padding-right:10px;}
+  .card,.pay-card{padding:1rem .9rem 1.2rem;border-radius:16px;}
+  .btn{font-size:.68rem;padding:.8rem 1.2rem;}
+  .sum-img{width:56px;height:56px;border-radius:10px;}
+  .fg input,.fg textarea,.fg select{font-size:.84rem;padding:.62rem .8rem;}
+}
 </style>
 </head>
 <body>
