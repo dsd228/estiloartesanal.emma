@@ -78,9 +78,11 @@ body {
   color: var(--ink);
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
   transition: background var(--dur) var(--ease), color var(--dur) var(--ease);
 }
 input, textarea, select, button { font-family: var(--sans); }
+img { max-width: 100%; }
 a { text-decoration: none; color: inherit; }
 @keyframes spin    { to { transform: rotate(360deg); } }
 @keyframes fadeUp  { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
@@ -417,7 +419,8 @@ header {
 .fill-cero { background: var(--red); }
 
 /* ── TABLA ── */
-.prod-table { width: 100%; border-collapse: separate; border-spacing: 0 7px; }
+.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; width: 100%; }
+.prod-table { width: 100%; border-collapse: separate; border-spacing: 0 7px; min-width: 600px; }
 .prod-table thead th { font-size: .57rem; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); padding: .35rem 1rem; text-align: left; font-weight: 400; }
 .prod-table tbody tr { background: var(--bg2); box-shadow: var(--nm-sm); border-radius: 11px; transition: all var(--dur) var(--ease); }
 .prod-table tbody tr:hover { box-shadow: var(--nm); transform: translateX(2px); }
@@ -718,11 +721,22 @@ header {
   .fg-row    { grid-template-columns: 1fr; }
   .modal     { padding: 1.3rem 1.1rem 2rem; border-radius: 22px 22px 0 0; max-height: 93vh; }
   .modal-bg  { align-items: flex-end; padding: 0; }
+  .export-box { padding: 1rem 1rem; }
+  .hdr-actions .hdr-pill:not(:last-child):not(:nth-last-child(2)) { display: none; }
   .modal-actions { flex-direction: column; }
   .modal-save,.modal-cancel { width: 100%; }
   .toast     { left: 12px; right: 12px; bottom: 16px; }
   .img-panel-grid { grid-template-columns: repeat(auto-fill,minmax(105px,1fr)); }
   .export-stats-grid { grid-template-columns: 1fr; }
+}
+@media(max-width:380px){
+  .stats-row { grid-template-columns: 1fr 1fr; }
+  .prod-grid-admin { grid-template-columns: 1fr; }
+  .export-stats-grid { grid-template-columns: 1fr; }
+  .hdr { padding: 0 8px; }
+  .brand-text { display: none; }
+  .main-area { padding: 12px 10px 92px; }
+  .modal { padding: 1rem .85rem 1.5rem; }
 }
 </style>
 </head>
@@ -733,7 +747,16 @@ header {
   <div class="login-box">
     <div class="login-logo">
       <svg width="48" height="48" viewBox="0 0 300 300">
-        <style>.em-lg{font-family:'Cormorant Garamond',serif;font-size:140px;font-style:italic;font-weight:300;fill:#8a4f58;}</style>
+        <style>.em-lg{font-family:'Cormorant Garamond',serif;font-size:140px;font-style:italic;font-weight:300;fill:#8a4f58;}@media(max-width:380px){
+  .stats-row { grid-template-columns: 1fr 1fr; }
+  .prod-grid-admin { grid-template-columns: 1fr; }
+  .export-stats-grid { grid-template-columns: 1fr; }
+  .hdr { padding: 0 8px; }
+  .brand-text { display: none; }
+  .main-area { padding: 12px 10px 92px; }
+  .modal { padding: 1rem .85rem 1.5rem; }
+}
+</style>
         <text x="150" y="200" text-anchor="middle" class="em-lg">E</text>
       </svg>
     </div>
@@ -756,7 +779,16 @@ header {
     <div class="hdr-brand">
       <div class="brand-mark">
         <svg width="24" height="24" viewBox="0 0 300 300">
-          <style>.em-hdr{font-family:'Cormorant Garamond',serif;font-size:140px;font-style:italic;font-weight:300;fill:#8a4f58;}</style>
+          <style>.em-hdr{font-family:'Cormorant Garamond',serif;font-size:140px;font-style:italic;font-weight:300;fill:#8a4f58;}@media(max-width:380px){
+  .stats-row { grid-template-columns: 1fr 1fr; }
+  .prod-grid-admin { grid-template-columns: 1fr; }
+  .export-stats-grid { grid-template-columns: 1fr; }
+  .hdr { padding: 0 8px; }
+  .brand-text { display: none; }
+  .main-area { padding: 12px 10px 92px; }
+  .modal { padding: 1rem .85rem 1.5rem; }
+}
+</style>
           <text x="150" y="200" text-anchor="middle" class="em-hdr">E</text>
         </svg>
       </div>
@@ -1285,7 +1317,7 @@ function renderTabla(){
   });
   if(!items.length){c.innerHTML='<div class="empty-state">Sin productos en esta categoría.</div>';return;}
   if(vistaActual==="tabla"){
-    c.innerHTML=`<table class="prod-table"><thead><tr><th></th><th>Producto</th><th>Categoría</th><th>Precio</th><th>Stock</th><th>Estado</th><th>Acciones</th></tr></thead><tbody>${items.map(([id,p])=>rowTabla(id,p)).join("")}</tbody></table>`;
+    c.innerHTML=`<div class="table-scroll"><table class="prod-table"><thead><tr><th></th><th>Producto</th><th>Categoría</th><th>Precio</th><th>Stock</th><th>Estado</th><th>Acciones</th></tr></thead><tbody>${items.map(([id,p])=>rowTabla(id,p)).join("")}</tbody></table></div>`;
   }else{
     c.innerHTML=`<div class="prod-grid-admin">${items.map(([id,p],i)=>`<div style="animation-delay:${i*0.03}s">${cardTarjeta(id,p)}</div>`).join("")}</div>`;
   }
