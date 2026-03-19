@@ -54,7 +54,7 @@ const STOCK_FILE = path.join(__dirname, "stock.json");
 const STOCK_DEFAULT = {
   // jabones
   "jabon-lavanda":     { nombre: "Jardín de Lavanda",       categoria: "jabones",      precio: 4800,  stock: 99, imagen: "assets /images/jardinlavanda.png" },
-  "jabon-citrico":     { nombre: "Refrescante",              categoria: "jabones",      precio: 4800,  stock: 99, imagen: "assets /images/refrezcante.png" },
+  "jabon-citrico":     { nombre: "Refrescante",              categoria: "jabones",      precio: 4800,  stock: 99, imagen: "assets /images/refrescante.png" },
   "jabon-romero":      { nombre: "Manzanilla",               categoria: "jabones",      precio: 4800,  stock: 99, imagen: "assets /images/manzanilla.png" },
   "jabon-avena":       { nombre: "Avena",                    categoria: "jabones",      precio: 4800,  stock: 99, imagen: "assets /images/avena.png" },
   "jabon-avenaseda":   { nombre: "Avena & Seda",             categoria: "jabones",      precio: 4800,  stock: 99, imagen: "assets /images/avenaseda.png" },
@@ -144,19 +144,19 @@ app.get("/stock", (req, res) => {
   res.json(leerStock());
 });
 
+// GET /productos.json — alias público amigable para el frontend
+app.get("/productos.json", (req, res) => {
+  res.setHeader("Content-Type", "application/json");
+  res.setHeader("Cache-Control", "no-cache");
+  res.json(leerStock());
+});
+
 // GET /stock/:id — devuelve un producto
 app.get("/stock/:id", (req, res) => {
   const stock = leerStock();
   const prod = stock[req.params.id];
   if (!prod) return res.status(404).json({ error: "Producto no encontrado" });
   res.json(prod);
-});
-
-// GET /productos.json — catálogo público en formato JSON (para que index.html lo consuma)
-app.get("/productos.json", (req, res) => {
-  res.setHeader("Content-Type", "application/json");
-  res.setHeader("Cache-Control", "no-cache");
-  res.json(leerStock());
 });
 
 // POST /crear-preferencia — crea preferencia MP y descuenta stock
@@ -320,13 +320,18 @@ app.post("/admin/stock", (req, res) => {
   if (!id || !nombre) return res.status(400).json({ error: "id y nombre son obligatorios" });
   if (stock[id])       return res.status(400).json({ error: "Ya existe un producto con ese id" });
 
+  const { peso, descripcion, ingredientes, caracteristicas } = req.body;
   stock[id] = {
     nombre,
-    categoria: categoria || "jabones",
-    precio:    Number(precio) || 0,
-    stock:     Number(stockNum) || 1,
-    imagen:    imagen || "",
-    activo:    true,
+    categoria:      categoria || "jabones",
+    precio:         Number(precio) || 0,
+    stock:          Number(stockNum) || 1,
+    imagen:         imagen || "",
+    peso:           peso || "",
+    descripcion:    descripcion || "",
+    ingredientes:   Array.isArray(ingredientes) ? ingredientes : [],
+    caracteristicas:Array.isArray(caracteristicas) ? caracteristicas : [],
+    activo:         true,
   };
 
   guardarStock(stock);
