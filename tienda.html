@@ -58,39 +58,34 @@ header{position:sticky;top:0;z-index:200;background:rgba(232,224,216,.97);backdr
 .bc-current{color:var(--ink);font-weight:500;}
 
 /* ── SHOP LAYOUT ── */
-.shop-wrap{max-width:1380px;margin:0 auto;padding:28px 32px 80px;display:grid;grid-template-columns:220px 1fr;gap:28px;flex:1;}
+.shop-wrap{max-width:1380px;margin:0 auto;padding:28px 32px 80px;display:grid;grid-template-columns:240px 1fr;gap:32px;flex:1;}
 
 /* ── SIDEBAR FILTROS ── */
 .filters-sidebar{position:sticky;top:96px;height:fit-content;display:flex;flex-direction:column;gap:20px;}
 .filter-block{background:var(--bg);border-radius:18px;box-shadow:var(--nm-sm);padding:1.2rem 1.4rem;}
 .filter-block h3{font-size:.58rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:.9rem;}
-/* Categoría pills */
 .cat-list{display:flex;flex-direction:column;gap:4px;}
 .cat-item{display:flex;align-items:center;justify-content:space-between;font-size:.78rem;padding:.52rem .75rem;border-radius:10px;border:none;background:transparent;color:var(--ink);cursor:pointer;transition:all .22s;text-align:left;width:100%;}
 .cat-item:hover{background:var(--bg-lt);color:var(--pink-dk);}
 .cat-item.on{background:var(--bg);box-shadow:var(--nm-in);color:var(--pink-dk);font-weight:500;}
 .cat-item .cnt{font-size:.62rem;color:var(--muted);background:var(--bg-lt);border-radius:50px;padding:.08rem .45rem;}
 .cat-item.on .cnt{color:var(--pink-dk);}
-/* Precio range */
 .price-inputs{display:flex;gap:.5rem;align-items:center;}
 .price-input{flex:1;padding:.5rem .65rem;border:none;border-radius:9px;font-size:.8rem;background:var(--bg);color:var(--ink);outline:none;box-shadow:var(--nm-in);text-align:center;}
 .price-sep{font-size:.7rem;color:var(--muted);flex-shrink:0;}
 .price-apply{width:100%;margin-top:.7rem;padding:.55rem;border:none;border-radius:50px;font-size:.62rem;font-weight:400;letter-spacing:1px;text-transform:uppercase;background:var(--pink-dk);color:#fff;cursor:pointer;box-shadow:3px 3px 8px rgba(138,79,88,.3);transition:all .22s;}
 .price-apply:hover{background:#7a3f48;}
-/* Disponibilidad */
 .toggle-row{display:flex;align-items:center;justify-content:space-between;font-size:.78rem;padding:.3rem 0;}
 .toggle{width:36px;height:20px;border-radius:50px;background:var(--bg);box-shadow:var(--nm-in);border:none;cursor:pointer;position:relative;transition:background .22s;}
 .toggle::after{content:'';position:absolute;width:14px;height:14px;border-radius:50%;background:var(--muted);top:3px;left:3px;transition:all .22s;box-shadow:1px 1px 3px var(--sd);}
 .toggle.on{background:var(--pink-lt);}
 .toggle.on::after{left:19px;background:var(--pink-dk);}
-/* Reset */
 .filter-reset{font-size:.62rem;letter-spacing:1px;text-transform:uppercase;color:var(--muted);background:none;border:none;cursor:pointer;padding:.4rem 0;transition:color .2s;}
 .filter-reset:hover{color:var(--pink-dk);}
 
 /* ── MAIN CONTENT ── */
 .shop-main{}
 
-/* Toolbar superior */
 .shop-toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:.8rem;}
 .results-count{font-size:.78rem;color:var(--muted);}
 .results-count strong{color:var(--ink);font-weight:500;}
@@ -101,14 +96,13 @@ header{position:sticky;top:0;z-index:200;background:rgba(232,224,216,.97);backdr
 .view-btn svg{width:13px;height:13px;}
 .view-btn.on{background:var(--bg-lt);box-shadow:var(--nm-sm);color:var(--pink-dk);}
 
-/* Active filters bar */
 .active-filters{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:16px;}
 .af-chip{display:inline-flex;align-items:center;gap:.35rem;font-size:.65rem;font-weight:400;letter-spacing:.5px;text-transform:uppercase;padding:.3rem .75rem;border-radius:50px;background:var(--pink-lt);color:var(--pink-dk);box-shadow:var(--nm-sm);}
 .af-chip button{background:none;border:none;cursor:pointer;color:var(--pink-dk);opacity:.7;padding:0;display:flex;align-items:center;font-size:.75rem;transition:opacity .2s;}
 .af-chip button:hover{opacity:1;}
 
 /* ── PRODUCT GRID ── */
-.prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:18px;}
+.prod-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
 .prod-grid.lista{grid-template-columns:1fr;gap:12px;}
 
 /* Card modo grid */
@@ -150,7 +144,6 @@ header{position:sticky;top:0;z-index:200;background:rgba(232,224,216,.97);backdr
 .skel-line.w50{width:50%;}
 .skel-line.w40{width:40%;margin:0 auto;}
 
-/* Empty / Error */
 .empty-state{grid-column:1/-1;text-align:center;padding:4rem 1rem;}
 .empty-state svg{width:48px;height:48px;color:var(--pink-md);opacity:.4;margin:0 auto 1rem;}
 .empty-state h3{font-family:var(--serif);font-size:1.6rem;font-weight:300;font-style:italic;margin-bottom:.5rem;}
@@ -158,19 +151,16 @@ header{position:sticky;top:0;z-index:200;background:rgba(232,224,216,.97);backdr
 .empty-cta{font-size:.65rem;letter-spacing:1.2px;text-transform:uppercase;padding:.6rem 1.5rem;border-radius:50px;border:none;background:var(--pink-dk);color:#fff;cursor:pointer;box-shadow:3px 3px 10px rgba(138,79,88,.3);transition:all .22s;}
 .empty-cta:hover{background:#7a3f48;}
 
-/* Paginación / Cargar más */
 .load-more-wrap{text-align:center;margin-top:32px;}
 .load-more{font-size:.68rem;font-weight:400;letter-spacing:1.5px;text-transform:uppercase;padding:.75rem 2.2rem;border-radius:50px;border:none;background:var(--bg);color:var(--ink);box-shadow:var(--nm-sm);cursor:pointer;transition:all .22s;display:inline-flex;align-items:center;gap:.5rem;}
 .load-more:hover{box-shadow:var(--nm-in);color:var(--pink-dk);}
 .load-more svg{width:13px;height:13px;}
 
-/* ── FOOTER ── */
 footer{background:var(--ink);}
 .foot-simple{max-width:1380px;margin:0 auto;padding:1.1rem 32px;display:flex;justify-content:space-between;align-items:center;font-size:.62rem;color:rgba(255,255,255,.2);flex-wrap:wrap;gap:.5rem;}
 .foot-simple a{color:rgba(255,255,255,.35);transition:color .2s;}
 .foot-simple a:hover{color:#c89aa8;}
 
-/* ── DRAWER FILTROS MOBILE ── */
 .filter-drawer-overlay{position:fixed;inset:0;z-index:300;background:rgba(58,42,46,.4);backdrop-filter:blur(4px);display:none;opacity:0;transition:opacity .25s;}
 .filter-drawer-overlay.open{display:block;opacity:1;}
 .filter-drawer{position:fixed;left:0;top:0;bottom:0;width:280px;background:var(--bg);z-index:301;transform:translateX(-100%);transition:transform .3s cubic-bezier(.25,.46,.45,.94);overflow-y:auto;padding:1.5rem 1.4rem 2rem;}
@@ -180,10 +170,16 @@ footer{background:var(--ink);}
 .drawer-close{width:32px;height:32px;border-radius:50%;border:none;background:var(--bg);box-shadow:var(--nm-sm);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--muted);}
 .drawer-close svg{width:14px;height:14px;}
 
-/* ── RESPONSIVE ── */
+@media(max-width:1200px){
+  .prod-grid{grid-template-columns:repeat(3,1fr);}
+}
 @media(max-width:1060px){
   .shop-wrap{grid-template-columns:1fr;padding:20px 24px 80px;}
   .filters-sidebar{display:none;}
+  .prod-grid{grid-template-columns:repeat(3,1fr);}
+}
+@media(max-width:800px){
+  .prod-grid{grid-template-columns:repeat(2,1fr);}
 }
 @media(max-width:600px){
   .hdr{padding:0 14px;height:58px;}
@@ -322,14 +318,10 @@ footer{background:var(--ink);}
       </div>
     </div>
 
-    <!-- Filtros activos -->
     <div class="active-filters" id="active-filters"></div>
 
-    <!-- Grid de productos -->
     <div class="prod-grid" id="pgrid">
       <!-- Skeletons iniciales -->
-      <div class="skel-card"><div class="skel-img"></div><div class="skel-body"><div class="skel-line w70"></div><div class="skel-line w50"></div><div class="skel-line w40"></div></div></div>
-      <div class="skel-card"><div class="skel-img"></div><div class="skel-body"><div class="skel-line w70"></div><div class="skel-line w50"></div><div class="skel-line w40"></div></div></div>
       <div class="skel-card"><div class="skel-img"></div><div class="skel-body"><div class="skel-line w70"></div><div class="skel-line w50"></div><div class="skel-line w40"></div></div></div>
       <div class="skel-card"><div class="skel-img"></div><div class="skel-body"><div class="skel-line w70"></div><div class="skel-line w50"></div><div class="skel-line w40"></div></div></div>
       <div class="skel-card"><div class="skel-img"></div><div class="skel-body"><div class="skel-line w70"></div><div class="skel-line w50"></div><div class="skel-line w40"></div></div></div>
@@ -367,14 +359,12 @@ let precioMin   = 0;
 let precioMax   = Infinity;
 let vistaActual = 'grid';
 let paginaActual = 1;
-const POR_PAGINA = 16;
+const POR_PAGINA = 12;
 
-// Leer categoría de URL
 const urlParams = new URLSearchParams(window.location.search);
 const catFromUrl = urlParams.get('cat');
 if (catFromUrl) catActual = catFromUrl;
 
-// ── CARGAR PRODUCTOS ──
 async function cargarProductos() {
   const wakeTimer = setTimeout(()=>{
     const t=document.getElementById('wake-toast');
@@ -387,9 +377,7 @@ async function cargarProductos() {
     if (!r.ok) throw new Error();
     allProducts = await r.json();
     actualizarContadores();
-    // Activar el botón de filtros mobile
     document.getElementById('btn-filtros-mobile').style.display = 'flex';
-    // Activar categoría desde URL
     if (catFromUrl) {
       document.querySelectorAll('.cat-item').forEach(b => {
         b.classList.toggle('on', b.dataset.cat === catFromUrl);
@@ -411,18 +399,15 @@ async function cargarProductos() {
 
 function getFiltered() {
   let items = Object.entries(allProducts).filter(([,p]) => p.activo !== false);
-
   if (catActual !== 'todos')   items = items.filter(([,p]) => p.categoria === catActual);
   if (busqueda)                items = items.filter(([,p]) => p.nombre.toLowerCase().includes(busqueda.toLowerCase()));
   if (soloStock)               items = items.filter(([,p]) => p.stock > 0);
   if (precioMin > 0)           items = items.filter(([,p]) => p.precio >= precioMin);
   if (precioMax < Infinity)    items = items.filter(([,p]) => p.precio <= precioMax || p.precio === 0);
-
   const sort = document.getElementById('sort-select')?.value || 'default';
   if (sort === 'precio-asc')  items.sort(([,a],[,b]) => a.precio - b.precio);
   if (sort === 'precio-desc') items.sort(([,a],[,b]) => b.precio - a.precio);
   if (sort === 'nombre')      items.sort(([,a],[,b]) => a.nombre.localeCompare(b.nombre, 'es'));
-
   return items;
 }
 
@@ -430,16 +415,11 @@ function renderProductos() {
   const grid = document.getElementById('pgrid');
   const items = getFiltered();
   paginaActual = 1;
-
-  // Results count
   const n = items.length;
   document.getElementById('results-count').innerHTML = n > 0
     ? `<strong>${n}</strong> producto${n !== 1 ? 's' : ''} encontrado${n !== 1 ? 's' : ''}`
     : 'Sin resultados';
-
-  // Active filters chips
   renderChips();
-
   if (!n) {
     grid.innerHTML = `
       <div class="empty-state">
@@ -451,12 +431,9 @@ function renderProductos() {
     document.getElementById('load-more-wrap').style.display = 'none';
     return;
   }
-
   const visibles = items.slice(0, paginaActual * POR_PAGINA);
   grid.className = `prod-grid${vistaActual === 'lista' ? ' lista' : ''}`;
   grid.innerHTML = visibles.map(([id, p], i) => cardHTML(id, p, i)).join('');
-
-  // Cargar más
   const hayMas = items.length > visibles.length;
   document.getElementById('load-more-wrap').style.display = hayMas ? 'block' : 'none';
 }
@@ -470,8 +447,7 @@ function cardHTML(id, p, i) {
   const imgHtml = p.imagen
     ? `<img class="pc-img" src="${p.imagen}" alt="${p.nombre}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=pc-ph><svg viewBox=\\'0 0 24 24\\' fill=\\'none\\' stroke=\\'currentColor\\' stroke-width=\\'1.5\\'><rect x=\\'3\\' y=\\'3\\' width=\\'18\\' height=\\'18\\' rx=\\'3\\'/></svg></div>'"/>`
     : `<div class="pc-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/></svg></div>`;
-
-  return `<div class="pc${agotado ? ' soon' : ''}" style="animation-delay:${delay}s" onclick="${agotado ? '' : `irProducto('${id}')`}">
+  return `<div class="pc${agotado ? ' soon' : ''}" style="animation-delay:${delay}s" onclick="${agotado ? '' : `window.location.href='producto.html?id=${id}'`}">
     <div class="pc-img-wrap">${imgHtml}<span class="pc-tag${agotado ? ' pronto' : ''}">${agotado ? 'Agotado' : tag}</span></div>
     <div class="pc-body">
       <div class="pc-name">${p.nombre}</div>
@@ -479,7 +455,7 @@ function cardHTML(id, p, i) {
       <div class="pc-price">${precio}</div>
       <button class="pc-btn">${agotado ? 'Sin stock' : 'Ver producto'}</button>
     </div>
-    <button class="pc-list-btn" onclick="${agotado ? '' : `irProducto('${id}')`}">${agotado ? 'Sin stock' : 'Ver →'}</button>
+    <button class="pc-list-btn" onclick="${agotado ? '' : `window.location.href='producto.html?id=${id}'`}">${agotado ? 'Sin stock' : 'Ver →'}</button>
   </div>`;
 }
 
@@ -487,7 +463,7 @@ function cargarMas() {
   paginaActual++;
   const items = getFiltered();
   const grid  = document.getElementById('pgrid');
-  const ya = paginaActual > 1 ? (paginaActual - 1) * POR_PAGINA : 0;
+  const ya = (paginaActual - 1) * POR_PAGINA;
   const nuevos = items.slice(ya, paginaActual * POR_PAGINA);
   nuevos.forEach(([id, p], i) => {
     grid.insertAdjacentHTML('beforeend', cardHTML(id, p, ya + i));
@@ -496,7 +472,6 @@ function cargarMas() {
   document.getElementById('load-more-wrap').style.display = hayMas ? 'block' : 'none';
 }
 
-// ── FILTROS ──
 function actualizarContadores() {
   const cats = ['jabones','ceramica','sahumadores','deco'];
   const total = Object.values(allProducts).filter(p => p.activo !== false).length;
@@ -579,11 +554,9 @@ function setVista(v) {
 
 function irProducto(id) { window.location.href = 'producto.html?id=' + id; }
 
-// ── DRAWER MOBILE ──
 function abrirDrawer() {
   document.getElementById('filter-drawer-overlay').classList.add('open');
   document.getElementById('filter-drawer').classList.add('open');
-  // Clonar contenido del sidebar al drawer
   const content = document.getElementById('filters-sidebar').innerHTML;
   document.getElementById('drawer-filters-content').innerHTML = content;
   document.body.style.overflow = 'hidden';
@@ -594,7 +567,6 @@ function cerrarDrawer() {
   document.body.style.overflow = '';
 }
 
-// ── RESPONSIVE: mostrar btn filtros mobile ──
 function checkMobile() {
   const isMobile = window.innerWidth <= 1060;
   document.getElementById('btn-filtros-mobile').style.display = isMobile ? 'flex' : 'none';
