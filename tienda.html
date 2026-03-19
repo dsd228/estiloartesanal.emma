@@ -54,6 +54,7 @@ header{position:sticky;top:0;z-index:200;background:rgba(232,224,216,.97);backdr
   width:100%;
   height:100svh;
   min-height:580px;
+  max-height:900px;
   overflow:hidden;
   display:flex;
   align-items:center;
@@ -152,11 +153,24 @@ header{position:sticky;top:0;z-index:200;background:rgba(232,224,216,.97);backdr
 
 /* Mobile */
 @media(max-width:600px){
+  .shop-hero{height:65svh;min-height:400px;max-height:600px;}
   .hero-arrow{width:36px;height:36px;}
   .hero-arrow.prev{left:10px;}
   .hero-arrow.next{right:10px;}
   .hero-slide-label{top:14px;right:14px;font-size:.48rem;}
-  .hero-dots{bottom:68px;}
+  .hero-dots{bottom:56px;}
+  .shop-hero-eyebrow{display:none;}
+  .shop-hero-sub{display:none;}
+  .shop-hero-title{font-size:clamp(2.4rem,10vw,4rem);margin-bottom:.6rem;}
+  .shop-hero-cats{gap:.4rem;}
+  .shop-hero-cat{font-size:.54rem;padding:.42rem 1rem;}
+  .shop-hero::after{display:none;}
+}
+@media(max-width:380px){
+  .shop-hero{height:55svh;min-height:320px;}
+  .shop-hero-title{font-size:clamp(2rem,9vw,3rem);}
+  .shop-hero-cats{gap:.3rem;}
+  .shop-hero-cat{font-size:.5rem;padding:.38rem .85rem;}
 }
 
 .shop-hero-body{
@@ -389,9 +403,29 @@ footer{background:var(--ink);}
 .drawer-close{width:34px;height:34px;border-radius:50%;border:none;background:var(--bg);box-shadow:var(--nm-sm);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--muted);}
 .drawer-close svg{width:14px;height:14px;}
 
-.wake-toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);z-index:999;background:var(--ink);color:#fff;border-radius:50px;padding:.7rem 1.5rem;font-size:.72rem;display:flex;align-items:center;gap:.55rem;box-shadow:0 4px 24px rgba(0,0,0,.35);opacity:0;transition:opacity .4s;pointer-events:none;}
-.wake-toast.show{opacity:1;}
-.wake-toast svg{width:13px;height:13px;animation:spin 1s linear infinite;color:var(--pink-md);}
+.wake-toast{
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(12px);
+  z-index:999;
+  background:var(--ink);color:#fff;
+  border-radius:16px;
+  padding:.85rem 1.6rem;
+  font-size:.75rem;font-weight:400;
+  display:flex;align-items:center;gap:.65rem;
+  box-shadow:0 8px 32px rgba(0,0,0,.4);
+  opacity:0;transition:opacity .4s, transform .4s;
+  pointer-events:none;
+  max-width:calc(100vw - 32px);
+  white-space:nowrap;
+}
+.wake-toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+.wake-toast svg{width:14px;height:14px;animation:spin 1s linear infinite;color:var(--pink-md);flex-shrink:0;}
+.wake-toast-progress{
+  position:absolute;bottom:0;left:0;height:2px;
+  background:var(--pink-md);border-radius:0 0 16px 16px;
+  width:100%;transform-origin:left;
+  animation:toastProgress 27s linear forwards;
+}
+@keyframes toastProgress{from{transform:scaleX(1)}to{transform:scaleX(0)}}
 
 @media(max-width:1200px){.prod-grid{grid-template-columns:repeat(2,1fr);}}
 @media(max-width:1060px){
@@ -647,16 +681,24 @@ if (catFromUrl) {
   });
 }
 
+let _cargaIntentos = 0;
 async function cargarProductos() {
+  _cargaIntentos++;
+  // Mostrar toast después de 2s
   const wakeTimer = setTimeout(()=>{
-    const t=document.getElementById('wake-toast');
-    if(t){t.classList.add('show');setTimeout(()=>t.classList.remove('show'),9000);}
-  }, 3000);
+    const t = document.getElementById('wake-toast');
+    if(t) t.classList.add('show');
+  }, 2000);
+
   try {
-    const r = await fetch(BACKEND + '/productos.json');
+    // Timeout de 35s — Render free puede tardar hasta 30s en despertar
+    const controller = new AbortController();
+    const timeoutId  = setTimeout(() => controller.abort(), 35000);
+    const r = await fetch(BACKEND + '/productos.json', { signal: controller.signal });
+    clearTimeout(timeoutId);
     clearTimeout(wakeTimer);
     document.getElementById('wake-toast')?.classList.remove('show');
-    if (!r.ok) throw new Error();
+    if (!r.ok) throw new Error('server');
     allProducts = await r.json();
     actualizarContadores();
     document.getElementById('btn-filtros-mobile').style.display = 'flex';
@@ -667,12 +709,29 @@ async function cargarProductos() {
     }
     renderProductos();
   } catch(e) {
+    clearTimeout(wakeTimer);
+    document.getElementById('wake-toast')?.classList.remove('show');
+    // Reintento automático hasta 2 veces
+    if (_cargaIntentos < 3) {
+      document.getElementById('pgrid').innerHTML = `
+        <div class="empty-state">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="animation:spin 1.5s linear infinite"><path d="M21 12a9 9 0 11-6.219-8.56"/></svg>
+          <h3>Cargando…</h3>
+          <p>El servidor está despertando, reintentando automáticamente…</p>
+        </div>`;
+      setTimeout(cargarProductos, 5000);
+      return;
+    }
+    // Después de 3 intentos, mostrar error con botón de reintento manual
     document.getElementById('pgrid').innerHTML = `
       <div class="empty-state">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-        <h3>No pudimos cargar</h3>
-        <p>Verificá tu conexión o escribinos por Instagram.</p>
-        <button class="empty-cta" onclick="window.open('https://instagram.com/estiloartesanal_emma','_blank')">Ir a Instagram</button>
+        <h3>Sin conexión al servidor</h3>
+        <p>El servidor tardó demasiado. Podés intentar de nuevo o consultarnos por Instagram.</p>
+        <button class="empty-cta" onclick="_cargaIntentos=0;cargarProductos()">Reintentar</button>
+        <a class="empty-cta" href="https://instagram.com/estiloartesanal_emma" target="_blank" style="margin-top:.5rem;background:var(--bg);color:var(--pink-dk);box-shadow:var(--nm-sm);display:inline-flex;align-items:center;justify-content:center;gap:.4rem;text-decoration:none;">
+          Ir a Instagram
+        </a>
       </div>`;
     document.getElementById('results-count').textContent = '';
   }
@@ -911,7 +970,8 @@ cargarProductos();
 </script>
 <div class="wake-toast" id="wake-toast">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 11-6.219-8.56"/></svg>
-  Despertando el servidor, un momento…
+  <span>Cargando productos… puede tardar hasta 30 seg</span>
+  <div class="wake-toast-progress" id="wake-progress"></div>
 </div>
 </body>
 </html>
