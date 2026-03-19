@@ -192,98 +192,92 @@ header{background:rgba(232,224,216,.97);backdrop-filter:blur(14px);box-shadow:0 
 
 <script>
 const BACKEND = "https://estiloartesanal-emma.onrender.com";
-const IMG = "assets /images/";
-const CATALOG = {
-  'jabon-lavanda':     {cat:'Jabones',name:'Jardín de Lavanda',price:'$4.800',priceNum:4800,img:IMG+'jardinlavanda.png',fallback:'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?q=85&w=300&auto=format&fit=crop'},
-  'jabon-refrescante': {cat:'Jabones',name:'Refrescante',price:'$4.800',priceNum:4800,img:IMG+'refrezcante.png',fallback:'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?q=85&w=300&auto=format&fit=crop'},
-  'jabon-manzanilla':  {cat:'Jabones',name:'Manzanilla',price:'$4.800',priceNum:4800,img:IMG+'manzanilla.png',fallback:'https://images.unsplash.com/photo-1601049676869-702ea24cfd58?q=85&w=300&auto=format&fit=crop'},
-  'jabon-avena':       {cat:'Jabones',name:'Avena',price:'$4.800',priceNum:4800,img:IMG+'avena.png',fallback:'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?q=85&w=300&auto=format&fit=crop'},
-  'jabon-avenaseda':   {cat:'Jabones',name:'Avena & Seda',price:'$4.800',priceNum:4800,img:IMG+'avenaseda.png',fallback:'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?q=85&w=300&auto=format&fit=crop'},
-  'jabon-avenaseda2':  {cat:'Jabones',name:'Avena & Seda II',price:'$4.800',priceNum:4800,img:IMG+'avenaseda2.png',fallback:'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?q=85&w=300&auto=format&fit=crop'},
-  'jabon-karite':      {cat:'Jabones',name:'Manteca de Karité',price:'$4.800',priceNum:4800,img:IMG+'mantecadekarite.png',fallback:'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?q=85&w=300&auto=format&fit=crop'},
-  'jabon-detox':       {cat:'Jabones',name:'Detox',price:'$4.800',priceNum:4800,img:IMG+'detox.png',fallback:'https://images.unsplash.com/photo-1601049676869-702ea24cfd58?q=85&w=300&auto=format&fit=crop'},
-  'jabon-petalos':     {cat:'Jabones',name:'Pétalos',price:'$4.800',priceNum:4800,img:IMG+'petalos.png',fallback:'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?q=85&w=300&auto=format&fit=crop'},
-  'jabon-cacao':       {cat:'Jabones',name:'Dulce Energía Cacao',price:'$4.800',priceNum:4800,img:IMG+'dulceenergiacacao.png',fallback:'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?q=85&w=300&auto=format&fit=crop'},
-  'jabon-lavandachia': {cat:'Jabones',name:'Lavanda Chía',price:'$4.800',priceNum:4800,img:IMG+'lavandachia.png',fallback:'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?q=85&w=300&auto=format&fit=crop'},
-  'jabon-lavandaimperial':{cat:'Jabones',name:'Lavanda Imperial',price:'$4.800',priceNum:4800,img:IMG+'lavandaimperial.png',fallback:'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?q=85&w=300&auto=format&fit=crop'},
-  'jabones-coleccion': {cat:'Jabones',name:'Colección jabones',price:'$4.800',priceNum:4800,img:IMG+'jaboneshero.jpg',fallback:'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?q=85&w=300&auto=format&fit=crop'},
-  'jabon-ranita':      {cat:'Jabones',name:'Jabón Ranita Infantil',price:'$5.500',priceNum:5500,img:IMG+'manzanilla.png',fallback:'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?q=85&w=300&auto=format&fit=crop'},
-  'sahumador-gratitud':{cat:'Sahumadores',name:'Sahumador Gratitud',price:'$7.000',priceNum:7000,img:IMG+'sahumadorchicogratitud.png',fallback:'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=85&w=300&auto=format&fit=crop'},
-  'sahumador-magia':   {cat:'Sahumadores',name:'Sahumador Magia',price:'$7.000',priceNum:7000,img:IMG+'sahumadorgrandemagia.png',fallback:'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=85&w=300&auto=format&fit=crop'},
-  'sahumador-luz':     {cat:'Sahumadores',name:'Sahumador Luz',price:'$9.000',priceNum:9000,img:IMG+'sahumadorazulluz.png',fallback:'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=85&w=300&auto=format&fit=crop'},
-  'sahumador-salmon':  {cat:'Sahumadores',name:'Sahumador Salmón',price:'$9.000',priceNum:9000,img:IMG+'sahumadorsalmon.png',fallback:'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=85&w=300&auto=format&fit=crop'},
-  'sahumador-cielo':   {cat:'Sahumadores',name:'Sahumador Cielo',price:'$9.000',priceNum:9000,img:IMG+'sahumadorluzcielo.png',fallback:'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=85&w=300&auto=format&fit=crop'},
-  'cenicero-esmeralda':{cat:'Cerámica',name:'Cenicero Esmeralda',price:'$5.000',priceNum:5000,img:IMG+'platocupcacke.png',fallback:'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=85&w=300&auto=format&fit=crop'},
-  'cuenco-frutilla':   {cat:'Cerámica',name:'Cuenco Frutilla',price:'$5.000',priceNum:5000,img:IMG+'racimofrutillas.png',fallback:'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=85&w=300&auto=format&fit=crop'},
-  'cazuela-locro':     {cat:'Cerámica',name:'Cazuela Locro',price:'$9.000',priceNum:9000,img:IMG+'cuencolocro.png',fallback:'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=85&w=300&auto=format&fit=crop'},
-  'taza-juana':        {cat:'Cerámica',name:'Taza Juana',price:'$7.500',priceNum:7500,img:IMG+'tazajuana.png',fallback:'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=85&w=300&auto=format&fit=crop'},
-  'taza-campo':        {cat:'Cerámica',name:'Taza Campo',price:'$7.500',priceNum:7500,img:IMG+'tazacampo.png',fallback:'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=85&w=300&auto=format&fit=crop'},
-  'taza-mariposa':     {cat:'Cerámica',name:'Taza Mariposa',price:'$7.500',priceNum:7500,img:IMG+'tazamariposa.png',fallback:'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=85&w=300&auto=format&fit=crop'},
-  'cuenco-sushi':      {cat:'Cerámica',name:'Cuenco Sushi',price:'Consultar',priceNum:0,img:IMG+'cuencosushi.png',fallback:'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=85&w=300&auto=format&fit=crop'},
-  'cuenco-grande':     {cat:'Cerámica',name:'Cuenco Grande',price:'Consultar',priceNum:0,img:IMG+'cuencograndemulticolor.png',fallback:'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=85&w=300&auto=format&fit=crop'},
-  'cuenco-flores':     {cat:'Cerámica',name:'Cuenco Flores',price:'Consultar',priceNum:0,img:IMG+'cuencofloresgrande.png',fallback:'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=85&w=300&auto=format&fit=crop'},
-  'cuenco-limon':      {cat:'Cerámica',name:'Cuenco Limón',price:'Consultar',priceNum:0,img:IMG+'cuencolimonchico.png',fallback:'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=85&w=300&auto=format&fit=crop'},
-  'racimo-uvas':       {cat:'Cerámica',name:'Racimo Uvas',price:'Consultar',priceNum:0,img:IMG+'racimosuvas.png',fallback:'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=85&w=300&auto=format&fit=crop'},
-  'racimo-cerezas':    {cat:'Cerámica',name:'Racimo Cerezas',price:'Consultar',priceNum:0,img:IMG+'rqacimocerezas.png',fallback:'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=85&w=300&auto=format&fit=crop'},
-  'casita-grande':     {cat:'Decoración',name:'Casita grande Alegría',price:'$20.000',priceNum:20000,img:'casitagrandealegria.png',fallback:'https://images.unsplash.com/photo-1591348278863-a8fb3887e2aa?q=85&w=300&auto=format&fit=crop'},
-  'casita-chica':      {cat:'Decoración',name:'Casita chica Hogar',price:'$15.000',priceNum:15000,img:'casitachicahogar.png',fallback:'https://images.unsplash.com/photo-1591348278863-a8fb3887e2aa?q=85&w=300&auto=format&fit=crop'},
-  'florero-nube':      {cat:'Decoración',name:'Florero Nube',price:'$5.000',priceNum:5000,img:IMG+'floreronube.png',fallback:'https://images.unsplash.com/photo-1591348278863-a8fb3887e2aa?q=85&w=300&auto=format&fit=crop'},
-  'porta-cepillos':    {cat:'Decoración',name:'Porta Cepillos Ámbar',price:'$5.000',priceNum:5000,img:IMG+'portacepillosambar.png',fallback:'https://images.unsplash.com/photo-1591348278863-a8fb3887e2aa?q=85&w=300&auto=format&fit=crop'},
-  'porta-espiral':     {cat:'Decoración',name:'Porta Espiral Margarita',price:'$8.000',priceNum:8000,img:IMG+'portaespiral.png',fallback:'https://images.unsplash.com/photo-1591348278863-a8fb3887e2aa?q=85&w=300&auto=format&fit=crop'},
-  'porta-ajos':        {cat:'Decoración',name:'Porta Ajos Jacinto',price:'Consultar',priceNum:0,img:IMG+'portaajosjacinto.png',fallback:'https://images.unsplash.com/photo-1591348278863-a8fb3887e2aa?q=85&w=300&auto=format&fit=crop'},
-  'floreros':          {cat:'Decoración',name:'Floreros',price:'Consultar',priceNum:0,img:IMG+'floreros.png',fallback:'https://images.unsplash.com/photo-1591348278863-a8fb3887e2aa?q=85&w=300&auto=format&fit=crop'},
-};
-let prod=null;
+const FALLBACK = "https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?q=85&w=300&auto=format&fit=crop";
+let prod = null;
+let prodId = null;
+
 function getParam(k){return new URLSearchParams(window.location.search).get(k);}
-function init(){
-  const id=getParam('id'); prod=CATALOG[id];
-  if(!prod){window.location.href='index.html';return;}
-  document.title='Checkout: '+prod.name+' · estiloartesanal.emma';
-  document.getElementById('sum-body').innerHTML=`
+
+async function init(){
+  prodId = getParam("id");
+  if(!prodId){window.location.href="index.html";return;}
+
+  let catalog = {};
+  try {
+    const r = await fetch(BACKEND+"/productos.json");
+    if(r.ok) catalog = await r.json();
+  } catch(e) {}
+
+  prod = catalog[prodId];
+  if(!prod){window.location.href="index.html";return;}
+
+  document.title = "Checkout: " + prod.nombre + " · estiloartesanal.emma";
+  const imgSrc = prod.imagen || FALLBACK;
+  const precio = prod.precio > 0 ? "$" + prod.precio.toLocaleString("es-AR") : "Consultar";
+  const catLabel = {jabones:"Jabones",sahumadores:"Sahumadores",ceramica:"Cerámica",deco:"Decoración"}[prod.categoria]||prod.categoria;
+
+  document.getElementById("sum-body").innerHTML = \`
     <div class="sum-prod">
-      <img class="sum-img" src="${prod.img}" onerror="this.src='${prod.fallback}'" alt="${prod.name}"/>
-      <div><p class="sum-pname">${prod.name}</p><p class="sum-pcat">${prod.cat}</p></div>
+      <img class="sum-img" src="\${imgSrc}" onerror="this.src='\${FALLBACK}'" alt="\${prod.nombre}"/>
+      <div><p class="sum-pname">\${prod.nombre}</p><p class="sum-pcat">\${catLabel}</p></div>
     </div>
     <div class="sum-hr"></div>
-    <div class="sum-row"><span>Subtotal</span><span>${prod.price}</span></div>
+    <div class="sum-row"><span>Subtotal</span><span>\${precio}</span></div>
     <div class="sum-row"><span>Envío</span><span style="color:var(--pink-dk)">Retiro gratis</span></div>
     <div class="sum-hr"></div>
-    <div class="sum-total"><span>Total</span><strong>${prod.price}</strong></div>
+    <div class="sum-total"><span>Total</span><strong>\${precio}</strong></div>
     <div class="sum-note">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
       Retiro personal · Calle 43 N° 4364, Colonia Caroya · Con cita previa por Instagram
-    </div>`;
+    </div>\`;
 }
+
 function validar(){
-  const nom=document.getElementById('ch-nom').value.trim();
-  const email=document.getElementById('ch-email').value.trim();
-  if(!nom){alert('Por favor ingresá tu nombre.');document.getElementById('ch-nom').focus();return false;}
-  if(!email){alert('Por favor ingresá tu email.');document.getElementById('ch-email').focus();return false;}
-  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){alert('El email no parece válido.');document.getElementById('ch-email').focus();return false;}
+  const nom = document.getElementById("ch-nom").value.trim();
+  const email = document.getElementById("ch-email").value.trim();
+  if(!nom){alert("Por favor ingresá tu nombre.");document.getElementById("ch-nom").focus();return false;}
+  if(!email){alert("Por favor ingresá tu email.");document.getElementById("ch-email").focus();return false;}
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){alert("El email no parece válido.");document.getElementById("ch-email").focus();return false;}
   return true;
 }
+
 async function pagarMP(){
   if(!validar())return;
-  const btn=document.getElementById('btn-mp');
-  btn.disabled=true;
-  btn.innerHTML=`<svg class="spinning" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;"><path d="M21 12a9 9 0 11-6.219-8.56"/></svg> Conectando...`;
-  const body={producto:prod.name,precio:prod.priceNum,nombre:(document.getElementById('ch-nom').value+' '+document.getElementById('ch-ape').value).trim(),email:document.getElementById('ch-email').value.trim(),telefono:document.getElementById('ch-tel').value.trim(),nota:document.getElementById('ch-nota').value.trim()};
+  const btn = document.getElementById("btn-mp");
+  btn.disabled = true;
+  btn.innerHTML = \`<svg class="spinning" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;animation:spin 1s linear infinite;"><path d="M21 12a9 9 0 11-6.219-8.56"/></svg> Conectando...\`;
+  const body = {
+    producto: prod.nombre,
+    precio:   prod.precio,
+    nombre:   (document.getElementById("ch-nom").value + " " + document.getElementById("ch-ape").value).trim(),
+    email:    document.getElementById("ch-email").value.trim(),
+    telefono: document.getElementById("ch-tel").value.trim(),
+    nota:     document.getElementById("ch-nota").value.trim(),
+    productoId: prodId,
+  };
   try{
-    const resp=await fetch(`${BACKEND}/crear-preferencia`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
-    if(!resp.ok){const e=await resp.json();throw new Error(e.error||'Error del servidor');}
-    const data=await resp.json();
-    window.location.href=data.init_point;
-  }catch(err){
-    alert('No se pudo conectar con Mercado Pago:\n'+err.message);
-    btn.disabled=false;
-    btn.innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:15px;height:15px;"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg> Pagar con Mercado Pago`;
+    const resp = await fetch(\`\${BACKEND}/crear-preferencia\`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});
+    if(!resp.ok){const e=await resp.json();throw new Error(e.error||"Error del servidor");}
+    const data = await resp.json();
+    window.location.href = data.init_point;
+  } catch(err){
+    alert("No se pudo conectar con Mercado Pago:\n" + err.message);
+    btn.disabled = false;
+    btn.innerHTML = \`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:15px;height:15px;"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg> Pagar con Mercado Pago\`;
   }
 }
+
 function coordinarIG(){
   if(!validar())return;
-  sessionStorage.setItem('pedido',JSON.stringify({nombre:document.getElementById('ch-nom').value.trim(),producto:prod.name,precio:prod.price,metodo:'instagram'}));
-  window.location.href='confirmacion.html?via=ig';
+  sessionStorage.setItem("pedido", JSON.stringify({
+    nombre:   document.getElementById("ch-nom").value.trim(),
+    producto: prod.nombre,
+    precio:   prod.precio > 0 ? "$" + prod.precio.toLocaleString("es-AR") : "Consultar",
+    metodo:   "instagram",
+  }));
+  window.location.href = "confirmacion.html?via=ig";
 }
+
 init();
 </script>
 </body>
