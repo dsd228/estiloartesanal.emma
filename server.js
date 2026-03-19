@@ -29,7 +29,7 @@ const storage = multer.diskStorage({
 });
 
 const fileFilter = (req, file, cb) => {
-  const allowed = [".jpg",".jpeg",".png",".webp",".gif"];
+  const allowed = [".webp",".jpeg",".png",".webp",".gif"];
   const ext = path.extname(file.originalname).toLowerCase();
   allowed.includes(ext) ? cb(null, true) : cb(new Error("Solo se permiten imágenes"));
 };
@@ -89,7 +89,7 @@ const STOCK_DEFAULT = {
   "taza-juana":             { nombre: "Taza Juana",                     categoria: "ceramica",    precio: 7500,  stock: 1,  imagen: "assets/images/tazajuana.png",                 esOferta: false, precioOriginal: 0, activo: true },
   "taza-campo":             { nombre: "Taza Campo",                     categoria: "ceramica",    precio: 7500,  stock: 1,  imagen: "assets/images/tazacampo.png",                 esOferta: false, precioOriginal: 0, activo: true },
   "taza-mariposa":          { nombre: "Taza Mariposa",                  categoria: "ceramica",    precio: 7500,  stock: 1,  imagen: "assets/images/tazamariposa.png",              esOferta: false, precioOriginal: 0, activo: true },
-  "taza-generico":          { nombre: "Taza",                           categoria: "ceramica",    precio: 7500,  stock: 1,  imagen: "assets/images/taza.jpg",                      esOferta: false, precioOriginal: 0, activo: true },
+  "taza-generico":          { nombre: "Taza",                           categoria: "ceramica",    precio: 7500,  stock: 1,  imagen: "assets/images/taza.webp",                      esOferta: false, precioOriginal: 0, activo: true },
   "cenicero-esmeralda":     { nombre: "Cenicero Esmeralda",             categoria: "ceramica",    precio: 5000,  stock: 1,  imagen: "assets/images/ceniceroesmeralda.png",         esOferta: false, precioOriginal: 0, activo: true },
   "platocupkacke":          { nombre: "Plato Cupcake",                  categoria: "ceramica",    precio: 5000,  stock: 1,  imagen: "assets/images/platocupkacke.png",             esOferta: false, precioOriginal: 0, activo: true },
   "cuenco-frutillas":       { nombre: "Cuenco Frutillas Mediano",       categoria: "ceramica",    precio: 5000,  stock: 1,  imagen: "assets/images/cuencofrutillasmediano.png",    esOferta: false, precioOriginal: 0, activo: true },
@@ -443,7 +443,7 @@ app.get("/admin/uploads", (req, res) => {
   if (!verificarAuth(req)) return res.status(401).json({ error: "No autorizado" });
 
   const files = fs.readdirSync(UPLOADS_DIR)
-    .filter(f => [".jpg",".jpeg",".png",".webp",".gif"].includes(path.extname(f).toLowerCase()))
+    .filter(f => [".webp",".jpeg",".png",".webp",".gif"].includes(path.extname(f).toLowerCase()))
     .map(f => ({
       filename: f,
       url: `/uploads/${f}`,
