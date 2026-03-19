@@ -43,7 +43,19 @@ const upload = multer({
 // ── Middlewares ───────────────────────────────────────────────
 app.use(express.json());
 app.use(cors({
-  origin: process.env.FRONTEND_URL || "*",
+  origin: function(origin, callback) {
+    const allowed = [
+      process.env.FRONTEND_URL,
+      process.env.ADMIN_URL,
+    ].filter(Boolean);
+    // Permitir requests sin origin (ej: Postman, curl)
+    if (!origin || allowed.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("No permitido por CORS"));
+    }
+  },
+  credentials: true,
 }));
 
 // ── STOCK — archivo JSON en disco ────────────────────────────
@@ -119,6 +131,7 @@ const STOCK_DEFAULT = {
   "porta-espiral-chico":    { nombre: "Porta Espiral Chico",            categoria: "deco",        precio: 7000,  stock: 1,  imagen: "assets/images/portaespiralchico.png",         esOferta: false, precioOriginal: 0, activo: true },
   "floreros":               { nombre: "Floreros",                       categoria: "deco",        precio: 6000,  stock: 4,  imagen: "assets/images/4floreros.png",                 descripcion: "Precio por unidad. Set de 4 floreros artesanales disponibles.", esOferta: false, precioOriginal: 0, activo: true },
 }
+
 function leerStock() {
   try {
     let data;
