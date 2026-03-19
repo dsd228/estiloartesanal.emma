@@ -1,4 +1,1212 @@
 <!DOCTYPE html><html lang="es">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>"/>
+<title>La Tienda · Estilo Artesanal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #f8f3ed;
+  --bg-lt: #fff9f2;
+  --sd: #d4ccc4;
+  --sl: #ffffff;
+  --pink: #f3d9dc;
+  --pink-dk: #b15c6b;
+  --pink-md: #d49aa5;
+  --pink-lt: #fce9ec;
+  --ink: #3f3135;
+  --muted: #9b8b84;
+  --clay: #c27e56;
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'Jost', system-ui, sans-serif;
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.05), 0 4px 12px rgba(0,0,0,0.03);
+  --shadow-md: 0 8px 24px rgba(0,0,0,0.08);
+  --shadow-inset: inset 0 1px 4px rgba(0,0,0,0.03), inset 0 -1px 4px rgba(255,255,255,0.7);
+}
+
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a, button {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+}
+
+/* HEADER */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(248, 243, 237, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(212, 204, 196, 0.3);
+  padding: 0 24px;
+}
+
+.hdr {
+  max-width: 1280px;
+  margin: 0 auto;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--pink-lt);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--pink-dk);
+  font-size: 20px;
+}
+
+.logo-text {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  font-style: italic;
+  letter-spacing: -0.02em;
+}
+
+.logo-text small {
+  font-family: var(--sans);
+  font-size: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--muted);
+  display: block;
+  margin-top: 2px;
+}
+
+.hdr-search {
+  flex: 1;
+  max-width: 360px;
+  margin: 0 24px;
+  position: relative;
+}
+
+.hdr-search input {
+  width: 100%;
+  padding: 10px 16px 10px 40px;
+  border: none;
+  border-radius: 40px;
+  background: var(--bg-lt);
+  box-shadow: var(--shadow-inset);
+  font-size: 0.85rem;
+  outline: none;
+}
+
+.hdr-search input:focus {
+  box-shadow: inset 0 1px 5px rgba(0,0,0,0.05), 0 0 0 2px rgba(177, 92, 107, 0.2);
+}
+
+.hdr-search svg {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  color: var(--muted);
+  pointer-events: none;
+}
+
+.hdr-right {
+  display: flex;
+  gap: 8px;
+}
+
+.hdr-pill {
+  padding: 8px 16px;
+  border-radius: 40px;
+  background: var(--bg-lt);
+  box-shadow: var(--shadow-sm);
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--muted);
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hdr-pill:hover {
+  box-shadow: var(--shadow-md);
+  color: var(--pink-dk);
+}
+
+/* HERO */
+.hero {
+  position: relative;
+  height: 75vh;
+  min-height: 500px;
+  max-height: 700px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.hero-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, rgba(30,20,20,0.7) 0%, rgba(30,20,20,0.3) 50%);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 0 20px;
+  max-width: 800px;
+}
+
+.hero-eyebrow {
+  font-size: 0.7rem;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 16px;
+}
+
+.hero-title {
+  font-family: var(--serif);
+  font-size: clamp(3rem, 10vw, 6rem);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 0.9;
+  margin-bottom: 20px;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+}
+
+.hero-sub {
+  font-size: 0.8rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 40px;
+}
+
+.hero-cats {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.hero-cat {
+  padding: 10px 24px;
+  border-radius: 40px;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.2);
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: white;
+  transition: all 0.2s;
+}
+
+.hero-cat:hover, .hero-cat.active {
+  background: rgba(255,255,255,0.2);
+  border-color: rgba(255,255,255,0.5);
+}
+
+/* LAYOUT PRINCIPAL */
+.shop-layout {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 30px;
+  flex: 1;
+}
+
+/* SIDEBAR */
+.sidebar {
+  position: sticky;
+  top: 90px;
+  height: fit-content;
+}
+
+.sidebar-title {
+  font-size: 0.6rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 16px;
+  padding-left: 8px;
+}
+
+.filter-block {
+  background: var(--bg-lt);
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+.filter-block h3 {
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.cat-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cat-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  border-radius: 12px;
+  width: 100%;
+  text-align: left;
+  font-size: 0.9rem;
+  color: var(--ink);
+  transition: all 0.15s;
+}
+
+.cat-item:hover {
+  background: rgba(212, 204, 196, 0.2);
+  color: var(--pink-dk);
+}
+
+.cat-item.active {
+  background: var(--pink-lt);
+  color: var(--pink-dk);
+  font-weight: 500;
+  box-shadow: var(--shadow-inset);
+}
+
+.cat-item .count {
+  font-size: 0.65rem;
+  color: var(--muted);
+  background: rgba(212, 204, 196, 0.3);
+  padding: 2px 8px;
+  border-radius: 20px;
+}
+
+.price-range {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.price-input {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 12px;
+  background: var(--bg);
+  box-shadow: var(--shadow-inset);
+  font-size: 0.8rem;
+  text-align: center;
+  outline: none;
+}
+
+.price-sep {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.price-apply {
+  width: 100%;
+  padding: 12px;
+  border-radius: 40px;
+  background: var(--pink-dk);
+  color: white;
+  font-size: 0.7rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s;
+}
+
+.price-apply:hover {
+  background: #9e4b5a;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.9rem;
+}
+
+.toggle {
+  width: 44px;
+  height: 24px;
+  border-radius: 30px;
+  background: var(--sd);
+  position: relative;
+  transition: all 0.2s;
+}
+
+.toggle.active {
+  background: var(--pink-dk);
+}
+
+.toggle::after {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: white;
+  top: 3px;
+  left: 3px;
+  transition: all 0.2s;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.toggle.active::after {
+  left: 23px;
+}
+
+.reset-filters {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  padding: 12px;
+  border-radius: 40px;
+  color: var(--muted);
+  font-size: 0.65rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: all 0.2s;
+}
+
+.reset-filters:hover {
+  color: var(--pink-dk);
+}
+
+/* TOOLBAR */
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.results {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.results strong {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sort-select {
+  padding: 8px 32px 8px 16px;
+  border: none;
+  border-radius: 40px;
+  background: var(--bg-lt);
+  box-shadow: var(--shadow-sm);
+  font-size: 0.8rem;
+  color: var(--ink);
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239b8b84' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  cursor: pointer;
+  outline: none;
+}
+
+.view-toggle {
+  display: flex;
+  gap: 4px;
+  background: var(--bg-lt);
+  padding: 4px;
+  border-radius: 40px;
+  box-shadow: var(--shadow-inset);
+}
+
+.view-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  transition: all 0.15s;
+}
+
+.view-btn.active {
+  background: var(--bg-lt);
+  box-shadow: var(--shadow-sm);
+  color: var(--pink-dk);
+}
+
+/* PRODUCT GRID */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.product-grid.list {
+  grid-template-columns: 1fr;
+}
+
+/* PRODUCT CARD */
+.product-card {
+  background: var(--bg-lt);
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s;
+  animation: fadeUp 0.4s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
+}
+
+.card-image {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--bg), var(--bg-lt));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+
+.product-card:hover .card-image img {
+  transform: scale(1.05);
+}
+
+.card-tag {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: rgba(248, 243, 237, 0.9);
+  backdrop-filter: blur(8px);
+  padding: 4px 14px;
+  border-radius: 40px;
+  font-size: 0.55rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--pink-dk);
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.card-body {
+  padding: 20px 20px 24px;
+}
+
+.card-name {
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+  color: var(--ink);
+}
+
+.card-category {
+  font-size: 0.65rem;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid rgba(212, 204, 196, 0.3);
+  padding-top: 16px;
+}
+
+.card-price {
+  font-family: var(--serif);
+  font-size: 1.8rem;
+  font-weight: 300;
+  color: var(--clay);
+  line-height: 1;
+}
+
+.card-btn {
+  padding: 8px 16px;
+  border-radius: 40px;
+  background: var(--bg);
+  box-shadow: var(--shadow-sm);
+  font-size: 0.6rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--ink);
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.card-btn:hover {
+  box-shadow: var(--shadow-inset);
+  color: var(--pink-dk);
+}
+
+/* LIST VIEW */
+.product-grid.list .product-card {
+  display: flex;
+  flex-direction: row;
+  border-radius: 20px;
+}
+
+.product-grid.list .card-image {
+  width: 150px;
+  min-width: 150px;
+  aspect-ratio: 1 / 1;
+}
+
+.product-grid.list .card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+}
+
+.product-grid.list .card-info {
+  flex: 1;
+}
+
+.product-grid.list .card-footer {
+  border-top: none;
+  padding-top: 0;
+  margin-left: 20px;
+  gap: 16px;
+}
+
+.product-grid.list .card-price {
+  font-size: 1.5rem;
+}
+
+.product-grid.list .card-category {
+  margin-bottom: 0;
+}
+
+/* PLACEHOLDER ICON */
+.placeholder-icon {
+  width: 60px;
+  height: 60px;
+  color: var(--pink-md);
+  opacity: 0.3;
+}
+
+/* LOAD MORE */
+.load-more {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.load-more button {
+  padding: 14px 40px;
+  border-radius: 40px;
+  background: var(--bg-lt);
+  box-shadow: var(--shadow-sm);
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--ink);
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.load-more button:hover {
+  box-shadow: var(--shadow-md);
+  color: var(--pink-dk);
+}
+
+/* FOOTER */
+footer {
+  background: var(--ink);
+  color: rgba(255,255,255,0.5);
+  padding: 24px;
+  margin-top: auto;
+}
+
+.footer-content {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.7rem;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.footer-content a {
+  color: rgba(255,255,255,0.5);
+  transition: color 0.2s;
+}
+
+.footer-content a:hover {
+  color: var(--pink-md);
+}
+
+/* DRAWER MOBILE */
+.drawer-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.3);
+  backdrop-filter: blur(4px);
+  z-index: 200;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.drawer-overlay.open {
+  display: block;
+  opacity: 1;
+}
+
+.drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 280px;
+  height: 100%;
+  background: var(--bg);
+  z-index: 201;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  overflow-y: auto;
+  padding: 24px;
+}
+
+.drawer.open {
+  transform: translateX(0);
+}
+
+.drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.drawer-header h2 {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  font-style: italic;
+  font-weight: 300;
+}
+
+.drawer-close {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--bg-lt);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* RESPONSIVE */
+@media (max-width: 1000px) {
+  .shop-layout {
+    grid-template-columns: 1fr;
+  }
+  
+  .sidebar {
+    display: none;
+  }
+  
+  #btn-filtros-mobile {
+    display: flex;
+  }
+  
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 700px) {
+  .hdr-search {
+    display: none;
+  }
+  
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .product-grid.list .product-card {
+    flex-direction: column;
+  }
+  
+  .product-grid.list .card-image {
+    width: 100%;
+  }
+  
+  .product-grid.list .card-body {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  
+  .product-grid.list .card-footer {
+    margin-left: 0;
+    width: 100%;
+  }
+  
+  .hero-title {
+    font-size: 3.5rem;
+  }
+  
+  .hero-sub {
+    display: none;
+  }
+  
+  .hero-eyebrow {
+    font-size: 0.6rem;
+    letter-spacing: 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-text small {
+    display: none;
+  }
+  
+  .hdr-pill span {
+    display: none;
+  }
+  
+  .hdr-pill svg {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .toolbar-right {
+    width: 100%;
+  }
+  
+  .sort-select {
+    flex: 1;
+  }
+}
+</style>
+</head>
+<body>
+<!-- DRAWER MOBILE -->
+<div class="drawer-overlay" id="drawer-overlay" onclick="cerrarDrawer()"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-header">
+    <h2>Filtros</h2>
+    <button class="drawer-close" onclick="cerrarDrawer()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+  </div>
+  <div class="filter-block">
+    <h3>Categorías</h3>
+    <div class="cat-list">
+      <button class="cat-item active" onclick="setCategoria('todos', this)"><span>Todos</span><span class="count">56</span></button>
+      <button class="cat-item" onclick="setCategoria('jabones', this)"><span>Jabones</span><span class="count">42</span></button>
+      <button class="cat-item" onclick="setCategoria('ceramica', this)"><span>Cerámica</span><span class="count">8</span></button>
+      <button class="cat-item" onclick="setCategoria('sahumadores', this)"><span>Sahumadores</span><span class="count">4</span></button>
+      <button class="cat-item" onclick="setCategoria('deco', this)"><span>Decoración</span><span class="count">2</span></button>
+    </div>
+  </div>
+  <div class="filter-block">
+    <h3>Precio</h3>
+    <div class="price-range">
+      <input type="number" class="price-input" id="mobile-price-min" placeholder="Min" value="">
+      <span class="price-sep">—</span>
+      <input type="number" class="price-input" id="mobile-price-max" placeholder="Max" value="">
+    </div>
+    <button class="price-apply" onclick="aplicarPrecio()">Aplicar</button>
+  </div>
+  <div class="filter-block">
+    <div class="toggle-row">
+      <span>Solo productos en stock</span>
+      <button class="toggle" id="mobile-stock-toggle" onclick="toggleStock(this)"></button>
+    </div>
+  </div>
+  <button class="reset-filters" onclick="resetFilters()">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/>
+    </svg>
+    Limpiar filtros
+  </button>
+</div>
+
+<header>
+  <div class="hdr">
+    <a class="logo" href="#">
+      <div class="logo-icon">🌿</div>
+      <div class="logo-text">
+        Estilo Artesanal
+        <small>COLONIA CAROYA</small>
+      </div>
+    </a>
+    
+    <div class="hdr-search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+      <input type="search" placeholder="Buscar productos..." oninput="buscar(this.value)">
+    </div>
+    
+    <div class="hdr-right">
+      <button class="hdr-pill" id="btn-filtros-mobile" onclick="abrirDrawer()" style="display: none;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="11" y1="18" x2="13" y2="18"/>
+        </svg>
+        <span>Filtros</span>
+      </button>
+      <a class="hdr-pill" href="#">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+        </svg>
+        <span>Inicio</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO SECTION -->
+<section class="hero">
+  <img src="https://images.unsplash.com/photo-1600850057857-cc3be4bd38fa?w=1200&auto=format" alt="Jabones artesanales" class="hero-image">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Colonia Caroya · Córdoba</p>
+    <h1 class="hero-title">La Tienda</h1>
+    <p class="hero-sub">Jabones naturales · Cerámica esmaltada · Objetos únicos</p>
+    <div class="hero-cats">
+      <button class="hero-cat active" onclick="filtrarCategoria('todos', this)">Todos</button>
+      <button class="hero-cat" onclick="filtrarCategoria('jabones', this)">Jabones</button>
+      <button class="hero-cat" onclick="filtrarCategoria('ceramica', this)">Cerámica</button>
+      <button class="hero-cat" onclick="filtrarCategoria('sahumadores', this)">Sahumadores</button>
+      <button class="hero-cat" onclick="filtrarCategoria('deco', this)">Decoración</button>
+    </div>
+  </div>
+</section>
+
+<!-- SHOP LAYOUT -->
+<div class="shop-layout">
+  <!-- SIDEBAR DESKTOP -->
+  <aside class="sidebar">
+    <div class="sidebar-title">Filtros</div>
+    
+    <div class="filter-block">
+      <h3>Categorías</h3>
+      <div class="cat-list">
+        <button class="cat-item active" onclick="setCategoria('todos', this)"><span>Todos</span><span class="count">56</span></button>
+        <button class="cat-item" onclick="setCategoria('jabones', this)"><span>Jabones</span><span class="count">42</span></button>
+        <button class="cat-item" onclick="setCategoria('ceramica', this)"><span>Cerámica</span><span class="count">8</span></button>
+        <button class="cat-item" onclick="setCategoria('sahumadores', this)"><span>Sahumadores</span><span class="count">4</span></button>
+        <button class="cat-item" onclick="setCategoria('deco', this)"><span>Decoración</span><span class="count">2</span></button>
+      </div>
+    </div>
+    
+    <div class="filter-block">
+      <h3>Precio</h3>
+      <div class="price-range">
+        <input type="number" class="price-input" id="price-min" placeholder="Min" value="">
+        <span class="price-sep">—</span>
+        <input type="number" class="price-input" id="price-max" placeholder="Max" value="">
+      </div>
+      <button class="price-apply" onclick="aplicarPrecio()">Aplicar</button>
+    </div>
+    
+    <div class="filter-block">
+      <div class="toggle-row">
+        <span>Solo stock</span>
+        <button class="toggle" id="stock-toggle" onclick="toggleStock(this)"></button>
+      </div>
+    </div>
+    
+    <button class="reset-filters" onclick="resetFilters()">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/>
+      </svg>
+      Limpiar filtros
+    </button>
+  </aside>
+  
+  <!-- MAIN CONTENT -->
+  <main>
+    <div class="toolbar">
+      <div class="results"><strong>56</strong> productos encontrados</div>
+      <div class="toolbar-right">
+        <select class="sort-select" onchange="ordenarProductos(this.value)">
+          <option value="default">Ordenar por</option>
+          <option value="price-asc">Precio: menor a mayor</option>
+          <option value="price-desc">Precio: mayor a menor</option>
+          <option value="name-asc">Nombre A-Z</option>
+        </select>
+        <div class="view-toggle">
+          <button class="view-btn active" onclick="cambiarVista('grid', this)" title="Cuadrícula">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+              <rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>
+            </svg>
+          </button>
+          <button class="view-btn" onclick="cambiarVista('lista', this)" title="Lista">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/>
+              <line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/>
+              <line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- PRODUCT GRID -->
+    <div class="product-grid" id="product-grid"></div>
+    
+    <!-- LOAD MORE -->
+    <div class="load-more">
+      <button onclick="cargarMas()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+        VER MÁS PRODUCTOS
+      </button>
+    </div>
+  </main>
+</div>
+
+<footer>
+  <div class="footer-content">
+    <span>© 2025 Estilo Artesanal · Hecho a mano en Colonia Caroya</span>
+    <a href="#">IG @estiloartesanal</a>
+  </div>
+</footer>
+
+<script>
+// Productos basados en la imagen
+const productos = [
+  { nombre: "AVENA & SEDA", precio: 4000, categoria: "Jabones", tag: "NATURAL" },
+  { nombre: "AVENA & SEDA II", precio: 4000, categoria: "Jabones", tag: "NATURAL" },
+  { nombre: "SOMBRAS DE PISTIL", precio: 4000, categoria: "Jabones", tag: "NATURAL" },
+  { nombre: "DETOX DOTADO", precio: 4000, categoria: "Jabones", tag: "NATURAL" },
+  { nombre: "PÉTALOS DE HIBISCUS", precio: 4000, categoria: "Jabones", tag: "NATURAL" },
+  { nombre: "DULCE ENERGÍA CACAO", precio: 3900, categoria: "Jabones", tag: "NATURAL" },
+  { nombre: "IMPERIAL LAVANDA & CHÍA", precio: 5000, categoria: "Jabones", tag: "NATURAL" },
+  { nombre: "LAVANDA IMPERIAL", precio: 5000, categoria: "Jabones", tag: "NATURAL" },
+  { nombre: "JARDÍN MALVA", precio: 5000, categoria: "Jabones", tag: "NATURAL" },
+  { nombre: "PUREZA HERBAL", precio: 5000, categoria: "Jabones", tag: "NATURAL" }
+];
+
+// Renderizar productos
+function renderProductos() {
+  const grid = document.getElementById('product-grid');
+  grid.innerHTML = '';
+  
+  productos.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'product-card';
+    card.innerHTML = `
+      <div class="card-image">
+        <svg class="placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+          <rect x="2" y="2" width="20" height="20" rx="3"/>
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M7 7L17 17M17 7L7 17"/>
+        </svg>
+        <span class="card-tag">${p.tag}</span>
+      </div>
+      <div class="card-body">
+        <div class="card-name">${p.nombre}</div>
+        <div class="card-category">Jabón artesanal</div>
+        <div class="card-footer">
+          <span class="card-price">$${p.precio.toLocaleString('es-CL')}</span>
+          <button class="card-btn" onclick="verProducto('${p.nombre}')">VER PRODUCTO</button>
+        </div>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+// Funciones de UI
+function abrirDrawer() {
+  document.getElementById('drawer').classList.add('open');
+  document.getElementById('drawer-overlay').classList.add('open');
+}
+
+function cerrarDrawer() {
+  document.getElementById('drawer').classList.remove('open');
+  document.getElementById('drawer-overlay').classList.remove('open');
+}
+
+function setCategoria(cat, btn) {
+  document.querySelectorAll('.cat-item').forEach(el => el.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function filtrarCategoria(cat, btn) {
+  document.querySelectorAll('.hero-cat').forEach(el => el.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function toggleStock(btn) {
+  btn.classList.toggle('active');
+}
+
+function resetFilters() {
+  document.querySelectorAll('.cat-item').forEach(el => el.classList.remove('active'));
+  document.querySelector('.cat-item').classList.add('active');
+  document.querySelectorAll('.price-input').forEach(el => el.value = '');
+  document.querySelectorAll('.toggle').forEach(el => el.classList.remove('active'));
+}
+
+function aplicarPrecio() {
+  alert('Filtrando por precio...');
+}
+
+function ordenarProductos(valor) {
+  console.log('Ordenar por:', valor);
+}
+
+function cambiarVista(vista, btn) {
+  document.querySelectorAll('.view-btn').forEach(el => el.classList.remove('active'));
+  btn.classList.add('active');
+  
+  const grid = document.getElementById('product-grid');
+  if (vista === 'lista') {
+    grid.classList.add('list');
+  } else {
+    grid.classList.remove('list');
+  }
+}
+
+function cargarMas() {
+  alert('Cargando más productos...');
+}
+
+function buscar(query) {
+  console.log('Buscando:', query);
+}
+
+function verProducto(nombre) {
+  alert(`Ver detalle de: ${nombre}`);
+}
+
+// Inicializar
+renderProductos();
+
+// Auto avance para mostrar el botón de filtros en mobile
+window.addEventListener('resize', function() {
+  const btn = document.getElementById('btn-filtros-mobile');
+  if (window.innerWidth <= 1000) {
+    btn.style.display = 'flex';
+  } else {
+    btn.style.display = 'none';
+    cerrarDrawer();
+  }
+});
+
+// Trigger inicial
+window.dispatchEvent(new Event('resize'));
+</script>
+</body>
+</html>
