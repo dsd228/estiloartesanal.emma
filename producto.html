@@ -191,153 +191,113 @@ footer{background:var(--ink);padding:1.8rem 40px;}
 
 <script>
 const BACKEND = "https://estiloartesanal-emma.onrender.com";
-const IMG = "assets /images/";
-
-// Aliases: IDs que llegan del index → ID real en el CATALOG
-// El index usa los IDs del backend (stock.json) que pueden diferir del CATALOG local
-const ID_ALIAS = {
-  'jabon-citrico':  'jabon-refrescante',
-  'jabon-romero':   'jabon-manzanilla',
-};
-const CATALOG = {
-  // ── JABONES ──
-  'jabon-lavanda':    {cat:'Jabones',name:'Jardín de Lavanda',price:'$4.800',priceNum:4800,priceLabel:'por unidad',desc:'Jabón artesanal de glicerina vegetal elaborado por proceso de vertido con aceites de coco, almendra y ricino y manteca de karité. Aroma relajante de lavanda.',ingredients:['Glicerina vegetal pura','Aceite de coco','Aceite de almendra','Aceite de ricino','Manteca de karité'],props:['Proceso de vertido · lista para usar','pH equilibrado','Aroma relajante de lavanda','Sin sulfatos ni parabenos','Hidratante y suavizante','Apto piel sensible'],img:IMG+'jardinlavanda.png',fallback:'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?q=85&w=900&auto=format&fit=crop'},
-  'jabon-refrescante':{cat:'Jabones',name:'Refrescante',price:'$4.800',priceNum:4800,priceLabel:'por unidad',desc:'Jabón refrescante con aceites esenciales cítricos. Energizante y purificante, ideal para empezar el día.',ingredients:['Glicerina vegetal pura','Aceite de coco','Aceite de almendra','Aceite de ricino','Manteca de karité'],props:['Proceso de vertido · lista para usar','pH equilibrado','Aroma cítrico refrescante','Sin sulfatos ni parabenos','Purificante suave'],img:IMG+'refrezcante.png',fallback:'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?q=85&w=900&auto=format&fit=crop'},
-  'jabon-manzanilla': {cat:'Jabones',name:'Manzanilla',price:'$4.800',priceNum:4800,priceLabel:'por unidad',desc:'Jabón suavizante con manzanilla. Ideal para pieles sensibles e irritadas.',ingredients:['Glicerina vegetal pura','Aceite de coco','Aceite de almendra','Aceite de ricino','Manteca de karité'],props:['Proceso de vertido · lista para usar','pH equilibrado','Con extracto de manzanilla','Calmante y suavizante','Sin sulfatos ni parabenos','Apto piel sensible'],img:IMG+'manzanilla.png',fallback:'https://images.unsplash.com/photo-1601049676869-702ea24cfd58?q=85&w=900&auto=format&fit=crop'},
-  'jabon-avena':      {cat:'Jabones',name:'Avena',price:'$4.800',priceNum:4800,priceLabel:'por unidad',desc:'Jabón nutritivo con avena coloidal. Suaviza y nutre la piel con cada uso.',ingredients:['Glicerina vegetal pura','Aceite de coco','Aceite de almendra','Aceite de ricino','Manteca de karité'],props:['Proceso de vertido · lista para usar','pH equilibrado','Con avena coloidal','Exfoliación suave natural','Sin sulfatos ni parabenos'],img:IMG+'avena.png',fallback:'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?q=85&w=900&auto=format&fit=crop'},
-  'jabon-avenaseda':  {cat:'Jabones',name:'Avena & Seda',price:'$4.800',priceNum:4800,priceLabel:'por unidad',desc:'Jabón con avena y proteína de seda para una piel suave y sedosa.',ingredients:['Glicerina vegetal pura','Aceite de coco','Aceite de almendra','Aceite de ricino','Manteca de karité'],props:['Proceso de vertido · lista para usar','pH equilibrado','Con avena y proteína de seda','Textura sedosa','Sin sulfatos ni parabenos'],img:IMG+'avenaseda.png',fallback:'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?q=85&w=900&auto=format&fit=crop'},
-  'jabon-avenaseda2': {cat:'Jabones',name:'Avena & Seda II',price:'$4.800',priceNum:4800,priceLabel:'por unidad',desc:'Segunda versión del jabón de avena y seda con formulación mejorada.',ingredients:['Glicerina vegetal pura','Aceite de coco','Aceite de almendra','Aceite de ricino','Manteca de karité'],props:['Proceso de vertido · lista para usar','pH equilibrado','Con avena y proteína de seda','Textura sedosa premium','Sin sulfatos ni parabenos'],img:IMG+'avenaseda2.png',fallback:'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?q=85&w=900&auto=format&fit=crop'},
-  'jabon-karite':     {cat:'Jabones',name:'Manteca de Karité',price:'$4.800',priceNum:4800,priceLabel:'por unidad',desc:'Jabón ultra nutritivo con manteca de karité pura. Ideal para pieles muy secas.',ingredients:['Glicerina vegetal pura','Aceite de coco','Aceite de almendra','Aceite de ricino','Manteca de karité'],props:['Proceso de vertido · lista para usar','pH equilibrado','Rica en manteca de karité','Ultra nutritiva para piel seca','Sin sulfatos ni parabenos'],img:IMG+'mantecadekarite.png',fallback:'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?q=85&w=900&auto=format&fit=crop'},
-  'jabon-detox':      {cat:'Jabones',name:'Detox',price:'$4.800',priceNum:4800,priceLabel:'por unidad',desc:'Jabón purificante con arcilla verde y carbón activado. Limpieza profunda.',ingredients:['Glicerina vegetal pura','Aceite de coco','Aceite de almendra','Aceite de ricino','Manteca de karité'],props:['Proceso de vertido · lista para usar','pH equilibrado','Con arcilla verde y carbón activado','Purificante profundo','Sin sulfatos ni parabenos'],img:IMG+'detox.png',fallback:'https://images.unsplash.com/photo-1601049676869-702ea24cfd58?q=85&w=900&auto=format&fit=crop'},
-  'jabon-petalos':    {cat:'Jabones',name:'Pétalos',price:'$4.800',priceNum:4800,priceLabel:'por unidad',desc:'Jabón floral con pétalos naturales. Aroma delicado y textura suave.',ingredients:['Glicerina vegetal pura','Aceite de coco','Aceite de almendra','Aceite de ricino','Manteca de karité'],props:['Proceso de vertido · lista para usar','pH equilibrado','Con pétalos naturales','Aroma floral delicado','Sin sulfatos ni parabenos'],img:IMG+'petalos.png',fallback:'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?q=85&w=900&auto=format&fit=crop'},
-  'jabon-cacao':      {cat:'Jabones',name:'Dulce Energía Cacao',price:'$4.800',priceNum:4800,priceLabel:'por unidad',desc:'Jabón energizante con cacao y aceites esenciales. Aroma irresistible.',ingredients:['Glicerina vegetal pura','Aceite de coco','Aceite de almendra','Aceite de ricino','Manteca de karité'],props:['Proceso de vertido · lista para usar','pH equilibrado','Con manteca de cacao','Aroma energizante','Sin sulfatos ni parabenos'],img:IMG+'dulceenergiacacao.png',fallback:'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?q=85&w=900&auto=format&fit=crop'},
-  'jabon-lavandachia':{cat:'Jabones',name:'Lavanda Chía',price:'$4.800',priceNum:4800,priceLabel:'por unidad',desc:'Jabón de lavanda con semillas de chía para una limpieza suave y nutritiva.',ingredients:['Glicerina vegetal pura','Aceite de coco','Aceite de almendra','Aceite de ricino','Manteca de karité'],props:['Proceso de vertido · lista para usar','pH equilibrado','Con semillas de chía','Exfoliación suave','Aroma relajante'],img:IMG+'lavandachia.png',fallback:'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?q=85&w=900&auto=format&fit=crop'},
-  'jabon-lavandaimperial':{cat:'Jabones',name:'Lavanda Imperial',price:'$4.800',priceNum:4800,priceLabel:'por unidad',desc:'Versión premium del jabón de lavanda con aceites enriquecidos.',ingredients:['Glicerina vegetal pura','Aceite de coco','Aceite de almendra','Aceite de ricino','Manteca de karité'],props:['Proceso de vertido · lista para usar','pH equilibrado','Lavanda premium','Hidratación intensa','Sin sulfatos ni parabenos'],img:IMG+'lavandaimperial.png',fallback:'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?q=85&w=900&auto=format&fit=crop'},
-  'jabones-coleccion':{cat:'Jabones',name:'Colección jabones',price:'$4.800',priceNum:4800,priceLabel:'c/u',desc:'Toda nuestra colección de jabones artesanales. Consultá disponibilidad.',ingredients:['Glicerina vegetal pura','Aceite de coco','Aceite de almendra','Aceite de ricino','Manteca de karité'],props:['Proceso de vertido · lista para usar','pH equilibrado','Variedad de aromas','100% naturales','Sin sulfatos ni parabenos'],img:IMG+'jaboneshero.jpg',fallback:'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?q=85&w=900&auto=format&fit=crop'},
-  'jabon-ranita':     {cat:'Jabones',name:'Jabón Ranita Infantil',price:'$5.500',priceNum:5500,priceLabel:'por unidad · 140gr',desc:'¡Llegaron los jaboncitos ranitas para la diversión y el cuidado de los más peques! Suave y divertido, con glicerina vegetal y flor de manzanilla para una piel infantil delicada.',ingredients:['Glicerina vegetal pura','Aceite de coco','Aceite de almendra','Extracto de manzanilla'],props:['Proceso de vertido · lista para usar','pH equilibrado','Especial piel infantil','Suave y delicado','Sin sulfatos ni parabenos','140 gramos'],img:IMG+'manzanilla.png',fallback:'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?q=85&w=900&auto=format&fit=crop'},
-  // ── SAHUMADORES ──
-  'sahumador-gratitud':{cat:'Sahumadores',name:'Sahumador Gratitud',price:'$7.000',priceNum:7000,priceLabel:'por unidad',desc:'Sahumador chico esmaltado a mano. Pieza única irrepetible.',ingredients:['Arcilla alta temperatura','Esmaltes naturales'],props:['Pieza única','Esmaltado a mano','Alta durabilidad','Para sahumerios o incienso'],img:IMG+'sahumadorchicogratitud.png',fallback:'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=85&w=900&auto=format&fit=crop'},
-  'sahumador-magia':  {cat:'Sahumadores',name:'Sahumador Magia',price:'$7.000',priceNum:7000,priceLabel:'por unidad',desc:'Sahumador grande esmaltado a mano. Para llenar tu hogar de aromas.',ingredients:['Arcilla alta temperatura','Esmaltes naturales'],props:['Pieza única','Tamaño grande','Esmaltado a mano','Alta durabilidad'],img:IMG+'sahumadorgrandemagia.png',fallback:'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=85&w=900&auto=format&fit=crop'},
-  'sahumador-luz':    {cat:'Sahumadores',name:'Sahumador Luz',price:'$9.000',priceNum:9000,priceLabel:'c/u · pack x4 disponible',desc:'Sahumador esmaltado en azul. Disponible en pack de 4 unidades.',ingredients:['Arcilla alta temperatura','Esmaltes naturales'],props:['Pack x4 disponible','Esmaltado a mano','Pieza única','Color azul cielo'],img:IMG+'sahumadorazulluz.png',fallback:'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=85&w=900&auto=format&fit=crop'},
-  'sahumador-salmon': {cat:'Sahumadores',name:'Sahumador Salmón',price:'$9.000',priceNum:9000,priceLabel:'por unidad',desc:'Sahumador en tonos salmón. Pieza única esmaltada a mano.',ingredients:['Arcilla alta temperatura','Esmaltes naturales'],props:['Pieza única','Tono salmón','Esmaltado a mano','Alta durabilidad'],img:IMG+'sahumadorsalmon.png',fallback:'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=85&w=900&auto=format&fit=crop'},
-  'sahumador-cielo':  {cat:'Sahumadores',name:'Sahumador Cielo',price:'$9.000',priceNum:9000,priceLabel:'por unidad',desc:'Sahumador en tono cielo. Pieza única esmaltada a mano.',ingredients:['Arcilla alta temperatura','Esmaltes naturales'],props:['Pieza única','Tono cielo','Esmaltado a mano','Alta durabilidad'],img:IMG+'sahumadorluzcielo.png',fallback:'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=85&w=900&auto=format&fit=crop'},
-  // ── CERÁMICA ──
-  'cenicero-esmeralda':{cat:'Cerámica',name:'Cenicero Esmeralda',price:'$5.000',priceNum:5000,priceLabel:'por unidad',desc:'Cenicero esmaltado en verde esmeralda. Pieza única hecha a mano.',ingredients:['Arcilla alta temperatura','Esmaltes naturales'],props:['Pieza única','Esmaltado a mano','Alta durabilidad'],img:IMG+'platocupcacke.png',fallback:'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=85&w=900&auto=format&fit=crop'},
-  'cuenco-frutilla':  {cat:'Cerámica',name:'Cuenco Frutilla',price:'$5.000',priceNum:5000,priceLabel:'por unidad',desc:'Cuenco mediano con diseño de frutilla esmaltado a mano.',ingredients:['Arcilla alta temperatura','Esmaltes naturales'],props:['Pieza única','Apto lavavajillas','Esmaltado a mano'],img:IMG+'racimofrutillas.png',fallback:'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=85&w=900&auto=format&fit=crop'},
-  'cazuela-locro':    {cat:'Cerámica',name:'Cazuela Locro',price:'$9.000',priceNum:9000,priceLabel:'c/u · 3×$25.000',desc:'Cazuela artesanal para locro. Disponible en pack de 3 unidades a $25.000.',ingredients:['Arcilla alta temperatura','Esmaltes naturales'],props:['Apta horno y microondas','Pack x3 disponible','Pieza única','Esmaltada a mano'],img:IMG+'cuencolocro.png',fallback:'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=85&w=900&auto=format&fit=crop'},
-  'taza-juana':       {cat:'Cerámica',name:'Taza Juana',price:'$7.500',priceNum:7500,priceLabel:'por unidad',desc:'Taza artesanal Juana esmaltada a mano. Perfecta para el desayuno.',ingredients:['Arcilla alta temperatura','Esmaltes naturales'],props:['Pieza única','Apta microondas y lavavajillas','Esmaltada a mano'],img:IMG+'tazajuana.png',fallback:'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=85&w=900&auto=format&fit=crop'},
-  'taza-campo':       {cat:'Cerámica',name:'Taza Campo',price:'$7.500',priceNum:7500,priceLabel:'por unidad',desc:'Taza artesanal Campo con diseño campestre esmaltado a mano.',ingredients:['Arcilla alta temperatura','Esmaltes naturales'],props:['Pieza única','Apta microondas y lavavajillas','Esmaltada a mano'],img:IMG+'tazacampo.png',fallback:'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=85&w=900&auto=format&fit=crop'},
-  'taza-mariposa':    {cat:'Cerámica',name:'Taza Mariposa',price:'$7.500',priceNum:7500,priceLabel:'por unidad',desc:'Taza artesanal Mariposa esmaltada a mano. Ideal para regalar.',ingredients:['Arcilla alta temperatura','Esmaltes naturales'],props:['Pieza única','Apta microondas y lavavajillas','Esmaltada a mano'],img:IMG+'tazamariposa.png',fallback:'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=85&w=900&auto=format&fit=crop'},
-  'cuenco-sushi':     {cat:'Cerámica',name:'Cuenco Sushi',price:'Consultar',priceNum:0,priceLabel:'',desc:'Cuenco esmaltado especial para sushi. Pieza única hecha a mano.',ingredients:['Arcilla alta temperatura','Esmaltes naturales'],props:['Pieza única','Apto lavavajillas','Esmaltado a mano'],img:IMG+'cuencosushi.png',fallback:'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=85&w=900&auto=format&fit=crop'},
-  'cuenco-grande':    {cat:'Cerámica',name:'Cuenco Grande Multicolor',price:'Consultar',priceNum:0,priceLabel:'',desc:'Cuenco grande con esmalte multicolor. Pieza única irrepetible.',ingredients:['Arcilla alta temperatura','Esmaltes naturales multicolor'],props:['Pieza única','Colores únicos','Esmaltado a mano'],img:IMG+'cuencograndemulticolor.png',fallback:'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=85&w=900&auto=format&fit=crop'},
-  'cuenco-flores':    {cat:'Cerámica',name:'Cuenco Flores',price:'Consultar',priceNum:0,priceLabel:'',desc:'Cuenco grande con diseño floral esmaltado a mano.',ingredients:['Arcilla alta temperatura','Esmaltes naturales'],props:['Pieza única','Diseño floral','Esmaltado a mano'],img:IMG+'cuencofloresgrande.png',fallback:'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=85&w=900&auto=format&fit=crop'},
-  'cuenco-limon':     {cat:'Cerámica',name:'Cuenco Limón',price:'Consultar',priceNum:0,priceLabel:'',desc:'Cuenco chico con diseño de limón esmaltado a mano.',ingredients:['Arcilla alta temperatura','Esmaltes naturales'],props:['Pieza única','Diseño de limón','Esmaltado a mano'],img:IMG+'cuencolimonchico.png',fallback:'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=85&w=900&auto=format&fit=crop'},
-  'racimo-uvas':      {cat:'Cerámica',name:'Racimos Aroma Uvas',price:'$12.000',priceNum:12000,priceLabel:'4 unidades disponibles · 206-223gr c/u',desc:'Racimos de uvas artesanales para colgar en la canilla del baño, bañera o perfumar cajones. Peso aproximado entre 206 y 223gr. ¡Decorativos y aromáticos!',ingredients:['Arcilla alta temperatura','Esmaltes naturales','Aroma uvas'],props:['4 unidades disponibles','Para colgar en canilla o bañera','Perfuma cajones','206-223gr aprox.','Pieza única'],img:IMG+'racimosuvas.png',fallback:'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=85&w=900&auto=format&fit=crop'},
-  'racimo-cerezas':   {cat:'Cerámica',name:'Racimos Aroma Cerezas',price:'$12.000',priceNum:12000,priceLabel:'1 unidad disponible',desc:'Racimos de cerezas artesanales para colgar en la canilla del baño, bañera o perfumar cajones. Pieza única esmaltada a mano.',ingredients:['Arcilla alta temperatura','Esmaltes naturales','Aroma cerezas'],props:['Pieza única','Para colgar en canilla o bañera','Perfuma cajones','206-287gr aprox.','Esmaltado a mano'],img:IMG+'rqacimocerezas.png',fallback:'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=85&w=900&auto=format&fit=crop'},
-  'racimo-frutillas':  {cat:'Cerámica',name:'Racimos Aroma Frutillas',price:'$12.000',priceNum:12000,priceLabel:'2 unidades disponibles · 205-287gr',desc:'Racimos de frutillas artesanales para colgar en la canilla del baño, bañera o perfumar cajones. Disponibles en dos tamaños: 287gr (grande) y 205gr (chico).',ingredients:['Arcilla alta temperatura','Esmaltes naturales','Aroma frutillas'],props:['2 unidades disponibles','Para colgar en canilla o bañera','Perfuma cajones','205-287gr','Esmaltado a mano'],img:IMG+'racimofrutillas.png',fallback:'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=85&w=900&auto=format&fit=crop'},
-  // nuevos jabones
-  'jabon-diosannatural':{cat:'Jabones',name:'Diosa Natural',price:'$4.000',priceNum:4000,priceLabel:'2 unidades · 66 y 82gr aprox.',desc:'Jabón íntimo natural con manzanilla, cúrcuma y caléndula. Suave y delicado, de uso externo.',ingredients:['Glicerina vegetal','Manzanilla','Cúrcuma','Caléndula','Manteca de karité'],props:['Uso externo','Íntimo','Hidratante','2 unidades: 66 y 82gr aprox.','Sin sulfatos ni parabenos'],img:IMG+'manzanilla.png',fallback:'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?q=85&w=900&auto=format&fit=crop'},
-  'jabon-dulceenergia':{cat:'Jabones',name:'Dulce Energía',price:'$3.900',priceNum:3900,priceLabel:'2 unidades · 100 y 75gr aprox.',desc:'Jabón con cacao, canela y aroma a coco. Energizante y nutritivo para piel seca.',ingredients:['Glicerina vegetal','Cacao','Canela','Aceite de ricino','Aceite de coco'],props:['Aroma a coco','Energizante','2 unidades: 100 y 75gr aprox.','Nutritivo','Sin sulfatos ni parabenos'],img:IMG+'dulceenergiacacao.png',fallback:'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?q=85&w=900&auto=format&fit=crop'},
-  'jabon-hibiscus':    {cat:'Jabones',name:'Pétalos de Hibiscus',price:'$4.000',priceNum:4000,priceLabel:'1 unidad · 64gr aprox.',desc:'Jabón con flor de hibiscus y aceite de almendras, ideal para piel seca, sensible y madura. Rico en vitamina E.',ingredients:['Glicerina vegetal','Flor de hibiscus','Aceite de almendras','Aceite de ricino','Vitamina E'],props:['Piel seca, sensible y madura','Hidratante','Vitamina E','1 unidad de 64gr aprox.','Sin sulfatos ni parabenos'],img:IMG+'petalos.png',fallback:'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?q=85&w=900&auto=format&fit=crop'},
-  'jabon-avenaseda-nuevo':{cat:'Jabones',name:'Avena de Seda',price:'$4.000',priceNum:4000,priceLabel:'4 unidades · 65-100gr aprox.',desc:'Jabón nutritivo e hidratante para todo tipo de piel, ideal para uso facial y corporal. Sin aroma. Con manteca de karité, aceite de almendras y harina de avena.',ingredients:['Manteca de karité','Aceite de almendras','Harina de avena','Aceite de ricino','Manzanilla'],props:['Todo tipo de piel','Nutritivo e hidratante facial y corporal','Sin aroma','4 unidades: 65-100gr aprox.','Sin sulfatos ni parabenos'],img:IMG+'avenaseda.png',fallback:'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?q=85&w=900&auto=format&fit=crop'},
-  'jabon-lavandachia-nuevo':{cat:'Jabones',name:'Imperial Lavanda con Chía',price:'$5.000',priceNum:5000,priceLabel:'1 unidad · 130gr aprox.',desc:'Jabón premium con manteca de karité, chía y flores de lavanda reales. Aroma intenso a lavanda. 130gr aprox.',ingredients:['Manteca de karité','Chía','Aceite de ricino','Flores de lavanda'],props:['Aroma lavanda','1 unidad de 130gr aprox.','Premium','Hidratante','Sin sulfatos ni parabenos'],img:IMG+'lavandachia.png',fallback:'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?q=85&w=900&auto=format&fit=crop'},
-  'jabon-lavandaimperial-nuevo':{cat:'Jabones',name:'Lavanda Imperial',price:'$5.000',priceNum:5000,priceLabel:'1 unidad · 130gr aprox.',desc:'Jabón premium con aceite de coco, manteca de karité y flores de lavanda reales. Aroma intenso a lavanda. 130gr aprox.',ingredients:['Aceite de coco','Manteca de karité','Flores de lavanda'],props:['Aroma lavanda','1 unidad de 130gr aprox.','Premium','Hidratante','Sin sulfatos ni parabenos'],img:IMG+'lavandaimperial.png',fallback:'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?q=85&w=900&auto=format&fit=crop'},
-  'jabon-detox-nuevo': {cat:'Jabones',name:'Detox Dotado',price:'Consultar',priceNum:0,priceLabel:'3 unidades · 75gr aprox. c/u',desc:'Jabón purificante para piel grasa, con acné e impurezas. Carbón activado, cúrcuma y caléndula sin aroma.',ingredients:['Carbón activado','Cúrcuma','Caléndula','Aceite de almendras','Aceite de ricino'],props:['Piel grasa y con acné','Purificante','Sin aroma','3 unidades de 75gr aprox.','Sin sulfatos ni parabenos'],img:IMG+'detox.png',fallback:'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?q=85&w=900&auto=format&fit=crop'},
-  'jabon-malva':       {cat:'Jabones',name:'Jardín de Malva Herbal',price:'$5.000',priceNum:5000,priceLabel:'2 unidades · 120gr aprox. c/u',desc:'Jabón herbal que hidrata y suaviza. Con manteca de karité, malva y vitamina E. Aroma a manzana verde.',ingredients:['Manteca de karité','Aceite de almendras','Malva','Vitamina E','Aceite de ricino'],props:['Hidrata y suaviza','Aroma manzana verde','2 unidades de 120gr aprox.','Vitamina E','Sin sulfatos ni parabenos'],img:IMG+'jardinlavanda.png',fallback:'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?q=85&w=900&auto=format&fit=crop'},
-  'jabon-exfoliante-anana':{cat:'Jabones',name:'Exfoliante Ananá',price:'$4.000',priceNum:4000,priceLabel:'5 unidades · 100gr aprox. c/u',desc:'Jabón exfoliante con esponja vegetal y aroma a ananá. Uso diario. Manteca de karité y aceite de ricino.',ingredients:['Manteca de karité','Aceite de ricino','Esponja vegetal','Aroma ananá'],props:['Exfoliante','Uso diario','5 unidades de 100gr aprox.','Aroma ananá','Sin sulfatos ni parabenos'],img:IMG+'avena.png',fallback:'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?q=85&w=900&auto=format&fit=crop'},
-  'jabon-exfoliante-manzana':{cat:'Jabones',name:'Exfoliante Manzana',price:'$4.000',priceNum:4000,priceLabel:'4 unidades · 120gr aprox. c/u',desc:'Jabón exfoliante con esponja vegetal y aroma a manzana. Uso diario. Manteca de karité y aceite de ricino.',ingredients:['Manteca de karité','Aceite de ricino','Esponja vegetal','Aroma manzana'],props:['Exfoliante','Uso diario','4 unidades de 120gr aprox.','Aroma manzana','Sin sulfatos ni parabenos'],img:IMG+'avena.png',fallback:'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?q=85&w=900&auto=format&fit=crop'},
-  // nuevas cerámicas
-  'collar-grande':     {cat:'Cerámica',name:'Collares Grandes de Cerámica',price:'$8.000',priceNum:8000,priceLabel:'c/u · 4 unidades disponibles',desc:'Collares grandes de cerámica esmaltados a mano. Piezas únicas irrepetibles.',ingredients:['Arcilla alta temperatura','Esmaltes naturales'],props:['Pieza única','4 unidades disponibles','Esmaltado a mano','Collar grande'],img:'collargrandeceramica.png',fallback:'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=85&w=900&auto=format&fit=crop'},
-  'collar-corazon':    {cat:'Cerámica',name:'Collar Grande Corazón',price:'$6.000',priceNum:6000,priceLabel:'1 unidad disponible',desc:'Collar grande con diseño de corazón esmaltado a mano. Pieza única.',ingredients:['Arcilla alta temperatura','Esmaltes naturales'],props:['Pieza única','Diseño corazón','Esmaltado a mano'],img:'collargrandeceramica.png',fallback:'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=85&w=900&auto=format&fit=crop'},
-  'collar-pequeno':    {cat:'Cerámica',name:'Collares Pequeños de Cerámica',price:'$5.000',priceNum:5000,priceLabel:'c/u · 5 unidades disponibles',desc:'Collares pequeños de cerámica esmaltados a mano. Piezas únicas.',ingredients:['Arcilla alta temperatura','Esmaltes naturales'],props:['Pieza única','5 unidades disponibles','Esmaltado a mano','Collar pequeño'],img:'collarespequeños.png',fallback:'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=85&w=900&auto=format&fit=crop'},
-  'porta-espiral-chico':{cat:'Decoración',name:'Porta Espiral Chico',price:'$7.000',priceNum:7000,priceLabel:'1 unidad disponible',desc:'Porta espiral chico artesanal para sahumerios en espiral.',ingredients:['Arcilla natural','Acabados a mano'],props:['Pieza única','1 unidad disponible','Para espirales','Hecha a mano'],img:IMG+'portaespiral.png',fallback:'https://images.unsplash.com/photo-1591348278863-a8fb3887e2aa?q=85&w=900&auto=format&fit=crop'},
-  'cuenco-grande-multi':{cat:'Cerámica',name:'Cuenco Grande Multicolor',price:'$9.000',priceNum:9000,priceLabel:'1 unidad disponible',desc:'Cuenco grande multicolor esmaltado a mano. Pieza única irrepetible.',ingredients:['Arcilla alta temperatura','Esmaltes naturales multicolor'],props:['Pieza única','1 unidad disponible','Colores únicos','Esmaltado a mano'],img:IMG+'cuencograndemulticolor.png',fallback:'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=85&w=900&auto=format&fit=crop'},
-  'tazon-bandeja':     {cat:'Cerámica',name:'Tazón más Bandeja',price:'$15.000',priceNum:15000,priceLabel:'1 unidad disponible',desc:'Tazón artesanal con bandeja a juego. Pieza única esmaltada a mano.',ingredients:['Arcilla alta temperatura','Esmaltes naturales'],props:['Pieza única','1 unidad disponible','Incluye bandeja','Esmaltado a mano'],img:IMG+'tazonmasbandeja.png',fallback:'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=85&w=900&auto=format&fit=crop'},
-  'floreros-nuevos':   {cat:'Decoración',name:'Floreros',price:'$6.000',priceNum:6000,priceLabel:'4 unidades disponibles',desc:'Floreros artesanales esmaltados a mano. 4 unidades disponibles.',ingredients:['Arcilla natural','Acabados a mano'],props:['4 unidades disponibles','Piezas únicas','Varios tamaños','Hecha a mano'],img:IMG+'floreros.png',fallback:'https://images.unsplash.com/photo-1591348278863-a8fb3887e2aa?q=85&w=900&auto=format&fit=crop'},
-  'plato-cupcake':     {cat:'Cerámica',name:'Plato Cup Cake',price:'$5.000',priceNum:5000,priceLabel:'1 unidad disponible',desc:'Plato cup cake esmaltado a mano. Pieza única.',ingredients:['Arcilla alta temperatura','Esmaltes naturales'],props:['Pieza única','1 unidad disponible','Esmaltado a mano'],img:IMG+'platocupcacke.png',fallback:'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=85&w=900&auto=format&fit=crop'},
-  'cuenco-naranja':    {cat:'Cerámica',name:'Cuencos Medianos Naranja',price:'$5.000',priceNum:5000,priceLabel:'c/u · 2 unidades disponibles',desc:'Cuencos medianos en color naranja esmaltados a mano. 2 unidades disponibles.',ingredients:['Arcilla alta temperatura','Esmaltes naturales'],props:['2 unidades disponibles','Color naranja','Esmaltado a mano','Pieza única'],img:IMG+'cuencograndemulticolor.png',fallback:'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=85&w=900&auto=format&fit=crop'},
-  'cuenco-sushi-nuevo':{cat:'Cerámica',name:'Cuencos Sushi',price:'$4.000',priceNum:4000,priceLabel:'c/u · 3 unidades disponibles',desc:'Cuencos sushi esmaltados a mano. 3 unidades disponibles.',ingredients:['Arcilla alta temperatura','Esmaltes naturales'],props:['3 unidades disponibles','Esmaltado a mano','Pieza única'],img:IMG+'cuencosushi.png',fallback:'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=85&w=900&auto=format&fit=crop'},
-  'cuenco-flores-chico':{cat:'Cerámica',name:'Cuenco Chico Flores',price:'$5.000',priceNum:5000,priceLabel:'1 unidad disponible',desc:'Cuenco chico con diseño floral esmaltado a mano.',ingredients:['Arcilla alta temperatura','Esmaltes naturales'],props:['Pieza única','Diseño floral','Esmaltado a mano'],img:'cuencoflores.png',fallback:'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=85&w=900&auto=format&fit=crop'},
-  'cuenco-flores-grande':{cat:'Cerámica',name:'Cuenco Grande Flores',price:'$7.000',priceNum:7000,priceLabel:'1 unidad disponible',desc:'Cuenco grande con diseño floral esmaltado a mano.',ingredients:['Arcilla alta temperatura','Esmaltes naturales'],props:['Pieza única','Diseño floral','Esmaltado a mano'],img:IMG+'cuencofloresgrande.png',fallback:'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=85&w=900&auto=format&fit=crop'},
-  'cuenco-limones':    {cat:'Cerámica',name:'Cuenco Grande Limones',price:'$7.000',priceNum:7000,priceLabel:'1 unidad disponible',desc:'Cuenco grande con diseño de limones esmaltado a mano.',ingredients:['Arcilla alta temperatura','Esmaltes naturales'],props:['Pieza única','Diseño limones','Esmaltado a mano'],img:IMG+'cuencolimonchico.png',fallback:'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=85&w=900&auto=format&fit=crop'},
-  // ── DECORACIÓN ──
-  'casita-grande':    {cat:'Decoración',name:'Casita grande Alegría',price:'$20.000',priceNum:20000,priceLabel:'por unidad',desc:'Casita decorativa grande artesanal. Trae alegría a cualquier rincón del hogar.',ingredients:['Arcilla natural','Acabados a mano'],props:['Pieza única','Hecha a mano','Arte cotidiano','Ideal como regalo'],img:'casitagrandealegria.png',fallback:'https://images.unsplash.com/photo-1591348278863-a8fb3887e2aa?q=85&w=900&auto=format&fit=crop'},
-  'casita-chica':     {cat:'Decoración',name:'Casita chica Hogar',price:'$15.000',priceNum:15000,priceLabel:'por unidad',desc:'Casita decorativa chica artesanal. Perfecta para regalar.',ingredients:['Arcilla natural','Acabados a mano'],props:['Pieza única','Hecha a mano','Arte cotidiano','Ideal como regalo'],img:'casitachicahogar.png',fallback:'https://images.unsplash.com/photo-1591348278863-a8fb3887e2aa?q=85&w=900&auto=format&fit=crop'},
-  'florero-nube':     {cat:'Decoración',name:'Florero Nube',price:'$5.000',priceNum:5000,priceLabel:'por unidad',desc:'Florero chico con forma de nube. Pieza artesanal única.',ingredients:['Arcilla natural','Acabados a mano'],props:['Pieza única','Forma de nube','Hecha a mano'],img:IMG+'floreronube.png',fallback:'https://images.unsplash.com/photo-1591348278863-a8fb3887e2aa?q=85&w=900&auto=format&fit=crop'},
-  'porta-cepillos':   {cat:'Decoración',name:'Porta Cepillos Ámbar',price:'$5.000',priceNum:5000,priceLabel:'por unidad',desc:'Porta cepillos ámbar artesanal para el baño.',ingredients:['Arcilla natural','Acabados a mano'],props:['Pieza única','Para el baño','Hecha a mano'],img:IMG+'portacepillosambar.png',fallback:'https://images.unsplash.com/photo-1591348278863-a8fb3887e2aa?q=85&w=900&auto=format&fit=crop'},
-  'porta-espiral':    {cat:'Decoración',name:'Porta Espiral Margarita',price:'$8.000',priceNum:8000,priceLabel:'por unidad',desc:'Porta espiral grande con diseño de margarita. Para sahumerios en espiral.',ingredients:['Arcilla natural','Acabados a mano'],props:['Pieza única','Para espirales','Diseño margarita','Hecha a mano'],img:IMG+'portaespiral.png',fallback:'https://images.unsplash.com/photo-1591348278863-a8fb3887e2aa?q=85&w=900&auto=format&fit=crop'},
-  'porta-ajos':       {cat:'Decoración',name:'Porta Ajos Jacinto',price:'Consultar',priceNum:0,priceLabel:'',desc:'Porta ajos decorativo con diseño de jacinto. Funcional y decorativo.',ingredients:['Arcilla natural','Acabados a mano'],props:['Pieza única','Funcional','Hecha a mano'],img:IMG+'portaajosjacinto.png',fallback:'https://images.unsplash.com/photo-1591348278863-a8fb3887e2aa?q=85&w=900&auto=format&fit=crop'},
-  'floreros':         {cat:'Decoración',name:'Floreros',price:'Consultar',priceNum:0,priceLabel:'',desc:'Floreros artesanales de distintos tamaños. Consultá disponibilidad.',ingredients:['Arcilla natural','Acabados a mano'],props:['Piezas únicas','Varios tamaños','Hecha a mano'],img:IMG+'floreros.png',fallback:'https://images.unsplash.com/photo-1591348278863-a8fb3887e2aa?q=85&w=900&auto=format&fit=crop'},
-};
-
+const FALLBACK_IMG = "https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?q=85&w=900&auto=format&fit=crop";
 const CHECK = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:14px;height:14px;flex-shrink:0;"><path d="M20 6L9 17l-5-5"/></svg>`;
 
 function getParam(k){return new URLSearchParams(window.location.search).get(k);}
 
-function loadProduct(){
-  const rawId = getParam('id')||'jabon-lavanda';
-  const id = ID_ALIAS[rawId] || rawId;  // resolver alias si existe
-  const p  = CATALOG[id];
+async function loadProduct(){
+  const id = getParam("id");
+  if(!id){window.location.href="index.html";return;}
+
+  let catalog = {};
+  try {
+    const r = await fetch(BACKEND+"/productos.json");
+    if(r.ok) catalog = await r.json();
+  } catch(e) {}
+
+  let p = catalog[id];
+
+  // Si no está en el catálogo, mostrar error
   if(!p){
-    // ID no conocido — mostrar página genérica en lugar de redirigir
-    document.getElementById('bc-name').textContent = 'Producto';
-    document.getElementById('prod-info').innerHTML = `
-      <p class="eyebrow">Producto</p>
-      <h1 style="font-family:var(--serif);font-size:2.5rem;font-weight:300;margin-bottom:1rem;">Producto no encontrado</h1>
-      <p style="color:var(--muted);font-size:.9rem;margin-bottom:1.5rem;">Este producto no está disponible o fue removido. Consultá por Instagram para ver el stock actual.</p>
-      <a href="https://instagram.com/estiloartesanal_emma" target="_blank" style="display:inline-flex;align-items:center;gap:.5rem;background:var(--pink-dk);color:#fff;border-radius:50px;padding:.85rem 2rem;font-size:.72rem;letter-spacing:1.2px;text-transform:uppercase;">Consultar por Instagram</a>
-      <br/><br/><a href="index.html#productos" style="font-size:.8rem;color:var(--muted);">← Volver a productos</a>
-    `;
+    document.getElementById("bc-name").textContent = "Producto no encontrado";
+    document.getElementById("prod-info").innerHTML = \`<p style="color:var(--muted);font-size:.88rem;">Este producto no está disponible.</p>
+      <a href="index.html#productos" style="font-size:.75rem;color:var(--pink-dk);">← Ver todos los productos</a>\`;
     return;
   }
-  document.title = p.name+' · estiloartesanal.emma';
-  document.getElementById('bc-name').textContent = p.name;
-  const mi = document.getElementById('main-img');
-  mi.src = p.img; mi.onerror=()=>{mi.src=p.fallback;}; mi.alt=p.name;
-  document.getElementById('thumbs').innerHTML=`<img class="thumb active" src="${p.img}" onerror="this.src='${p.fallback}'" onclick="setMain(this,'${p.img}','${p.fallback}')"/>`;
-  const chips = p.ingredients.map(i=>`<span class="ingr-chip">${i}</span>`).join('');
-  const props = p.props.map(pr=>`<div class="prop-row">${CHECK}${pr}</div>`).join('');
-  document.getElementById('prod-info').innerHTML = `
-    <p class="eyebrow">${p.cat}</p>
-    <h1 style="font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);font-weight:300;line-height:1.08;margin-bottom:.7rem;">${p.name}</h1>
-    <p style="font-family:var(--serif);font-size:2rem;font-weight:400;color:var(--clay);margin-bottom:1.4rem;">${p.price} <small style="font-family:var(--sans);font-size:.72rem;color:var(--muted);">${p.priceLabel}</small></p>
-    <p style="font-size:.9rem;color:var(--muted);line-height:1.9;margin-bottom:1.8rem;">${p.desc}</p>
+
+  document.title = p.nombre + " · estiloartesanal.emma";
+  document.getElementById("bc-name").textContent = p.nombre;
+
+  // Imagen principal
+  const mi = document.getElementById("main-img");
+  const imgSrc = p.imagen || FALLBACK_IMG;
+  mi.src = imgSrc;
+  mi.onerror = () => { mi.src = FALLBACK_IMG; };
+  mi.alt = p.nombre;
+
+  // Thumbnails
+  document.getElementById("thumbs").innerHTML =
+    \`<img class="thumb active" src="\${imgSrc}" onerror="this.src='\${FALLBACK_IMG}'" onclick="setMain(this,'\${imgSrc}')"/>\`;
+
+  // Precio
+  const precio = p.precio > 0 ? "$" + p.precio.toLocaleString("es-AR") : "Consultar";
+  const precioLabel = p.peso ? p.peso : (p.stock > 0 ? p.stock + " unidad" + (p.stock !== 1 ? "es disponibles" : "") : "Agotado");
+
+  // Ingredientes y características
+  const ingr = (p.ingredientes||[]).length
+    ? (p.ingredientes||[]).map(i=>\`<span class="ingr-chip">\${i}</span>\`).join("")
+    : \`<span class="ingr-chip" style="color:var(--muted);">No especificados</span>\`;
+
+  const props = (p.caracteristicas||[]).length
+    ? (p.caracteristicas||[]).map(pr=>\`<div class="prop-row">\${CHECK}\${pr}</div>\`).join("")
+    : \`<div class="prop-row">\${CHECK}Hecho a mano</div><div class="prop-row">\${CHECK}Sin sulfatos ni parabenos</div>\`;
+
+  const catLabel = {jabones:"Jabones",sahumadores:"Sahumadores",ceramica:"Cerámica",deco:"Decoración"}[p.categoria]||p.categoria;
+
+  const agotado = p.stock <= 0;
+  const inactivo = p.activo === false;
+
+  document.getElementById("prod-info").innerHTML = \`
+    <p class="eyebrow">\${catLabel}</p>
+    <h1 style="font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);font-weight:300;line-height:1.08;margin-bottom:.7rem;">\${p.nombre}</h1>
+    <p style="font-family:var(--serif);font-size:2rem;font-weight:400;color:var(--clay);margin-bottom:1.4rem;">\${precio} <small style="font-family:var(--sans);font-size:.72rem;color:var(--muted);">\${precioLabel}</small></p>
+    \${p.descripcion ? \`<p style="font-size:.9rem;color:var(--muted);line-height:1.9;margin-bottom:1.8rem;">\${p.descripcion}</p>\` : ""}
     <p class="block-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:11px;height:11px;"><path d="M17 8C8 10 5.9 16.17 3.82 19.34c-.9 1.4 1.34 2.34 2.46.97L12 13l7 7"/></svg>Ingredientes</p>
-    <div class="chips">${chips}</div>
+    <div class="chips">\${ingr}</div>
     <p class="block-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:11px;height:11px;"><path d="M20 6L9 17l-5-5"/></svg>Características</p>
-    <div class="props-list">${props}</div>
+    <div class="props-list">\${props}</div>
     <div class="actions">
-      <button class="btn btn-buy" onclick="irCheckout('${id}')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:14px;height:14px;"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-        Comprar ahora
-      </button>
-      <button class="btn btn-mp" onclick="irCheckout('${id}')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:14px;height:14px;"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
-        Pagar con Mercado Pago
-      </button>
+      \${agotado||inactivo
+        ? \`<button class="btn btn-buy" disabled style="opacity:.5;cursor:not-allowed;">Sin stock</button>
+           <a class="btn btn-mp" href="https://instagram.com/estiloartesanal_emma" target="_blank" style="background:var(--bg);color:var(--ink);box-shadow:4px 4px 10px rgba(0,0,0,.1);">Consultar por Instagram</a>\`
+        : \`<button class="btn btn-buy" onclick="irCheckout('\${id}')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:14px;height:14px;"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>Comprar ahora
+           </button>
+           <button class="btn btn-mp" onclick="irCheckout('\${id}')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:14px;height:14px;"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>Pagar con Mercado Pago
+           </button>\`
+      }
     </div>
     <p class="pickup-note">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
       Retiro personal · Calle 43 N° 4364 · Colonia Caroya · Solo con cita previa
     </p>
-  `;
-  const relIds = Object.keys(CATALOG).filter(k=>k!==id).slice(0,3);
-  document.getElementById('rel-grid').innerHTML = relIds.map(rid=>{
-    const r=CATALOG[rid];
-    return `<a class="rel-card" href="producto.html?id=${rid}">
-      <img class="rel-img" src="${r.img}" onerror="this.src='${r.fallback}'" alt="${r.name}"/>
-      <div class="rel-body"><p class="rel-cat">${r.cat}</p><p class="rel-name">${r.name}</p><p class="rel-price">${r.price}</p></div>
-    </a>`;
-  }).join('');
+  \`;
+
+  // Relacionados
+  const relIds = Object.keys(catalog).filter(k => k !== id && catalog[k].categoria === p.categoria && catalog[k].activo !== false).slice(0,3);
+  document.getElementById("rel-grid").innerHTML = relIds.map(rid => {
+    const r = catalog[rid];
+    const rImg = r.imagen || FALLBACK_IMG;
+    const rPrecio = r.precio > 0 ? "$" + r.precio.toLocaleString("es-AR") : "Consultar";
+    const rCat = {jabones:"Jabones",sahumadores:"Sahumadores",ceramica:"Cerámica",deco:"Decoración"}[r.categoria]||r.categoria;
+    return \`<a class="rel-card" href="producto.html?id=\${rid}">
+      <img class="rel-img" src="\${rImg}" onerror="this.src='\${FALLBACK_IMG}'" alt="\${r.nombre}"/>
+      <div class="rel-body"><p class="rel-cat">\${rCat}</p><p class="rel-name">\${r.nombre}</p><p class="rel-price">\${rPrecio}</p></div>
+    </a>\`;
+  }).join("");
 }
 
-function setMain(thumb,src,fallback){
-  document.querySelectorAll('.thumb').forEach(t=>t.classList.remove('active'));
-  thumb.classList.add('active');
-  const mi=document.getElementById('main-img');
-  mi.src=src;mi.onerror=()=>{mi.src=fallback;};
+function setMain(thumb, src){
+  document.querySelectorAll(".thumb").forEach(t=>t.classList.remove("active"));
+  thumb.classList.add("active");
+  const mi = document.getElementById("main-img");
+  mi.src = src; mi.onerror = () => { mi.src = FALLBACK_IMG; };
 }
-function irCheckout(id){window.location.href='checkout.html?id='+id;}
+
+function irCheckout(id){ window.location.href = "checkout.html?id=" + id; }
+
 loadProduct();
 </script>
 </body>
