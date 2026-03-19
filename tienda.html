@@ -48,7 +48,7 @@ header{position:sticky;top:0;z-index:200;background:rgba(232,224,216,.97);backdr
 .hdr-pill svg{width:11px;height:11px;}
 .hdr-pill:hover{box-shadow:var(--nm-in);color:var(--pink-dk);}
 
-/* ── HERO ── */
+/* ── HERO CARRUSEL ── */
 .shop-hero{
   position:relative;
   width:100%;
@@ -59,25 +59,105 @@ header{position:sticky;top:0;z-index:200;background:rgba(232,224,216,.97);backdr
   align-items:center;
   justify-content:center;
 }
-.shop-hero-bg{position:absolute;inset:0;}
-.shop-hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 30%;transform:scale(1.04);transition:transform 10s ease;}
-.shop-hero-bg img.loaded{transform:scale(1);}
-/* Multi-layer overlay: escuro abajo, degradado cinematico */
-.shop-hero-overlay{
+
+/* Slides container */
+.hero-slides{position:absolute;inset:0;}
+
+/* Cada slide */
+.hero-slide{
+  position:absolute;inset:0;
+  opacity:0;
+  transition:opacity 1.4s ease;
+  pointer-events:none;
+}
+.hero-slide.on{opacity:1;pointer-events:auto;}
+
+/* Imagen del slide */
+.hero-slide img{
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:center 35%;
+  display:block;
+  transform:scale(1.06);
+  transition:transform 9s ease;
+}
+.hero-slide.on img{transform:scale(1);}
+
+/* Overlay encima de cada imagen */
+.hero-slide::after{
+  content:'';
   position:absolute;inset:0;
   background:
-    linear-gradient(to top, rgba(30,14,18,.92) 0%, rgba(30,14,18,.3) 40%, transparent 70%),
-    linear-gradient(160deg, rgba(138,79,88,.35) 0%, transparent 60%);
+    linear-gradient(to top, rgba(30,14,18,.88) 0%, rgba(30,14,18,.22) 45%, transparent 70%),
+    linear-gradient(160deg, rgba(138,79,88,.28) 0%, transparent 55%);
 }
+
+/* Etiqueta categoría esquina */
+.hero-slide-label{
+  position:absolute;top:24px;right:24px;z-index:3;
+  font-size:.52rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;
+  background:rgba(255,255,255,.12);backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,.22);
+  color:rgba(255,255,255,.82);border-radius:50px;
+  padding:.3rem .9rem;
+}
+
+/* Flechas */
+.hero-arrow{
+  position:absolute;top:50%;transform:translateY(-50%);
+  z-index:4;width:44px;height:44px;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.3);
+  background:rgba(255,255,255,.1);
+  backdrop-filter:blur(10px);
+  color:#fff;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .25s;
+}
+.hero-arrow:hover{background:rgba(255,255,255,.22);border-color:rgba(255,255,255,.6);}
+.hero-arrow svg{width:16px;height:16px;}
+.hero-arrow.prev{left:20px;}
+.hero-arrow.next{right:20px;}
+
+/* Dots */
+.hero-dots{
+  position:absolute;bottom:76px;left:50%;transform:translateX(-50%);
+  z-index:4;display:flex;gap:.55rem;align-items:center;
+}
+.hero-dot{
+  width:8px;height:8px;border-radius:4px;
+  border:none;padding:0;cursor:pointer;
+  background:rgba(255,255,255,.35);
+  transition:all .35s;
+}
+.hero-dot.on{background:#fff;width:26px;}
+
+/* Barra de progreso */
+.hero-prog{
+  position:absolute;bottom:0;left:0;
+  height:3px;background:var(--pink-md);
+  z-index:4;width:0%;transition:width linear;
+}
+
 /* Scroll indicator */
 .shop-hero::after{
   content:'';
-  position:absolute;bottom:32px;left:50%;transform:translateX(-50%);
-  width:1px;height:56px;
-  background:linear-gradient(to bottom, transparent, rgba(255,255,255,.5));
-  animation:scrollPulse 2s ease-in-out infinite;
+  position:absolute;bottom:28px;left:50%;transform:translateX(-50%);
+  width:1px;height:48px;
+  background:linear-gradient(to bottom, transparent, rgba(255,255,255,.45));
+  animation:scrollPulse 2.2s ease-in-out infinite;
+  z-index:3;
 }
-@keyframes scrollPulse{0%,100%{opacity:.3;transform:translateX(-50%) scaleY(.8)}50%{opacity:1;transform:translateX(-50%) scaleY(1)}}
+@keyframes scrollPulse{0%,100%{opacity:.25;transform:translateX(-50%) scaleY(.7)}50%{opacity:.9;transform:translateX(-50%) scaleY(1)}}
+
+/* Mobile */
+@media(max-width:600px){
+  .hero-arrow{width:36px;height:36px;}
+  .hero-arrow.prev{left:10px;}
+  .hero-arrow.next{right:10px;}
+  .hero-slide-label{top:14px;right:14px;font-size:.48rem;}
+  .hero-dots{bottom:68px;}
+}
 
 .shop-hero-body{
   position:relative;z-index:2;
