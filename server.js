@@ -53,45 +53,55 @@ const STOCK_FILE = path.join(__dirname, "stock.json");
 
 const STOCK_DEFAULT = {
   // jabones
-  "jabon-lavanda":     { nombre: "Jardín de Lavanda",       categoria: "jabones",      precio: 4800,  stock: 99, imagen: "assets /images/jardinlavanda.png" },
-  "jabon-citrico":     { nombre: "Refrescante",              categoria: "jabones",      precio: 4800,  stock: 99, imagen: "assets /images/refrescante.png" },
-  "jabon-romero":      { nombre: "Manzanilla",               categoria: "jabones",      precio: 4800,  stock: 99, imagen: "assets /images/manzanilla.png" },
-  "jabon-avena":       { nombre: "Avena",                    categoria: "jabones",      precio: 4800,  stock: 99, imagen: "assets /images/avena.png" },
-  "jabon-avenaseda":   { nombre: "Avena & Seda",             categoria: "jabones",      precio: 4800,  stock: 99, imagen: "assets /images/avenaseda.png" },
-  "jabon-avenaseda2":  { nombre: "Avena & Seda II",          categoria: "jabones",      precio: 4800,  stock: 99, imagen: "assets /images/avenaseda2.png" },
-  "jabon-karite":      { nombre: "Manteca de Karité",        categoria: "jabones",      precio: 4800,  stock: 99, imagen: "assets /images/mantecadekarite.png" },
-  "jabon-detox":       { nombre: "Detox",                    categoria: "jabones",      precio: 4800,  stock: 99, imagen: "assets /images/detox.png" },
-  "jabon-petalos":     { nombre: "Pétalos",                  categoria: "jabones",      precio: 4800,  stock: 99, imagen: "assets /images/petalos.png" },
-  "jabon-cacao":       { nombre: "Dulce Energía Cacao",      categoria: "jabones",      precio: 4800,  stock: 99, imagen: "assets /images/dulceenergiacacao.png" },
+  "jabon-lavanda":     { nombre: "Jardín de Lavanda",       categoria: "jabones",      precio: 4800,  stock: 99, imagen: "assets/images/jardinlavanda.png" },
+  "jabon-citrico":     { nombre: "Refrescante",              categoria: "jabones",      precio: 4800,  stock: 99, imagen: "assets/images/refrescante.png" },
+  "jabon-romero":      { nombre: "Manzanilla",               categoria: "jabones",      precio: 4800,  stock: 99, imagen: "assets/images/manzanilla.png" },
+  "jabon-avena":       { nombre: "Avena",                    categoria: "jabones",      precio: 4800,  stock: 99, imagen: "assets/images/avena.png" },
+  "jabon-avenaseda":   { nombre: "Avena & Seda",             categoria: "jabones",      precio: 4800,  stock: 99, imagen: "assets/images/avenaseda.png" },
+  "jabon-avenaseda2":  { nombre: "Avena & Seda II",          categoria: "jabones",      precio: 4800,  stock: 99, imagen: "assets/images/avenaseda2.png" },
+  "jabon-karite":      { nombre: "Manteca de Karité",        categoria: "jabones",      precio: 4800,  stock: 99, imagen: "assets/images/mantecadekarite.png" },
+  "jabon-detox":       { nombre: "Detox",                    categoria: "jabones",      precio: 4800,  stock: 99, imagen: "assets/images/detox.png" },
+  "jabon-petalos":     { nombre: "Pétalos",                  categoria: "jabones",      precio: 4800,  stock: 99, imagen: "assets/images/petalos.png" },
+  "jabon-cacao":       { nombre: "Dulce Energía Cacao",      categoria: "jabones",      precio: 4800,  stock: 99, imagen: "assets/images/dulceenergiacacao.png" },
   // sahumadores
-  "sahumador-gratitud":{ nombre: "Sahumador Gratitud",       categoria: "sahumadores",  precio: 7000,  stock: 1,  imagen: "assets /images/sahumadorchicogratitud.png" },
-  "sahumador-magia":   { nombre: "Sahumador Magia",          categoria: "sahumadores",  precio: 7000,  stock: 1,  imagen: "assets /images/sahumadorgrandemagia.png" },
-  "sahumador-luz":     { nombre: "Sahumador Luz",            categoria: "sahumadores",  precio: 9000,  stock: 4,  imagen: "assets /images/sahumadorazulluz.png" },
-  "sahumador-salmon":  { nombre: "Sahumador Salmón",         categoria: "sahumadores",  precio: 9000,  stock: 1,  imagen: "assets /images/sahumadorsalmon.png" },
-  "sahumador-cielo":   { nombre: "Sahumador Cielo",          categoria: "sahumadores",  precio: 9000,  stock: 1,  imagen: "assets /images/sahumadorluzcielo.png" },
+  "sahumador-gratitud":{ nombre: "Sahumador Gratitud",       categoria: "sahumadores",  precio: 7000,  stock: 1,  imagen: "assets/images/sahumadorchicogratitud.png" },
+  "sahumador-magia":   { nombre: "Sahumador Magia",          categoria: "sahumadores",  precio: 7000,  stock: 1,  imagen: "assets/images/sahumadorgrandemagia.png" },
+  "sahumador-luz":     { nombre: "Sahumador Luz",            categoria: "sahumadores",  precio: 9000,  stock: 4,  imagen: "assets/images/sahumadorazulluz.png" },
+  "sahumador-salmon":  { nombre: "Sahumador Salmón",         categoria: "sahumadores",  precio: 9000,  stock: 1,  imagen: "assets/images/sahumadorsalmon.png" },
+  "sahumador-cielo":   { nombre: "Sahumador Cielo",          categoria: "sahumadores",  precio: 9000,  stock: 1,  imagen: "assets/images/sahumadorluzcielo.png" },
   // ceramica
-  "cenicero-esmeralda":{ nombre: "Cenicero Esmeralda",       categoria: "ceramica",     precio: 5000,  stock: 1,  imagen: "assets /images/platocupcacke.png" },
-  "cuenco-frutilla":   { nombre: "Cuenco Frutilla",          categoria: "ceramica",     precio: 5000,  stock: 1,  imagen: "assets /images/racimofrutillas.png" },
-  "cazuela-locro":     { nombre: "Cazuela Locro",            categoria: "ceramica",     precio: 9000,  stock: 3,  imagen: "assets /images/cuencolocro.png" },
-  "taza-juana":        { nombre: "Taza Juana",               categoria: "ceramica",     precio: 7500,  stock: 1,  imagen: "assets /images/tazajuana.png" },
-  "taza-campo":        { nombre: "Taza Campo",               categoria: "ceramica",     precio: 7500,  stock: 1,  imagen: "assets /images/tazacampo.png" },
-  "taza-mariposa":     { nombre: "Taza Mariposa",            categoria: "ceramica",     precio: 7500,  stock: 1,  imagen: "assets /images/tazamariposa.png" },
-  "cuenco-sushi":      { nombre: "Cuenco Sushi",             categoria: "ceramica",     precio: 0,     stock: 1,  imagen: "assets /images/cuencosushi.png" },
-  "cuenco-grande":     { nombre: "Cuenco Grande Multicolor", categoria: "ceramica",     precio: 0,     stock: 1,  imagen: "assets /images/cuencograndemulticolor.png" },
+  "cenicero-esmeralda":{ nombre: "Cenicero Esmeralda",       categoria: "ceramica",     precio: 5000,  stock: 1,  imagen: "assets/images/platocupcacke.png" },
+  "cuenco-frutilla":   { nombre: "Cuenco Frutilla",          categoria: "ceramica",     precio: 5000,  stock: 1,  imagen: "assets/images/racimofrutillas.png" },
+  "cazuela-locro":     { nombre: "Cazuela Locro",            categoria: "ceramica",     precio: 9000,  stock: 3,  imagen: "assets/images/cuencolocro.png" },
+  "taza-juana":        { nombre: "Taza Juana",               categoria: "ceramica",     precio: 7500,  stock: 1,  imagen: "assets/images/tazajuana.png" },
+  "taza-campo":        { nombre: "Taza Campo",               categoria: "ceramica",     precio: 7500,  stock: 1,  imagen: "assets/images/tazacampo.png" },
+  "taza-mariposa":     { nombre: "Taza Mariposa",            categoria: "ceramica",     precio: 7500,  stock: 1,  imagen: "assets/images/tazamariposa.png" },
+  "cuenco-sushi":      { nombre: "Cuenco Sushi",             categoria: "ceramica",     precio: 0,     stock: 1,  imagen: "assets/images/cuencosushi.png" },
+  "cuenco-grande":     { nombre: "Cuenco Grande Multicolor", categoria: "ceramica",     precio: 0,     stock: 1,  imagen: "assets/images/cuencograndemulticolor.png" },
   // deco
   "casita-grande":     { nombre: "Casita grande Alegría",    categoria: "deco",         precio: 20000, stock: 1,  imagen: "casitagrandealegria.png" },
   "casita-chica":      { nombre: "Casita chica Hogar",       categoria: "deco",         precio: 15000, stock: 1,  imagen: "casitachicahogar.png" },
-  "florero-nube":      { nombre: "Florero Nube",             categoria: "deco",         precio: 5000,  stock: 1,  imagen: "assets /images/floreronube.png" },
-  "porta-cepillos":    { nombre: "Porta Cepillos Ámbar",     categoria: "deco",         precio: 5000,  stock: 1,  imagen: "assets /images/portacepillosambar.png" },
-  "porta-espiral":     { nombre: "Porta Espiral Margarita",  categoria: "deco",         precio: 8000,  stock: 1,  imagen: "assets /images/portaespiral.png" },
-  "floreros":          { nombre: "Floreros",                 categoria: "deco",         precio: 0,     stock: 1,  imagen: "assets /images/floreros.png" },
+  "florero-nube":      { nombre: "Florero Nube",             categoria: "deco",         precio: 5000,  stock: 1,  imagen: "assets/images/floreronube.png" },
+  "porta-cepillos":    { nombre: "Porta Cepillos Ámbar",     categoria: "deco",         precio: 5000,  stock: 1,  imagen: "assets/images/portacepillosambar.png" },
+  "porta-espiral":     { nombre: "Porta Espiral Margarita",  categoria: "deco",         precio: 8000,  stock: 1,  imagen: "assets/images/portaespiral.png" },
+  "floreros":          { nombre: "Floreros",                 categoria: "deco",         precio: 0,     stock: 1,  imagen: "assets/images/floreros.png" },
 };
 
 function leerStock() {
   try {
+    let data;
     if (fs.existsSync(STOCK_FILE)) {
-      return JSON.parse(fs.readFileSync(STOCK_FILE, "utf8"));
+      data = JSON.parse(fs.readFileSync(STOCK_FILE, "utf8"));
+    } else {
+      data = { ...STOCK_DEFAULT };
     }
+    // Normalizar campos nuevos en productos existentes que no los tengan
+    for (const id of Object.keys(data)) {
+      if (data[id].esOferta        === undefined) data[id].esOferta        = false;
+      if (data[id].precioOriginal  === undefined) data[id].precioOriginal  = 0;
+      if (data[id].activo          === undefined) data[id].activo          = true;
+    }
+    return data;
   } catch(e) { console.error("Error leyendo stock:", e); }
   return { ...STOCK_DEFAULT };
 }
@@ -301,10 +311,12 @@ app.put("/admin/stock/:id", (req, res) => {
   if (categoria     !== undefined) stock[id].categoria      = categoria;
   if (imagen        !== undefined) stock[id].imagen         = imagen;
   if (activo        !== undefined) stock[id].activo         = activo;
-  if (req.body.peso          !== undefined) stock[id].peso          = req.body.peso;
-  if (req.body.descripcion   !== undefined) stock[id].descripcion   = req.body.descripcion;
-  if (req.body.ingredientes  !== undefined) stock[id].ingredientes  = req.body.ingredientes;
-  if (req.body.caracteristicas !== undefined) stock[id].caracteristicas = req.body.caracteristicas;
+  if (req.body.peso             !== undefined) stock[id].peso             = req.body.peso;
+  if (req.body.descripcion      !== undefined) stock[id].descripcion      = req.body.descripcion;
+  if (req.body.ingredientes     !== undefined) stock[id].ingredientes     = req.body.ingredientes;
+  if (req.body.caracteristicas  !== undefined) stock[id].caracteristicas  = req.body.caracteristicas;
+  if (req.body.esOferta         !== undefined) stock[id].esOferta         = req.body.esOferta;
+  if (req.body.precioOriginal   !== undefined) stock[id].precioOriginal   = Number(req.body.precioOriginal) || 0;
 
   guardarStock(stock);
   res.json({ ok: true, producto: stock[id] });
@@ -320,18 +332,20 @@ app.post("/admin/stock", (req, res) => {
   if (!id || !nombre) return res.status(400).json({ error: "id y nombre son obligatorios" });
   if (stock[id])       return res.status(400).json({ error: "Ya existe un producto con ese id" });
 
-  const { peso, descripcion, ingredientes, caracteristicas } = req.body;
+  const { peso, descripcion, ingredientes, caracteristicas, activo, esOferta, precioOriginal } = req.body;
   stock[id] = {
     nombre,
-    categoria:      categoria || "jabones",
-    precio:         Number(precio) || 0,
-    stock:          Number(stockNum) || 1,
-    imagen:         imagen || "",
-    peso:           peso || "",
-    descripcion:    descripcion || "",
-    ingredientes:   Array.isArray(ingredientes) ? ingredientes : [],
-    caracteristicas:Array.isArray(caracteristicas) ? caracteristicas : [],
-    activo:         true,
+    categoria:       categoria || "jabones",
+    precio:          Number(precio) || 0,
+    stock:           Number(stockNum) || 1,
+    imagen:          imagen || "",
+    peso:            peso || "",
+    descripcion:     descripcion || "",
+    ingredientes:    Array.isArray(ingredientes) ? ingredientes : [],
+    caracteristicas: Array.isArray(caracteristicas) ? caracteristicas : [],
+    activo:          activo !== false,
+    esOferta:        esOferta === true || esOferta === "true" || false,
+    precioOriginal:  Number(precioOriginal) || 0,
   };
 
   guardarStock(stock);
