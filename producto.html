@@ -146,10 +146,10 @@ footer{background:var(--ink);padding:1.8rem 40px;}
   </a>
   <nav>
     <a href="index.html">Inicio</a>
-    <a href="index.html#productos">Productos</a>
+    <a href="index.html#tienda">Productos</a>
     <a href="index.html#retiro">Retiro</a>
   </nav>
-  <button class="btn-back" onclick="location.href='index.html#productos'">
+  <button class="btn-back" onclick="location.href='index.html#tienda'">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
     Volver
   </button>
@@ -159,7 +159,7 @@ footer{background:var(--ink);padding:1.8rem 40px;}
 <nav class="breadcrumb">
   <a href="index.html">Inicio</a>
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
-  <a href="index.html#productos">Productos</a>
+  <a href="index.html#tienda">Productos</a>
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
   <span id="bc-name">Cargando...</span>
 </nav>
@@ -208,84 +208,78 @@ async function loadProduct(){
 
   let p = catalog[id];
 
-  // Si no está en el catálogo, mostrar error
   if(!p){
     document.getElementById("bc-name").textContent = "Producto no encontrado";
-    document.getElementById("prod-info").innerHTML = \`<p style="color:var(--muted);font-size:.88rem;">Este producto no está disponible.</p>
-      <a href="index.html#productos" style="font-size:.75rem;color:var(--pink-dk);">← Ver todos los productos</a>\`;
+    document.getElementById("prod-info").innerHTML = `<p style="color:var(--muted);font-size:.88rem;">Este producto no está disponible.</p>
+      <a href="index.html#tienda" style="font-size:.75rem;color:var(--pink-dk);">← Ver todos los productos</a>`;
     return;
   }
 
   document.title = p.nombre + " · estiloartesanal.emma";
   document.getElementById("bc-name").textContent = p.nombre;
 
-  // Imagen principal
   const mi = document.getElementById("main-img");
   const imgSrc = p.imagen || FALLBACK_IMG;
   mi.src = imgSrc;
   mi.onerror = () => { mi.src = FALLBACK_IMG; };
   mi.alt = p.nombre;
 
-  // Thumbnails
   document.getElementById("thumbs").innerHTML =
-    \`<img class="thumb active" src="\${imgSrc}" onerror="this.src='\${FALLBACK_IMG}'" onclick="setMain(this,'\${imgSrc}')"/>\`;
+    `<img class="thumb active" src="${imgSrc}" onerror="this.src='${FALLBACK_IMG}'" onclick="setMain(this,'${imgSrc}')"/>`;
 
-  // Precio
   const precio = p.precio > 0 ? "$" + p.precio.toLocaleString("es-AR") : "Consultar";
   const precioLabel = p.peso ? p.peso : (p.stock > 0 ? p.stock + " unidad" + (p.stock !== 1 ? "es disponibles" : "") : "Agotado");
 
-  // Ingredientes y características
   const ingr = (p.ingredientes||[]).length
-    ? (p.ingredientes||[]).map(i=>\`<span class="ingr-chip">\${i}</span>\`).join("")
-    : \`<span class="ingr-chip" style="color:var(--muted);">No especificados</span>\`;
+    ? (p.ingredientes||[]).map(i=>`<span class="ingr-chip">${i}</span>`).join("")
+    : `<span class="ingr-chip" style="color:var(--muted);">No especificados</span>`;
 
   const props = (p.caracteristicas||[]).length
-    ? (p.caracteristicas||[]).map(pr=>\`<div class="prop-row">\${CHECK}\${pr}</div>\`).join("")
-    : \`<div class="prop-row">\${CHECK}Hecho a mano</div><div class="prop-row">\${CHECK}Sin sulfatos ni parabenos</div>\`;
+    ? (p.caracteristicas||[]).map(pr=>`<div class="prop-row">${CHECK}${pr}</div>`).join("")
+    : `<div class="prop-row">${CHECK}Hecho a mano</div><div class="prop-row">${CHECK}Sin sulfatos ni parabenos</div>`;
 
   const catLabel = {jabones:"Jabones",sahumadores:"Sahumadores",ceramica:"Cerámica",deco:"Decoración"}[p.categoria]||p.categoria;
 
   const agotado = p.stock <= 0;
   const inactivo = p.activo === false;
 
-  document.getElementById("prod-info").innerHTML = \`
-    <p class="eyebrow">\${catLabel}</p>
-    <h1 style="font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);font-weight:300;line-height:1.08;margin-bottom:.7rem;">\${p.nombre}</h1>
-    <p style="font-family:var(--serif);font-size:2rem;font-weight:400;color:var(--clay);margin-bottom:1.4rem;">\${precio} <small style="font-family:var(--sans);font-size:.72rem;color:var(--muted);">\${precioLabel}</small></p>
-    \${p.descripcion ? \`<p style="font-size:.9rem;color:var(--muted);line-height:1.9;margin-bottom:1.8rem;">\${p.descripcion}</p>\` : ""}
+  document.getElementById("prod-info").innerHTML = `
+    <p class="eyebrow">${catLabel}</p>
+    <h1 style="font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);font-weight:300;line-height:1.08;margin-bottom:.7rem;">${p.nombre}</h1>
+    <p style="font-family:var(--serif);font-size:2rem;font-weight:400;color:var(--clay);margin-bottom:1.4rem;">${precio} <small style="font-family:var(--sans);font-size:.72rem;color:var(--muted);">${precioLabel}</small></p>
+    ${p.descripcion ? `<p style="font-size:.9rem;color:var(--muted);line-height:1.9;margin-bottom:1.8rem;">${p.descripcion}</p>` : ""}
     <p class="block-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:11px;height:11px;"><path d="M17 8C8 10 5.9 16.17 3.82 19.34c-.9 1.4 1.34 2.34 2.46.97L12 13l7 7"/></svg>Ingredientes</p>
-    <div class="chips">\${ingr}</div>
+    <div class="chips">${ingr}</div>
     <p class="block-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:11px;height:11px;"><path d="M20 6L9 17l-5-5"/></svg>Características</p>
-    <div class="props-list">\${props}</div>
+    <div class="props-list">${props}</div>
     <div class="actions">
-      \${agotado||inactivo
-        ? \`<button class="btn btn-buy" disabled style="opacity:.5;cursor:not-allowed;">Sin stock</button>
-           <a class="btn btn-mp" href="https://instagram.com/estiloartesanal_emma" target="_blank" style="background:var(--bg);color:var(--ink);box-shadow:4px 4px 10px rgba(0,0,0,.1);">Consultar por Instagram</a>\`
-        : \`<button class="btn btn-buy" onclick="irCheckout('\${id}')">
+      ${agotado||inactivo
+        ? `<button class="btn btn-buy" disabled style="opacity:.5;cursor:not-allowed;">Sin stock</button>
+           <a class="btn btn-mp" href="https://instagram.com/estiloartesanal_emma" target="_blank" style="background:var(--bg);color:var(--ink);box-shadow:4px 4px 10px rgba(0,0,0,.1);">Consultar por Instagram</a>`
+        : `<button class="btn btn-buy" onclick="irCheckout('${id}')">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:14px;height:14px;"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>Comprar ahora
            </button>
-           <button class="btn btn-mp" onclick="irCheckout('\${id}')">
+           <button class="btn btn-mp" onclick="irCheckout('${id}')">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:14px;height:14px;"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>Pagar con Mercado Pago
-           </button>\`
+           </button>`
       }
     </div>
     <p class="pickup-note">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
       Retiro personal · Calle 43 N° 4364 · Colonia Caroya · Solo con cita previa
     </p>
-  \`;
+  `;
 
-  // Relacionados
   const relIds = Object.keys(catalog).filter(k => k !== id && catalog[k].categoria === p.categoria && catalog[k].activo !== false).slice(0,3);
   document.getElementById("rel-grid").innerHTML = relIds.map(rid => {
     const r = catalog[rid];
     const rImg = r.imagen || FALLBACK_IMG;
     const rPrecio = r.precio > 0 ? "$" + r.precio.toLocaleString("es-AR") : "Consultar";
     const rCat = {jabones:"Jabones",sahumadores:"Sahumadores",ceramica:"Cerámica",deco:"Decoración"}[r.categoria]||r.categoria;
-    return \`<a class="rel-card" href="producto.html?id=\${rid}">
-      <img class="rel-img" src="\${rImg}" onerror="this.src='\${FALLBACK_IMG}'" alt="\${r.nombre}"/>
-      <div class="rel-body"><p class="rel-cat">\${rCat}</p><p class="rel-name">\${r.nombre}</p><p class="rel-price">\${rPrecio}</p></div>
-    </a>\`;
+    return `<a class="rel-card" href="producto.html?id=${rid}">
+      <img class="rel-img" src="${rImg}" onerror="this.src='${FALLBACK_IMG}'" alt="${r.nombre}"/>
+      <div class="rel-body"><p class="rel-cat">${rCat}</p><p class="rel-name">${r.nombre}</p><p class="rel-price">${rPrecio}</p></div>
+    </a>`;
   }).join("");
 }
 
