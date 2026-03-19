@@ -119,14 +119,14 @@ nav a:hover{color:var(--ink);background:var(--bg);box-shadow:var(--nm-sm);}
 .filter-row{display:flex;justify-content:center;gap:.6rem;margin-bottom:44px;flex-wrap:wrap;}
 .fil{font-size:.62rem;font-weight:400;letter-spacing:1.5px;text-transform:uppercase;padding:.45rem 1.2rem;border-radius:50px;border:none;background:var(--bg);color:var(--muted);box-shadow:var(--nm-sm);cursor:pointer;transition:all .22s;}
 .fil.on,.fil:hover{box-shadow:var(--nm-in);color:var(--pink-dk);}
-.prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:22px;}
+.prod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
 .pc{background:var(--bg);border-radius:20px;box-shadow:var(--nm-out);cursor:pointer;overflow:hidden;transition:box-shadow .3s,transform .3s;}
 .pc:hover{box-shadow:var(--nm-in);transform:translateY(-4px);}
 .pc.soon{opacity:.55;pointer-events:none;}
 .pc-img-wrap{overflow:hidden;position:relative;border-radius:20px 20px 0 0;}
-.pc-img{width:100%;height:215px;object-fit:cover;transition:transform .6s ease;}
+.pc-img{width:100%;height:240px;object-fit:cover;transition:transform .6s ease;}
 .pc:hover .pc-img{transform:scale(1.04);}
-.pc-ph{width:100%;height:215px;background:var(--bg-lt);display:flex;align-items:center;justify-content:center;}
+.pc-ph{width:100%;height:240px;background:var(--bg-lt);display:flex;align-items:center;justify-content:center;}
 .pc-ph svg{width:32px;height:32px;color:var(--pink-md);opacity:.5;}
 .pc-tag{position:absolute;top:12px;left:12px;font-size:.54rem;font-weight:400;letter-spacing:1px;text-transform:uppercase;background:var(--bg);color:var(--pink-dk);padding:.22rem .7rem;border-radius:50px;box-shadow:2px 2px 6px var(--sd),-1px -1px 4px var(--sl);}
 .pc-tag.pronto{color:var(--muted);}
@@ -203,13 +203,60 @@ footer{background:var(--ink);box-shadow:inset 0 4px 16px rgba(0,0,0,.3);}
 .foot-col a{display:block;font-size:.74rem;font-weight:300;color:rgba(255,255,255,.3);margin-bottom:.45rem;transition:color .2s;}
 .foot-col a:hover{color:var(--pink-md);}
 .foot-bottom{max-width:1200px;margin:0 auto;padding:1.1rem 40px;display:flex;justify-content:space-between;font-size:.62rem;font-weight:300;color:rgba(255,255,255,.18);}
-@media(max-width:1060px){.cat-grid{grid-template-columns:1fr 1fr;gap:16px;}.gli-grid,.about-grid,.retiro-grid{grid-template-columns:1fr;}.gli-img{height:320px;}.about-img-wrap img{height:300px;}.pago-grid{grid-template-columns:1fr 1fr;}.foot-top{grid-template-columns:1fr;gap:28px;}.sec{padding:68px 0;}}
-@media(max-width:600px){nav{display:none;}.hdr{padding:0 16px;height:60px;}.logo-wrap{width:44px;height:44px;}.logo-wrap svg{width:30px;height:30px;}.logo-text span{font-size:.84rem;}.logo-text small{display:none;}.hdr-btn{font-size:.58rem;padding:.5rem 1rem;}.hero{height:80svh;min-height:500px;margin-top:60px;}.h-body h1{font-size:clamp(2rem,8vw,3rem);}.h-tagline{display:none;}.h-actions{gap:.7rem;}.h-cta{font-size:.62rem;padding:.75rem 1.8rem;}.strip-inner{grid-template-columns:1fr 1fr;padding:0 16px;}.s-item{padding:.9rem .5rem;border-right:none;border-bottom:1px solid rgba(255,255,255,.2);}.s-item:nth-child(odd){border-right:1px solid rgba(255,255,255,.2);}.s-item:nth-child(3),.s-item:nth-child(4){border-bottom:none;}.sec{padding:52px 0;}.inn{padding:0 16px;}.sec-title{margin-bottom:32px;}.cat-grid{grid-template-columns:1fr 1fr;gap:12px;}.cat-name{font-size:1.2rem;}.cat-body{padding:1rem 1.1rem;}.cat-arrow{font-size:.55rem;padding:.35rem .85rem;}.sale-grid{grid-template-columns:1fr 1fr;gap:12px;}.sale-img{height:155px;}.prod-grid{grid-template-columns:1fr 1fr;gap:12px;}.pc-img{height:165px;}.pc-body{padding:1rem 1rem 1.2rem;}.pc-name{font-size:.62rem;}.about-grid,.gli-grid,.retiro-grid{gap:24px;}.about-img-wrap img{height:240px;}.gli-img{height:240px;}.stats{gap:10px;}.pago-grid{grid-template-columns:1fr 1fr;gap:12px;}.pago{padding:1.3rem 1rem;}.foot-top{padding:36px 16px 28px;}.foot-bottom{padding:.9rem 16px;flex-direction:column;gap:.4rem;text-align:center;}}
+@media(max-width:1060px){
+  .cat-grid{grid-template-columns:1fr 1fr;gap:16px;}
+  .prod-grid{grid-template-columns:repeat(2,1fr);}
+  .gli-grid,.about-grid,.retiro-grid{grid-template-columns:1fr;}
+  .gli-img{height:320px;}
+  .about-img-wrap img{height:300px;}
+  .pago-grid{grid-template-columns:1fr 1fr;}
+  .foot-top{grid-template-columns:1fr;gap:28px;}
+  .sec{padding:68px 0;}
+}
+@media(max-width:600px){
+  nav{display:none;}
+  .hdr{padding:0 16px;height:60px;}
+  .logo-wrap{width:44px;height:44px;}
+  .logo-wrap svg{width:30px;height:30px;}
+  .logo-text span{font-size:.84rem;}
+  .logo-text small{display:none;}
+  .hdr-btn{font-size:.58rem;padding:.5rem 1rem;}
+  .hero{height:80svh;min-height:500px;margin-top:60px;}
+  .h-body h1{font-size:clamp(2rem,8vw,3rem);}
+  .h-tagline{display:none;}
+  .h-actions{gap:.7rem;}
+  .h-cta{font-size:.62rem;padding:.75rem 1.8rem;}
+  .strip-inner{grid-template-columns:1fr 1fr;padding:0 16px;}
+  .s-item{padding:.9rem .5rem;border-right:none;border-bottom:1px solid rgba(255,255,255,.2);}
+  .s-item:nth-child(odd){border-right:1px solid rgba(255,255,255,.2);}
+  .s-item:nth-child(3),.s-item:nth-child(4){border-bottom:none;}
+  .sec{padding:52px 0;}
+  .inn{padding:0 16px;}
+  .sec-title{margin-bottom:32px;}
+  .cat-grid{grid-template-columns:1fr 1fr;gap:12px;}
+  .cat-name{font-size:1.2rem;}
+  .cat-body{padding:1rem 1.1rem;}
+  .cat-arrow{font-size:.55rem;padding:.35rem .85rem;}
+  .sale-grid{grid-template-columns:1fr 1fr;gap:12px;}
+  .sale-img{height:155px;}
+  .prod-grid{grid-template-columns:1fr 1fr;gap:12px;}
+  .pc-img{height:165px;}
+  .pc-body{padding:1rem 1rem 1.2rem;}
+  .pc-name{font-size:.62rem;}
+  .about-grid,.gli-grid,.retiro-grid{gap:24px;}
+  .about-img-wrap img{height:240px;}
+  .gli-img{height:240px;}
+  .stats{gap:10px;}
+  .pago-grid{grid-template-columns:1fr 1fr;gap:12px;}
+  .pago{padding:1.3rem 1rem;}
+  .foot-top{padding:36px 16px 28px;}
+  .foot-bottom{padding:.9rem 16px;flex-direction:column;gap:.4rem;text-align:center;}
+}
 
 @keyframes shimmer{from{background-position:-200% 0}to{background-position:200% 0}}
 .skel{background:linear-gradient(90deg,var(--bg) 25%,var(--bg-lt) 50%,var(--bg) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite linear;border-radius:8px;}
 .skel-card-wrap{background:var(--bg);border-radius:20px;box-shadow:var(--nm-out);overflow:hidden;}
-.skel-img-ph{height:220px;}
+.skel-img-ph{height:240px;}
 .skel-body-ph{padding:1.2rem 1.3rem 1.5rem;display:flex;flex-direction:column;gap:.5rem;align-items:center;}
 .skel-line{height:10px;}
 .skel-sale-img{height:195px;}
@@ -251,10 +298,10 @@ footer{background:var(--ink);box-shadow:inset 0 4px 16px rgba(0,0,0,.3);}
 
 <section class="hero" id="hero">
   <div class="h-slides">
-    <div class="h-slide on"><img src="https://images.unsplash.com/photo-1607006332611-ff950d0bf067?q=80&w=1600&auto=format&fit=crop" style="object-position:center 40%" alt="Jabones artesanales"/></div>
-    <div class="h-slide"><img src="https://images.unsplash.com/photo-1584305574647-0cc949a2bb9f?q=80&w=1600&auto=format&fit=crop" style="object-position:center 50%" alt="Jabones naturales"/></div>
-    <div class="h-slide"><img src="https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?q=80&w=1600&auto=format&fit=crop" style="object-position:center 40%" alt="Taller artesanal"/></div>
-    <div class="h-slide"><img src="https://images.unsplash.com/photo-1601049676869-702ea24cfd58?q=80&w=1600&auto=format&fit=crop" style="object-position:center 50%" alt="Jabones variados"/></div>
+    <div class="h-slide on"><img src="assets/images/jaboneshero.jpg" style="object-position:center 40%" alt="Jabones artesanales" onerror="this.src='assets/images/hero.jpg'"></div>
+    <div class="h-slide"><img src="assets/images/dyah-miller-IwiLSSJXBTc-unsplash.jpg" style="object-position:center 50%" alt="Jabones naturales"></div>
+    <div class="h-slide"><img src="assets/images/hero3.jpg" style="object-position:center 40%" alt="Taller artesanal"></div>
+    <div class="h-slide"><img src="assets/images/hero4.jpg" style="object-position:center 50%" alt="Jabones variados"></div>
   </div>
   <div class="h-body">
     <p class="h-eyebrow">Colonia Caroya · Córdoba</p>
@@ -292,9 +339,9 @@ footer{background:var(--ink);box-shadow:inset 0 4px 16px rgba(0,0,0,.3);}
     <div class="sec-line"></div>
   </div>
   <div class="cat-grid rv d1">
-    <!-- Tarjeta Jabones (sin onclick) -->
+    <!-- Jabones -->
     <div class="cat-card">
-      <img class="cat-img" src="https://images.unsplash.com/photo-1607006332611-ff950d0bf067?q=80&w=800&auto=format&fit=crop" alt="Jabones artesanales"/>
+      <img class="cat-img" src="assets/images/jardinlavanda.png" alt="Jabones artesanales" onerror="this.src='assets/images/jabones.jpg'">
       <div class="cat-overlay"></div>
       <div class="cat-body">
         <div class="cat-label">Colección</div>
@@ -302,9 +349,9 @@ footer{background:var(--ink);box-shadow:inset 0 4px 16px rgba(0,0,0,.3);}
         <div class="cat-arrow">Ver colección <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
       </div>
     </div>
-    <!-- Tarjeta Cerámica (sin onclick) -->
+    <!-- Cerámica -->
     <div class="cat-card">
-      <img class="cat-img" src="https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=80&w=800&auto=format&fit=crop" alt="Cerámica esmaltada"/>
+      <img class="cat-img" src="assets/images/tazajuana.png" alt="Cerámica esmaltada">
       <div class="cat-overlay"></div>
       <div class="cat-body">
         <div class="cat-label">Cerámica esmaltada</div>
@@ -312,9 +359,9 @@ footer{background:var(--ink);box-shadow:inset 0 4px 16px rgba(0,0,0,.3);}
         <div class="cat-arrow">Ver colección <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
       </div>
     </div>
-    <!-- Tarjeta Decoración (sin onclick) -->
+    <!-- Decoración -->
     <div class="cat-card">
-      <img class="cat-img" src="https://images.unsplash.com/photo-1591348278863-a8fb3887e2aa?q=80&w=800&auto=format&fit=crop" alt="Objetos decorativos"/>
+      <img class="cat-img" src="assets/images/floreros.png" alt="Objetos decorativos">
       <div class="cat-overlay"></div>
       <div class="cat-body">
         <div class="cat-label">Decoración</div>
@@ -322,7 +369,7 @@ footer{background:var(--ink);box-shadow:inset 0 4px 16px rgba(0,0,0,.3);}
         <div class="cat-arrow">Ver colección <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
       </div>
     </div>
-    <!-- Tarjeta Próximamente (sin cambios) -->
+    <!-- Próximamente -->
     <div class="cat-card soon">
       <div style="width:100%;height:100%;background:linear-gradient(135deg,#d4c8be,#c0b0a8);position:absolute;inset:0;"></div>
       <div class="cat-overlay" style="background:linear-gradient(to top,rgba(40,20,24,.4) 0%,transparent 60%);"></div>
@@ -394,8 +441,7 @@ footer{background:var(--ink);box-shadow:inset 0 4px 16px rgba(0,0,0,.3);}
 <section id="sobre" class="sec sec-off">
 <div class="inn">
   <div class="about-grid rv">
-    <!-- Imagen de artesana trabajando (Unsplash) -->
-    <div class="about-img-wrap"><img src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?q=80&w=900&auto=format&fit=crop" alt="Artesana trabajando"/></div>
+    <div class="about-img-wrap"><img src="assets/images/hero4.jpg" alt="Elaboración artesanal"></div>
     <div class="about-text">
       <p class="eyebrow">Sobre mí</p>
       <h2>Hecho a mano en Caroya</h2>
@@ -416,7 +462,7 @@ footer{background:var(--ink);box-shadow:inset 0 4px 16px rgba(0,0,0,.3);}
 <section id="glicerina" class="sec">
 <div class="inn">
   <div class="gli-grid">
-    <div class="rv"><div class="gli-img-wrap"><img class="gli-img" src="https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?q=80&w=900&auto=format&fit=crop" alt="Glicerina vegetal"/></div></div>
+    <div class="rv"><div class="gli-img-wrap"><img class="gli-img" src="assets/images/glicerinavegetal.jpg" alt="Glicerina vegetal"></div></div>
     <div class="gli-text rv d2">
       <p class="eyebrow">Ingrediente estrella</p>
       <h2>Propiedades de la glicerina</h2>
