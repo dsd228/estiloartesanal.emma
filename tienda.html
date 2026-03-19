@@ -102,7 +102,7 @@ header{position:sticky;top:0;z-index:200;background:rgba(232,224,216,.97);backdr
 .af-chip button:hover{opacity:1;}
 
 /* ── PRODUCT GRID ── */
-.prod-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+.prod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
 .prod-grid.lista{grid-template-columns:1fr;gap:12px;}
 
 /* Card modo grid */
@@ -110,13 +110,13 @@ header{position:sticky;top:0;z-index:200;background:rgba(232,224,216,.97);backdr
 .pc:hover{box-shadow:var(--nm);transform:translateY(-4px);}
 .pc.soon{opacity:.55;pointer-events:none;}
 .pc-img-wrap{overflow:hidden;position:relative;}
-.pc-img{width:100%;height:200px;object-fit:cover;transition:transform .5s ease;}
+.pc-img{width:100%;height:240px;object-fit:cover;transition:transform .5s ease;}
 .pc:hover .pc-img{transform:scale(1.04);}
-.pc-ph{width:100%;height:200px;background:var(--bg-lt);display:flex;align-items:center;justify-content:center;}
+.pc-ph{width:100%;height:240px;background:var(--bg-lt);display:flex;align-items:center;justify-content:center;}
 .pc-ph svg{width:32px;height:32px;color:var(--pink-md);opacity:.4;}
 .pc-tag{position:absolute;top:10px;left:10px;font-size:.53rem;font-weight:400;letter-spacing:1px;text-transform:uppercase;background:var(--bg);color:var(--pink-dk);padding:.2rem .65rem;border-radius:50px;box-shadow:2px 2px 6px var(--sd),-1px -1px 4px var(--sl);}
 .pc-tag.pronto{color:var(--muted);}
-.pc-body{padding:1.1rem 1.2rem 1.3rem;text-align:center;}
+.pc-body{padding:1.2rem 1.3rem 1.5rem;text-align:center;}
 .pc-name{font-size:.7rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;margin-bottom:.2rem;line-height:1.3;}
 .pc-cat{font-size:.6rem;font-weight:300;color:var(--muted);margin-bottom:.45rem;}
 .pc-price{font-family:var(--serif);font-size:1.1rem;font-weight:400;color:var(--clay);margin-bottom:.8rem;}
@@ -137,7 +137,7 @@ header{position:sticky;top:0;z-index:200;background:rgba(232,224,216,.97);backdr
 
 /* Skeleton loading */
 .skel-card{background:var(--bg);border-radius:18px;box-shadow:var(--nm-sm);overflow:hidden;}
-.skel-img{height:200px;background:linear-gradient(90deg,var(--bg) 25%,var(--bg-lt) 50%,var(--bg) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite linear;}
+.skel-img{height:240px;background:linear-gradient(90deg,var(--bg) 25%,var(--bg-lt) 50%,var(--bg) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite linear;}
 .skel-body{padding:1.1rem 1.2rem;}
 .skel-line{height:10px;border-radius:5px;margin-bottom:.5rem;background:linear-gradient(90deg,var(--bg) 25%,var(--bg-lt) 50%,var(--bg) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite linear;}
 .skel-line.w70{width:70%;}
@@ -176,7 +176,7 @@ footer{background:var(--ink);}
 @media(max-width:1060px){
   .shop-wrap{grid-template-columns:1fr;padding:20px 24px 80px;}
   .filters-sidebar{display:none;}
-  .prod-grid{grid-template-columns:repeat(3,1fr);}
+  .prod-grid{grid-template-columns:repeat(2,1fr);}
 }
 @media(max-width:800px){
   .prod-grid{grid-template-columns:repeat(2,1fr);}
@@ -190,7 +190,7 @@ footer{background:var(--ink);}
   .hdr-search{max-width:none;flex:1;}
   .shop-wrap{padding:16px 14px 80px;}
   .prod-grid{grid-template-columns:1fr 1fr;gap:12px;}
-  .pc-img{height:155px;}
+  .pc-img{height:165px;}
   .prod-grid.lista{grid-template-columns:1fr;}
   .prod-grid.lista .pc-img{height:90px;width:90px;}
   .prod-grid.lista .pc-img-wrap{min-width:90px;}
@@ -321,7 +321,7 @@ footer{background:var(--ink);}
     <div class="active-filters" id="active-filters"></div>
 
     <div class="prod-grid" id="pgrid">
-      <!-- Skeletons iniciales -->
+      <!-- Skeletons iniciales (4 para agilizar) -->
       <div class="skel-card"><div class="skel-img"></div><div class="skel-body"><div class="skel-line w70"></div><div class="skel-line w50"></div><div class="skel-line w40"></div></div></div>
       <div class="skel-card"><div class="skel-img"></div><div class="skel-body"><div class="skel-line w70"></div><div class="skel-line w50"></div><div class="skel-line w40"></div></div></div>
       <div class="skel-card"><div class="skel-img"></div><div class="skel-body"><div class="skel-line w70"></div><div class="skel-line w50"></div><div class="skel-line w40"></div></div></div>
@@ -359,7 +359,7 @@ let precioMin   = 0;
 let precioMax   = Infinity;
 let vistaActual = 'grid';
 let paginaActual = 1;
-const POR_PAGINA = 12;
+const POR_PAGINA = 9; // Múltiplo de 3
 
 const urlParams = new URLSearchParams(window.location.search);
 const catFromUrl = urlParams.get('cat');
