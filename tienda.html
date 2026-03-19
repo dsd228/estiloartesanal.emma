@@ -236,66 +236,74 @@ header{position:sticky;top:0;z-index:200;background:rgba(232,224,216,.97);backdr
 }
 
 /* ── SHOP LAYOUT ── */
-.shop-wrap{max-width:100%;margin:0 auto;padding:28px 40px 100px;display:grid;grid-template-columns:220px 1fr;gap:32px;flex:1;}
+.shop-wrap{max-width:100%;margin:0 auto;padding:28px 40px 100px;display:flex;flex-direction:column;gap:20px;flex:1;}
 
-/* ── SIDEBAR FILTROS ── */
+/* ── FILTROS BARRA HORIZONTAL (desktop) ── */
 .filters-sidebar{
-  position:sticky;top:84px;
-  height:fit-content;
-  display:flex;flex-direction:column;gap:8px;
+  display:flex;flex-direction:row;flex-wrap:wrap;
+  align-items:center;gap:10px;
+  background:var(--bg);border-radius:20px;
+  box-shadow:var(--nm-sm);
+  padding:.9rem 1.4rem;
 }
 .sidebar-title{
   font-size:.5rem;font-weight:500;letter-spacing:3px;text-transform:uppercase;
-  color:var(--muted);padding:.2rem .4rem;margin-bottom:2px;
+  color:var(--muted);padding:.2rem .4rem;white-space:nowrap;
+  margin-bottom:0;
 }
 .filter-block{
-  background:var(--bg);border-radius:16px;
-  box-shadow:var(--nm-sm);
-  padding:1rem 1.1rem;
+  background:transparent;border-radius:0;
+  box-shadow:none;
+  padding:0;
+  display:flex;align-items:center;gap:.5rem;
+  border-left:1px solid rgba(196,188,180,.5);
+  padding-left:1rem;
 }
+.filter-block:first-of-type{border-left:none;padding-left:0;}
 .filter-block h3{
   font-size:.5rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;
-  color:var(--muted);margin-bottom:.7rem;
+  color:var(--muted);margin-bottom:0;white-space:nowrap;
 }
-.cat-list{display:flex;flex-direction:column;gap:1px;}
+.cat-list{display:flex;flex-direction:row;flex-wrap:wrap;gap:4px;}
 .cat-item{
-  display:flex;align-items:center;justify-content:space-between;
-  font-size:.78rem;padding:.42rem .55rem;
-  border-radius:9px;border:none;
-  background:transparent;color:var(--ink);
-  cursor:pointer;transition:all .18s;text-align:left;width:100%;
+  display:flex;align-items:center;gap:.35rem;
+  font-size:.6rem;padding:.38rem .85rem;
+  border-radius:50px;border:none;
+  background:var(--bg);color:var(--muted);
+  cursor:pointer;transition:all .18s;text-align:left;
+  box-shadow:var(--nm-sm);white-space:nowrap;
 }
-.cat-item:hover{background:rgba(196,188,180,.22);color:var(--pink-dk);}
+.cat-item:hover{box-shadow:var(--nm-in);color:var(--pink-dk);}
 .cat-item.on{
   background:var(--pink-lt);color:var(--pink-dk);font-weight:500;
   box-shadow:inset 2px 2px 6px rgba(196,188,180,.5),inset -1px -1px 4px rgba(255,255,255,.8);
 }
 .cat-item .cnt{
-  font-size:.56rem;color:var(--muted);
+  font-size:.52rem;color:var(--muted);
   background:rgba(196,188,180,.35);
-  border-radius:50px;padding:.04rem .42rem;min-width:1.4rem;text-align:center;flex-shrink:0;
+  border-radius:50px;padding:.02rem .38rem;min-width:1.2rem;text-align:center;flex-shrink:0;
 }
 .cat-item.on .cnt{background:rgba(138,79,88,.12);color:var(--pink-dk);}
-.price-inputs{display:grid;grid-template-columns:1fr auto 1fr;gap:.3rem;align-items:center;}
+.price-inputs{display:flex;flex-direction:row;align-items:center;gap:.3rem;}
 .price-input{
-  padding:.48rem .5rem;border:none;border-radius:8px;
-  font-size:.76rem;background:var(--bg-lt);color:var(--ink);
+  padding:.38rem .5rem;border:none;border-radius:8px;
+  font-size:.7rem;background:var(--bg-lt);color:var(--ink);
   outline:none;box-shadow:var(--nm-in);text-align:center;
-  transition:box-shadow .18s;width:100%;
+  transition:box-shadow .18s;width:70px;
 }
 .price-input:focus{box-shadow:var(--nm-in),0 0 0 2px rgba(138,79,88,.2);}
-.price-input::placeholder{font-size:.68rem;color:var(--muted);}
+.price-input::placeholder{font-size:.65rem;color:var(--muted);}
 .price-sep{font-size:.72rem;color:var(--muted);text-align:center;}
 .price-apply{
-  width:100%;margin-top:.6rem;padding:.5rem;
-  border:none;border-radius:9px;
-  font-size:.55rem;font-weight:500;letter-spacing:1px;text-transform:uppercase;
+  margin-top:0;padding:.38rem .8rem;
+  border:none;border-radius:50px;
+  font-size:.52rem;font-weight:500;letter-spacing:1px;text-transform:uppercase;
   background:var(--pink-dk);color:#fff;cursor:pointer;
   box-shadow:0 3px 8px rgba(138,79,88,.3);
-  transition:all .2s;
+  transition:all .2s;white-space:nowrap;
 }
 .price-apply:hover{background:#7a3f48;transform:translateY(-1px);}
-.toggle-row{display:flex;align-items:center;justify-content:space-between;font-size:.77rem;gap:.5rem;}
+.toggle-row{display:flex;align-items:center;gap:.5rem;font-size:.7rem;white-space:nowrap;}
 .toggle{
   width:36px;height:20px;border-radius:50px;
   background:rgba(196,188,180,.45);
@@ -311,12 +319,12 @@ header{position:sticky;top:0;z-index:200;background:rgba(232,224,216,.97);backdr
 }
 .toggle.on{background:var(--pink-dk);}
 .toggle.on::after{left:19px;}
-.filter-reset-wrap{padding:.2rem .4rem;}
+.filter-reset-wrap{padding:0;margin-left:auto;}
 .filter-reset{
-  width:100%;font-size:.56rem;letter-spacing:.8px;text-transform:uppercase;
+  font-size:.52rem;letter-spacing:.8px;text-transform:uppercase;
   color:var(--muted);background:none;border:none;
-  cursor:pointer;padding:.45rem;
-  transition:color .18s;display:flex;align-items:center;justify-content:center;gap:.35rem;
+  cursor:pointer;padding:.38rem .6rem;
+  transition:color .18s;display:flex;align-items:center;gap:.3rem;white-space:nowrap;
 }
 .filter-reset svg{width:10px;height:10px;}
 .filter-reset:hover{color:var(--pink-dk);}
@@ -338,7 +346,7 @@ header{position:sticky;top:0;z-index:200;background:rgba(232,224,216,.97);backdr
 .af-chip button:hover{opacity:1;}
 
 /* ── PRODUCT GRID ── */
-.prod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+.prod-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
 .prod-grid.lista{grid-template-columns:1fr;gap:14px;}
 .pc{background:var(--bg);border-radius:28px;box-shadow:var(--nm-sm);cursor:pointer;overflow:hidden;transition:box-shadow .4s,transform .4s;animation:fadeUp .4s ease both;display:flex;flex-direction:column;}
 .pc:hover{box-shadow:var(--nm);transform:translateY(-8px);}
@@ -411,14 +419,17 @@ footer{background:var(--ink);}
 ══════════════════════════════ */
 
 /* Tablet grande */
+@media(max-width:1400px){
+  .prod-grid{grid-template-columns:repeat(4,1fr);}
+}
 @media(max-width:1200px){
   .shop-wrap{padding:28px 24px 100px;}
   .prod-grid{grid-template-columns:repeat(3,1fr);}
 }
 
-/* Tablet — ocultar sidebar, mostrar botón filtros */
+/* Tablet */
 @media(max-width:1060px){
-  .shop-wrap{grid-template-columns:1fr;padding:20px 24px 80px;}
+  .shop-wrap{padding:20px 24px 80px;}
   .filters-sidebar{display:none;}
   #btn-filtros-mobile{display:flex !important;}
   .prod-grid{grid-template-columns:repeat(3,1fr);}
@@ -626,12 +637,10 @@ footer{background:var(--ink);}
 <!-- SHOP -->
 <div class="shop-wrap">
 
-  <!-- SIDEBAR -->
+  <!-- FILTROS BARRA HORIZONTAL -->
   <aside class="filters-sidebar" id="filters-sidebar">
-    <div class="sidebar-title">Filtros</div>
 
     <div class="filter-block">
-      <h3>Categoría</h3>
       <div class="cat-list">
         <button class="cat-item on" data-cat="todos" onclick="setCat('todos',this)">Todos <span class="cnt" id="cnt-todos">—</span></button>
         <button class="cat-item" data-cat="jabones" onclick="setCat('jabones',this)">Jabones <span class="cnt" id="cnt-jabones">—</span></button>
@@ -648,11 +657,10 @@ footer{background:var(--ink);}
         <span class="price-sep">—</span>
         <input class="price-input" id="precio-max" type="number" placeholder="Máx" min="0"/>
       </div>
-      <button class="price-apply" onclick="aplicarPrecio()">Aplicar precio</button>
+      <button class="price-apply" onclick="aplicarPrecio()">Aplicar</button>
     </div>
 
     <div class="filter-block">
-      <h3>Disponibilidad</h3>
       <div class="toggle-row">
         <span>Solo con stock</span>
         <button class="toggle" id="toggle-stock" onclick="toggleStock()"></button>
@@ -662,9 +670,10 @@ footer{background:var(--ink);}
     <div class="filter-reset-wrap">
       <button class="filter-reset" onclick="resetFiltros()">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg>
-        Limpiar filtros
+        Limpiar
       </button>
     </div>
+
   </aside>
 
   <!-- MAIN -->
