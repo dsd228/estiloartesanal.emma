@@ -385,12 +385,42 @@ footer{background:var(--ink);}
 </div>
 </header>
 
-<!-- HERO -->
-<section class="shop-hero">
-  <div class="shop-hero-bg">
-    <img src="assets/images/jaboneshero.webp" alt="Tienda Estilo Artesanal" onerror="this.src='assets/images/hero.webp'">
-    <div class="shop-hero-overlay"></div>
+<!-- HERO CARRUSEL -->
+<section class="shop-hero" id="shop-hero">
+
+  <!-- Slides -->
+  <div class="hero-slides">
+    <div class="hero-slide on">
+      <span class="hero-slide-label">Jabones naturales</span>
+      <img src="assets/images/jaboneshero.webp" alt="Jabones artesanales" loading="eager" onerror="this.src='assets/images/hero.webp'">
+    </div>
+    <div class="hero-slide">
+      <span class="hero-slide-label">Racimos artesanales</span>
+      <img src="assets/images/racimofrutillasaromafrutillas.webp" alt="Jabón Racimo Frutillas" loading="lazy" onerror="this.src='assets/images/hero.webp'">
+    </div>
+    <div class="hero-slide">
+      <span class="hero-slide-label">Cerámica esmaltada</span>
+      <img src="assets/images/cuencograndeflores.webp" alt="Cuenco Grande Flores" loading="lazy" onerror="this.src='assets/images/hero.webp'">
+    </div>
+    <div class="hero-slide">
+      <span class="hero-slide-label">Sahumadores</span>
+      <img src="assets/images/sahumadorchicogratitud.webp" alt="Sahumador Gratitud" loading="lazy" onerror="this.src='assets/images/hero.webp'">
+    </div>
+    <div class="hero-slide">
+      <span class="hero-slide-label">Decoración</span>
+      <img src="assets/images/florerochiconube.webp" alt="Florero Chico Nube" loading="lazy" onerror="this.src='assets/images/hero.webp'">
+    </div>
   </div>
+
+  <!-- Flechas -->
+  <button class="hero-arrow prev" id="hero-prev" aria-label="Anterior">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <button class="hero-arrow next" id="hero-next" aria-label="Siguiente">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+
+  <!-- Contenido central -->
   <div class="shop-hero-body">
     <p class="shop-hero-eyebrow">Colonia Caroya · Córdoba</p>
     <h1 class="shop-hero-title">La Tienda</h1>
@@ -403,6 +433,19 @@ footer{background:var(--ink);}
       <button class="shop-hero-cat" onclick="heroSetCat('deco',this)">Decoración</button>
     </div>
   </div>
+
+  <!-- Dots -->
+  <div class="hero-dots">
+    <button class="hero-dot on" onclick="heroGoTo(0)" aria-label="Slide 1"></button>
+    <button class="hero-dot" onclick="heroGoTo(1)" aria-label="Slide 2"></button>
+    <button class="hero-dot" onclick="heroGoTo(2)" aria-label="Slide 3"></button>
+    <button class="hero-dot" onclick="heroGoTo(3)" aria-label="Slide 4"></button>
+    <button class="hero-dot" onclick="heroGoTo(4)" aria-label="Slide 5"></button>
+  </div>
+
+  <!-- Barra progreso -->
+  <div class="hero-prog" id="hero-prog"></div>
+
 </section>
 
 <!-- SHOP -->
@@ -727,12 +770,64 @@ function checkMobile() {
 window.addEventListener('resize', checkMobile);
 checkMobile();
 
-cargarProductos();
+// ── HERO CARRUSEL ─────────────────────────────────────
+const heroSlides = document.querySelectorAll('.hero-slide');
+const heroDots   = document.querySelectorAll('.hero-dot');
+const heroProg   = document.getElementById('hero-prog');
+const HERO_DUR   = 5500;
+let heroIdx = 0;
+let heroTimer;
 
-// Hero image zoom-in on load
-document.querySelector('.shop-hero-bg img')?.addEventListener('load', function(){
-  this.classList.add('loaded');
-});
+function heroShow(n) {
+  heroSlides[heroIdx].classList.remove('on');
+  heroDots[heroIdx].classList.remove('on');
+  heroIdx = (n + heroSlides.length) % heroSlides.length;
+  heroSlides[heroIdx].classList.add('on');
+  heroDots[heroIdx].classList.add('on');
+  heroAnimProg();
+}
+function heroGoTo(n) { heroShow(n); heroReset(); }
+function heroAnimProg() {
+  heroProg.style.transition = 'none';
+  heroProg.style.width = '0%';
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    heroProg.style.transition = `width ${HERO_DUR}ms linear`;
+    heroProg.style.width = '100%';
+  }));
+}
+function heroReset() {
+  clearInterval(heroTimer);
+  heroTimer = setInterval(() => heroShow(heroIdx + 1), HERO_DUR);
+}
+heroTimer = setInterval(() => heroShow(heroIdx + 1), HERO_DUR);
+heroAnimProg();
+
+// Flechas
+document.getElementById('hero-prev')?.addEventListener('click', () => { heroShow(heroIdx - 1); heroReset(); });
+document.getElementById('hero-next')?.addEventListener('click', () => { heroShow(heroIdx + 1); heroReset(); });
+
+// Pausa al hover
+const heroEl = document.getElementById('shop-hero');
+heroEl?.addEventListener('mouseenter', () => { clearInterval(heroTimer); heroProg.style.transition = 'none'; });
+heroEl?.addEventListener('mouseleave', () => { heroReset(); heroAnimProg(); });
+
+// Swipe touch
+let heroTx = 0;
+heroEl?.addEventListener('touchstart', e => { heroTx = e.touches[0].clientX; }, { passive: true });
+heroEl?.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - heroTx;
+  if (Math.abs(dx) > 40) { heroShow(dx < 0 ? heroIdx + 1 : heroIdx - 1); heroReset(); }
+}, { passive: true });
+
+// Precargar siguiente imagen
+function heroPreload(idx) {
+  const next = (idx + 1) % heroSlides.length;
+  const img = heroSlides[next]?.querySelector('img');
+  if (img && !img.complete) img.loading = 'eager';
+}
+heroSlides[0]?.querySelector('img')?.addEventListener('load', () => heroPreload(0));
+
+cargarProductos();
 </script>
 <div class="wake-toast" id="wake-toast">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 11-6.219-8.56"/></svg>
