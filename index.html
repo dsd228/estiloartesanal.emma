@@ -4,598 +4,578 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>"/>
-<title>Estilo Artesanal.emma · Jabones naturales & Cerámica</title>
+<title>Tienda · Estilo Artesanal.emma</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
-:root{--bg:#e8e0d8;--bg-lt:#f5efe8;--sd:#c4bcb4;--sl:#ffffff;--pink:#E8C1C7;--pink-dk:#8a4f58;--pink-md:#c89aa8;--pink-lt:#f5dde0;--ink:#3a2a2e;--muted:#9a8880;--clay:#c8956a;--serif:"Cormorant Garamond",Georgia,serif;--sans:"Jost",system-ui,sans-serif;--nm-out:8px 8px 20px var(--sd),-8px -8px 20px var(--sl);--nm-in:inset 5px 5px 14px var(--sd),inset -5px -5px 14px var(--sl);--nm-sm:4px 4px 10px var(--sd),-4px -4px 10px var(--sl);}
+:root{
+  --bg:#e8e0d8;--bg-lt:#f5efe8;
+  --sd:#c4bcb4;--sl:#ffffff;
+  --pink:#E8C1C7;--pink-dk:#8a4f58;--pink-md:#c89aa8;--pink-lt:#f5dde0;
+  --ink:#3a2a2e;--muted:#9a8880;--clay:#c8956a;
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'Jost',system-ui,sans-serif;
+  --nm:8px 8px 20px var(--sd),-8px -8px 20px var(--sl);
+  --nm-in:inset 5px 5px 14px var(--sd),inset -5px -5px 14px var(--sl);
+  --nm-sm:4px 4px 10px var(--sd),-4px -4px 10px var(--sl);
+}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{font-family:var(--sans);background:var(--bg);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column;}
 img{display:block;max-width:100%;}
 a{text-decoration:none;color:inherit;}
 button{font-family:var(--sans);cursor:pointer;}
-.rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease;}
-.rv.vs{opacity:1;transform:none;}
-.d1{transition-delay:.08s;}.d2{transition-delay:.16s;}.d3{transition-delay:.24s;}.d4{transition-delay:.32s;}
-header{position:fixed;top:0;left:0;right:0;z-index:500;background:rgba(232,224,216,.97);backdrop-filter:blur(12px);box-shadow:0 4px 16px var(--sd),0 -1px 0 var(--sl);transition:box-shadow .3s;}
-header.scrolled{box-shadow:0 6px 24px var(--sd);}
-.hdr{max-width:1200px;margin:0 auto;padding:0 40px;height:72px;display:flex;align-items:center;justify-content:space-between;gap:1rem;}
-.logo-wrap{width:52px;height:52px;border-radius:50%;background:var(--bg);box-shadow:var(--nm-sm);display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;transition:box-shadow .2s;}
-.logo-wrap:hover{box-shadow:var(--nm-in);}
-.logo-wrap svg{width:36px;height:36px;}
-.logo-text{display:flex;flex-direction:column;line-height:1.1;}
-.logo-text span{font-family:var(--serif);font-size:1rem;font-weight:400;color:var(--ink);font-style:italic;}
-.logo-text small{font-size:.5rem;font-weight:300;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);}
-nav{display:flex;gap:.2rem;}
-nav a{font-size:.65rem;font-weight:400;letter-spacing:1.8px;text-transform:uppercase;color:var(--muted);padding:.5rem 1rem;border-radius:50px;transition:all .22s;}
-nav a:hover{color:var(--ink);background:var(--bg);box-shadow:var(--nm-sm);}
-.hdr-btn{font-size:.64rem;font-weight:400;letter-spacing:1.5px;text-transform:uppercase;padding:.6rem 1.5rem;border-radius:50px;border:none;background:var(--bg);color:var(--ink);box-shadow:var(--nm-sm);transition:all .22s;}
-.hdr-btn:hover{box-shadow:var(--nm-in);color:var(--pink-dk);}
-.hero{position:relative;width:100%;height:100svh;min-height:580px;max-height:900px;overflow:hidden;margin-top:72px;}
-.h-slides{position:absolute;inset:0;}
-.h-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.4s ease;}
-.h-slide.on{opacity:1;}
-.h-slide img{width:100%;height:100%;object-fit:cover;transform:scale(1.05);transition:transform 8s ease;}
-.h-slide.on img{transform:scale(1);}
-.h-slide::after{content:"";position:absolute;inset:0;background:rgba(40,20,24,.38);}
-.h-body{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 24px;}
-.h-eyebrow{font-size:.6rem;font-weight:400;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:1rem;}
-.h-body h1{font-family:var(--serif);font-size:clamp(2.4rem,6vw,5rem);font-weight:300;font-style:italic;color:#fff;line-height:1.1;margin-bottom:.5rem;text-shadow:0 2px 24px rgba(0,0,0,.25);}
-.h-tagline{font-size:.72rem;font-weight:300;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:2.2rem;}
-.h-actions{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;}
-.h-cta{font-size:.68rem;font-weight:400;letter-spacing:2.5px;text-transform:uppercase;background:rgba(232,224,216,.18);color:#fff;border:1px solid rgba(255,255,255,.55);border-radius:50px;padding:.85rem 2.4rem;backdrop-filter:blur(8px);transition:all .25s;cursor:pointer;}
-.h-cta:hover{background:rgba(232,224,216,.35);}
-.h-cta.solid{background:var(--pink-dk);border-color:transparent;box-shadow:0 4px 16px rgba(138,79,88,.4);}
-.h-cta.solid:hover{background:#7a3f48;}
-.h-dots{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);z-index:3;display:flex;gap:.5rem;}
-.h-dot{width:10px;height:10px;border-radius:50%;border:none;padding:0;cursor:pointer;background:rgba(255,255,255,.4);transition:all .3s;}
-.h-dot.on{background:#fff;transform:scale(1.2);}
-.h-prog{position:absolute;bottom:0;left:0;height:3px;background:var(--pink-md);z-index:3;width:0%;transition:width linear;}
-.strip{background:var(--pink);box-shadow:0 4px 12px var(--sd);}
-.strip-inner{max-width:1200px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:repeat(4,1fr);}
-.s-item{padding:1.4rem 1rem;text-align:center;border-right:1px solid rgba(255,255,255,.3);}
-.s-item:last-child{border-right:none;}
-.s-item svg{width:24px;height:24px;color:var(--ink);opacity:.7;margin:0 auto .5rem;}
-.s-item h4{font-size:.6rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--ink);margin-bottom:.2rem;}
-.s-item p{font-size:.68rem;font-weight:300;color:rgba(58,42,46,.6);}
-.sec{padding:88px 0;}
-.inn{max-width:1200px;margin:0 auto;padding:0 40px;}
-.sec-off{background:var(--bg-lt);}
-.sec-title{text-align:center;margin-bottom:52px;}
-.sec-title .eyebrow{font-size:.58rem;font-weight:400;letter-spacing:3.5px;text-transform:uppercase;color:var(--pink-dk);margin-bottom:.5rem;}
-.sec-title h2{font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.6rem);font-weight:300;font-style:italic;color:var(--ink);margin-bottom:.4rem;}
-.sec-title p{font-size:.84rem;font-weight:300;color:var(--muted);}
-.sec-line{width:36px;height:3px;border-radius:2px;background:var(--bg);box-shadow:var(--nm-sm);margin:.8rem auto 0;}
-.cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
-.cat-card{position:relative;border-radius:20px;overflow:hidden;box-shadow:var(--nm-out);cursor:pointer;transition:box-shadow .3s,transform .3s;aspect-ratio:3/4;}
-.cat-card:hover{box-shadow:var(--nm-in);transform:translateY(-5px);}
-.cat-card.soon{cursor:default;}
-.cat-card.soon:hover{transform:none;box-shadow:var(--nm-out);}
-.cat-img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease;display:block;}
-.cat-card:not(.soon):hover .cat-img{transform:scale(1.06);}
-.cat-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(40,20,24,.75) 0%,rgba(40,20,24,.1) 55%,transparent 100%);transition:background .3s;}
-.cat-card:hover .cat-overlay{background:linear-gradient(to top,rgba(40,20,24,.85) 0%,rgba(40,20,24,.2) 60%,transparent 100%);}
-.cat-body{position:absolute;bottom:0;left:0;right:0;padding:1.4rem 1.6rem;z-index:2;}
-.cat-label{font-size:.54rem;font-weight:400;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:.3rem;}
-.cat-name{font-family:var(--serif);font-size:1.5rem;font-weight:300;font-style:italic;color:#fff;line-height:1.1;margin-bottom:.8rem;}
-.cat-arrow{display:inline-flex;align-items:center;gap:.5rem;font-size:.6rem;font-weight:400;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.8);background:rgba(255,255,255,.15);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.3);border-radius:50px;padding:.42rem 1.1rem;transition:all .25s;}
-.cat-arrow svg{width:11px;height:11px;transition:transform .25s;}
-.cat-card:not(.soon):hover .cat-arrow{background:rgba(255,255,255,.3);color:#fff;}
-.cat-card:not(.soon):hover .cat-arrow svg{transform:translateX(3px);}
-.cat-ph{position:absolute;inset:0;background:linear-gradient(135deg,#d8cec6,#c0b0a8);display:none;align-items:center;justify-content:center;}
-.cat-ph svg{width:40px;height:40px;color:rgba(255,255,255,.3);}
-.cat-soon-overlay{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.6rem;}
-.cat-soon-badge{font-size:.58rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;background:var(--pink-dk);color:#fff;border-radius:50px;padding:.4rem 1.1rem;}
-.cat-soon-txt{font-size:.72rem;font-weight:300;color:rgba(255,255,255,.7);}
-.sale-sec{background:var(--pink-lt);position:relative;overflow:hidden;}
-.sale-sec::before{content:"SALE";position:absolute;top:-10px;right:-20px;font-family:var(--serif);font-size:12rem;font-style:italic;font-weight:300;color:rgba(138,79,88,.055);line-height:1;pointer-events:none;user-select:none;}
-.sale-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:40px;flex-wrap:wrap;gap:1rem;}
-.sale-header .eyebrow{font-size:.58rem;letter-spacing:3px;text-transform:uppercase;color:var(--pink-dk);margin-bottom:.4rem;}
-.sale-header h2{font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.6rem);font-weight:300;font-style:italic;}
-.sale-header .sub{font-size:.82rem;font-weight:300;color:var(--muted);margin-top:.3rem;}
-.sale-link{font-size:.62rem;font-weight:400;letter-spacing:1.5px;text-transform:uppercase;color:var(--pink-dk);display:flex;align-items:center;gap:.4rem;cursor:pointer;transition:gap .2s;background:none;border:none;padding:0;}
-.sale-link:hover{gap:.7rem;}
-.sale-link svg{width:12px;height:12px;}
-.sale-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:18px;}
-.sale-card{background:var(--bg);border-radius:18px;box-shadow:var(--nm-sm);overflow:hidden;cursor:pointer;transition:box-shadow .3s,transform .3s;position:relative;}
-.sale-card:hover{box-shadow:var(--nm-out);transform:translateY(-4px);}
-.sale-img-wrap{overflow:hidden;position:relative;}
-.sale-img{width:100%;height:195px;object-fit:cover;transition:transform .5s ease;}
-.sale-card:hover .sale-img{transform:scale(1.04);}
-.sale-ph{width:100%;height:195px;background:var(--bg-lt);display:flex;align-items:center;justify-content:center;}
-.sale-ph svg{width:28px;height:28px;color:var(--pink-md);opacity:.4;}
-.sale-badge{position:absolute;top:10px;left:10px;font-size:.52rem;font-weight:500;letter-spacing:1px;text-transform:uppercase;background:var(--pink-dk);color:#fff;border-radius:6px;padding:.26rem .62rem;}
-.sale-pct{position:absolute;top:10px;right:10px;font-size:.68rem;font-weight:500;background:#fff;color:var(--pink-dk);border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;box-shadow:2px 2px 8px rgba(138,79,88,.2);}
-.sale-body{padding:1rem 1.1rem 1.3rem;text-align:center;}
-.sale-name{font-size:.68rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;margin-bottom:.18rem;}
-.sale-cat{font-size:.6rem;font-weight:300;color:var(--muted);margin-bottom:.5rem;}
-.sale-prices{display:flex;align-items:center;justify-content:center;gap:.6rem;margin-bottom:.85rem;}
-.sale-price-old{font-size:.74rem;text-decoration:line-through;color:var(--muted);}
-.sale-price-new{font-family:var(--serif);font-size:1.15rem;font-weight:400;color:var(--pink-dk);}
-.sale-btn{font-size:.58rem;font-weight:400;letter-spacing:1.5px;text-transform:uppercase;background:var(--bg);color:var(--ink);border:none;border-radius:50px;padding:.48rem 1.1rem;width:calc(100% - 2rem);box-shadow:var(--nm-sm);transition:all .22s;display:block;margin:0 auto;}
-.sale-btn:hover{box-shadow:var(--nm-in);color:var(--pink-dk);}
-.filter-row{display:flex;justify-content:center;gap:.6rem;margin-bottom:44px;flex-wrap:wrap;}
-.fil{font-size:.62rem;font-weight:400;letter-spacing:1.5px;text-transform:uppercase;padding:.45rem 1.2rem;border-radius:50px;border:none;background:var(--bg);color:var(--muted);box-shadow:var(--nm-sm);cursor:pointer;transition:all .22s;}
-.fil.on,.fil:hover{box-shadow:var(--nm-in);color:var(--pink-dk);}
-.prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:22px;}
-.pc{background:var(--bg);border-radius:20px;box-shadow:var(--nm-out);cursor:pointer;overflow:hidden;transition:box-shadow .3s,transform .3s;}
-.pc:hover{box-shadow:var(--nm-in);transform:translateY(-4px);}
-.pc.soon{opacity:.55;pointer-events:none;}
-.pc-img-wrap{overflow:hidden;position:relative;border-radius:20px 20px 0 0;}
-.pc-img{width:100%;height:215px;object-fit:cover;transition:transform .6s ease;}
-.pc:hover .pc-img{transform:scale(1.04);}
-.pc-ph{width:100%;height:215px;background:var(--bg-lt);display:flex;align-items:center;justify-content:center;}
-.pc-ph svg{width:32px;height:32px;color:var(--pink-md);opacity:.5;}
-.pc-tag{position:absolute;top:12px;left:12px;font-size:.54rem;font-weight:400;letter-spacing:1px;text-transform:uppercase;background:var(--bg);color:var(--pink-dk);padding:.22rem .7rem;border-radius:50px;box-shadow:2px 2px 6px var(--sd),-1px -1px 4px var(--sl);}
-.pc-tag.pronto{color:var(--muted);}
-.pc-body{padding:1.2rem 1.3rem 1.5rem;text-align:center;}
-.pc-name{font-size:.7rem;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:.22rem;}
-.pc-cat{font-size:.6rem;font-weight:300;color:var(--muted);letter-spacing:1px;margin-bottom:.5rem;}
-.pc-price{font-family:var(--serif);font-size:1.1rem;font-weight:400;color:var(--clay);margin-bottom:.9rem;}
-.pc-btn{font-size:.6rem;font-weight:400;letter-spacing:1.5px;text-transform:uppercase;background:var(--bg);color:var(--ink);border:none;border-radius:50px;padding:.5rem 1.2rem;width:calc(100% - 2rem);box-shadow:var(--nm-sm);transition:all .22s;display:block;margin:0 auto;}
-.pc-btn:hover{box-shadow:var(--nm-in);color:var(--pink-dk);}
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;}
-.about-img-wrap{border-radius:24px;overflow:hidden;box-shadow:var(--nm-out);}
-.about-img-wrap img{width:100%;height:500px;object-fit:cover;display:block;}
-.about-text .eyebrow{font-size:.6rem;font-weight:400;letter-spacing:3px;text-transform:uppercase;color:var(--pink-dk);margin-bottom:.6rem;}
-.about-text h2{font-family:var(--serif);font-size:clamp(1.8rem,2.5vw,2.4rem);font-weight:300;font-style:italic;margin-bottom:1rem;line-height:1.15;}
-.about-text p{font-size:.86rem;font-weight:300;color:var(--muted);line-height:1.95;margin-bottom:.75rem;}
-.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:1.8rem;}
-.stat{padding:1.2rem;text-align:center;border-radius:16px;background:var(--bg);box-shadow:var(--nm-sm);transition:box-shadow .25s;}
-.stat:hover{box-shadow:var(--nm-in);}
-.stat strong{display:block;font-family:var(--serif);font-size:1.9rem;font-weight:300;color:var(--clay);line-height:1;margin-bottom:.2rem;}
-.stat span{font-size:.6rem;font-weight:300;letter-spacing:1px;text-transform:uppercase;color:var(--muted);}
-.gli-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;}
-.gli-img-wrap{border-radius:24px;overflow:hidden;box-shadow:var(--nm-out);}
-.gli-img{width:100%;height:480px;object-fit:cover;display:block;}
-.gli-text .eyebrow{font-size:.6rem;font-weight:400;letter-spacing:3px;text-transform:uppercase;color:var(--pink-dk);margin-bottom:.7rem;display:flex;align-items:center;gap:.5rem;}
-.gli-text .eyebrow::before{content:"";width:18px;height:2px;border-radius:1px;background:var(--pink-md);}
-.gli-text h2{font-family:var(--serif);font-size:clamp(1.6rem,2.5vw,2.2rem);font-weight:300;font-style:italic;margin-bottom:.9rem;}
-.gli-text p{font-size:.86rem;font-weight:300;color:var(--muted);line-height:1.9;margin-bottom:.9rem;}
-.gli-props{display:flex;flex-direction:column;gap:.65rem;margin-top:1.2rem;}
-.gli-prop{display:flex;align-items:center;gap:.9rem;padding:.9rem 1.1rem;background:var(--bg);border-radius:13px;box-shadow:var(--nm-sm);transition:box-shadow .25s;}
-.gli-prop:hover{box-shadow:var(--nm-in);}
-.gli-em{width:34px;height:34px;border-radius:9px;background:var(--bg);box-shadow:var(--nm-sm);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--pink-dk);}
-.gli-em svg{width:16px;height:16px;}
-.gli-prop strong{font-size:.78rem;font-weight:500;}
-.gli-prop span{font-size:.7rem;font-weight:300;color:var(--muted);margin-left:auto;}
-.retiro-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;}
-.retiro-map{background:var(--bg);border-radius:24px;min-height:280px;box-shadow:var(--nm-out);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.8rem;padding:2rem;}
-.retiro-map svg{width:36px;height:36px;color:var(--pink-dk);}
-.retiro-map strong{font-size:.7rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;}
-.retiro-map p{font-size:.74rem;color:var(--muted);}
-.retiro-text .eyebrow{font-size:.6rem;font-weight:400;letter-spacing:3px;text-transform:uppercase;color:var(--pink-dk);margin-bottom:.5rem;}
-.retiro-text h2{font-family:var(--serif);font-size:clamp(1.6rem,2.5vw,2.2rem);font-weight:300;font-style:italic;margin-bottom:.9rem;}
-.retiro-text p{font-size:.84rem;font-weight:300;color:var(--muted);line-height:1.85;margin-bottom:.55rem;}
-.retiro-addr{display:flex;align-items:center;gap:.8rem;background:var(--bg);border-radius:13px;box-shadow:var(--nm-sm);padding:.9rem 1.2rem;margin-top:1.2rem;}
-.retiro-addr svg{width:16px;height:16px;color:var(--pink-dk);flex-shrink:0;}
-.retiro-addr strong{display:block;font-size:.78rem;font-weight:500;margin-bottom:.12rem;}
-.retiro-addr span{font-size:.7rem;color:var(--muted);}
-.retiro-notice{margin-top:.7rem;font-size:.68rem;font-weight:300;color:var(--muted);display:flex;align-items:center;gap:.4rem;}
-.retiro-notice svg{width:10px;height:10px;}
-.pago-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:2.2rem;}
-.pago{background:var(--bg);border-radius:18px;box-shadow:var(--nm-out);padding:1.8rem 1.2rem;text-align:center;transition:box-shadow .25s,transform .25s;}
-.pago:hover{box-shadow:var(--nm-in);transform:translateY(-3px);}
-.pago-ico{width:48px;height:48px;border-radius:13px;background:var(--bg);box-shadow:var(--nm-sm);display:flex;align-items:center;justify-content:center;margin:0 auto .9rem;}
-.pago-ico svg{width:20px;height:20px;color:var(--pink-dk);}
-.pago h4{font-size:.64rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;margin-bottom:.25rem;}
-.pago p{font-size:.7rem;font-weight:300;color:var(--muted);}
-.ig-sec{background:var(--pink);padding:68px 0;text-align:center;box-shadow:inset 0 4px 12px var(--sd),inset 0 -4px 12px rgba(255,255,255,.3);}
-.ig-inner{max-width:460px;margin:0 auto;padding:0 24px;}
-.ig-icon{width:54px;height:54px;border-radius:16px;margin:0 auto 1.3rem;background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);box-shadow:4px 4px 10px rgba(138,79,88,.3),-2px -2px 8px rgba(255,255,255,.4);display:flex;align-items:center;justify-content:center;}
-.ig-icon svg{width:24px;height:24px;color:#fff;}
-.ig-sec h2{font-family:var(--serif);font-size:1.8rem;font-weight:300;font-style:italic;color:var(--ink);margin-bottom:.6rem;}
-.ig-sec p{font-size:.82rem;font-weight:300;color:rgba(58,42,46,.6);line-height:1.8;margin-bottom:1.6rem;}
-.ig-btn{display:inline-flex;align-items:center;gap:.5rem;font-size:.64rem;font-weight:400;letter-spacing:2px;text-transform:uppercase;background:var(--bg);color:var(--ink);border:none;border-radius:50px;padding:.75rem 2rem;box-shadow:var(--nm-sm);transition:all .25s;cursor:pointer;}
-.ig-btn:hover{box-shadow:var(--nm-in);color:var(--pink-dk);}
-.ig-btn svg{width:13px;height:13px;}
-footer{background:var(--ink);box-shadow:inset 0 4px 16px rgba(0,0,0,.3);}
-.foot-top{max-width:1200px;margin:0 auto;padding:56px 40px 44px;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:44px;border-bottom:1px solid rgba(255,255,255,.07);}
-.foot-logo{font-family:var(--serif);font-size:1.1rem;font-style:italic;font-weight:300;color:var(--pink-md);margin-bottom:.65rem;}
-.foot-brand p{font-size:.74rem;font-weight:300;color:rgba(255,255,255,.3);line-height:1.75;max-width:230px;}
-.foot-socials{display:flex;gap:.5rem;margin-top:1.2rem;}
-.fsoc{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.05);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.3);transition:all .22s;}
-.fsoc:hover{background:var(--pink-md);color:#fff;}
-.fsoc svg{width:12px;height:12px;}
-.foot-col h5{font-size:.54rem;font-weight:400;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.18);margin-bottom:.9rem;}
-.foot-col a{display:block;font-size:.74rem;font-weight:300;color:rgba(255,255,255,.3);margin-bottom:.45rem;transition:color .2s;}
-.foot-col a:hover{color:var(--pink-md);}
-.foot-bottom{max-width:1200px;margin:0 auto;padding:1.1rem 40px;display:flex;justify-content:space-between;font-size:.62rem;font-weight:300;color:rgba(255,255,255,.18);}
-@media(max-width:1060px){.cat-grid{grid-template-columns:1fr 1fr;gap:16px;}.gli-grid,.about-grid,.retiro-grid{grid-template-columns:1fr;}.gli-img{height:320px;}.about-img-wrap img{height:300px;}.pago-grid{grid-template-columns:1fr 1fr;}.foot-top{grid-template-columns:1fr;gap:28px;}.sec{padding:68px 0;}}
-@media(max-width:600px){nav{display:none;}.hdr{padding:0 16px;height:60px;}.logo-wrap{width:44px;height:44px;}.logo-wrap svg{width:30px;height:30px;}.logo-text span{font-size:.84rem;}.logo-text small{display:none;}.hdr-btn{font-size:.58rem;padding:.5rem 1rem;}.hero{height:80svh;min-height:500px;margin-top:60px;}.h-body h1{font-size:clamp(2rem,8vw,3rem);}.h-tagline{display:none;}.h-actions{gap:.7rem;}.h-cta{font-size:.62rem;padding:.75rem 1.8rem;}.strip-inner{grid-template-columns:1fr 1fr;padding:0 16px;}.s-item{padding:.9rem .5rem;border-right:none;border-bottom:1px solid rgba(255,255,255,.2);}.s-item:nth-child(odd){border-right:1px solid rgba(255,255,255,.2);}.s-item:nth-child(3),.s-item:nth-child(4){border-bottom:none;}.sec{padding:52px 0;}.inn{padding:0 16px;}.sec-title{margin-bottom:32px;}.cat-grid{grid-template-columns:1fr 1fr;gap:12px;}.cat-name{font-size:1.2rem;}.cat-body{padding:1rem 1.1rem;}.cat-arrow{font-size:.55rem;padding:.35rem .85rem;}.sale-grid{grid-template-columns:1fr 1fr;gap:12px;}.sale-img{height:155px;}.prod-grid{grid-template-columns:1fr 1fr;gap:12px;}.pc-img{height:165px;}.pc-body{padding:1rem 1rem 1.2rem;}.pc-name{font-size:.62rem;}.about-grid,.gli-grid,.retiro-grid{gap:24px;}.about-img-wrap img{height:240px;}.gli-img{height:240px;}.stats{gap:10px;}.pago-grid{grid-template-columns:1fr 1fr;gap:12px;}.pago{padding:1.3rem 1rem;}.foot-top{padding:36px 16px 28px;}.foot-bottom{padding:.9rem 16px;flex-direction:column;gap:.4rem;text-align:center;}}
-
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
 @keyframes shimmer{from{background-position:-200% 0}to{background-position:200% 0}}
-.skel{background:linear-gradient(90deg,var(--bg) 25%,var(--bg-lt) 50%,var(--bg) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite linear;border-radius:8px;}
-.skel-card-wrap{background:var(--bg);border-radius:20px;box-shadow:var(--nm-out);overflow:hidden;}
-.skel-img-ph{height:220px;}
-.skel-body-ph{padding:1.2rem 1.3rem 1.5rem;display:flex;flex-direction:column;gap:.5rem;align-items:center;}
-.skel-line{height:10px;}
-.skel-sale-img{height:195px;}
-.skel-sale-wrap{background:var(--bg);border-radius:18px;box-shadow:var(--nm-sm);overflow:hidden;}
-.skel-sale-body{padding:1rem 1.1rem;display:flex;flex-direction:column;gap:.45rem;align-items:center;}
-/* Server wake toast */
+
+/* ── HEADER ── */
+header{position:sticky;top:0;z-index:200;background:rgba(232,224,216,.97);backdrop-filter:blur(14px);box-shadow:0 1px 0 rgba(196,188,180,.5),0 4px 20px rgba(58,42,46,.06);}
+.hdr{max-width:1380px;margin:0 auto;padding:0 32px;height:68px;display:flex;align-items:center;gap:1.5rem;}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0;}
+.logo-wrap{width:44px;height:44px;border-radius:50%;background:var(--bg);box-shadow:var(--nm-sm);display:flex;align-items:center;justify-content:center;transition:box-shadow .2s;}
+.logo-wrap:hover{box-shadow:var(--nm-in);}
+.logo-wrap svg{width:30px;height:30px;}
+.logo-text span{font-family:var(--serif);font-size:.9rem;font-style:italic;color:var(--ink);}
+.logo-text small{font-size:.46rem;font-weight:300;letter-spacing:2px;text-transform:uppercase;color:var(--muted);display:block;}
+.hdr-search{flex:1;max-width:380px;position:relative;}
+.hdr-search svg{position:absolute;left:.9rem;top:50%;transform:translateY(-50%);width:14px;height:14px;color:var(--muted);pointer-events:none;}
+.hdr-search input{width:100%;padding:.6rem 1rem .6rem 2.5rem;border:none;border-radius:50px;font-size:.8rem;background:var(--bg);color:var(--ink);outline:none;box-shadow:var(--nm-in);transition:box-shadow .2s;}
+.hdr-search input:focus{box-shadow:var(--nm-in),0 0 0 2px rgba(138,79,88,.2);}
+.hdr-right{margin-left:auto;display:flex;align-items:center;gap:.6rem;}
+.hdr-pill{font-size:.6rem;letter-spacing:1px;text-transform:uppercase;padding:.38rem .9rem;border-radius:50px;background:var(--bg);color:var(--muted);box-shadow:var(--nm-sm);border:none;cursor:pointer;transition:all .22s;display:flex;align-items:center;gap:.35rem;white-space:nowrap;}
+.hdr-pill svg{width:11px;height:11px;}
+.hdr-pill:hover{box-shadow:var(--nm-in);color:var(--pink-dk);}
+.hdr-pill.active{box-shadow:var(--nm-in);color:var(--pink-dk);}
+
+/* ── BREADCRUMB ── */
+.breadcrumb{background:var(--bg-lt);border-bottom:1px solid rgba(196,188,180,.4);}
+.bc-inner{max-width:1380px;margin:0 auto;padding:.7rem 32px;display:flex;align-items:center;gap:.5rem;font-size:.68rem;color:var(--muted);}
+.bc-inner a{color:var(--muted);transition:color .2s;}
+.bc-inner a:hover{color:var(--pink-dk);}
+.bc-sep{opacity:.4;}
+.bc-current{color:var(--ink);font-weight:500;}
+
+/* ── SHOP LAYOUT ── */
+.shop-wrap{max-width:1380px;margin:0 auto;padding:28px 32px 80px;display:grid;grid-template-columns:240px 1fr;gap:32px;flex:1;}
+
+/* ── SIDEBAR FILTROS ── */
+.filters-sidebar{position:sticky;top:96px;height:fit-content;display:flex;flex-direction:column;gap:20px;}
+.filter-block{background:var(--bg);border-radius:18px;box-shadow:var(--nm-sm);padding:1.2rem 1.4rem;}
+.filter-block h3{font-size:.58rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:.9rem;}
+.cat-list{display:flex;flex-direction:column;gap:4px;}
+.cat-item{display:flex;align-items:center;justify-content:space-between;font-size:.78rem;padding:.52rem .75rem;border-radius:10px;border:none;background:transparent;color:var(--ink);cursor:pointer;transition:all .22s;text-align:left;width:100%;}
+.cat-item:hover{background:var(--bg-lt);color:var(--pink-dk);}
+.cat-item.on{background:var(--bg);box-shadow:var(--nm-in);color:var(--pink-dk);font-weight:500;}
+.cat-item .cnt{font-size:.62rem;color:var(--muted);background:var(--bg-lt);border-radius:50px;padding:.08rem .45rem;}
+.cat-item.on .cnt{color:var(--pink-dk);}
+.price-inputs{display:flex;gap:.5rem;align-items:center;}
+.price-input{flex:1;padding:.5rem .65rem;border:none;border-radius:9px;font-size:.8rem;background:var(--bg);color:var(--ink);outline:none;box-shadow:var(--nm-in);text-align:center;}
+.price-sep{font-size:.7rem;color:var(--muted);flex-shrink:0;}
+.price-apply{width:100%;margin-top:.7rem;padding:.55rem;border:none;border-radius:50px;font-size:.62rem;font-weight:400;letter-spacing:1px;text-transform:uppercase;background:var(--pink-dk);color:#fff;cursor:pointer;box-shadow:3px 3px 8px rgba(138,79,88,.3);transition:all .22s;}
+.price-apply:hover{background:#7a3f48;}
+.toggle-row{display:flex;align-items:center;justify-content:space-between;font-size:.78rem;padding:.3rem 0;}
+.toggle{width:36px;height:20px;border-radius:50px;background:var(--bg);box-shadow:var(--nm-in);border:none;cursor:pointer;position:relative;transition:background .22s;}
+.toggle::after{content:'';position:absolute;width:14px;height:14px;border-radius:50%;background:var(--muted);top:3px;left:3px;transition:all .22s;box-shadow:1px 1px 3px var(--sd);}
+.toggle.on{background:var(--pink-lt);}
+.toggle.on::after{left:19px;background:var(--pink-dk);}
+.filter-reset{font-size:.62rem;letter-spacing:1px;text-transform:uppercase;color:var(--muted);background:none;border:none;cursor:pointer;padding:.4rem 0;transition:color .2s;}
+.filter-reset:hover{color:var(--pink-dk);}
+
+/* ── MAIN CONTENT ── */
+.shop-main{}
+
+.shop-toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:.8rem;}
+.results-count{font-size:.78rem;color:var(--muted);}
+.results-count strong{color:var(--ink);font-weight:500;}
+.toolbar-right{display:flex;align-items:center;gap:.6rem;}
+.sort-select{padding:.45rem .9rem;border:none;border-radius:50px;font-size:.72rem;font-family:var(--sans);background:var(--bg);color:var(--ink);outline:none;box-shadow:var(--nm-sm);cursor:pointer;appearance:none;padding-right:2rem;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239a8880' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .6rem center;}
+.view-toggle{display:flex;gap:3px;background:var(--bg);border-radius:50px;padding:3px;box-shadow:var(--nm-in);}
+.view-btn{width:28px;height:28px;border-radius:50px;border:none;background:transparent;color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .22s;}
+.view-btn svg{width:13px;height:13px;}
+.view-btn.on{background:var(--bg-lt);box-shadow:var(--nm-sm);color:var(--pink-dk);}
+
+.active-filters{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:16px;}
+.af-chip{display:inline-flex;align-items:center;gap:.35rem;font-size:.65rem;font-weight:400;letter-spacing:.5px;text-transform:uppercase;padding:.3rem .75rem;border-radius:50px;background:var(--pink-lt);color:var(--pink-dk);box-shadow:var(--nm-sm);}
+.af-chip button{background:none;border:none;cursor:pointer;color:var(--pink-dk);opacity:.7;padding:0;display:flex;align-items:center;font-size:.75rem;transition:opacity .2s;}
+.af-chip button:hover{opacity:1;}
+
+/* ── PRODUCT GRID ── */
+.prod-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+.prod-grid.lista{grid-template-columns:1fr;gap:12px;}
+
+/* Card modo grid */
+.pc{background:var(--bg);border-radius:18px;box-shadow:var(--nm-sm);cursor:pointer;overflow:hidden;transition:box-shadow .3s,transform .3s;animation:fadeUp .35s ease both;}
+.pc:hover{box-shadow:var(--nm);transform:translateY(-4px);}
+.pc.soon{opacity:.55;pointer-events:none;}
+.pc-img-wrap{overflow:hidden;position:relative;}
+.pc-img{width:100%;height:200px;object-fit:cover;transition:transform .5s ease;}
+.pc:hover .pc-img{transform:scale(1.04);}
+.pc-ph{width:100%;height:200px;background:var(--bg-lt);display:flex;align-items:center;justify-content:center;}
+.pc-ph svg{width:32px;height:32px;color:var(--pink-md);opacity:.4;}
+.pc-tag{position:absolute;top:10px;left:10px;font-size:.53rem;font-weight:400;letter-spacing:1px;text-transform:uppercase;background:var(--bg);color:var(--pink-dk);padding:.2rem .65rem;border-radius:50px;box-shadow:2px 2px 6px var(--sd),-1px -1px 4px var(--sl);}
+.pc-tag.pronto{color:var(--muted);}
+.pc-body{padding:1.1rem 1.2rem 1.3rem;text-align:center;}
+.pc-name{font-size:.7rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;margin-bottom:.2rem;line-height:1.3;}
+.pc-cat{font-size:.6rem;font-weight:300;color:var(--muted);margin-bottom:.45rem;}
+.pc-price{font-family:var(--serif);font-size:1.1rem;font-weight:400;color:var(--clay);margin-bottom:.8rem;}
+.pc-btn{font-size:.58rem;font-weight:400;letter-spacing:1.3px;text-transform:uppercase;background:var(--bg);color:var(--ink);border:none;border-radius:50px;padding:.48rem 1.1rem;width:calc(100% - 2rem);box-shadow:var(--nm-sm);transition:all .22s;display:block;margin:0 auto;}
+.pc-btn:hover{box-shadow:var(--nm-in);color:var(--pink-dk);}
+
+/* Card modo lista */
+.prod-grid.lista .pc{border-radius:14px;display:grid;grid-template-columns:120px 1fr auto;align-items:center;gap:0;}
+.prod-grid.lista .pc-img-wrap{border-radius:14px 0 0 14px;}
+.prod-grid.lista .pc-img{height:100px;width:120px;}
+.prod-grid.lista .pc-ph{height:100px;width:120px;}
+.prod-grid.lista .pc-body{text-align:left;padding:.9rem 1.2rem;border-radius:0;}
+.prod-grid.lista .pc-price{margin-bottom:0;}
+.prod-grid.lista .pc-btn{display:none;}
+.prod-grid.lista .pc-list-btn{font-size:.58rem;font-weight:400;letter-spacing:1.2px;text-transform:uppercase;background:var(--bg);color:var(--ink);border:none;border-radius:50px;padding:.5rem 1.2rem;box-shadow:var(--nm-sm);transition:all .22s;margin-right:1rem;flex-shrink:0;white-space:nowrap;cursor:pointer;}
+.prod-grid.lista .pc-list-btn:hover{box-shadow:var(--nm-in);color:var(--pink-dk);}
+.pc-list-btn{display:none;}
+
+/* Skeleton loading */
+.skel-card{background:var(--bg);border-radius:18px;box-shadow:var(--nm-sm);overflow:hidden;}
+.skel-img{height:200px;background:linear-gradient(90deg,var(--bg) 25%,var(--bg-lt) 50%,var(--bg) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite linear;}
+.skel-body{padding:1.1rem 1.2rem;}
+.skel-line{height:10px;border-radius:5px;margin-bottom:.5rem;background:linear-gradient(90deg,var(--bg) 25%,var(--bg-lt) 50%,var(--bg) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite linear;}
+.skel-line.w70{width:70%;}
+.skel-line.w50{width:50%;}
+.skel-line.w40{width:40%;margin:0 auto;}
+
+.empty-state{grid-column:1/-1;text-align:center;padding:4rem 1rem;}
+.empty-state svg{width:48px;height:48px;color:var(--pink-md);opacity:.4;margin:0 auto 1rem;}
+.empty-state h3{font-family:var(--serif);font-size:1.6rem;font-weight:300;font-style:italic;margin-bottom:.5rem;}
+.empty-state p{font-size:.82rem;color:var(--muted);line-height:1.7;max-width:320px;margin:0 auto 1.4rem;}
+.empty-cta{font-size:.65rem;letter-spacing:1.2px;text-transform:uppercase;padding:.6rem 1.5rem;border-radius:50px;border:none;background:var(--pink-dk);color:#fff;cursor:pointer;box-shadow:3px 3px 10px rgba(138,79,88,.3);transition:all .22s;}
+.empty-cta:hover{background:#7a3f48;}
+
+.load-more-wrap{text-align:center;margin-top:32px;}
+.load-more{font-size:.68rem;font-weight:400;letter-spacing:1.5px;text-transform:uppercase;padding:.75rem 2.2rem;border-radius:50px;border:none;background:var(--bg);color:var(--ink);box-shadow:var(--nm-sm);cursor:pointer;transition:all .22s;display:inline-flex;align-items:center;gap:.5rem;}
+.load-more:hover{box-shadow:var(--nm-in);color:var(--pink-dk);}
+.load-more svg{width:13px;height:13px;}
+
+footer{background:var(--ink);}
+.foot-simple{max-width:1380px;margin:0 auto;padding:1.1rem 32px;display:flex;justify-content:space-between;align-items:center;font-size:.62rem;color:rgba(255,255,255,.2);flex-wrap:wrap;gap:.5rem;}
+.foot-simple a{color:rgba(255,255,255,.35);transition:color .2s;}
+.foot-simple a:hover{color:#c89aa8;}
+
+.filter-drawer-overlay{position:fixed;inset:0;z-index:300;background:rgba(58,42,46,.4);backdrop-filter:blur(4px);display:none;opacity:0;transition:opacity .25s;}
+.filter-drawer-overlay.open{display:block;opacity:1;}
+.filter-drawer{position:fixed;left:0;top:0;bottom:0;width:280px;background:var(--bg);z-index:301;transform:translateX(-100%);transition:transform .3s cubic-bezier(.25,.46,.45,.94);overflow-y:auto;padding:1.5rem 1.4rem 2rem;}
+.filter-drawer.open{transform:translateX(0);}
+.drawer-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.4rem;}
+.drawer-head h2{font-family:var(--serif);font-size:1.4rem;font-weight:300;font-style:italic;}
+.drawer-close{width:32px;height:32px;border-radius:50%;border:none;background:var(--bg);box-shadow:var(--nm-sm);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--muted);}
+.drawer-close svg{width:14px;height:14px;}
+
+@media(max-width:1200px){
+  .prod-grid{grid-template-columns:repeat(3,1fr);}
+}
+@media(max-width:1060px){
+  .shop-wrap{grid-template-columns:1fr;padding:20px 24px 80px;}
+  .filters-sidebar{display:none;}
+  .prod-grid{grid-template-columns:repeat(3,1fr);}
+}
+@media(max-width:800px){
+  .prod-grid{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:600px){
+  .hdr{padding:0 14px;height:58px;}
+  .logo-wrap{width:38px;height:38px;}
+  .logo-wrap svg{width:26px;height:26px;}
+  .logo-text span{font-size:.8rem;}
+  .logo-text small{display:none;}
+  .hdr-search{max-width:none;flex:1;}
+  .shop-wrap{padding:16px 14px 80px;}
+  .prod-grid{grid-template-columns:1fr 1fr;gap:12px;}
+  .pc-img{height:155px;}
+  .prod-grid.lista{grid-template-columns:1fr;}
+  .prod-grid.lista .pc-img{height:90px;width:90px;}
+  .prod-grid.lista .pc-img-wrap{min-width:90px;}
+  .bc-inner{padding:.6rem 14px;}
+}
+@media(max-width:380px){
+  .prod-grid{grid-template-columns:1fr;}
+}
+
 .wake-toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:999;background:var(--ink);color:#fff;border-radius:50px;padding:.65rem 1.4rem;font-size:.72rem;display:flex;align-items:center;gap:.5rem;box-shadow:0 4px 20px rgba(0,0,0,.3);opacity:0;transition:opacity .4s;pointer-events:none;}
 .wake-toast.show{opacity:1;}
 .wake-toast svg{width:13px;height:13px;animation:spin 1s linear infinite;color:var(--pink-md);}
-@keyframes spin{to{transform:rotate(360deg)}}
 </style>
 </head>
 <body>
 
-<header id="hdr">
+<!-- DRAWER FILTROS MOBILE -->
+<div class="filter-drawer-overlay" id="drawer-overlay" onclick="cerrarDrawer()"></div>
+<div class="filter-drawer" id="filter-drawer">
+  <div class="drawer-head">
+    <h2>Filtros</h2>
+    <button class="drawer-close" onclick="cerrarDrawer()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  </div>
+  <div id="drawer-filters-content"></div>
+</div>
+
+<!-- HEADER -->
+<header>
 <div class="hdr">
-  <a href="#" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+  <a class="logo" href="index.html">
     <div class="logo-wrap">
-      <svg width="36" height="36" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
-        <style>.em-h{font-family:"Cormorant Garamond",serif;font-size:140px;font-style:italic;font-weight:300;fill:#8a4f58;}.rt{font-family:"Jost",sans-serif;font-size:22px;font-weight:300;fill:#7a6a6e;letter-spacing:3px;}.rb{font-family:"Jost",sans-serif;font-size:19px;font-weight:300;fill:#9a8880;letter-spacing:2px;}</style>
-        <path id="aT" d="M 30,150 A 120,120 0 0,1 270,150" fill="none"/>
-        <text class="rt"><textPath href="#aT" startOffset="50%" text-anchor="middle">ESTILO ARTESANAL</textPath></text>
-        <path id="aB" d="M 48,165 A 105,105 0 0,0 252,165" fill="none"/>
-        <text class="rb"><textPath href="#aB" startOffset="50%" text-anchor="middle">TODO HECHO A MANO</textPath></text>
-        <text x="150" y="188" text-anchor="middle" class="em-h">E</text>
+      <svg width="30" height="30" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+        <style>.em-t{font-family:'Cormorant Garamond',serif;font-size:140px;font-style:italic;font-weight:300;fill:#8a4f58;}.rt-t{font-family:'Jost',sans-serif;font-size:22px;font-weight:300;fill:#7a6a6e;letter-spacing:3px;}.rb-t{font-family:'Jost',sans-serif;font-size:19px;font-weight:300;fill:#9a8880;letter-spacing:2px;}</style>
+        <path id="aTt" d="M 30,150 A 120,120 0 0,1 270,150" fill="none"/>
+        <text class="rt-t"><textPath href="#aTt" startOffset="50%" text-anchor="middle">ESTILO ARTESANAL</textPath></text>
+        <path id="aBt" d="M 48,165 A 105,105 0 0,0 252,165" fill="none"/>
+        <text class="rb-t"><textPath href="#aBt" startOffset="50%" text-anchor="middle">TODO HECHO A MANO</textPath></text>
+        <text x="150" y="188" text-anchor="middle" class="em-t">E</text>
       </svg>
     </div>
-    <div class="logo-text"><span>Estilo Artesanal.emma</span><small>hecho a mano · Colonia Caroya</small></div>
+    <div class="logo-text">
+      <span>Estilo Artesanal.emma</span>
+      <small>hecho a mano · Colonia Caroya</small>
+    </div>
   </a>
-  <nav>
-    <a href="#categorias">Categorías</a>
-    <a href="#tienda">Tienda</a>
-    <a href="#sobre">Sobre mí</a>
-    <a href="#retiro">Retiro</a>
-  </nav>
-  <button class="hdr-btn" onclick="location.href='tienda.html'">Ver tienda</button>
+  <div class="hdr-search">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="search" id="search-hdr" placeholder="Buscar productos…" oninput="buscar(this.value)"/>
+  </div>
+  <div class="hdr-right">
+    <button class="hdr-pill" onclick="abrirDrawer()" style="display:none;" id="btn-filtros-mobile">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="11" y1="18" x2="13" y2="18"/></svg>
+      Filtros
+    </button>
+    <a class="hdr-pill" href="index.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+      Inicio
+    </a>
+  </div>
 </div>
 </header>
 
-<section class="hero" id="hero">
-  <div class="h-slides">
-    <div class="h-slide on"><img src="https://images.unsplash.com/photo-1607006332611-ff950d0bf067?q=80&w=1600&auto=format&fit=crop" style="object-position:center 40%" alt="Jabones artesanales"/></div>
-    <div class="h-slide"><img src="https://images.unsplash.com/photo-1584305574647-0cc949a2bb9f?q=80&w=1600&auto=format&fit=crop" style="object-position:center 50%" alt="Jabones naturales"/></div>
-    <div class="h-slide"><img src="https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?q=80&w=1600&auto=format&fit=crop" style="object-position:center 40%" alt="Taller artesanal"/></div>
-    <div class="h-slide"><img src="https://images.unsplash.com/photo-1601049676869-702ea24cfd58?q=80&w=1600&auto=format&fit=crop" style="object-position:center 50%" alt="Jabones variados"/></div>
-  </div>
-  <div class="h-body">
-    <p class="h-eyebrow">Colonia Caroya · Córdoba</p>
-    <h1>Estilo Artesanal</h1>
-    <p class="h-tagline">Todo hecho a mano · Con amor y sin atajos</p>
-    <div class="h-actions">
-      <button class="h-cta solid" onclick="location.href='tienda.html'">Ver tienda</button>
-      <button class="h-cta" onclick="location.href='#categorias'">Explorar</button>
-    </div>
-  </div>
-  <div class="h-dots" id="hDots">
-    <button class="h-dot on" onclick="heroGo(0)"></button>
-    <button class="h-dot" onclick="heroGo(1)"></button>
-    <button class="h-dot" onclick="heroGo(2)"></button>
-    <button class="h-dot" onclick="heroGo(3)"></button>
-  </div>
-  <div class="h-prog" id="hProg"></div>
-</section>
-
-<div class="strip">
-  <div class="strip-inner">
-    <div class="s-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M12 2C6 9 4 13 4 16a8 8 0 0016 0c0-3-2-7-8-14z"/></svg><h4>100% Natural</h4><p>Ingredientes que conocemos y confiamos</p></div>
-    <div class="s-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l8.84 8.84 8.84-8.84a5.5 5.5 0 000-7.78z"/></svg><h4>Hecho a mano</h4><p>Elaborado con amor en el taller de Caroya</p></div>
-    <div class="s-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><h4>Empaque cuidado</h4><p>Cada pieza envuelta con detalle artesanal</p></div>
-    <div class="s-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><h4>Sin químicos</h4><p>Sin sulfatos, sin parabenos, sin artificios</p></div>
-  </div>
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+<div class="bc-inner">
+  <a href="index.html">Inicio</a>
+  <span class="bc-sep">/</span>
+  <span class="bc-current" id="bc-current">Tienda</span>
+</div>
 </div>
 
-<section id="categorias" class="sec">
-<div class="inn">
-  <div class="sec-title rv">
-    <p class="eyebrow">Explorar</p>
-    <h2>Nuestras categorías</h2>
-    <p>Cada pieza, una historia. Elegí la tuya.</p>
-    <div class="sec-line"></div>
-  </div>
-  <div class="cat-grid rv d1">
-    <div class="cat-card" onclick="window.location.href='tienda.html?cat=jabones'">
-      <img class="cat-img" src="https://images.unsplash.com/photo-1607006332611-ff950d0bf067?q=80&w=800&auto=format&fit=crop" alt="Jabones artesanales"/>
-      <div class="cat-overlay"></div>
-      <div class="cat-body">
-        <div class="cat-label">Colección</div>
-        <div class="cat-name">Jabones<br/>artesanales</div>
-        <div class="cat-arrow">Ver colección <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+<!-- SHOP -->
+<div class="shop-wrap">
+
+  <!-- SIDEBAR (desktop) -->
+  <aside class="filters-sidebar" id="filters-sidebar">
+    <div class="filter-block">
+      <h3>Categoría</h3>
+      <div class="cat-list" id="cat-list">
+        <button class="cat-item on" data-cat="todos" onclick="setCat('todos',this)">Todos <span class="cnt" id="cnt-todos">—</span></button>
+        <button class="cat-item" data-cat="jabones" onclick="setCat('jabones',this)">Jabones <span class="cnt" id="cnt-jabones">—</span></button>
+        <button class="cat-item" data-cat="ceramica" onclick="setCat('ceramica',this)">Cerámica <span class="cnt" id="cnt-ceramica">—</span></button>
+        <button class="cat-item" data-cat="sahumadores" onclick="setCat('sahumadores',this)">Sahumadores <span class="cnt" id="cnt-sahumadores">—</span></button>
+        <button class="cat-item" data-cat="deco" onclick="setCat('deco',this)">Decoración <span class="cnt" id="cnt-deco">—</span></button>
       </div>
     </div>
-    <div class="cat-card" onclick="window.location.href='tienda.html?cat=ceramica'">
-      <img class="cat-img" src="https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=80&w=800&auto=format&fit=crop" alt="Cerámica esmaltada"/>
-      <div class="cat-overlay"></div>
-      <div class="cat-body">
-        <div class="cat-label">Cerámica esmaltada</div>
-        <div class="cat-name">Tazas &amp;<br/>cuencos</div>
-        <div class="cat-arrow">Ver colección <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+    <div class="filter-block">
+      <h3>Precio</h3>
+      <div class="price-inputs">
+        <input class="price-input" id="precio-min" type="number" placeholder="Mín" min="0"/>
+        <span class="price-sep">—</span>
+        <input class="price-input" id="precio-max" type="number" placeholder="Máx" min="0"/>
+      </div>
+      <button class="price-apply" onclick="aplicarPrecio()">Aplicar</button>
+    </div>
+    <div class="filter-block">
+      <h3>Disponibilidad</h3>
+      <div class="toggle-row">
+        <span style="font-size:.78rem;">Solo con stock</span>
+        <button class="toggle" id="toggle-stock" onclick="toggleStock()"></button>
       </div>
     </div>
-    <div class="cat-card" onclick="window.location.href='tienda.html?cat=deco'">
-      <img class="cat-img" src="https://images.unsplash.com/photo-1591348278863-a8fb3887e2aa?q=80&w=800&auto=format&fit=crop" alt="Objetos decorativos"/>
-      <div class="cat-overlay"></div>
-      <div class="cat-body">
-        <div class="cat-label">Decoración</div>
-        <div class="cat-name">Objetos<br/>artesanales</div>
-        <div class="cat-arrow">Ver colección <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+    <button class="filter-reset" onclick="resetFiltros()">Limpiar filtros</button>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="shop-main">
+    <div class="shop-toolbar">
+      <p class="results-count" id="results-count">Cargando…</p>
+      <div class="toolbar-right">
+        <select class="sort-select" id="sort-select" onchange="renderProductos()">
+          <option value="default">Ordenar por…</option>
+          <option value="precio-asc">Precio: menor a mayor</option>
+          <option value="precio-desc">Precio: mayor a menor</option>
+          <option value="nombre">Nombre A–Z</option>
+        </select>
+        <div class="view-toggle">
+          <button class="view-btn on" id="vb-grid" onclick="setVista('grid')" title="Grilla">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+          </button>
+          <button class="view-btn" id="vb-lista" onclick="setVista('lista')" title="Lista">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/></svg>
+          </button>
+        </div>
       </div>
     </div>
-    <div class="cat-card soon">
-      <div style="width:100%;height:100%;background:linear-gradient(135deg,#d4c8be,#c0b0a8);position:absolute;inset:0;"></div>
-      <div class="cat-overlay" style="background:linear-gradient(to top,rgba(40,20,24,.4) 0%,transparent 60%);"></div>
-      <div class="cat-body">
-        <div class="cat-label">Próximamente</div>
-        <div class="cat-name">Velas<br/>artesanales</div>
-      </div>
-      <div class="cat-soon-overlay">
-        <span class="cat-soon-badge">Próximamente</span>
-        <span class="cat-soon-txt">¡Muy pronto!</span>
-      </div>
+
+    <div class="active-filters" id="active-filters"></div>
+
+    <div class="prod-grid" id="pgrid">
+      <!-- Skeletons iniciales -->
+      <div class="skel-card"><div class="skel-img"></div><div class="skel-body"><div class="skel-line w70"></div><div class="skel-line w50"></div><div class="skel-line w40"></div></div></div>
+      <div class="skel-card"><div class="skel-img"></div><div class="skel-body"><div class="skel-line w70"></div><div class="skel-line w50"></div><div class="skel-line w40"></div></div></div>
+      <div class="skel-card"><div class="skel-img"></div><div class="skel-body"><div class="skel-line w70"></div><div class="skel-line w50"></div><div class="skel-line w40"></div></div></div>
+      <div class="skel-card"><div class="skel-img"></div><div class="skel-body"><div class="skel-line w70"></div><div class="skel-line w50"></div><div class="skel-line w40"></div></div></div>
+    </div>
+
+    <div class="load-more-wrap" id="load-more-wrap" style="display:none;">
+      <button class="load-more" onclick="cargarMas()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg>
+        Ver más productos
+      </button>
     </div>
   </div>
-</div>
-</section>
 
-<section class="sec sale-sec sec-off" id="ofertas">
-<div class="inn">
-  <div class="sale-header rv">
-    <div>
-      <p class="eyebrow">Ofertas especiales</p>
-      <h2>Sale &amp; Outlet</h2>
-      <p class="sub">Piezas únicas a precios especiales · Solo por tiempo limitado</p>
-    </div>
-    <button class="sale-link" onclick="document.getElementById('tienda').scrollIntoView({behavior:'smooth'})">
-      Ver todo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-    </button>
-  </div>
-  <div class="sale-grid rv d1" id="sale-grid">
-    <!-- Skeletons -->
-    <div class="skel-sale-wrap"><div class="skel skel-sale-img"></div><div class="skel-sale-body"><div class="skel" style="height:10px;width:70%;"></div><div class="skel" style="height:9px;width:50%;"></div><div class="skel" style="height:9px;width:40%;"></div></div></div>
-    <div class="skel-sale-wrap"><div class="skel skel-sale-img"></div><div class="skel-sale-body"><div class="skel" style="height:10px;width:70%;"></div><div class="skel" style="height:9px;width:50%;"></div><div class="skel" style="height:9px;width:40%;"></div></div></div>
-    <div class="skel-sale-wrap"><div class="skel skel-sale-img"></div><div class="skel-sale-body"><div class="skel" style="height:10px;width:70%;"></div><div class="skel" style="height:9px;width:50%;"></div><div class="skel" style="height:9px;width:40%;"></div></div></div>
-    <div class="skel-sale-wrap"><div class="skel skel-sale-img"></div><div class="skel-sale-body"><div class="skel" style="height:10px;width:70%;"></div><div class="skel" style="height:9px;width:50%;"></div><div class="skel" style="height:9px;width:40%;"></div></div></div>
-    <div class="skel-sale-wrap"><div class="skel skel-sale-img"></div><div class="skel-sale-body"><div class="skel" style="height:10px;width:70%;"></div><div class="skel" style="height:9px;width:50%;"></div><div class="skel" style="height:9px;width:40%;"></div></div></div>
-    <div class="skel-sale-wrap"><div class="skel skel-sale-img"></div><div class="skel-sale-body"><div class="skel" style="height:10px;width:70%;"></div><div class="skel" style="height:9px;width:50%;"></div><div class="skel" style="height:9px;width:40%;"></div></div></div>
-  </div>
 </div>
-</section>
 
-<section id="tienda" class="sec">
-<div class="inn">
-  <div class="sec-title rv">
-    <p class="eyebrow">Catálogo completo</p>
-    <h2>La tienda</h2>
-    <div class="sec-line"></div>
-  </div>
-  <div class="filter-row rv d1">
-    <button class="fil on" onclick="filtrar(this,'todos')">Todos</button>
-    <button class="fil" onclick="filtrar(this,'jabones')">Jabones</button>
-    <button class="fil" onclick="filtrar(this,'ceramica')">Cerámica</button>
-    <button class="fil" onclick="filtrar(this,'sahumadores')">Sahumadores</button>
-    <button class="fil" onclick="filtrar(this,'deco')">Decoración</button>
-  </div>
-  <div class="prod-grid rv d2" id="pgrid">
-    <!-- Skeletons -->
-    <div class="skel-card-wrap"><div class="skel skel-img-ph"></div><div class="skel-body-ph"><div class="skel skel-line" style="width:75%;"></div><div class="skel skel-line" style="width:55%;"></div><div class="skel skel-line" style="width:40%;"></div></div></div>
-    <div class="skel-card-wrap"><div class="skel skel-img-ph"></div><div class="skel-body-ph"><div class="skel skel-line" style="width:75%;"></div><div class="skel skel-line" style="width:55%;"></div><div class="skel skel-line" style="width:40%;"></div></div></div>
-    <div class="skel-card-wrap"><div class="skel skel-img-ph"></div><div class="skel-body-ph"><div class="skel skel-line" style="width:75%;"></div><div class="skel skel-line" style="width:55%;"></div><div class="skel skel-line" style="width:40%;"></div></div></div>
-    <div class="skel-card-wrap"><div class="skel skel-img-ph"></div><div class="skel-body-ph"><div class="skel skel-line" style="width:75%;"></div><div class="skel skel-line" style="width:55%;"></div><div class="skel skel-line" style="width:40%;"></div></div></div>
-    <div class="skel-card-wrap"><div class="skel skel-img-ph"></div><div class="skel-body-ph"><div class="skel skel-line" style="width:75%;"></div><div class="skel skel-line" style="width:55%;"></div><div class="skel skel-line" style="width:40%;"></div></div></div>
-    <div class="skel-card-wrap"><div class="skel skel-img-ph"></div><div class="skel-body-ph"><div class="skel skel-line" style="width:75%;"></div><div class="skel skel-line" style="width:55%;"></div><div class="skel skel-line" style="width:40%;"></div></div></div>
-    <div class="skel-card-wrap"><div class="skel skel-img-ph"></div><div class="skel-body-ph"><div class="skel skel-line" style="width:75%;"></div><div class="skel skel-line" style="width:55%;"></div><div class="skel skel-line" style="width:40%;"></div></div></div>
-    <div class="skel-card-wrap"><div class="skel skel-img-ph"></div><div class="skel-body-ph"><div class="skel skel-line" style="width:75%;"></div><div class="skel skel-line" style="width:55%;"></div><div class="skel skel-line" style="width:40%;"></div></div></div>
-  </div>
-</div>
-</section>
-
-<section id="sobre" class="sec sec-off">
-<div class="inn">
-  <div class="about-grid rv">
-    <div class="about-img-wrap"><img src="https://images.unsplash.com/photo-1584305574647-0cc949a2bb9f?q=80&w=900&auto=format&fit=crop" alt="Elaboración artesanal"/></div>
-    <div class="about-text">
-      <p class="eyebrow">Sobre mí</p>
-      <h2>Hecho a mano en Caroya</h2>
-      <p>Soy Emma, artesana de Colonia Caroya. Elaboro jabones de glicerina vegetal por proceso de vertido — compro la glicerina ya lista, la derrito y armo cada pieza desde cero, con el pH y las propiedades pensadas desde el principio.</p>
-      <p>Trabajo con aceites de coco, almendra y ricino, y manteca de karité, logrando jabones suaves y nutritivos para la piel. Sin sulfatos ni parabenos.</p>
-      <p>Cada jabón es una pieza artesanal con diseño y terminación propios. También hago jabones en forma de racimos y piezas especiales por encargo. Además, trabajo cerámica esmaltada: tazas, cuencos y objetos únicos, todos hechos a mano.</p>
-      <div class="stats">
-        <div class="stat"><strong>100%</strong><span>Natural</span></div>
-        <div class="stat"><strong>Vertido</strong><span>Proceso artesanal</span></div>
-        <div class="stat"><strong>0</strong><span>Químicos</span></div>
-        <div class="stat"><strong>&#x2665;</strong><span>A mano</span></div>
-      </div>
-    </div>
-  </div>
-</div>
-</section>
-
-<section id="glicerina" class="sec">
-<div class="inn">
-  <div class="gli-grid">
-    <div class="rv"><div class="gli-img-wrap"><img class="gli-img" src="https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?q=80&w=900&auto=format&fit=crop" alt="Glicerina vegetal"/></div></div>
-    <div class="gli-text rv d2">
-      <p class="eyebrow">Ingrediente estrella</p>
-      <h2>Propiedades de la glicerina</h2>
-      <p>El corazón de nuestros jabones. La glicerina vegetal pura es lo que hace que cada jabón cuide de verdad tu piel — sin resecar, sin agredir.</p>
-      <div class="gli-props">
-        <div class="gli-prop"><div class="gli-em"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C6 9 4 13 4 16a8 8 0 0016 0c0-3-2-7-8-14z"/></svg></div><strong>Hidratante natural</strong><span>Retiene humedad</span></div>
-        <div class="gli-prop"><div class="gli-em"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22c-4 0-7-3-7-7 0-3 2-6 7-11 5 5 7 8 7 11 0 4-3 7-7 7z"/></svg></div><strong>Suaviza la piel</strong><span>Con cada uso</span></div>
-        <div class="gli-prop"><div class="gli-em"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8V6a5 5 0 0110 0v2"/></svg></div><strong>Limpieza suave</strong><span>Sin resecar</span></div>
-        <div class="gli-prop"><div class="gli-em"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div><strong>Piel sensible</strong><span>Bien tolerada</span></div>
-        <div class="gli-prop"><div class="gli-em"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/></svg></div><strong>Espuma cremosa</strong><span>Textura suave</span></div>
-      </div>
-    </div>
-  </div>
-</div>
-</section>
-
-<section id="retiro" class="sec sec-off">
-<div class="inn">
-  <div class="sec-title rv"><p class="eyebrow">Dónde encontrarnos</p><h2>Punto de retiro</h2><div class="sec-line"></div></div>
-  <div class="retiro-grid rv d1">
-    <div class="retiro-map">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-      <strong>Calle 43 N° 4364</strong><p>Colonia Caroya · Córdoba</p>
-    </div>
-    <div class="retiro-text">
-      <p class="eyebrow">Retiro personal</p>
-      <h2>Vení al taller</h2>
-      <p>Ver las piezas en persona y llevarte la que más te guste al instante. Con cita previa — escribime por Instagram y coordinamos.</p>
-      <div class="retiro-addr">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-        <div><strong>Calle 43 N° 4364</strong><span>Colonia Caroya · Córdoba · Argentina</span></div>
-      </div>
-      <p class="retiro-notice"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Sin envíos por ahora · Solo retiro personal</p>
-    </div>
-  </div>
-</div>
-</section>
-
-<section id="pagos" class="sec">
-<div class="inn">
-  <div class="sec-title rv"><p class="eyebrow">Cómo pagar</p><h2>Formas de pago</h2><div class="sec-line"></div></div>
-  <div class="pago-grid rv d1">
-    <div class="pago"><div class="pago-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="4" width="22" height="16" rx="3"/><path d="M1 10h22"/></svg></div><h4>Tarjeta</h4><p>Crédito y débito</p></div>
-    <div class="pago"><div class="pago-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></div><h4>Mercado Pago</h4><p>Pago online seguro</p></div>
-    <div class="pago"><div class="pago-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div><h4>Transferencia</h4><p>Bancaria / alias</p></div>
-    <div class="pago"><div class="pago-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><h4>Efectivo</h4><p>Solo en el retiro</p></div>
-  </div>
-</div>
-</section>
-
-<section class="ig-sec">
-<div class="ig-inner rv">
-  <div class="ig-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="white" stroke="none"/></svg></div>
-  <h2>Seguinos en Instagram</h2>
-  <p>Mirá el proceso, los productos nuevos y la vida del taller. Escribinos para coordinar el retiro o consultar stock.</p>
-  <a class="ig-btn" href="https://instagram.com/estiloartesanal_emma" target="_blank">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
-    @estiloartesanal_emma
-  </a>
-</div>
-</section>
-
+<!-- FOOTER -->
 <footer>
-<div class="foot-top">
-  <div class="foot-brand">
-    <div class="foot-logo">Estilo Artesanal.emma</div>
-    <p>Jabones naturales de glicerina, cerámica artesanal y objetos únicos hechos a mano en Colonia Caroya, Córdoba.</p>
-    <div class="foot-socials">
-      <a class="fsoc" href="https://instagram.com/estiloartesanal_emma" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
-    </div>
-  </div>
-  <div class="foot-col">
-    <h5>Categorías</h5>
-    <a href="tienda.html?cat=jabones">Jabones artesanales</a>
-    <a href="tienda.html?cat=ceramica">Cerámica esmaltada</a>
-    <a href="tienda.html?cat=sahumadores">Sahumadores</a>
-    <a href="tienda.html?cat=deco">Decoración</a>
-  </div>
-  <div class="foot-col">
-    <h5>Información</h5>
-    <a href="#glicerina">Glicerina natural</a>
-    <a href="#sobre">Sobre mí</a>
-    <a href="#retiro">Punto de retiro</a>
-    <a href="#pagos">Formas de pago</a>
-    <a href="https://instagram.com/estiloartesanal_emma" target="_blank">Instagram</a>
-  </div>
-</div>
-<div class="foot-bottom">
+<div class="foot-simple">
   <span>© 2026 · Estilo Artesanal.emma · Calle 43 N° 4364 · Colonia Caroya</span>
-  <span>Hecho con 🌿 y amor · Web por <a href="https://diazuxstudio.com.ar" target="_blank" style="color:rgba(255,255,255,.4);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='#c89aa8'" onmouseout="this.style.color='rgba(255,255,255,.4)'">diazuxstudio.com.ar</a></span>
-  <a href="admin.html" style="font-size:.55rem;color:rgba(255,255,255,.08);transition:color .3s;" onmouseover="this.style.color='rgba(255,255,255,.35)'" onmouseout="this.style.color='rgba(255,255,255,.08)'">&#x2699;</a>
+  <span>Diseño web <a href="https://diazuxstudio.com.ar" target="_blank">diazuxstudio.com.ar</a></span>
 </div>
 </footer>
 
 <script>
-window.addEventListener('scroll',()=>{document.getElementById('hdr').classList.toggle('scrolled',window.scrollY>10);},{passive:true});
-let idx=0;
-const slides=document.querySelectorAll('.h-slide');
-const dots=document.querySelectorAll('.h-dot');
-const prog=document.getElementById('hProg');
-const DUR=5000;let timer;
-function show(n){slides[idx].classList.remove('on');dots[idx].classList.remove('on');idx=(n+slides.length)%slides.length;slides[idx].classList.add('on');dots[idx].classList.add('on');animProg();}
-function heroGo(n){show(n);reset();}
-function animProg(){prog.style.transition='none';prog.style.width='0%';requestAnimationFrame(()=>requestAnimationFrame(()=>{prog.style.transition=`width ${DUR}ms linear`;prog.style.width='100%';}));}
-function reset(){clearInterval(timer);timer=setInterval(()=>show(idx+1),DUR);}
-timer=setInterval(()=>show(idx+1),DUR);animProg();
-const heroEl=document.getElementById('hero');
-heroEl.addEventListener('mouseenter',()=>{clearInterval(timer);prog.style.transition='none';});
-heroEl.addEventListener('mouseleave',()=>{reset();animProg();});
-let tx=0;
-heroEl.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;},{passive:true});
-heroEl.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>40)show(dx<0?idx+1:idx-1);},{passive:true});
-const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vs');obs.unobserve(e.target);}});},{threshold:.08,rootMargin:'0px 0px -30px 0px'});
-document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
-const BACKEND='https://estiloartesanal-emma.onrender.com';
-const CAT_LABELS={jabones:'Jabón artesanal',sahumadores:'Sahumador',ceramica:'Cerámica',deco:'Decoración'};
-const TAG_LABELS={jabones:'Natural',sahumadores:'Artesanal',ceramica:'Pieza única',deco:'Artesanal'};
-let todosLosProductos={};
-let catActiva='todos';
+const BACKEND = 'https://estiloartesanal-emma.onrender.com';
+const CAT_LABELS = {jabones:'Jabón artesanal',sahumadores:'Sahumador',ceramica:'Cerámica',deco:'Decoración'};
+const TAG_LABELS  = {jabones:'Natural',sahumadores:'Artesanal',ceramica:'Pieza única',deco:'Artesanal'};
 
-async function cargarProductos(){
+let allProducts = {};
+let catActual   = 'todos';
+let busqueda    = '';
+let soloStock   = false;
+let precioMin   = 0;
+let precioMax   = Infinity;
+let vistaActual = 'grid';
+let paginaActual = 1;
+const POR_PAGINA = 12;
+
+const urlParams = new URLSearchParams(window.location.search);
+const catFromUrl = urlParams.get('cat');
+if (catFromUrl) catActual = catFromUrl;
+
+async function cargarProductos() {
   const wakeTimer = setTimeout(()=>{
     const t=document.getElementById('wake-toast');
-    if(t){t.classList.add('show');setTimeout(()=>t.classList.remove('show'),8000);}
+    if(t){t.classList.add('show');setTimeout(()=>t.classList.remove('show'),9000);}
   }, 3000);
-  try{
-    const r=await fetch(BACKEND+'/productos.json');
+  try {
+    const r = await fetch(BACKEND + '/productos.json');
     clearTimeout(wakeTimer);
     document.getElementById('wake-toast')?.classList.remove('show');
-    if(!r.ok)throw new Error();
-    todosLosProductos=await r.json();
+    if (!r.ok) throw new Error();
+    allProducts = await r.json();
+    actualizarContadores();
+    document.getElementById('btn-filtros-mobile').style.display = 'flex';
+    if (catFromUrl) {
+      document.querySelectorAll('.cat-item').forEach(b => {
+        b.classList.toggle('on', b.dataset.cat === catFromUrl);
+      });
+      actualizarBreadcrumb();
+    }
     renderProductos();
-    renderSale();
-  }catch(e){
-    clearTimeout(wakeTimer);
-    document.getElementById('wake-toast')?.classList.remove('show');
-    document.getElementById('pgrid').innerHTML='<p style="grid-column:1/-1;text-align:center;color:var(--muted);font-size:.82rem;padding:2rem;">No se pudo cargar el catálogo. <a href="https://instagram.com/estiloartesanal_emma" target="_blank" style="color:var(--pink-dk)">Escribinos por Instagram</a></p>';
-    document.getElementById('sale-grid').innerHTML='<p style="grid-column:1/-1;text-align:center;color:var(--muted);font-size:.82rem;padding:1rem;">No disponible.</p>';
+  } catch(e) {
+    document.getElementById('pgrid').innerHTML = `
+      <div class="empty-state">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <h3>No pudimos cargar</h3>
+        <p>Verificá tu conexión o escribinos por Instagram.</p>
+        <button class="empty-cta" onclick="window.open('https://instagram.com/estiloartesanal_emma','_blank')">Ir a Instagram</button>
+      </div>`;
+    document.getElementById('results-count').textContent = '';
   }
 }
-function renderProductos(){
-  const grid=document.getElementById('pgrid');
-  const items=Object.entries(todosLosProductos).filter(([,p])=>(catActiva==='todos'||p.categoria===catActiva)&&p.activo!==false);
-  if(!items.length){grid.innerHTML='<p style="grid-column:1/-1;text-align:center;color:var(--muted);font-size:.82rem;padding:2rem;">Sin productos en esta categoría.</p>';return;}
-  grid.innerHTML=items.map(([id,p])=>{
-    const precio=p.precio>0?'$'+p.precio.toLocaleString('es-AR'):'Consultar';
-    const cat=CAT_LABELS[p.categoria]||p.categoria;
-    const tag=TAG_LABELS[p.categoria]||'Artesanal';
-    const agotado=p.stock<=0;
-    const imgHtml=p.imagen?`<img class="pc-img" src="${p.imagen}" alt="${p.nombre}" onerror="this.parentElement.innerHTML='<div class=pc-ph><svg viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'1.5\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'3\'/></svg></div>'"/>`:'<div class="pc-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/></svg></div>';
-    return `<div class="pc${agotado?' soon':''}" data-cat="${p.categoria}" onclick="${agotado?'':`window.location.href='producto.html?id=${id}'`}"><div class="pc-img-wrap">${imgHtml}<span class="pc-tag${agotado?' pronto':''}">${agotado?'Agotado':tag}</span></div><div class="pc-body"><div class="pc-name">${p.nombre}</div><div class="pc-cat">${cat}</div><div class="pc-price">${precio}</div><button class="pc-btn">${agotado?'Sin stock':'Ver producto'}</button></div></div>`;
-  }).join('');
-  grid.querySelectorAll('.pc').forEach(el=>obs.observe(el));
+
+function getFiltered() {
+  let items = Object.entries(allProducts).filter(([,p]) => p.activo !== false);
+  if (catActual !== 'todos')   items = items.filter(([,p]) => p.categoria === catActual);
+  if (busqueda)                items = items.filter(([,p]) => p.nombre.toLowerCase().includes(busqueda.toLowerCase()));
+  if (soloStock)               items = items.filter(([,p]) => p.stock > 0);
+  if (precioMin > 0)           items = items.filter(([,p]) => p.precio >= precioMin);
+  if (precioMax < Infinity)    items = items.filter(([,p]) => p.precio <= precioMax || p.precio === 0);
+  const sort = document.getElementById('sort-select')?.value || 'default';
+  if (sort === 'precio-asc')  items.sort(([,a],[,b]) => a.precio - b.precio);
+  if (sort === 'precio-desc') items.sort(([,a],[,b]) => b.precio - a.precio);
+  if (sort === 'nombre')      items.sort(([,a],[,b]) => a.nombre.localeCompare(b.nombre, 'es'));
+  return items;
 }
-function renderSale(){
-  const grid=document.getElementById('sale-grid');
-  const items=Object.entries(todosLosProductos).filter(([,p])=>p.activo!==false&&p.stock>0&&p.precio>0).sort(([,a],[,b])=>a.precio-b.precio).slice(0,6);
-  if(!items.length){grid.innerHTML='<p style="grid-column:1/-1;text-align:center;color:var(--muted);font-size:.82rem;padding:1.5rem;">No hay ofertas disponibles por ahora.</p>';return;}
-  grid.innerHTML=items.map(([id,p])=>{
-    const precioViejo=Math.round(p.precio*1.2/100)*100;
-    const imgHtml=p.imagen?`<img class="sale-img" src="${p.imagen}" alt="${p.nombre}" onerror="this.parentElement.innerHTML='<div class=sale-ph><svg viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'1.5\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'3\'/></svg></div>'"/>`:'<div class="sale-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/></svg></div>';
-    const cat=CAT_LABELS[p.categoria]||p.categoria;
-    return `<div class="sale-card" onclick="window.location.href='producto.html?id=${id}'"><div class="sale-img-wrap">${imgHtml}<span class="sale-badge">Sale</span><span class="sale-pct">-20%</span></div><div class="sale-body"><div class="sale-name">${p.nombre}</div><div class="sale-cat">${cat}</div><div class="sale-prices"><span class="sale-price-old">$${precioViejo.toLocaleString('es-AR')}</span><span class="sale-price-new">$${p.precio.toLocaleString('es-AR')}</span></div><button class="sale-btn">Ver producto</button></div></div>`;
-  }).join('');
+
+function renderProductos() {
+  const grid = document.getElementById('pgrid');
+  const items = getFiltered();
+  paginaActual = 1;
+  const n = items.length;
+  document.getElementById('results-count').innerHTML = n > 0
+    ? `<strong>${n}</strong> producto${n !== 1 ? 's' : ''} encontrado${n !== 1 ? 's' : ''}`
+    : 'Sin resultados';
+  renderChips();
+  if (!n) {
+    grid.innerHTML = `
+      <div class="empty-state">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <h3>Sin resultados</h3>
+        <p>Probá con otra búsqueda o quitá algún filtro.</p>
+        <button class="empty-cta" onclick="resetFiltros()">Limpiar filtros</button>
+      </div>`;
+    document.getElementById('load-more-wrap').style.display = 'none';
+    return;
+  }
+  const visibles = items.slice(0, paginaActual * POR_PAGINA);
+  grid.className = `prod-grid${vistaActual === 'lista' ? ' lista' : ''}`;
+  grid.innerHTML = visibles.map(([id, p], i) => cardHTML(id, p, i)).join('');
+  const hayMas = items.length > visibles.length;
+  document.getElementById('load-more-wrap').style.display = hayMas ? 'block' : 'none';
 }
-function irCategoria(cat){
-  catActiva=cat;
-  document.querySelectorAll('.fil').forEach(b=>b.classList.remove('on'));
-  const btn=[...document.querySelectorAll('.fil')].find(b=>b.getAttribute('onclick')&&b.getAttribute('onclick').includes(`'${cat}'`));
-  if(btn)btn.classList.add('on');
+
+function cardHTML(id, p, i) {
+  const precio  = p.precio > 0 ? '$' + p.precio.toLocaleString('es-AR') : 'Consultar';
+  const cat     = CAT_LABELS[p.categoria] || p.categoria;
+  const tag     = TAG_LABELS[p.categoria] || 'Artesanal';
+  const agotado = p.stock <= 0;
+  const delay   = Math.min(i * 0.04, 0.5);
+  const imgHtml = p.imagen
+    ? `<img class="pc-img" src="${p.imagen}" alt="${p.nombre}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=pc-ph><svg viewBox=\\'0 0 24 24\\' fill=\\'none\\' stroke=\\'currentColor\\' stroke-width=\\'1.5\\'><rect x=\\'3\\' y=\\'3\\' width=\\'18\\' height=\\'18\\' rx=\\'3\\'/></svg></div>'"/>`
+    : `<div class="pc-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/></svg></div>`;
+  return `<div class="pc${agotado ? ' soon' : ''}" style="animation-delay:${delay}s" onclick="${agotado ? '' : `window.location.href='producto.html?id=${id}'`}">
+    <div class="pc-img-wrap">${imgHtml}<span class="pc-tag${agotado ? ' pronto' : ''}">${agotado ? 'Agotado' : tag}</span></div>
+    <div class="pc-body">
+      <div class="pc-name">${p.nombre}</div>
+      <div class="pc-cat">${cat}</div>
+      <div class="pc-price">${precio}</div>
+      <button class="pc-btn">${agotado ? 'Sin stock' : 'Ver producto'}</button>
+    </div>
+    <button class="pc-list-btn" onclick="${agotado ? '' : `window.location.href='producto.html?id=${id}'`}">${agotado ? 'Sin stock' : 'Ver →'}</button>
+  </div>`;
+}
+
+function cargarMas() {
+  paginaActual++;
+  const items = getFiltered();
+  const grid  = document.getElementById('pgrid');
+  const ya = (paginaActual - 1) * POR_PAGINA;
+  const nuevos = items.slice(ya, paginaActual * POR_PAGINA);
+  nuevos.forEach(([id, p], i) => {
+    grid.insertAdjacentHTML('beforeend', cardHTML(id, p, ya + i));
+  });
+  const hayMas = items.length > paginaActual * POR_PAGINA;
+  document.getElementById('load-more-wrap').style.display = hayMas ? 'block' : 'none';
+}
+
+function actualizarContadores() {
+  const cats = ['jabones','ceramica','sahumadores','deco'];
+  const total = Object.values(allProducts).filter(p => p.activo !== false).length;
+  document.getElementById('cnt-todos').textContent = total;
+  cats.forEach(c => {
+    const el = document.getElementById('cnt-' + c);
+    if (el) el.textContent = Object.values(allProducts).filter(p => p.activo !== false && p.categoria === c).length;
+  });
+}
+
+function setCat(cat, btn) {
+  catActual = cat;
+  document.querySelectorAll('.cat-item').forEach(b => b.classList.remove('on'));
+  document.querySelectorAll(`[data-cat="${cat}"]`).forEach(b => b.classList.add('on'));
+  actualizarBreadcrumb();
   renderProductos();
-  document.getElementById('tienda').scrollIntoView({behavior:'smooth'});
 }
-function filtrar(btn,cat){
-  document.querySelectorAll('.fil').forEach(b=>b.classList.remove('on'));
-  btn.classList.add('on');
-  catActiva=cat;
+
+function actualizarBreadcrumb() {
+  const labels = {todos:'Tienda',jabones:'Jabones',ceramica:'Cerámica',sahumadores:'Sahumadores',deco:'Decoración'};
+  document.getElementById('bc-current').textContent = labels[catActual] || 'Tienda';
+}
+
+function buscar(q) {
+  busqueda = q;
   renderProductos();
 }
-function irProducto(id){window.location.href='producto.html?id='+id;}
+
+function toggleStock() {
+  soloStock = !soloStock;
+  document.getElementById('toggle-stock').classList.toggle('on', soloStock);
+  renderProductos();
+}
+
+function aplicarPrecio() {
+  const mn = Number(document.getElementById('precio-min').value) || 0;
+  const mx = Number(document.getElementById('precio-max').value) || Infinity;
+  precioMin = mn;
+  precioMax = mx || Infinity;
+  renderProductos();
+}
+
+function resetFiltros() {
+  catActual = 'todos';
+  busqueda  = '';
+  soloStock = false;
+  precioMin = 0;
+  precioMax = Infinity;
+  document.querySelectorAll('.cat-item').forEach(b => b.classList.toggle('on', b.dataset.cat === 'todos'));
+  document.getElementById('toggle-stock').classList.remove('on');
+  document.getElementById('precio-min').value = '';
+  document.getElementById('precio-max').value = '';
+  document.getElementById('search-hdr').value = '';
+  document.getElementById('sort-select').value = 'default';
+  actualizarBreadcrumb();
+  renderProductos();
+}
+
+function renderChips() {
+  const chips = [];
+  if (catActual !== 'todos') chips.push({label: CAT_LABELS[catActual]||catActual, action: "setCat('todos')"});
+  if (busqueda)              chips.push({label: `"${busqueda}"`, action: "resetBusqueda()"});
+  if (soloStock)             chips.push({label: 'Con stock', action: 'toggleStock()'});
+  if (precioMin > 0)         chips.push({label: `Desde $${precioMin.toLocaleString('es-AR')}`, action: 'resetPrecio()'});
+  if (precioMax < Infinity)  chips.push({label: `Hasta $${precioMax.toLocaleString('es-AR')}`, action: 'resetPrecio()'});
+  document.getElementById('active-filters').innerHTML = chips.map(c =>
+    `<span class="af-chip">${c.label}<button onclick="${c.action}">×</button></span>`
+  ).join('');
+}
+
+function resetBusqueda() { busqueda = ''; document.getElementById('search-hdr').value = ''; renderProductos(); }
+function resetPrecio()   { precioMin=0; precioMax=Infinity; document.getElementById('precio-min').value=''; document.getElementById('precio-max').value=''; renderProductos(); }
+
+function setVista(v) {
+  vistaActual = v;
+  document.getElementById('vb-grid').classList.toggle('on', v === 'grid');
+  document.getElementById('vb-lista').classList.toggle('on', v === 'lista');
+  document.getElementById('pgrid').className = `prod-grid${v === 'lista' ? ' lista' : ''}`;
+}
+
+function irProducto(id) { window.location.href = 'producto.html?id=' + id; }
+
+function abrirDrawer() {
+  document.getElementById('filter-drawer-overlay').classList.add('open');
+  document.getElementById('filter-drawer').classList.add('open');
+  const content = document.getElementById('filters-sidebar').innerHTML;
+  document.getElementById('drawer-filters-content').innerHTML = content;
+  document.body.style.overflow = 'hidden';
+}
+function cerrarDrawer() {
+  document.getElementById('filter-drawer-overlay').classList.remove('open');
+  document.getElementById('filter-drawer').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function checkMobile() {
+  const isMobile = window.innerWidth <= 1060;
+  document.getElementById('btn-filtros-mobile').style.display = isMobile ? 'flex' : 'none';
+}
+window.addEventListener('resize', checkMobile);
+checkMobile();
+
 cargarProductos();
 </script>
-
-<!-- Wake toast -->
 <div class="wake-toast" id="wake-toast">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 11-6.219-8.56"/></svg>
   Despertando el servidor, un momento…
